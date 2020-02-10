@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -79,6 +81,36 @@ public class LoginActivity extends AppCompatActivity
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 finish();
+            }
+        });
+
+        // onClickListener for btnLogin
+        btnLogin.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // Grabs the input form the editTexts
+                String email = etEmail.getText().toString();
+                String password = etPassword.getText().toString();
+
+                // Checks if either field is empty and outputs the relevant message
+                if(TextUtils.isEmpty(email) && TextUtils.isEmpty(password))
+                {
+                    Toast.makeText(getApplicationContext(),"Enter email address and password!",Toast.LENGTH_SHORT).show();
+                }
+                else if (TextUtils.isEmpty(email))
+                {
+                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                }
+                else if (TextUtils.isEmpty(password))
+                {
+                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    // If validation is passed, logs in the user
+                }
             }
         });
 
