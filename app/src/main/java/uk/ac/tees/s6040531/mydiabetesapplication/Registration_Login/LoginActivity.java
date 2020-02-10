@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import uk.ac.tees.s6040531.mydiabetesapplication.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**
@@ -40,10 +41,10 @@ public class LoginActivity extends AppCompatActivity
         if(auth.getCurrentUser() != null)
         {
             // Loads the HomeActivity
-            /*Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(i);
             overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-            finish();*/
+            finish();
         }
 
     }
