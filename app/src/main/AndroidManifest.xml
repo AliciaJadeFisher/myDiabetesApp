@@ -11,10 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Registration_Login.LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
-
+        <activity android:name=".Registration_Login.SetupActivity"></activity>
+        <activity android:name=".Registration_Login.RegistrationActivity" />
+        <activity
+            android:name=".Registration_Login.LoginActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
