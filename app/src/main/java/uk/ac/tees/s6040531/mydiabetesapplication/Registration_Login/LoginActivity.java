@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -20,8 +19,7 @@ public class LoginActivity extends AppCompatActivity
 {
     // Variables for layout access
     EditText etEmail, etPassword;
-    ProgressBar progressBar;
-    Button btnSignup, btnLogin, btnReset;
+    Button btnReg, btnLogin, btnReset;
 
     // Variable for Firebase access
     FirebaseAuth auth;
@@ -46,6 +44,14 @@ public class LoginActivity extends AppCompatActivity
             overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
             finish();
         }
+
+        // Initialize widgets
+        etEmail = (EditText)findViewById(R.id.et_email);
+        etPassword = (EditText)findViewById(R.id.et_password);
+        btnReg = (Button)findViewById(R.id.btn_reg);
+        btnLogin = (Button)findViewById(R.id.btn_login);
+        btnReset = (Button)findViewById(R.id.btn_reset_password);
+
 
     }
 }
