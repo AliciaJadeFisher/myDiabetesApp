@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -51,6 +52,20 @@ public class LoginActivity extends AppCompatActivity
         btnReg = (Button)findViewById(R.id.btn_reg);
         btnLogin = (Button)findViewById(R.id.btn_login);
         btnReset = (Button)findViewById(R.id.btn_reset_password);
+
+        // onClickListener for btnReg
+        btnReg.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // Loads the RegistrationActivity
+                Intent i = new Intent(LoginActivity.this, RegistrationActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                finish();
+            }
+        });
 
 
     }
