@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1034100515557",
+    "firebase_url": "https://mydiabetesapplication-eef18.firebaseio.com",
+    "project_id": "mydiabetesapplication-eef18",
+    "storage_bucket": "mydiabetesapplication-eef18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034100515557:android:1a4ab2df28d41c976eea0c",
+        "android_client_info": {
+          "package_name": "uk.ac.tees.s6040531.mydiabetesapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034100515557-o1ijrpkp6kjog092a3h6d0d0cbhhbr24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTJAVKsWNTTtiRBIRxE9nq94lndZHNArU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034100515557-o1ijrpkp6kjog092a3h6d0d0cbhhbr24.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
