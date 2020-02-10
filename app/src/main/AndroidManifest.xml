@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Registration_Login.SetupActivity"></activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"></activity>
+        <activity android:name=".Registration_Login.SetupActivity" />
         <activity android:name=".Registration_Login.RegistrationActivity" />
         <activity
             android:name=".Registration_Login.LoginActivity"

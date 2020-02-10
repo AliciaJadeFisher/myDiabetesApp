@@ -6,4 +6,8 @@
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="login">Login here</string>
     <string name="don_t_have">Don\'t have an account? Register here</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
