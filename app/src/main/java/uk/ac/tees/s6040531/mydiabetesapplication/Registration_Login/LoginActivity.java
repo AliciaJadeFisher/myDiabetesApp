@@ -67,6 +67,16 @@ public class LoginActivity extends AppCompatActivity
             }
         });
 
+        // onClickListener for btnReset
+        btnReset.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //
+            }
+        });
+
 
     }
 }
