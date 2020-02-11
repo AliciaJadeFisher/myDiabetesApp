@@ -4,4 +4,10 @@
         <item>mg/dL</item>
         <item>mmol/L</item>
     </string-array>
+
+    <string-array name="carb_types">
+        <item>g</item>
+        <item>CP</item>
+        <item>ex.</item>
+    </string-array>
 </resources>

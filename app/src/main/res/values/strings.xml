@@ -33,4 +33,14 @@
     <string name="account_setup">Account Setup</string>
     <string name="blood_sugar_measurement">Blood Sugar measurement :</string>
     <string name="mg_dl">mg/dL</string>
+    <string name="carbohydrate_measurement">Carbohydrate measurement:</string>
+    <string name="blood_sugar_target_ranges">Blood Sugar Target Ranges :</string>
+    <string name="hypo">Hypo:</string>
+    <string name="_4_0_mmol_l">4.0 mmol/L</string>
+    <string name="_5_0_mol_l">5.0 mol/L</string>
+    <string name="bottom_target">Bottom Target :</string>
+    <string name="top_target">Top Target:</string>
+    <string name="_8_5_mml_l">8.5 mml/L</string>
+    <string name="hyper">Hyper:</string>
+    <string name="_13_mmol_l">13 mmol/L</string>
 </resources>
