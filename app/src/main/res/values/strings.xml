@@ -55,4 +55,6 @@
     <string name="correction_dosage_1_unit_of_insulin">Correction Dosage (1 unit of insulin):</string>
     <string name="_2_5_mmol_l">2.5 mmol/L</string>
     <string name="save_details">Save Details</string>
+    <string name="what_shall_we_call_you">What shall we call you ?</string>
+    <string name="name">Name</string>
 </resources>
