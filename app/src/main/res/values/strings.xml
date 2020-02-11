@@ -1,17 +1,29 @@
 <resources>
+    <!--Application Name-->
     <string name="app_name">MyDiabetesApplication</string>
     <string name="slogan">Own your diabetes!</string>
+
+    <!--Activity Names-->
+    <string name="title_activity_home">HomeActivity</string>
+
+    <!--Login Activity Strings-->
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="login">Login here</string>
     <string name="don_t_have">Don\'t have an account? Register here</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="error_email_password">Enter email address and password!</string>
     <string name="error_email">Enter email address!</string>
     <string name="error_password">Enter password!</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
+
+    <!--Registration Activity Strings-->
+    <string name="agree">By clicking below you agree to the Terms of Service and Privacy Policy</string>
+    <string name="have_an_account_log_in">Have an account? Log in.</string>
+    <string name="register">Register here</string>
+
+    <!--Navigation Strings -->
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
