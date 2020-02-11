@@ -123,4 +123,12 @@ public class RegistrationActivity extends AppCompatActivity
         });
 
     }
+    @Override
+    public void onBackPressed()
+    {
+        Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finish();
+    }
 }
