@@ -2,7 +2,9 @@ package uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -37,6 +39,19 @@ public class RegistrationActivity extends AppCompatActivity
         btnReg = (Button) findViewById(R.id.btn_reg);
         btnLogin = (Button)findViewById(R.id.btn_login);
         btnTerms = (Button)findViewById(R.id.btn_login);
+
+        // onClickListener for btnLogin
+        btnLogin.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(RegistrationActivity.this,LoginActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                finish();
+            }
+        });
 
     }
 }
