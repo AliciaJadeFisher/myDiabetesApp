@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
@@ -79,17 +83,40 @@ public class RegistrationActivity extends AppCompatActivity
                 //Checks if the inputs are empty
                 if(TextUtils.isEmpty(email))
                 {
-                    Toast.makeText(getApplicationContext(),R.string.error_email , Toast.LENGTH_SHORT ).show();
+                    Toast.makeText(getApplicationContext(), R.string.error_email , Toast.LENGTH_SHORT ).show();
                 }
                 if(TextUtils.isEmpty(password))
                 {
-                    Toast.makeText(getApplicationContext(),R.string.error_password, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.error_password, Toast.LENGTH_SHORT).show();
                 }
                 //Checks that the password is of a suitable length
                 if(password.length()< 8)
                 {
-                    Toast.makeText(getApplicationContext(),R.string.short_pass, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.short_pass, Toast.LENGTH_SHORT).show();
                 }
+
+                auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+                        // Informs the user that they are creating an account
+                        Toast.makeText(RegistrationActivity.this, R.string.create_account,Toast.LENGTH_SHORT).show();
+
+                        //Checks if creation was successful and prints out relevant message
+                        if(!task.isSuccessful())
+                        {
+                            Toast.makeText(RegistrationActivity.this, R.string.create_failed, Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            //Loads SetupActivity
+                            startActivity(new Intent(RegistrationActivity.this,SetupActivity.class));
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                            finish();
+                        }
+                    }
+                });
 
 
             }
