@@ -12,15 +12,16 @@
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="login">Login here</string>
     <string name="don_t_have">Don\'t have an account? Register here</string>
-    <string name="error_email_password">Enter email address and password!</string>
-    <string name="error_email">Enter email address!</string>
-    <string name="error_password">Enter password!</string>
+    <string name="error_email_password">Please enter an email address and a password</string>
+    <string name="error_email">Please enter an email address</string>
+    <string name="error_password">Please enter a password</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
 
     <!--Registration Activity Strings-->
     <string name="agree">By clicking below you agree to the Terms of Service and Privacy Policy</string>
     <string name="have_an_account_log_in">Have an account? Log in.</string>
     <string name="register">Register here</string>
+    <string name="short_pass">Password too short, enter a minimum of 8 characters</string>
 
     <!--Navigation Strings -->
     <string name="title_home">Home</string>

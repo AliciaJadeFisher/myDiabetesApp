@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -64,6 +66,34 @@ public class RegistrationActivity extends AppCompatActivity
 //                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 //            }
 //        });
+
+        // onClickListener for btnReg
+        btnReg.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String email = etEmail.getText().toString();
+                String password = etPassword.getText().toString();
+
+                //Checks if the inputs are empty
+                if(TextUtils.isEmpty(email))
+                {
+                    Toast.makeText(getApplicationContext(),R.string.error_email , Toast.LENGTH_SHORT ).show();
+                }
+                if(TextUtils.isEmpty(password))
+                {
+                    Toast.makeText(getApplicationContext(),R.string.error_password, Toast.LENGTH_SHORT).show();
+                }
+                //Checks that the password is of a suitable length
+                if(password.length()< 8)
+                {
+                    Toast.makeText(getApplicationContext(),R.string.short_pass, Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
 
     }
 }
