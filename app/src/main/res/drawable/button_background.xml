@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--this is for the main buttons that are used throughout the app-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/colorPrimaryDark"/>
+    <corners android:radius="8dp"/>
+    <stroke android:color="@android:color/black"
+        android:width="3sp"/>
+    <padding android:left="0dip" android:top="0dip"
+        android:right="0dip" android:bottom="0dip" />
+</shape>

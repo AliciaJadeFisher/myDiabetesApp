@@ -37,10 +37,22 @@
     <string name="blood_sugar_target_ranges">Blood Sugar Target Ranges :</string>
     <string name="hypo">Hypo:</string>
     <string name="_4_0_mmol_l">4.0 mmol/L</string>
-    <string name="_5_0_mol_l">5.0 mol/L</string>
+    <string name="_5_0_mol_l">5.0 mmol/L</string>
     <string name="bottom_target">Bottom Target :</string>
     <string name="top_target">Top Target:</string>
-    <string name="_8_5_mml_l">8.5 mml/L</string>
+    <string name="_8_5_mml_l">8.5 mmol/L</string>
     <string name="hyper">Hyper:</string>
     <string name="_13_mmol_l">13 mmol/L</string>
+    <string name="active_insulin_duration">Active Insulin Duration (hours):</string>
+    <string name="_04_00">04:00</string>
+    <string name="insulin_precision">Insulin Precision:</string>
+    <string name="_0_1">0.1</string>
+    <string name="carbohydrate_portion">Carbohydrate Portion:</string>
+    <string name="_10">10</string>
+    <string name="_10g">10g</string>
+    <string name="carbohydrate_ratio_insulin_for_1_cp">Carbohydrate Ratio (insulin for 1 CP):</string>
+    <string name="_4">4</string>
+    <string name="correction_dosage_1_unit_of_insulin">Correction Dosage (1 unit of insulin):</string>
+    <string name="_2_5_mmol_l">2.5 mmol/L</string>
+    <string name="save_details">Save Details</string>
 </resources>

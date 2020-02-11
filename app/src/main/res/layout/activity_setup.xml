@@ -46,7 +46,8 @@
             android:padding="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
             <!--TextView for the screen title-->
             <TextView
@@ -130,10 +131,11 @@
                         android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/et_hypo"
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/_4_0_mmol_l"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:gravity="center"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -151,10 +153,11 @@
                         android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/et_bottom"
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/_5_0_mol_l"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:gravity="center"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -172,10 +175,11 @@
                         android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/et_top"
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/_8_5_mml_l"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:gravity="center"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -192,14 +196,128 @@
                         android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/et_hyper"
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/_13_mmol_l"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:gravity="center"/>
                 </LinearLayout>
 
 
             </LinearLayout>
+
+            <!--TextView for the blood sugar type-->
+            <TextView
+                android:id="@+id/tv_duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/active_insulin_duration"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="10dp"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_duration"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/_04_00"
+                android:textSize="15sp"
+                android:paddingTop="10dp"
+                android:gravity="center"/>
+
+            <!--TextView for the blood sugar type-->
+            <TextView
+                android:id="@+id/tv_precision"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/insulin_precision"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="10dp"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_precision"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/_0_1"
+                android:textSize="15sp"
+                android:paddingTop="10dp"
+                android:gravity="center"/>
+
+            <!--TextView for the blood sugar type-->
+            <TextView
+                android:id="@+id/tv_carb_portion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/carbohydrate_portion"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="10dp"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_carb_portion"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/_10g"
+                android:textSize="15sp"
+                android:paddingTop="10dp"
+                android:gravity="center"/>
+
+            <!--TextView for the blood sugar type-->
+            <TextView
+                android:id="@+id/tv_carb_ratio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/carbohydrate_ratio_insulin_for_1_cp"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="10dp"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_carb_ratio"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/_4"
+                android:textSize="15sp"
+                android:paddingTop="10dp"
+                android:gravity="center"/>
+
+            <!--TextView for the blood sugar type-->
+            <TextView
+                android:id="@+id/tv_correction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/correction_dosage_1_unit_of_insulin"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="10dp"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_correction"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/_2_5_mmol_l"
+                android:textSize="15sp"
+                android:paddingTop="10dp"
+                android:gravity="center"/>
+
+            <!--Button that saves the user's details and links to the HomeActivity-->
+            <Button
+                android:id="@+id/create"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_background"
+                android:text="@string/save_details"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"/>
+
         </LinearLayout>
 
     </ScrollView>
