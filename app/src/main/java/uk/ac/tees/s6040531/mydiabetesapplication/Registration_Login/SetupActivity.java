@@ -48,19 +48,31 @@ public class SetupActivity extends AppCompatActivity implements AdapterView.OnIt
         auth = FirebaseAuth.getInstance();
         cUser = auth.getCurrentUser();
         id = auth.getUid();
-        
+
+        // Initialize widgets
+        etName = (EditText)findViewById(R.id.et_name);
+        etHypo = (EditText)findViewById(R.id.et_hypo);
+        etBottom = (EditText)findViewById(R.id.et_bottom);
+        etTop = (EditText)findViewById(R.id.et_top);
+        etHyper = (EditText)findViewById(R.id.et_hyper);
+        etDuration = (EditText)findViewById(R.id.et_duration);
+        etPrecision = (EditText)findViewById(R.id.et_precision);
+        etPortion = (EditText)findViewById(R.id.et_carb_portion);
+        etRatio = (EditText)findViewById(R.id.et_carb_ratio);
+        etCorrection = (EditText)findViewById(R.id.et_correction);
+        btnSave = (Button)findViewById(R.id.btn_save);
         spnBs = (Spinner)findViewById(R.id.spn_bs);
         spnCarb = (Spinner)findViewById(R.id.spn_carb);
 
+        // ArrayAdapter for spnBs
         ArrayAdapter<CharSequence> bsAdapter = ArrayAdapter.createFromResource(this, R.array.bs_types, android.R.layout.simple_spinner_item);
         bsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnBs.setAdapter(bsAdapter);
 
+        // ArrayAdapter for spnCarb
         ArrayAdapter<CharSequence> carbAdapter = ArrayAdapter.createFromResource(this, R.array.carb_types, android.R.layout.simple_spinner_item);
         carbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnCarb.setAdapter(carbAdapter);
-
-
     }
 
     @Override

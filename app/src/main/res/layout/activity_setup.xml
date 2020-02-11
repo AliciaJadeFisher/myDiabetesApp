@@ -328,7 +328,7 @@
 
             <!--Button that saves the user's details and links to the HomeActivity-->
             <Button
-                android:id="@+id/create"
+                android:id="@+id/btn_save"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
