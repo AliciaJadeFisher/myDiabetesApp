@@ -53,5 +53,17 @@ public class RegistrationActivity extends AppCompatActivity
             }
         });
 
+        // onClickListener for btnTerms
+//        btnTerms.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                Intent i = new Intent(RegistrationActivity.this, AboutActivity.class);
+//                startActivity(i);
+//                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+//            }
+//        });
+
     }
 }
