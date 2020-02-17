@@ -28,6 +28,7 @@ public class BasicFragment extends Fragment implements AdapterView.OnItemSelecte
     Button btnNext;
     User user;
     FirebaseAuth auth;
+
     // Variables for user data
     String bs, carb, id;
 
