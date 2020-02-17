@@ -1,9 +1,10 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-public class User
+public class User implements Serializable
 {
     String id, name, bs_m, cb_m;
     double hypo, bottom, top, hyper, duration, precision, correction;
