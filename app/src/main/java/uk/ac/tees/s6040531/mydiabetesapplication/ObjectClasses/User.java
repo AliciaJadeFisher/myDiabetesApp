@@ -1,13 +1,14 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class User
 {
     String id, name, bs_m, cb_m;
     double hypo, bottom, top, hyper, duration, precision, correction;
     int portion;
-    HashMap<String, TimeBlock> time_blocks;
+    List<TimeBlock> time_blocks;
 
     public User()
     {
@@ -110,12 +111,12 @@ public class User
         this.portion = portion;
     }
 
-    public HashMap<String, TimeBlock> getTime_blocks()
+    public List<TimeBlock> getTime_blocks()
     {
         return time_blocks;
     }
 
-    public void setTime_blocks(HashMap<String, TimeBlock> time_blocks)
+    public void setTime_blocks(List<TimeBlock> time_blocks)
     {
         this.time_blocks = time_blocks;
     }

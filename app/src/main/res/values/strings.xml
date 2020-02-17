@@ -67,4 +67,10 @@
     <string name="_00_00">00:00</string>
     <string name="time_end">Time End:</string>
     <string name="_08_00">08:00</string>
+    <string name="start">Start</string>
+    <string name="show_start_time">Show start time</string>
+    <string name="end">End</string>
+    <string name="show_end_time">Show end time</string>
+    <string name="ratio">Ratio</string>
+    <string name="show_ratio">Show ratio</string>
 </resources>

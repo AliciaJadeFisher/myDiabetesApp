@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -26,6 +27,7 @@ public class BasicFragment extends Fragment implements AdapterView.OnItemSelecte
     EditText etName;
     Spinner spnBs, spnCarb;
     Button btnNext;
+    ViewPager viewPager;
     User user;
     FirebaseAuth auth;
 
@@ -69,7 +71,7 @@ public class BasicFragment extends Fragment implements AdapterView.OnItemSelecte
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-
+        viewPager = (ViewPager)getActivity().findViewById(R.id.view_pager);
         etName = (EditText)view.findViewById(R.id.et_name);
         spnBs = (Spinner)view.findViewById(R.id.spn_bs);
         spnCarb = (Spinner)view.findViewById(R.id.spn_carb);
@@ -90,6 +92,7 @@ public class BasicFragment extends Fragment implements AdapterView.OnItemSelecte
                 user.setCb_m(carb);
 
                 sd.sendData1Medical(user);
+                viewPager.setCurrentItem(1);
             }
         });
 

@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager.widget.ViewPager;
+
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
@@ -19,6 +21,7 @@ public class MedicalFragment  extends Fragment
     SendData sd;
     EditText etHypo, etBottom, etTop, etHyper, etDuration, etPrecision, etPortion, etCorrection;
     Button btnBack,btnNext;
+    ViewPager viewPager;
     User user;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -58,7 +61,7 @@ public class MedicalFragment  extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-
+        viewPager = (ViewPager)getActivity().findViewById(R.id.view_pager);
         etHypo = (EditText)view.findViewById(R.id.et_hypo);
         etBottom = (EditText)view.findViewById(R.id.et_bottom);
         etTop = (EditText)view.findViewById(R.id.et_top);
@@ -69,6 +72,14 @@ public class MedicalFragment  extends Fragment
         etCorrection = (EditText)view.findViewById(R.id.et_correction);
         btnBack = (Button)view.findViewById(R.id.btn_back);
         btnNext = (Button)view.findViewById(R.id.btn_next);
+
+        btnBack.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(0);
+            }
+        });
 
         btnNext.setOnClickListener(new View.OnClickListener()
         {
@@ -85,6 +96,7 @@ public class MedicalFragment  extends Fragment
                 user.setCorrection(Double.parseDouble(etCorrection.getText().toString()));
 
                 sd.sendData1Medical(user);
+                viewPager.setCurrentItem(2);
             }
         });
     }
