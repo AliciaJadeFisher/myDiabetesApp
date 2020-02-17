@@ -22,7 +22,7 @@
 
         <!--TextView for the field title-->
         <TextView
-            android:id="@+id/threadTitle"
+            android:id="@+id/startTitle"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -34,7 +34,7 @@
 
         <!--TextView to display the thread title-->
         <TextView
-            android:id="@+id/tv_viewThreadTitle"
+            android:id="@+id/tv_viewStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -43,16 +43,16 @@
             android:textColor="@color/cardview_dark_background"
             android:textSize="17sp"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/threadTitle"
+            android:layout_toEndOf="@+id/startTitle"
             android:layout_marginStart="11dp" />
 
         <!--TextView for the field title-->
         <TextView
-            android:id="@+id/threadDesc"
+            android:id="@+id/endTitle"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:layout_below="@+id/threadTitle"
+            android:layout_below="@+id/startTitle"
             android:text="@string/end"
             android:fontFamily="sans-serif"
             android:textColor="@color/colorPrimary"
@@ -61,11 +61,11 @@
 
         <!--TextView to display the thread description-->
         <TextView
-            android:id="@+id/tv_viewThreadDesc"
+            android:id="@+id/tv_viewEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_viewThreadTitle"
-            android:layout_below="@+id/tv_viewThreadTitle"
+            android:layout_alignStart="@+id/tv_viewStart"
+            android:layout_below="@+id/tv_viewStart"
             android:gravity="start"
             android:text="@string/show_end_time"
             android:fontFamily="sans-serif-condensed"
@@ -74,11 +74,11 @@
 
         <!--TextView for the field title-->
         <TextView
-            android:id="@+id/threadPosts"
+            android:id="@+id/ratioTile"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:layout_below="@+id/threadDesc"
+            android:layout_below="@+id/endTitle"
             android:text="@string/ratio"
             android:fontFamily="sans-serif"
             android:textColor="@color/colorPrimary"
@@ -87,11 +87,11 @@
 
         <!--TextView to display the no. posts in the thread-->
         <TextView
-            android:id="@+id/tv_viewThreadPosts"
+            android:id="@+id/tv_viewRatio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_viewThreadDesc"
-            android:layout_below="@+id/tv_viewThreadDesc"
+            android:layout_alignStart="@+id/tv_viewEnd"
+            android:layout_below="@+id/tv_viewEnd"
             android:gravity="start"
             android:text="@string/show_ratio"
             android:fontFamily="sans-serif-condensed"

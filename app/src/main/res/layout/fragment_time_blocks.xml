@@ -3,7 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="56dp"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/colorAccent">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_time"
@@ -34,7 +35,9 @@
             android:hint="@string/_00_00"
             android:textSize="15sp"
             android:paddingTop="10dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/colorPrimaryDark"/>
 
         <!--TextView for the blood sugar type-->
         <TextView
@@ -54,7 +57,9 @@
             android:hint="@string/_08_00"
             android:textSize="15sp"
             android:paddingTop="10dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/colorPrimaryDark"/>
 
         <!--TextView for the blood sugar type-->
         <TextView
@@ -74,7 +79,9 @@
             android:hint="@string/_4"
             android:textSize="15sp"
             android:paddingTop="10dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/colorPrimaryDark"/>
 
         <!--Button that saves the user's details and links to the HomeActivity-->
         <Button

@@ -6,9 +6,7 @@ import java.util.List;
 
 public class User implements Serializable
 {
-    String id, name, bs_m, cb_m;
-    double hypo, bottom, top, hyper, duration, precision, correction;
-    int portion;
+    String id, name, bs_m, cb_m,hypo, bottom, top, hyper, duration, precision, correction,portion;
     List<TimeBlock> time_blocks;
 
     public User()
@@ -48,67 +46,67 @@ public class User implements Serializable
         this.cb_m = cb_m;
     }
 
-    public double getHypo() {
+    public String getHypo() {
         return hypo;
     }
 
-    public void setHypo(double hypo) {
+    public void setHypo(String hypo) {
         this.hypo = hypo;
     }
 
-    public double getBottom() {
+    public String getBottom() {
         return bottom;
     }
 
-    public void setBottom(double bottom) {
+    public void setBottom(String bottom) {
         this.bottom = bottom;
     }
 
-    public double getTop() {
+    public String getTop() {
         return top;
     }
 
-    public void setTop(double top) {
+    public void setTop(String top) {
         this.top = top;
     }
 
-    public double getHyper() {
+    public String getHyper() {
         return hyper;
     }
 
-    public void setHyper(double hyper) {
+    public void setHyper(String hyper) {
         this.hyper = hyper;
     }
 
-    public double getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
-    public double getPrecision() {
+    public String getPrecision() {
         return precision;
     }
 
-    public void setPrecision(double precision) {
+    public void setPrecision(String precision) {
         this.precision = precision;
     }
 
-    public double getCorrection() {
+    public String getCorrection() {
         return correction;
     }
 
-    public void setCorrection(double correction) {
+    public void setCorrection(String correction) {
         this.correction = correction;
     }
 
-    public int getPortion() {
+    public String getPortion() {
         return portion;
     }
 
-    public void setPortion(int portion) {
+    public void setPortion(String portion) {
         this.portion = portion;
     }
 

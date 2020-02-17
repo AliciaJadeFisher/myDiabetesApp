@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registration_Login.ui.main.PlaceholderFragment">
+    android:background="@color/colorAccent">
 
     <!--LinearLayout for the widgets-->
     <LinearLayout
@@ -35,6 +35,8 @@
         android:hint="@string/name"
         android:textSize="15sp"
         android:paddingTop="10dp"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryDark"
         android:gravity="center"/>
 
     <!--TextView for the blood sugar type-->
@@ -53,7 +55,8 @@
         android:id="@+id/spn_bs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"/>
+        android:paddingTop="10dp"
+        android:textColor="@color/colorPrimaryDark"/>
 
     <!--TextView for the blood sugar type-->
     <TextView
@@ -71,7 +74,8 @@
         android:id="@+id/spn_carb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"/>
+        android:paddingTop="10dp"
+        android:textColor="@color/colorPrimaryDark"/>
 
     <!--TextView for the blood sugar type-->
 

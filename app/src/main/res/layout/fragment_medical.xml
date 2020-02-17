@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
 
     <!--LinearLayout for the widgets-->
     <LinearLayout
@@ -52,7 +53,9 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/_4_0_mmol_l"
                     android:textSize="15sp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
 
             <LinearLayout
@@ -74,7 +77,9 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/_5_0_mol_l"
                     android:textSize="15sp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
 
             <LinearLayout
@@ -96,7 +101,9 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/_8_5_mml_l"
                     android:textSize="15sp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
 
             <LinearLayout
@@ -117,7 +124,9 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/_13_mmol_l"
                     android:textSize="15sp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
 
 
@@ -141,7 +150,9 @@
             android:hint="@string/_04_00"
             android:textSize="15sp"
             android:paddingTop="10dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/colorPrimaryDark"/>
 
         <!--TextView for the blood sugar type-->
         <TextView
@@ -161,7 +172,9 @@
             android:hint="@string/_0_1"
             android:textSize="15sp"
             android:paddingTop="10dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/colorPrimaryDark"/>
 
         <!--TextView for the blood sugar type-->
         <TextView
@@ -181,7 +194,9 @@
             android:hint="@string/_10g"
             android:textSize="15sp"
             android:paddingTop="10dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/colorPrimaryDark"/>
 
         <!--TextView for the blood sugar type-->
         <TextView
@@ -201,7 +216,9 @@
             android:hint="@string/_2_5_mmol_l"
             android:textSize="15sp"
             android:paddingTop="10dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/colorPrimaryDark"/>
         <LinearLayout
             android:paddingTop="10dp"
             android:layout_width="match_parent"

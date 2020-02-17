@@ -87,14 +87,14 @@ public class MedicalFragment  extends Fragment
             @Override
             public void onClick(View v)
             {
-                user.setHypo(Double.parseDouble(etHypo.getText().toString()));
-                user.setBottom(Double.parseDouble(etBottom.getText().toString()));
-                user.setTop(Double.parseDouble(etTop.getText().toString()));
-                user.setHyper(Double.parseDouble(etHyper.getText().toString()));
-                user.setDuration(Double.parseDouble(etDuration.getText().toString()));
-                user.setPrecision(Double.parseDouble(etPrecision.getText().toString()));
-                user.setPortion(Integer.parseInt(etPortion.getText().toString()));
-                user.setCorrection(Double.parseDouble(etCorrection.getText().toString()));
+                user.setHypo(etHypo.getText().toString());
+                user.setBottom(etBottom.getText().toString());
+                user.setTop(etTop.getText().toString());
+                user.setHyper(etHyper.getText().toString());
+                user.setDuration(etDuration.getText().toString());
+                user.setPrecision(etPrecision.getText().toString());
+                user.setPortion(etPortion.getText().toString());
+                user.setCorrection(etCorrection.getText().toString());
 
                 sd.sendDataTime(user);
                 viewPager.setCurrentItem(2);

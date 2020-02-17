@@ -37,9 +37,9 @@ public class TimeBlockRecyclerViewAdapter extends RecyclerView.Adapter<TimeBlock
             super(itemView);
 
             parentLayout = itemView.findViewById(R.id.parent_layout);
-            tvStart = (TextView)itemView.findViewById(R.id.tv_start);
-            tvEnd = (TextView)itemView.findViewById(R.id.tv_end);
-            tvRatio = (TextView)itemView.findViewById(R.id.tv_carb_ratio);
+            tvStart = (TextView)itemView.findViewById(R.id.tv_viewStart);
+            tvEnd = (TextView)itemView.findViewById(R.id.tv_viewEnd);
+            tvRatio = (TextView)itemView.findViewById(R.id.tv_viewRatio);
 
         }
     }
@@ -63,9 +63,9 @@ public class TimeBlockRecyclerViewAdapter extends RecyclerView.Adapter<TimeBlock
         final Activity activity = (Activity)context;
         final TimeBlock block = timeBlocks.get(position);
 
-        holder.tvStart.setText(String.valueOf(block.getStart()));
-        holder.tvEnd.setText(String.valueOf(block.getEnd()));
-        holder.tvRatio.setText(String.valueOf(block.getRatio()));
+        holder.tvStart.setText(block.getStart());
+        holder.tvEnd.setText(block.getEnd());
+        holder.tvRatio.setText(block.getRatio());
         
     }
 

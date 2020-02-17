@@ -2,6 +2,7 @@ package uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,12 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.HomeActivity;
@@ -24,19 +29,21 @@ import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.TimeBlockRecyclerViewAdapter;
+import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.AccountSetupActivity;
 
 public class TimeBlockFragment extends Fragment
 {
     EditText etStart, etEnd, etRatio;
     RecyclerView rvTime;
-    Button btnAdd,btnBack,btnNext;
+    Button btnAdd,btnBack,btnSave;
     ViewPager viewPager;
     User user;
     TimeBlockRecyclerViewAdapter adapter;
-    List<TimeBlock> time_blocks;
+    List<TimeBlock> time_blocks = new ArrayList<>();
 
     FirebaseFirestore udbRef;
 
+    private static final String TAG = "TBFragment";
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private PageViewModel pageViewModel;
@@ -83,7 +90,7 @@ public class TimeBlockFragment extends Fragment
         etRatio = (EditText)view.findViewById(R.id.et_carb_ratio);
         btnAdd = (Button)view.findViewById(R.id.btn_add);
         btnBack = (Button)view.findViewById(R.id.btn_back);
-        btnNext = (Button)view.findViewById(R.id.btn_next);
+        btnSave = (Button)view.findViewById(R.id.btn_save);
 
         rvTime = (RecyclerView)view.findViewById(R.id.rv_time);
         rvTime.setHasFixedSize(true);
@@ -94,9 +101,9 @@ public class TimeBlockFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                double start = Double.parseDouble(etStart.getText().toString());
-                double end = Double.parseDouble(etEnd.getText().toString());
-                double ratio = Double.parseDouble(etRatio.getText().toString());
+                String start = etStart.getText().toString();
+                String end = etEnd.getText().toString();
+                String ratio = etRatio.getText().toString();
 
                 TimeBlock tb = new TimeBlock(start, end , ratio);
                 time_blocks.add(tb);
@@ -114,17 +121,29 @@ public class TimeBlockFragment extends Fragment
             }
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener()
+        btnSave.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 user.setTime_blocks(time_blocks);
 
-                udbRef.collection("users").add(user);
+                udbRef.collection("users").document(user.getId()).set(user)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error writing document", e);
+                        }
+                    });
 
                 Intent i = new Intent(getActivity(), HomeActivity.class);
-                i.putExtra("user", user);
+                i.putExtra("user",user);
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 getActivity().finish();
