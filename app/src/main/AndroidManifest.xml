@@ -11,7 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Registration_Login.ResetPasswordActivity"></activity>
+        <activity
+            android:name=".Registration_Login.AccountSetupActivity"
+            android:label="@string/title_activity_account_setup"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Registration_Login.ResetPasswordActivity" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home" />

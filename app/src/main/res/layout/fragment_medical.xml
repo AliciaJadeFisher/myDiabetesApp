@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--LinearLayout for the widgets-->
+    <LinearLayout
+        android:layout_marginTop="56dp"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+        <!--TextView for the blood sugar type-->
+        <TextView
+            android:id="@+id/tv_target"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/blood_sugar_target_ranges"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingTop="10dp"
+            android:textSize="15sp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_targets"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingEnd="15dp">
+                <TextView
+                    android:id="@+id/tv_hypo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hypo"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"/>
+                <EditText
+                    android:id="@+id/et_hypo"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/_4_0_mmol_l"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingEnd="15dp">
+                <TextView
+                    android:id="@+id/tv_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bottom_target"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"/>
+                <EditText
+                    android:id="@+id/et_bottom"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/_5_0_mol_l"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingEnd="15dp">
+                <TextView
+                    android:id="@+id/tv_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/top_target"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"/>
+                <EditText
+                    android:id="@+id/et_top"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/_8_5_mml_l"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_hyper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hyper"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"/>
+                <EditText
+                    android:id="@+id/et_hyper"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/_13_mmol_l"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!--TextView for the blood sugar type-->
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/active_insulin_duration"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingTop="10dp"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:id="@+id/et_duration"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/_04_00"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:gravity="center"/>
+
+        <!--TextView for the blood sugar type-->
+        <TextView
+            android:id="@+id/tv_precision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/insulin_precision"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingTop="10dp"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:id="@+id/et_precision"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/_0_1"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:gravity="center"/>
+
+        <!--TextView for the blood sugar type-->
+        <TextView
+            android:id="@+id/tv_carb_portion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/carbohydrate_portion"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingTop="10dp"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:id="@+id/et_carb_portion"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/_10g"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:gravity="center"/>
+
+        <!--TextView for the blood sugar type-->
+        <TextView
+            android:id="@+id/tv_correction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/correction_dosage_1_unit_of_insulin"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingTop="10dp"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:id="@+id/et_correction"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/_2_5_mmol_l"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:gravity="center"/>
+        <LinearLayout
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!--Button that saves the user's details and links to the HomeActivity-->
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_background"
+                android:text="@string/back"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                tools:ignore="ButtonStyle" />
+            <!--Button that saves the user's details and links to the HomeActivity-->
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_background"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
