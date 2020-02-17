@@ -19,11 +19,12 @@ import java.util.HashMap;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
+import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.BasicFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.MedicalFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.SectionsPagerAdapter;
 import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.TimeBlockFragment;
 
-public class AccountSetupActivity extends AppCompatActivity
+public class AccountSetupActivity extends AppCompatActivity implements BasicFragment.sendDataMedical, MedicalFragment.sendDataTime
 {
 
     @Override
@@ -40,17 +41,19 @@ public class AccountSetupActivity extends AppCompatActivity
         tabs.setupWithViewPager(viewPager);
     }
 
+    @Override
     public void sendDataMedical(User u)
     {
         String tag = "android:switcher:" + R.id.view_pager + ":" + 1;
-        MedicalFragment mf = (MedicalFragment)getSupportFragmentManager().findFragmentById(Integer.parseInt(tag));
+        MedicalFragment mf = (MedicalFragment)getSupportFragmentManager().findFragmentByTag(tag);
         mf.dataReceived(u);
     }
 
+    @Override
     public void sendDataTime(User u)
     {
         String tag = "android:switcher:" + R.id.view_pager + ":" + 2;
-        TimeBlockFragment tf = (TimeBlockFragment) getSupportFragmentManager().findFragmentById(Integer.parseInt(tag));
+        TimeBlockFragment tf = (TimeBlockFragment) getSupportFragmentManager().findFragmentByTag(tag);
         tf.dataReceived(u);
     }
 

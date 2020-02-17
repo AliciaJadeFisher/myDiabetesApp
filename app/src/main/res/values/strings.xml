@@ -73,4 +73,5 @@
     <string name="show_end_time">Show end time</string>
     <string name="ratio">Ratio</string>
     <string name="show_ratio">Show ratio</string>
+    <string name="create_successs">Create account successful!</string>
 </resources>

@@ -13,14 +13,13 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".Registration_Login.AccountSetupActivity"
-            android:label="@string/title_activity_account_setup"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_account_setup"/>
         <activity android:name=".Registration_Login.ResetPasswordActivity" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home" />
-        <activity android:name=".Registration_Login.SetupActivity" />
-        <activity android:name=".Registration_Login.RegistrationActivity" />
+        <activity android:name=".Registration_Login.RegistrationActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".Registration_Login.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,7 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class BasicFragment extends Fragment implements AdapterView.OnItemSelectedListener
 {
-    SendData sd;
+    sendDataMedical sd;
     EditText etName;
     Spinner spnBs, spnCarb;
     Button btnNext;
@@ -91,7 +92,7 @@ public class BasicFragment extends Fragment implements AdapterView.OnItemSelecte
                 user.setBs_m(bs);
                 user.setCb_m(carb);
 
-                sd.sendData1Medical(user);
+                sd.sendDataMedical(user);
                 viewPager.setCurrentItem(1);
             }
         });
@@ -129,9 +130,28 @@ public class BasicFragment extends Fragment implements AdapterView.OnItemSelecte
     /**
      * Interface for SendMessage
      */
-    interface SendData
+    public interface sendDataMedical
     {
-        void sendData1Medical(User user);
+        void sendDataMedical(User user);
+    }
+
+    /**
+     * Called when fragment is first attached to its context
+     * @param context
+     */
+    @Override
+    public void onAttach(Context context)
+    {
+        super.onAttach(context);
+
+        try
+        {
+            sd = (sendDataMedical) getActivity();
+        }
+        catch(ClassCastException e)
+        {
+            throw new ClassCastException("Error in retrieving data. Please try again.");
+        }
     }
 }
 

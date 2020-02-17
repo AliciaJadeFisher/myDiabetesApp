@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class MedicalFragment  extends Fragment
 {
-    SendData sd;
+    sendDataTime sd;
     EditText etHypo, etBottom, etTop, etHyper, etDuration, etPrecision, etPortion, etCorrection;
     Button btnBack,btnNext;
     ViewPager viewPager;
@@ -53,7 +54,7 @@ public class MedicalFragment  extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View root = inflater.inflate(R.layout.fragment_basic, container, false);
+        View root = inflater.inflate(R.layout.fragment_medical, container, false);
         return root;
     }
 
@@ -70,7 +71,7 @@ public class MedicalFragment  extends Fragment
         etPrecision = (EditText)view.findViewById(R.id.et_precision);
         etPortion = (EditText)view.findViewById(R.id.et_carb_portion);
         etCorrection = (EditText)view.findViewById(R.id.et_correction);
-        btnBack = (Button)view.findViewById(R.id.btn_back);
+        btnBack = (Button)view.findViewById(R.id.btn_go_back);
         btnNext = (Button)view.findViewById(R.id.btn_next);
 
         btnBack.setOnClickListener(new View.OnClickListener()
@@ -95,7 +96,7 @@ public class MedicalFragment  extends Fragment
                 user.setPortion(Integer.parseInt(etPortion.getText().toString()));
                 user.setCorrection(Double.parseDouble(etCorrection.getText().toString()));
 
-                sd.sendData1Medical(user);
+                sd.sendDataTime(user);
                 viewPager.setCurrentItem(2);
             }
         });
@@ -104,9 +105,28 @@ public class MedicalFragment  extends Fragment
     /**
      * Interface for SendMessage
      */
-    interface SendData
+    public interface sendDataTime
     {
-        void sendData1Medical(User user);
+        void sendDataTime(User user);
+    }
+
+    /**
+     * Called when fragment is first attached to its context
+     * @param context
+     */
+    @Override
+    public void onAttach(Context context)
+    {
+        super.onAttach(context);
+
+        try
+        {
+            sd = (sendDataTime) getActivity();
+        }
+        catch(ClassCastException e)
+        {
+            throw new ClassCastException("Error in retrieving data. Please try again.");
+        }
     }
 
     public void dataReceived(User u)

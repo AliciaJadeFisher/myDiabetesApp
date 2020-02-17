@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,9 +43,9 @@ public class RegistrationActivity extends AppCompatActivity
         // Initialize widgets
         etEmail = (EditText)findViewById(R.id.et_email);
         etPassword = (EditText)findViewById(R.id.et_password);
-        btnReg = (Button) findViewById(R.id.btn_reg);
+        btnReg = (Button) findViewById(R.id.btn_register);
         btnLogin = (Button)findViewById(R.id.btn_login);
-        btnTerms = (Button)findViewById(R.id.btn_login);
+        btnTerms = (Button)findViewById(R.id.btn_terms);
 
         // onClickListener for btnLogin
         btnLogin.setOnClickListener(new View.OnClickListener()
@@ -103,16 +104,18 @@ public class RegistrationActivity extends AppCompatActivity
                         // Informs the user that they are creating an account
                         Toast.makeText(RegistrationActivity.this, R.string.create_account,Toast.LENGTH_SHORT).show();
 
-                        //Checks if creation was successful and prints out relevant message
+                        System.out.println("================== TASK : " + task.isSuccessful() + "=====================");
+
                         if(!task.isSuccessful())
                         {
                             Toast.makeText(RegistrationActivity.this, R.string.create_failed, Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
-                            //Loads SetupActivity
-                            startActivity(new Intent(RegistrationActivity.this,SetupActivity.class));
-                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                            Toast.makeText(RegistrationActivity.this, R.string.create_successs, Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(RegistrationActivity.this, AccountSetupActivity.class);
+                            startActivity(i);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             finish();
                         }
                     }

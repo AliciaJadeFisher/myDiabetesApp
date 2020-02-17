@@ -45,15 +45,15 @@ public class LoginActivity extends AppCompatActivity
         auth = null;
         auth = FirebaseAuth.getInstance();
 
-        // Checks if a current user exists
-        if(auth.getCurrentUser() != null)
-        {
-            // Loads the HomeActivity
-            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(i);
-            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-            finish();
-        }
+//        // Checks if a current user exists
+//        if(auth.getCurrentUser() != null)
+//        {
+//            // Loads the HomeActivity
+//            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+//            startActivity(i);
+//            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+//            finish();
+//        }
 
         // Initialize widgets
         etEmail = (EditText)findViewById(R.id.et_email);
@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity
                 Intent i = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                finish();
             }
         });
 

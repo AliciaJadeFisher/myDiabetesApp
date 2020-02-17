@@ -15,11 +15,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.sql.Time;
 import java.util.List;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.HomeActivity;
@@ -38,7 +35,7 @@ public class TimeBlockFragment extends Fragment
     TimeBlockRecyclerViewAdapter adapter;
     List<TimeBlock> time_blocks;
 
-    DatabaseReference udbRef;
+    FirebaseFirestore udbRef;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -69,7 +66,7 @@ public class TimeBlockFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View root = inflater.inflate(R.layout.fragment_basic, container, false);
+        View root = inflater.inflate(R.layout.fragment_time_blocks, container, false);
         return root;
     }
 
@@ -79,7 +76,7 @@ public class TimeBlockFragment extends Fragment
 
         super.onViewCreated(view, savedInstanceState);
 
-        udbRef = FirebaseDatabase.getInstance().getReference("users");
+        udbRef = FirebaseFirestore.getInstance();
         viewPager = (ViewPager)getActivity().findViewById(R.id.view_pager);
         etStart = (EditText)view.findViewById(R.id.et_start);
         etEnd = (EditText)view.findViewById(R.id.et_end);
@@ -124,7 +121,7 @@ public class TimeBlockFragment extends Fragment
             {
                 user.setTime_blocks(time_blocks);
 
-                udbRef.child(user.getId()).setValue(user);
+                udbRef.collection("users").add(user);
 
                 Intent i = new Intent(getActivity(), HomeActivity.class);
                 i.putExtra("user", user);
