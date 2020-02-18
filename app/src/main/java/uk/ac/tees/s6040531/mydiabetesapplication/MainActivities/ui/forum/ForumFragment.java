@@ -1,4 +1,4 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.ui.dashboard;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ui.forum;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
-public class DashboardFragment extends Fragment {
+public class ForumFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private ForumViewModel forumViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(this, new Observer<String>() {
+        forumViewModel =
+                ViewModelProviders.of(this).get(ForumViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_forum, container, false);
+        final TextView textView = root.findViewById(R.id.text_forum);
+        forumViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

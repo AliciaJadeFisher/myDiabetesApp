@@ -74,4 +74,7 @@
     <string name="ratio">Ratio</string>
     <string name="show_ratio">Show ratio</string>
     <string name="create_successs">Create account successful!</string>
+    <string name="add_entry">Add Entry</string>
+    <string name="forum">Forum</string>
+    <string name="home_fragment">This is the home fragment</string>
 </resources>

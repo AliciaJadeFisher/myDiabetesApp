@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="uk.ac.tees.s6040531.mydiabetesapplication.ui.home.HomeFragment"
+        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ui.add.AddFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_add" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="uk.ac.tees.s6040531.mydiabetesapplication.ui.dashboard.DashboardFragment"
+        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ui.home.HomeFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="uk.ac.tees.s6040531.mydiabetesapplication.ui.notifications.NotificationsFragment"
+        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ui.forum.ForumFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_forum" />
 </navigation>

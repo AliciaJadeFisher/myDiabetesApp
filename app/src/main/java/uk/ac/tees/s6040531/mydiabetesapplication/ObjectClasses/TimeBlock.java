@@ -1,6 +1,8 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses;
 
-public class TimeBlock
+import java.io.Serializable;
+
+public class TimeBlock implements Serializable
 {
    String start,end,ratio;
 

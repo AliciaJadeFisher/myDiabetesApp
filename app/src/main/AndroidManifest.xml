@@ -17,8 +17,8 @@
             android:theme="@style/noActionbar"/>
         <activity android:name=".Registration_Login.ResetPasswordActivity" />
         <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_home" />
+            android:name=".MainActivities.HomeActivity"
+            android:label="@string/title_activity_home"/>
         <activity android:name=".Registration_Login.RegistrationActivity"
             android:theme="@style/noActionbar"/>
         <activity

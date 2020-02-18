@@ -78,6 +78,8 @@ public class BasicFragment extends Fragment implements AdapterView.OnItemSelecte
         spnCarb = (Spinner)view.findViewById(R.id.spn_carb);
         btnNext = (Button)view.findViewById(R.id.btn_next);
 
+        bs = spnBs.getSelectedItem().toString();
+        carb = spnCarb.getSelectedItem().toString();
         btnNext.setOnClickListener(new View.OnClickListener()
         {
             @Override

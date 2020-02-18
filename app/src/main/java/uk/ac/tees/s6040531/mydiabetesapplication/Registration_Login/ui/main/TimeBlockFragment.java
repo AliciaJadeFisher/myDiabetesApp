@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,17 +20,17 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.ac.tees.s6040531.mydiabetesapplication.HomeActivity;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.TimeBlockRecyclerViewAdapter;
-import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.AccountSetupActivity;
 
 public class TimeBlockFragment extends Fragment
 {
@@ -84,6 +85,7 @@ public class TimeBlockFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         udbRef = FirebaseFirestore.getInstance();
+
         viewPager = (ViewPager)getActivity().findViewById(R.id.view_pager);
         etStart = (EditText)view.findViewById(R.id.et_start);
         etEnd = (EditText)view.findViewById(R.id.et_end);
@@ -128,17 +130,22 @@ public class TimeBlockFragment extends Fragment
             {
                 user.setTime_blocks(time_blocks);
 
-                udbRef.collection("users").document(user.getId()).set(user)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                }
-            })
-                    .addOnFailureListener(new OnFailureListener() {
+                udbRef.collection("users").add(user)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>()
+                    {
                         @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error writing document", e);
+                        public void onSuccess(DocumentReference documentReference)
+                        {
+                            Toast.makeText(getActivity(), "Details Saved", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener()
+                    {
+                        @Override
+                        public void onFailure(@NonNull Exception e)
+                        {
+                            Log.w(TAG, "========================== Error adding event document =====================", e);
+                            Toast.makeText(getActivity(), "Error, details could not be saved", Toast.LENGTH_SHORT).show();
                         }
                     });
 
