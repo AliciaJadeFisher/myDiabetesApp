@@ -4,25 +4,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
-import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
-public class ThreadFragment extends Fragment
+public class AddThreadFragment extends Fragment
 {
-    User user;
-    ForumThread thread;
+    //Variables used for layout access
+    EditText etTitle, etDescription;
+    Button btnCreate, btnDelete;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    public static ThreadFragment newInstance(int index)
+    public static AddThreadFragment newInstance(int index)
     {
-        ThreadFragment fragment = new ThreadFragment();
+        AddThreadFragment fragment = new AddThreadFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_SECTION_NUMBER, index);
         fragment.setArguments(bundle);
@@ -42,9 +44,6 @@ public class ThreadFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_thread, container, false);
-
-        user = (User)getArguments().get("user");
-        thread = (ForumThread)getArguments().get("thread");
 
         return root;
     }
