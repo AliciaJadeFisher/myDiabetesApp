@@ -82,4 +82,10 @@
     <string name="this_is_the_thread_fragment">This is the thread fragment</string>
     <string name="thread_fragment">Thread Fragment</string>
     <string name="threads">Threads</string>
+    <string name="title">Title</string>
+    <string name="show_thread_title">show thread title</string>
+    <string name="description">Desc.</string>
+    <string name="show_thread_description">show thread description</string>
+    <string name="no_posts">No. posts</string>
+    <string name="show_no_posts">show no. posts</string>
 </resources>

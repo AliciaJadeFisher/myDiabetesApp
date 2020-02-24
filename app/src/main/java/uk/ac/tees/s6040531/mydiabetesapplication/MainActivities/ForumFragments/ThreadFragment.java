@@ -48,6 +48,6 @@ public class ThreadFragment extends Fragment
     {
 
         super.onViewCreated(view, savedInstanceState);
-        textView = (TextView)view.findViewById(R.id.text_forum);
+        textView = (TextView)view.findViewById(R.id.text_thread);
     }
 }
