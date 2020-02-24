@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
@@ -19,6 +21,16 @@ public class AddThreadFragment extends Fragment
     //Variables used for layout access
     EditText etTitle, etDescription;
     Button btnCreate, btnDelete;
+
+    //Variables used for project and thread access
+    ForumThread thread;
+    String tID;
+
+    //Variable used tro store create/edit status
+    String status = "New";
+
+    //Variables used for database access
+    FirebaseFirestore threadDbRef, postDbRef;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -43,15 +55,14 @@ public class AddThreadFragment extends Fragment
     }
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View root = inflater.inflate(R.layout.fragment_thread, container, false);
-
+        View root = inflater.inflate(R.layout.fragment_add_thread, container, false);
         return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
-
         super.onViewCreated(view, savedInstanceState);
+        
     }
 }
