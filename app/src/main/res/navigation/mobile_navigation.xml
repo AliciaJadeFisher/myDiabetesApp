@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumFragment"
+        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumFragments.ForumFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_forum" />
 </navigation>

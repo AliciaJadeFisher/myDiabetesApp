@@ -79,4 +79,7 @@
     <string name="home_fragment">This is the home fragment</string>
     <string name="this_is_the_forum_fragment">This is the forum fragment</string>
     <string name="this_is_the_add_entry_fragment">This is the add entry fragment</string>
+    <string name="this_is_the_thread_fragment">This is the thread fragment</string>
+    <string name="thread_fragment">Thread Fragment</string>
+    <string name="threads">Threads</string>
 </resources>

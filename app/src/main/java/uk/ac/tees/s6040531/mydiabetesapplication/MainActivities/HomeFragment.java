@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumFragments.ForumFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class HomeFragment extends Fragment

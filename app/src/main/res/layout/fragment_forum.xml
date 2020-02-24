@@ -4,30 +4,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <!--LinearLayout for the widgets-->
-    <LinearLayout
-        android:layout_marginTop="56dp"
-        android:padding="16dp"
+    <!--ScrollView for the entire screen-->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/text_forum"
+        <!--LinearLayout for the widgets-->
+        <LinearLayout
+            android:layout_marginTop="56dp"
+            android:padding="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:text="@string/this_is_the_forum_fragment"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center">
 
-    </LinearLayout>
+            <!--Relative layout for the title section-->
+            <RelativeLayout
+                android:id="@+id/layout_forum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <!--TextView for the page title-->
+                <TextView
+                    android:id="@+id/tv_Threads"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/threads"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="10dp"
+                android:paddingBottom="20dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerViewThreads">
+            </androidx.recyclerview.widget.RecyclerView>
+            <Button
+                android:id="@+id/btn_addThread"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/thread_fragment"/>
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
