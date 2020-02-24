@@ -77,4 +77,6 @@
     <string name="add_entry">Add Entry</string>
     <string name="forum">Forum</string>
     <string name="home_fragment">This is the home fragment</string>
+    <string name="this_is_the_forum_fragment">This is the forum fragment</string>
+    <string name="this_is_the_add_entry_fragment">This is the add entry fragment</string>
 </resources>

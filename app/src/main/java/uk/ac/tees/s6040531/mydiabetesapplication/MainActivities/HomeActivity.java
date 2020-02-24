@@ -8,16 +8,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ui.home.HomeFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class HomeActivity extends AppCompatActivity
 {
+    final Fragment homeFragment = new HomeFragment();
+    final Fragment addFragment = new AddFragment();
+    final Fragment forumFragment = new ForumFragment();
+    final FragmentManager fragMan = getSupportFragmentManager();
+
+    Fragment activeFragment = homeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,28 +29,37 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         final BottomNavigationView navView = (BottomNavigationView) findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         navView.setSelectedItemId(R.id.navigation_home);
         getSupportActionBar().hide();
 
-        BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener()
-        {
-                    @Override public boolean onNavigationItemSelected(@NonNull MenuItem item)
-                    {
-                        switch (item.getItemId()) {
-                            case R.id.navigation_add:
-                                navView.setSelectedItemId(R.id.navigation_add);
-                                return true;
-                            case R.id.navigation_home:
-                                navView.setSelectedItemId(R.id.navigation_home);
-                                return true;
-                            case R.id.navigation_forum:
-                                navView.setSelectedItemId(R.id.navigation_forum);
-                                return true;
-                        }
-                        return false;
-                    }
-                };
+        fragMan.beginTransaction().add(R.id.home_parent, addFragment,"1").hide(addFragment).commit();
+        fragMan.beginTransaction().add(R.id.home_parent, forumFragment,"3").hide(forumFragment).commit();
+        fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"2").commit();
+
 
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener()
+    {
+        @Override public boolean onNavigationItemSelected(@NonNull MenuItem item)
+        {
+            switch (item.getItemId()) {
+                case R.id.navigation_add:
+                    fragMan.beginTransaction().hide(activeFragment).show(addFragment).commit();
+                    activeFragment = addFragment;
+                    return true;
+                case R.id.navigation_home:
+                    fragMan.beginTransaction().hide(activeFragment).show(homeFragment).commit();
+                    activeFragment = homeFragment;
+                    return true;
+                case R.id.navigation_forum:
+                    fragMan.beginTransaction().hide(activeFragment).show(forumFragment).commit();
+                    activeFragment = forumFragment;
+                    return true;
+            }
+            return false;
+        }
+    };
 
 }
