@@ -53,7 +53,7 @@
                 android:id="@+id/btn_addThread"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/thread_fragment"/>
+                android:text="@string/add_thread"/>
 
         </LinearLayout>
     </ScrollView>

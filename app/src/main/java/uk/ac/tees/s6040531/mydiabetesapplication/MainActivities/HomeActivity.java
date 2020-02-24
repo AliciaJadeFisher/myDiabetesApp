@@ -78,7 +78,6 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
                         addFragment.setArguments(userBundle);
                         homeFragment.setArguments(userBundle);
                         forumFragment.setArguments(userBundle);
-                        threadFragment.setArguments(userBundle);
                     }
                 }
             });
@@ -107,10 +106,15 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
         }
     };
 
+    @Override
     public void goToThreadFragment(User u, ForumThread t)
     {
+        Bundle threadUserBundle = new Bundle();
+        threadUserBundle.putSerializable("user",u);
+        threadUserBundle.putSerializable("thread",t);
+        threadFragment.setArguments(threadUserBundle);
+
         fragMan.beginTransaction().hide(activeFragment).show(threadFragment).commit();
-        threadFragment;
         activeFragment = threadFragment;
     }
 
