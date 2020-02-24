@@ -64,7 +64,6 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
         fragMan.beginTransaction().add(R.id.home_parent, forumFragment,"3").hide(forumFragment).commit();
         fragMan.beginTransaction().add(R.id.home_parent, threadFragment,"3").hide(threadFragment).commit();
         fragMan.beginTransaction().add(R.id.home_parent, addThreadFragment,"3").hide(addThreadFragment).commit();
-        homeFragment.setArguments(userBundle);
         fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"2").commit();
     }
 
@@ -102,6 +101,8 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
                 System.out.println("=================================== User : " + u.getName() + " =========================================");
 
                 userBundle.putSerializable("user", u);
+
+                homeFragment.setArguments(userBundle);
             }
         });
     }

@@ -19,7 +19,7 @@ import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.Basi
 public class HomeFragment extends Fragment
 {
     TextView textView;
-    User user = new User();
+    User user;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
