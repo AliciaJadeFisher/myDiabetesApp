@@ -10,11 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class ThreadFragment extends Fragment
 {
-    TextView textView;
+    User user;
+    ForumThread thread;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -48,6 +51,11 @@ public class ThreadFragment extends Fragment
     {
 
         super.onViewCreated(view, savedInstanceState);
-        textView = (TextView)view.findViewById(R.id.text_thread);
+    }
+
+    public void threadDataReceived(User u, ForumThread t;)
+    {
+        user = u;
+        thread = t;
     }
 }

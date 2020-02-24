@@ -6,19 +6,41 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
+import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.ThreadRecyclerViewAdapter;
 
 public class ForumFragment extends Fragment
 {
-    ThreadFragGo tm;
+    RecyclerView threadRecycler;
     Button btnAddThread;
+
+    ThreadFragGo tm;
+    List<ForumThread> threadList = new ArrayList<>();
+    User u;
+
+    //Variable used for the recyclerView adapter
+    ThreadRecyclerViewAdapter adapter;
+
+    //Variable used for database access
+    FirebaseFirestore threadDbRef;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -44,6 +66,7 @@ public class ForumFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_forum, container, false);
+        u = (User)getArguments().getSerializable("user");
         return root;
     }
 
@@ -53,15 +76,39 @@ public class ForumFragment extends Fragment
 
         super.onViewCreated(view, savedInstanceState);
         btnAddThread = (Button)view.findViewById(R.id.btn_addThread);
+        threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
+        threadRecycler.setHasFixedSize(true);
+        threadRecycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         btnAddThread.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                tm.goToThreadFragment();
+                //tm.goToThreadFragment();
             }
         });
+
+        threadDbRef.collection("threads").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+        {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task)
+            {
+                if (task.isSuccessful())
+                {
+                    for (QueryDocumentSnapshot document : task.getResult())
+                    {
+                        ForumThread  t = (ForumThread)document.getData();
+                        t.setThreadID(document.getId());
+                        threadList.add(t);
+                    }
+                }
+            }
+        });
+
+        //Passes the current activity, thread list, project and user to the adapter
+        adapter = new ThreadRecyclerViewAdapter(this, threadList, u);
+        threadRecycler.setAdapter(adapter);
     }
 
     /**
@@ -69,7 +116,7 @@ public class ForumFragment extends Fragment
      */
     public interface ThreadFragGo
     {
-        void goToThreadFragment();
+        void goToThreadFragment(User user, ForumThread thread);
     }
 
     /**
