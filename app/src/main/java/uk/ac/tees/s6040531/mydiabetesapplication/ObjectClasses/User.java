@@ -10,9 +10,7 @@ public class User implements Serializable
     List<TimeBlock> time_blocks;
 
     public User()
-    {
-
-    }
+    {}
 
     public String getId() {
         return id;

@@ -20,6 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -43,6 +44,7 @@ public class TimeBlockFragment extends Fragment
     List<TimeBlock> time_blocks = new ArrayList<>();
 
     FirebaseFirestore udbRef;
+    FirebaseAuth auth;
 
     private static final String TAG = "TBFragment";
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -84,6 +86,7 @@ public class TimeBlockFragment extends Fragment
 
         super.onViewCreated(view, savedInstanceState);
 
+        auth = FirebaseAuth.getInstance();
         udbRef = FirebaseFirestore.getInstance();
 
         viewPager = (ViewPager)getActivity().findViewById(R.id.view_pager);
@@ -130,24 +133,21 @@ public class TimeBlockFragment extends Fragment
             {
                 user.setTime_blocks(time_blocks);
 
-                udbRef.collection("users").add(user)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>()
+                udbRef.document("users/"+ auth.getUid()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid)
                     {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference)
-                        {
-                            Toast.makeText(getActivity(), "Details Saved", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener()
+                        Toast.makeText(getActivity(), "Details Saved", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener()
+                {
+                    @Override
+                    public void onFailure(@NonNull Exception e)
                     {
-                        @Override
-                        public void onFailure(@NonNull Exception e)
-                        {
-                            Log.w(TAG, "========================== Error adding event document =====================", e);
-                            Toast.makeText(getActivity(), "Error, details could not be saved", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        Toast.makeText(getActivity(), "Error saving details", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
                 Intent i = new Intent(getActivity(), HomeActivity.class);
                 i.putExtra("user",user);

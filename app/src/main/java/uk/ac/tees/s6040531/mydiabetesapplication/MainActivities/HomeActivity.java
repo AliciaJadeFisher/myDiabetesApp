@@ -1,34 +1,38 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumFragments.AddThreadFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumFragments.ForumFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumFragments.ThreadFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
+import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.BasicFragment;
 
-public class HomeActivity extends AppCompatActivity implements ForumFragment.ThreadFragGo
+public class HomeActivity extends AppCompatActivity implements ForumFragment.ThreadFragGo, ForumFragment.AddThreadFragGo, AddThreadFragment.ForumFragGo
 {
     final Fragment homeFragment = new HomeFragment();
     final Fragment addFragment = new AddFragment();
     final Fragment forumFragment = new ForumFragment();
     final Fragment threadFragment = new ThreadFragment();
+    final Fragment addThreadFragment = new AddThreadFragment();
     final FragmentManager fragMan = getSupportFragmentManager();
+
+    Bundle userBundle = new Bundle();
 
     Fragment activeFragment = homeFragment;
 
@@ -52,36 +56,16 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
         // Grabs the current firebase auth instance
         auth = null;
         auth = FirebaseAuth.getInstance();
+        udbRef = FirebaseFirestore.getInstance();
+
+        getUser();
 
         fragMan.beginTransaction().add(R.id.home_parent, addFragment,"1").hide(addFragment).commit();
         fragMan.beginTransaction().add(R.id.home_parent, forumFragment,"3").hide(forumFragment).commit();
         fragMan.beginTransaction().add(R.id.home_parent, threadFragment,"3").hide(threadFragment).commit();
+        fragMan.beginTransaction().add(R.id.home_parent, addThreadFragment,"3").hide(addThreadFragment).commit();
+        homeFragment.setArguments(userBundle);
         fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"2").commit();
-
-        getIncomingIntent();
-
-        if(u == null)
-        {
-            udbRef.collection("users").whereEqualTo("id", auth.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
-            {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task)
-                {
-                    if(task.isSuccessful())
-                    {
-                        DocumentSnapshot doc = task.getResult().getDocuments().get(0);
-                        u = (User)doc.getData();
-
-                        Bundle userBundle = new Bundle();
-                        userBundle.putSerializable("user",u);
-
-                        addFragment.setArguments(userBundle);
-                        homeFragment.setArguments(userBundle);
-                        forumFragment.setArguments(userBundle);
-                    }
-                }
-            });
-        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener()
@@ -106,30 +90,42 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
         }
     };
 
+    public void getUser()
+    {
+        udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+        {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot)
+            {
+                u = documentSnapshot.toObject(User.class);
+
+                System.out.println("=================================== User : " + u.getName() + " =========================================");
+
+                userBundle.putSerializable("user", u);
+            }
+        });
+    }
+
+
     @Override
     public void goToThreadFragment(User u, ForumThread t)
     {
-        Bundle threadUserBundle = new Bundle();
-        threadUserBundle.putSerializable("user",u);
-        threadUserBundle.putSerializable("thread",t);
-        threadFragment.setArguments(threadUserBundle);
-
         fragMan.beginTransaction().hide(activeFragment).show(threadFragment).commit();
         activeFragment = threadFragment;
     }
 
-    /**
-     * Retrieves data sent with the intent in the extra field
-     */
-    private void getIncomingIntent()
+    @Override
+    public void goToAddThreadFragment()
     {
-        //Checks if the intent has an extra with the reference user
-        if(this.getIntent().hasExtra("user"))
-        {
-            //Grabs the data in the extra
-            u = (User)this.getIntent().getSerializableExtra("user");
+        fragMan.beginTransaction().hide(activeFragment).show(addThreadFragment).commit();
+        activeFragment = addThreadFragment;
+    }
 
-        }
+    @Override
+    public void goToForumFragment()
+    {
+        fragMan.beginTransaction().hide(activeFragment).show(forumFragment).commit();
+        activeFragment = forumFragment;
     }
 
 }

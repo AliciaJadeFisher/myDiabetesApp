@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
-public class BasicFragment extends Fragment implements AdapterView.OnItemSelectedListener
+public class BasicFragment extends Fragment
 {
     sendDataMedical sd;
     EditText etName;
@@ -78,8 +78,9 @@ public class BasicFragment extends Fragment implements AdapterView.OnItemSelecte
         spnCarb = (Spinner)view.findViewById(R.id.spn_carb);
         btnNext = (Button)view.findViewById(R.id.btn_next);
 
-        bs = spnBs.getSelectedItem().toString();
-        carb = spnCarb.getSelectedItem().toString();
+        bs = "mmol/L";
+        carb = "g";
+
         btnNext.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -87,6 +88,9 @@ public class BasicFragment extends Fragment implements AdapterView.OnItemSelecte
             {
                 auth = FirebaseAuth.getInstance();
                 id = auth.getCurrentUser().getUid();
+
+                bs = spnBs.getSelectedItem().toString();
+                carb = spnCarb.getSelectedItem().toString();
 
                 user = new User();
                 user.setId(id);
@@ -109,25 +113,6 @@ public class BasicFragment extends Fragment implements AdapterView.OnItemSelecte
         carbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnCarb.setAdapter(carbAdapter);
     }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-    {
-        switch (parent.getId())
-        {
-            case R.id.spn_bs:
-                bs = parent.getItemAtPosition(position).toString();
-                System.out.println("Blood sugar type : " + bs);
-                break;
-            case R.id.spn_carb:
-                carb = parent.getItemAtPosition(position).toString();
-                System.out.println("Carbohydrate type : " + carb);
-                break;
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {}
 
     /**
      * Interface for SendMessage

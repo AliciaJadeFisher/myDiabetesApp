@@ -6,6 +6,8 @@ public class TimeBlock implements Serializable
 {
    String start,end,ratio;
 
+    public TimeBlock(){}
+
     public TimeBlock(String s, String e, String r)
     {
         start = s;

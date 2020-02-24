@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity
         auth = null;
         auth = FirebaseAuth.getInstance();
 
-//        // Checks if a current user exists
+         // Checks if a current user exists
         if(auth.getCurrentUser() != null)
         {
             // Loads the HomeActivity

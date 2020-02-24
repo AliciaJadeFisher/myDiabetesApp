@@ -43,8 +43,8 @@ public class ThreadFragment extends Fragment
     {
         View root = inflater.inflate(R.layout.fragment_thread, container, false);
 
-        user = (User)getArguments().get("user");
-        thread = (ForumThread)getArguments().get("thread");
+//        user = (User)getArguments().get("user");
+//        thread = (ForumThread)getArguments().get("thread");
 
         return root;
     }

@@ -8,7 +8,7 @@ public class ForumThread implements Serializable
     /**
      * Attributes for Thread
      */
-    String projectID, threadID, title, desc, posts;
+    String threadID, title, desc, posts;
 
     /**
      * Empty constructor
@@ -17,29 +17,17 @@ public class ForumThread implements Serializable
 
     /**
      * Main constructor
-     * @param pID
      * @param t
      * @param d
      * @param p
      */
-    public ForumThread(String pID, String tID, String t, String d, String p)
+    public ForumThread(String tID, String t, String d, String p)
     {
-        projectID = pID;
         threadID = tID;
         title = t;
         desc = d;
         posts = p;
     }
-
-    /**
-     * Retrieves the project id
-     * @return projecID
-     */
-    public String getProjectID()
-    {
-        return projectID;
-    }
-
     /**
      * Retrieves the thread id
      * @return threadID
@@ -74,15 +62,6 @@ public class ForumThread implements Serializable
     public String getPosts()
     {
         return posts;
-    }
-
-    /**
-     * Sets the project id
-     * @param projectID
-     */
-    public void setProjectID(String projectID)
-    {
-        this.projectID = projectID;
     }
 
     /**

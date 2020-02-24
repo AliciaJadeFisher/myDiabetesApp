@@ -33,6 +33,7 @@ public class ForumFragment extends Fragment
     Button btnAddThread;
 
     ThreadFragGo tm;
+    AddThreadFragGo atm;
     List<ForumThread> threadList = new ArrayList<>();
     User u;
 
@@ -66,29 +67,29 @@ public class ForumFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_forum, container, false);
-        u = (User)getArguments().getSerializable("user");
         return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
-
         super.onViewCreated(view, savedInstanceState);
         btnAddThread = (Button)view.findViewById(R.id.btn_addThread);
         threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
         threadRecycler.setHasFixedSize(true);
         threadRecycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+//        u = (User)getArguments().getSerializable("user");
+
         btnAddThread.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                //tm.goToThreadFragment();
             }
         });
 
+        threadDbRef = FirebaseFirestore.getInstance();
         threadDbRef.collection("threads").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
         {
             @Override
@@ -120,6 +121,14 @@ public class ForumFragment extends Fragment
     }
 
     /**
+     * Interface for goToThreadFragment
+     */
+    public interface AddThreadFragGo
+    {
+        void goToAddThreadFragment();
+    }
+
+    /**
      * Called when fragment is first attached to its context
      * @param context
      */
@@ -131,6 +140,7 @@ public class ForumFragment extends Fragment
         try
         {
             tm = (ThreadFragGo) getActivity();
+            atm = (AddThreadFragGo) getActivity();
         }
         catch(ClassCastException e)
         {
