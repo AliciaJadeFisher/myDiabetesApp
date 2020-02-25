@@ -78,6 +78,8 @@ public class AddThreadFragment extends Fragment
         btnCreate = (Button)view.findViewById(R.id.btn_create_thread);
         btnDelete = (Button)view.findViewById(R.id.btn_delete_thread);
 
+        threadDbRef = FirebaseFirestore.getInstance();
+
         btnCreate.setOnClickListener(new View.OnClickListener()
         {
             @Override

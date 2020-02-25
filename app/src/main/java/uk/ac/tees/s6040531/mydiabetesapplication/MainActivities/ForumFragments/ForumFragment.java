@@ -34,8 +34,9 @@ public class ForumFragment extends Fragment
 
     ThreadFragGo tm;
     AddThreadFragGo atm;
-    List<ForumThread> threadList = new ArrayList<>();
     User u;
+
+    List<ForumThread> adapterList = new ArrayList<>();
 
     //Variable used for the recyclerView adapter
     ThreadRecyclerViewAdapter adapter;
@@ -74,22 +75,32 @@ public class ForumFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+        threadDbRef = FirebaseFirestore.getInstance();
         btnAddThread = (Button)view.findViewById(R.id.btn_addThread);
-        threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
-        threadRecycler.setHasFixedSize(true);
-        threadRecycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-//        u = (User)getArguments().getSerializable("user");
 
         btnAddThread.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                atm.goToAddThreadFragment();
             }
         });
 
-        threadDbRef = FirebaseFirestore.getInstance();
+        adapterList = getThreads();
+
+
+        //Passes the current activity, thread list, project and user to the adapter
+        adapter = new ThreadRecyclerViewAdapter(this, adapterList, u, tm);
+        threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
+        threadRecycler.setAdapter(adapter);
+        threadRecycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
+    }
+
+    public List<ForumThread> getThreads()
+    {
+        final List<ForumThread> threadList = new ArrayList<>();
+
         threadDbRef.collection("threads").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
         {
             @Override
@@ -99,7 +110,7 @@ public class ForumFragment extends Fragment
                 {
                     for (QueryDocumentSnapshot document : task.getResult())
                     {
-                        ForumThread  t = (ForumThread)document.getData();
+                        ForumThread  t = document.toObject(ForumThread.class);
                         t.setThreadID(document.getId());
                         threadList.add(t);
                     }
@@ -107,9 +118,14 @@ public class ForumFragment extends Fragment
             }
         });
 
-        //Passes the current activity, thread list, project and user to the adapter
-        adapter = new ThreadRecyclerViewAdapter(this, threadList, u);
-        threadRecycler.setAdapter(adapter);
+        return threadList;
+
+    }
+
+    public void updateThreads()
+    {
+        adapterList = getThreads();
+        adapter.updateList(adapterList);
     }
 
     /**

@@ -14,7 +14,7 @@
     <RelativeLayout
         android:id="@+id/parent_layout"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:background="@drawable/recycler_background"
         android:paddingBottom="20sp"
         android:padding="10dp"

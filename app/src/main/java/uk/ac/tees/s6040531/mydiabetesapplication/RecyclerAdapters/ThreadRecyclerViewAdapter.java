@@ -28,11 +28,12 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
 
     User user;
 
-    public ThreadRecyclerViewAdapter(Fragment parent, List<ForumThread> tempList, User u)
+    public ThreadRecyclerViewAdapter(Fragment parent, List<ForumThread> tempList, User u, ForumFragment.ThreadFragGo t)
     {
         this.parent = parent;
         this.threadList = tempList;
         this.user = u;
+        this.tm = t;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder
@@ -71,12 +72,10 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
      * @param position
      */
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position)
+    public void onBindViewHolder(ViewHolder holder,final int position)
     {
-        final Activity activity = (Activity)parent.getActivity();
-
-        //Grabs the note at the current position
-        final ForumThread thread = threadList.get(position);
+        //Grabs the thread at the current position
+        ForumThread thread = threadList.get(position);
 
         //Sets the TextViews
         holder.threadTitle.setText(thread.getTitle());
@@ -99,6 +98,11 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
         });
     }
 
+    public void updateList(List<ForumThread> newList)
+    {
+        threadList.addAll(newList);
+    }
+
     /**
      * Returns the amount of threads
      * @return threadList.size()
@@ -110,11 +114,8 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
         return threadList.size();
     }
 
-    /**
-     * Interface for ClickListener
-     */
-    public interface ClickListener
-    {
-        public void itemClicked(View view ,int position);
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 }

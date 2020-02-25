@@ -24,11 +24,11 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class HomeActivity extends AppCompatActivity implements ForumFragment.ThreadFragGo, ForumFragment.AddThreadFragGo, AddThreadFragment.ForumFragGo
 {
-    final Fragment homeFragment = new HomeFragment();
-    final Fragment addFragment = new AddFragment();
-    final Fragment forumFragment = new ForumFragment();
-    final Fragment threadFragment = new ThreadFragment();
-    final Fragment addThreadFragment = new AddThreadFragment();
+    final HomeFragment homeFragment = new HomeFragment();
+    final AddFragment addFragment = new AddFragment();
+    final ForumFragment forumFragment = new ForumFragment();
+    final ThreadFragment threadFragment = new ThreadFragment();
+    final AddThreadFragment addThreadFragment = new AddThreadFragment();
     final FragmentManager fragMan = getSupportFragmentManager();
 
     Bundle userBundle = new Bundle();
@@ -101,9 +101,7 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
 
                 userBundle.putSerializable("user", u);
 
-                HomeFragment newHomeFragment = new HomeFragment();
-                newHomeFragment.setArguments(userBundle);
-                fragMan.beginTransaction().replace(R.id.home_parent,newHomeFragment).commit();
+                homeFragment.setUser(u);
             }
         });
     }
@@ -114,6 +112,7 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
     {
         fragMan.beginTransaction().hide(activeFragment).show(threadFragment).commit();
         activeFragment = threadFragment;
+
     }
 
     @Override
@@ -126,6 +125,9 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
     @Override
     public void goToForumFragment()
     {
+        forumFragment.updateThreads();
+        fragMan.beginTransaction().detach(forumFragment);
+        fragMan.beginTransaction().attach(forumFragment);
         fragMan.beginTransaction().hide(activeFragment).show(forumFragment).commit();
         activeFragment = forumFragment;
     }

@@ -42,10 +42,6 @@ public class ThreadFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_thread, container, false);
-
-//        user = (User)getArguments().get("user");
-//        thread = (ForumThread)getArguments().get("thread");
-
         return root;
     }
 
@@ -54,5 +50,18 @@ public class ThreadFragment extends Fragment
     {
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void setDetails(User u, ForumThread t)
+    {
+        if(u != null)
+        {
+            user = u;
+        }
+
+        if(t != null)
+        {
+            thread = t;
+        }
     }
 }

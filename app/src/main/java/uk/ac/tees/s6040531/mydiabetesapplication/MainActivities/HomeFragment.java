@@ -1,6 +1,5 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumFragments.ForumFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
-import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.BasicFragment;
 
 public class HomeFragment extends Fragment
 {
-    TextView textView;
+    TextView tvTitle;
     User user;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -38,10 +35,10 @@ public class HomeFragment extends Fragment
         super.onCreate(savedInstanceState);
 
         int index = 1;
+
         if (getArguments() != null)
         {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
-            user = (User) getArguments().getSerializable("user");
         }
     }
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -54,9 +51,22 @@ public class HomeFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        textView = (TextView)view.findViewById(R.id.text_home);
-        textView.setText(user.getName());
+        tvTitle = (TextView)view.findViewById(R.id.text_home);
 
+        tvTitle.setText("Welcome!");
     }
+
+    public void setUser(User u)
+    {
+        if(u != null)
+        {
+            user = u;
+
+            tvTitle.setText("Welcome " + user.getName());
+
+            System.out.println("======================== Current user : " + user.getName() + "====================");
+        }
+    }
+
 
 }
