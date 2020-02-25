@@ -21,7 +21,6 @@ import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumFragments.T
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
-import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.BasicFragment;
 
 public class HomeActivity extends AppCompatActivity implements ForumFragment.ThreadFragGo, ForumFragment.AddThreadFragGo, AddThreadFragment.ForumFragGo
 {
@@ -102,7 +101,9 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
 
                 userBundle.putSerializable("user", u);
 
-                homeFragment.setArguments(userBundle);
+                HomeFragment newHomeFragment = new HomeFragment();
+                newHomeFragment.setArguments(userBundle);
+                fragMan.beginTransaction().replace(R.id.home_parent,newHomeFragment).commit();
             }
         });
     }
