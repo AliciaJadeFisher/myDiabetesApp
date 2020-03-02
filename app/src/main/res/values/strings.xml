@@ -92,4 +92,6 @@
     <string name="thread_title">Thread Title</string>
     <string name="thread_description">Thread Description</string>
     <string name="add_thread">Add Thread</string>
+    <string name="thread_title_here">Thread Title Here</string>
+    <string name="thread_description_here">Thread description here</string>
 </resources>

@@ -4,10 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
@@ -15,8 +24,21 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class ThreadFragment extends Fragment
 {
+    //Variables used for layout access
+    TextView threadName;
+    RecyclerView recyclerView;
+    FloatingActionButton newPost;
+
     User user;
     ForumThread thread;
+    List<ThreadPost> postList = new ArrayList<>();
+
+    //Variable used for the recyclerView adapter
+    PostRecyclerViewAdapter adapter;
+
+    //Variable used for database access
+    FirebaseFirestore postDbRef;
+
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
