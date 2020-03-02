@@ -1,4 +1,4 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.SettingsSection;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

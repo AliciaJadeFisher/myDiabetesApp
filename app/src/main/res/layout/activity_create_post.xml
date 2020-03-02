@@ -6,6 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".MainActivities.ForumSection.CreatePostActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <!--Toolbar for the toolbar layout-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <!--ImageView to display the solo logo-->
+            <ImageView
+                android:maxWidth="@dimen/logo_w_h"
+                android:src="@drawable/logo_icon"
+                android:paddingEnd="15dp"
+                android:paddingStart="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:contentDescription="@string/logo_icon"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <!--ScrollView for the entire screen-->
     <ScrollView
         android:layout_width="match_parent"
@@ -14,6 +40,8 @@
         <!--LinearLayout for the widgets-->
         <LinearLayout
             android:orientation="vertical"
+            android:layout_marginTop="56dp"
+            android:padding="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

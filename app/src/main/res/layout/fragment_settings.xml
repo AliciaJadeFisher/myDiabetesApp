@@ -1,23 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="56dp">
 
+        <!--Applications Settings section-->
+        <!--TextView for the section title-->
         <TextView
-            android:id="@+id/text_add"
             android:layout_width="match_parent"
+            android:paddingTop="10sp"
+            android:paddingBottom="10sp"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:text="@string/this_is_the_settings_fragment"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:text="@string/application_settings"
+            android:textSize="16sp"/>
+
+        <!--View for section separation-->
+        <View
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@android:color/black"
+            tools:ignore="SmallSp" />
+
+        <!--Button that links to the AccountSettingsActivity-->
+        <Button
+            android:id="@+id/btn_account"
+            android:layout_width="match_parent"
+            android:layout_gravity="start"
+            android:layout_height="50sp"
+            android:background="@drawable/settings_button_background"
+            android:text="@string/account_settings"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:gravity="start|center_vertical"/>
+
+        <!--View for section separation-->
+        <View
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@android:color/black"
+            tools:ignore="SmallSp" />
+
+        <!--Other Settings section-->
+        <!--TextView for the section title-->
+        <TextView
+            android:layout_width="match_parent"
+            android:paddingTop="10sp"
+            android:paddingBottom="10sp"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:text="@string/other"
+            android:textSize="16sp"/>
+
+        <!--View for section separation-->
+        <View
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@android:color/black"
+            tools:ignore="SmallSp" />
+
+        <!--Button that links to the AboutActivity-->
+        <Button
+            android:id="@+id/btn_about"
+            android:layout_width="match_parent"
+            android:layout_gravity="start"
+            android:layout_height="50sp"
+            android:background="@drawable/settings_button_background"
+            android:text="@string/about_my_diabetes"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:gravity="start|center_vertical"/>
+
+        <!--View for section separation-->
+        <View
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@android:color/black"
+            tools:ignore="SmallSp" />
+
+        <!--Button that links to the HelpActivity-->
+        <Button
+            android:id="@+id/btn_help"
+            android:layout_width="match_parent"
+            android:layout_gravity="start"
+            android:layout_height="50sp"
+            android:background="@drawable/settings_button_background"
+            android:text="@string/help_and_contact"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:gravity="start|center_vertical"/>
+
+        <!--View for section separation-->
+        <View
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@android:color/black"
+            tools:ignore="SmallSp" />
 
 </LinearLayout>

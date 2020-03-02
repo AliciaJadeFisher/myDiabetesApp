@@ -102,4 +102,11 @@
     <string name="post">Post</string>
     <string name="settings">Settings</string>
     <string name="this_is_the_settings_fragment">This is the settings fragment</string>
+    <string name="application_settings">Application Settings</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="other">Other</string>
+    <string name="about_my_diabetes">About My Diabetes</string>
+    <string name="help_and_contact">Help and Contact</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="privacy_policy">Privacy Policy</string>
 </resources>
