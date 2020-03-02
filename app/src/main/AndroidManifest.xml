@@ -11,16 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".MainActivities.CreateThreadActivity"></activity>
         <activity
             android:name=".Registration_Login.AccountSetupActivity"
             android:label="@string/title_activity_account_setup"
-            android:theme="@style/noActionbar"/>
+            android:theme="@style/noActionbar" />
         <activity android:name=".Registration_Login.ResetPasswordActivity" />
         <activity
             android:name=".MainActivities.HomeActivity"
-            android:label="@string/title_activity_home"/>
-        <activity android:name=".Registration_Login.RegistrationActivity"
-            android:theme="@style/noActionbar"/>
+            android:label="@string/title_activity_home" />
+        <activity
+            android:name=".Registration_Login.RegistrationActivity"
+            android:theme="@style/noActionbar" />
         <activity
             android:name=".Registration_Login.LoginActivity"
             android:theme="@style/noActionbar" />

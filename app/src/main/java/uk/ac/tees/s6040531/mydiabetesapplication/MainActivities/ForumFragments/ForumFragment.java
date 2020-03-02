@@ -1,6 +1,7 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumFragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.CreateThreadActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
@@ -33,7 +35,6 @@ public class ForumFragment extends Fragment
     Button btnAddThread;
 
     ThreadFragGo tm;
-    AddThreadFragGo atm;
     User u;
 
     List<ForumThread> adapterList = new ArrayList<>();
@@ -83,7 +84,11 @@ public class ForumFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                atm.goToAddThreadFragment();
+                // Loads the HomeActivity
+                Intent i = new Intent(getActivity(), CreateThreadActivity.class);
+                startActivity(i);
+                getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                getActivity().finish();
             }
         });
 
@@ -137,14 +142,6 @@ public class ForumFragment extends Fragment
     }
 
     /**
-     * Interface for goToThreadFragment
-     */
-    public interface AddThreadFragGo
-    {
-        void goToAddThreadFragment();
-    }
-
-    /**
      * Called when fragment is first attached to its context
      * @param context
      */
@@ -156,7 +153,6 @@ public class ForumFragment extends Fragment
         try
         {
             tm = (ThreadFragGo) getActivity();
-            atm = (AddThreadFragGo) getActivity();
         }
         catch(ClassCastException e)
         {
