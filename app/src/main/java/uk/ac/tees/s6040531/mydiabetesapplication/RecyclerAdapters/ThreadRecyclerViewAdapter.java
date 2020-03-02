@@ -98,11 +98,6 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
         });
     }
 
-    public void updateList(List<ForumThread> newList)
-    {
-        threadList.addAll(newList);
-    }
-
     /**
      * Returns the amount of threads
      * @return threadList.size()

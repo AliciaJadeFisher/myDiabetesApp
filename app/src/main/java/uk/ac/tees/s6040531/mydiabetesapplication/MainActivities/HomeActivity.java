@@ -28,8 +28,11 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
     final ThreadFragment threadFragment = new ThreadFragment();
     final FragmentManager fragMan = getSupportFragmentManager();
 
+    String prev;
+
     Bundle userBundle = new Bundle();
 
+    BottomNavigationView navView;
     Fragment activeFragment = homeFragment;
 
     User u;
@@ -44,7 +47,7 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        final BottomNavigationView navView = (BottomNavigationView) findViewById(R.id.nav_view);
+        navView = (BottomNavigationView) findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         navView.setSelectedItemId(R.id.navigation_home);
         getSupportActionBar().hide();
@@ -60,6 +63,8 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
         fragMan.beginTransaction().add(R.id.home_parent, forumFragment,"3").hide(forumFragment).commit();
         fragMan.beginTransaction().add(R.id.home_parent, threadFragment,"3").hide(threadFragment).commit();
         fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"2").commit();
+
+        getIncomingIntent();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener()
@@ -100,6 +105,22 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
                 homeFragment.setUser(u);
             }
         });
+    }
+
+    public void getIncomingIntent()
+    {
+        if(this.getIntent().hasExtra("prev"))
+        {
+            //Grabs the data in the extra
+            prev = this.getIntent().getStringExtra("prev");
+
+            if(prev.equals("CreateThread"))
+            {
+                fragMan.beginTransaction().detach(forumFragment).attach(forumFragment).commit();
+                navView.setSelectedItemId(R.id.navigation_forum);
+                activeFragment = forumFragment;
+            }
+        }
     }
 
 

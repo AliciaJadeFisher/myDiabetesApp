@@ -2,6 +2,7 @@ package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumFragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,6 +58,8 @@ public class ForumFragment extends Fragment
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -66,6 +70,8 @@ public class ForumFragment extends Fragment
             index = getArguments().getInt(ARG_SECTION_NUMBER);
         }
     }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View root = inflater.inflate(R.layout.fragment_forum, container, false);
@@ -75,7 +81,9 @@ public class ForumFragment extends Fragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
+
         super.onViewCreated(view, savedInstanceState);
+
         threadDbRef = FirebaseFirestore.getInstance();
         btnAddThread = (Button)view.findViewById(R.id.btn_addThread);
 
@@ -100,6 +108,7 @@ public class ForumFragment extends Fragment
         threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
         threadRecycler.setAdapter(adapter);
         threadRecycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        adapter.notifyDataSetChanged();
     }
 
     public List<ForumThread> getThreads()
@@ -117,7 +126,8 @@ public class ForumFragment extends Fragment
                     {
                         ForumThread  t = document.toObject(ForumThread.class);
                         t.setThreadID(document.getId());
-                        threadList.add(t);
+                        threadList.add(0,t);
+                        adapter.notifyItemInserted(0);
                     }
                 }
             }
@@ -125,12 +135,6 @@ public class ForumFragment extends Fragment
 
         return threadList;
 
-    }
-
-    public void updateThreads()
-    {
-        adapterList = getThreads();
-        adapter.updateList(adapterList);
     }
 
     /**

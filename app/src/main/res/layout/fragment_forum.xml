@@ -15,20 +15,11 @@
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center">
 
-        <!--Relative layout for the title section-->
-        <RelativeLayout
-            android:id="@+id/layout_forum"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-
             <!--TextView for the page title-->
             <TextView
                 android:id="@+id/tv_Threads"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:gravity="center_horizontal"
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
@@ -36,7 +27,6 @@
                 android:text="@string/threads"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"/>
-        </RelativeLayout>
 
         <Button
             android:id="@+id/btn_addThread"
@@ -52,7 +42,6 @@
             android:id="@+id/recyclerViewThreads"
             android:nestedScrollingEnabled="false">
         </androidx.recyclerview.widget.RecyclerView>
-
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
