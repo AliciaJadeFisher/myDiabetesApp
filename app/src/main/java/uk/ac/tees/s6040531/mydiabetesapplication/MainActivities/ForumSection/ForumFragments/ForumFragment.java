@@ -1,8 +1,7 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumFragments;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.ForumFragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.CreateThreadActivity;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.CreateThreadActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;

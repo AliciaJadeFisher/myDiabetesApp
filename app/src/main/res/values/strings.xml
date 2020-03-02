@@ -94,4 +94,7 @@
     <string name="add_thread">Add Thread</string>
     <string name="thread_title_here">Thread Title Here</string>
     <string name="thread_description_here">Thread description here</string>
+    <string name="poster_name_here">Poster name here</string>
+    <string name="date_posted_here">Date posted here</string>
+    <string name="post_content_here">Post content here</string>
 </resources>

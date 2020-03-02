@@ -1,4 +1,4 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--LinearLayout for the widgets-->
+    <LinearLayout
+        android:id="@+id/parent_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/post_background_other"
+        android:paddingBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:padding="10dp">
+
+        <!--RelativeLayout for the widgets-->
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+            <!--TextView for the poster's name-->
+            <TextView
+                android:id="@+id/tv_poster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@string/poster_name_here"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="15sp"
+                tools:ignore="PrivateResource" />
+
+            <!--TextView for the post date-->
+            <TextView
+                android:id="@+id/tv_datePosted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:gravity="end"
+                android:text="@string/date_posted_here"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="15sp"
+                tools:ignore="PrivateResource,RelativeOverlap" />
+        </RelativeLayout>
+
+        <!--View for separation-->
+        <View
+            android:layout_gravity="center"
+            android:id="@+id/separate"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@android:color/black"
+            android:layout_marginBottom="5dp"
+            tools:ignore="SmallSp" />
+
+        <!--TextView for the post content-->
+        <TextView
+            android:id="@+id/tv_postContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/post_content_here"
+            android:textColor="@color/cardview_dark_background"
+            android:paddingStart="3dp"
+            android:paddingEnd="0dp"
+            android:paddingBottom="20dp"
+            android:textSize="15sp"
+            tools:ignore="PrivateResource" />
+    </LinearLayout>
+
+</LinearLayout>
