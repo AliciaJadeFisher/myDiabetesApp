@@ -15,17 +15,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.ForumFragments.ForumFragment;
-import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.ForumFragments.ThreadFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
-public class HomeActivity extends AppCompatActivity implements ForumFragment.ThreadFragGo
+public class HomeActivity extends AppCompatActivity
 {
     final HomeFragment homeFragment = new HomeFragment();
     final AddFragment addFragment = new AddFragment();
     final ForumFragment forumFragment = new ForumFragment();
-    final ThreadFragment threadFragment = new ThreadFragment();
     final FragmentManager fragMan = getSupportFragmentManager();
 
     String prev;
@@ -61,7 +59,6 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
 
         fragMan.beginTransaction().add(R.id.home_parent, addFragment,"1").hide(addFragment).commit();
         fragMan.beginTransaction().add(R.id.home_parent, forumFragment,"3").hide(forumFragment).commit();
-        fragMan.beginTransaction().add(R.id.home_parent, threadFragment,"3").hide(threadFragment).commit();
         fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"2").commit();
 
         getIncomingIntent();
@@ -82,6 +79,7 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
                     return true;
                 case R.id.navigation_forum:
                     fragMan.beginTransaction().hide(activeFragment).show(forumFragment).commit();
+                    forumFragment.setUser(u);
                     activeFragment = forumFragment;
                     return true;
             }
@@ -121,15 +119,6 @@ public class HomeActivity extends AppCompatActivity implements ForumFragment.Thr
                 activeFragment = forumFragment;
             }
         }
-    }
-
-
-    @Override
-    public void goToThreadFragment(User u, ForumThread t)
-    {
-        fragMan.beginTransaction().hide(activeFragment).show(threadFragment).commit();
-        activeFragment = threadFragment;
-
     }
 
 }

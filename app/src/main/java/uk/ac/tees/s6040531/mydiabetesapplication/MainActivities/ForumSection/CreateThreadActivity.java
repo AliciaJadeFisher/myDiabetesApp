@@ -30,11 +30,8 @@ public class CreateThreadActivity extends AppCompatActivity
     ForumThread thread;
     String tID;
 
-    //Variable used tro store create/edit status
-    String status = "New";
-
     //Variables used for database access
-    FirebaseFirestore threadDbRef, postDbRef;
+    FirebaseFirestore threadDbRef;
 
     private static final String TAG = "CreateThreadActivity";
     private static final String ARG_SECTION_NUMBER = "section_number";

@@ -3,6 +3,7 @@ package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.Fo
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -34,8 +37,7 @@ public class ForumFragment extends Fragment
     RecyclerView threadRecycler;
     Button btnAddThread;
 
-    ThreadFragGo tm;
-    User u;
+    User user;
 
     List<ForumThread> adapterList = new ArrayList<>();
 
@@ -45,6 +47,7 @@ public class ForumFragment extends Fragment
     //Variable used for database access
     FirebaseFirestore threadDbRef;
 
+    private static final String TAG = "ForumFragment";
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     public static ForumFragment newInstance(int index)
@@ -83,6 +86,7 @@ public class ForumFragment extends Fragment
 
         threadDbRef = FirebaseFirestore.getInstance();
         btnAddThread = (Button)view.findViewById(R.id.btn_addThread);
+        threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
 
         btnAddThread.setOnClickListener(new View.OnClickListener()
         {
@@ -96,16 +100,6 @@ public class ForumFragment extends Fragment
                 getActivity().finish();
             }
         });
-
-        adapterList = getThreads();
-
-
-        //Passes the current activity, thread list, project and user to the adapter
-        adapter = new ThreadRecyclerViewAdapter(this, adapterList, u, tm);
-        threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
-        threadRecycler.setAdapter(adapter);
-        threadRecycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        adapter.notifyDataSetChanged();
     }
 
     public List<ForumThread> getThreads()
@@ -123,6 +117,22 @@ public class ForumFragment extends Fragment
                     {
                         ForumThread  t = document.toObject(ForumThread.class);
                         t.setThreadID(document.getId());
+                        threadDbRef.collection("threads").document(t.getThreadID()).update("threadID",document.getId())
+                                .addOnSuccessListener(new OnSuccessListener<Void>()
+                                {
+                                    @Override
+                                    public void onSuccess(Void aVoid)
+                                    {
+                                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+
+                                        Log.w(TAG, "Error updating document", e);
+                                    }
+                                });
                         threadList.add(0,t);
                         adapter.notifyItemInserted(0);
                     }
@@ -134,30 +144,16 @@ public class ForumFragment extends Fragment
 
     }
 
-    /**
-     * Interface for goToThreadFragment
-     */
-    public interface ThreadFragGo
+    public void setUser(User u)
     {
-        void goToThreadFragment(User user, ForumThread thread);
-    }
+        user = u;
 
-    /**
-     * Called when fragment is first attached to its context
-     * @param context
-     */
-    @Override
-    public void onAttach(Context context)
-    {
-        super.onAttach(context);
+        adapterList = getThreads();
 
-        try
-        {
-            tm = (ThreadFragGo) getActivity();
-        }
-        catch(ClassCastException e)
-        {
-            throw new ClassCastException("Error in retrieving data. Please try again.");
-        }
+        //Passes the current activity, thread list, project and user to the adapter
+        adapter = new ThreadRecyclerViewAdapter(this, adapterList, user);
+        threadRecycler.setAdapter(adapter);
+        threadRecycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        adapter.notifyDataSetChanged();
     }
 }

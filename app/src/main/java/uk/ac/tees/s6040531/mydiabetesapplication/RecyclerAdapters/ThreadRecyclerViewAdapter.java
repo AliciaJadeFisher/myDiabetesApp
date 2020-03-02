@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,25 +13,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.ForumFragments.ForumFragment;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.ViewPostsActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecyclerViewAdapter.ViewHolder>
 {
-    ForumFragment.ThreadFragGo tm;
     Fragment parent;
 
     List<ForumThread> threadList;
 
     User user;
 
-    public ThreadRecyclerViewAdapter(Fragment parent, List<ForumThread> tempList, User u, ForumFragment.ThreadFragGo t)
+    public ThreadRecyclerViewAdapter(Fragment parent, List<ForumThread> tempList, User u)
     {
         this.parent = parent;
         this.threadList = tempList;
         this.user = u;
-        this.tm = t;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder
@@ -72,7 +72,7 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
     public void onBindViewHolder(ViewHolder holder,final int position)
     {
         //Grabs the thread at the current position
-        ForumThread thread = threadList.get(position);
+        final ForumThread thread = threadList.get(position);
 
         //Sets the TextViews
         holder.threadTitle.setText(thread.getTitle());
@@ -89,8 +89,13 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
             @Override
             public void onClick(View v)
             {
-
-                tm.goToThreadFragment(user, threadList.get(position));
+                //Passes the user and thread to the CreatePostActivity and loads it up
+                Intent i = new Intent(parent.getActivity(), ViewPostsActivity.class);
+                i.putExtra("user", user);
+                i.putExtra("thread", thread);
+                parent.getActivity().startActivity(i);
+                parent.getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                parent.getActivity().finish();
             }
         });
     }

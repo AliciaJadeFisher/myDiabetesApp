@@ -97,4 +97,7 @@
     <string name="poster_name_here">Poster name here</string>
     <string name="date_posted_here">Date posted here</string>
     <string name="post_content_here">Post content here</string>
+    <string name="new_post">New Post</string>
+    <string name="post_here">Post here...</string>
+    <string name="post">Post</string>
 </resources>
