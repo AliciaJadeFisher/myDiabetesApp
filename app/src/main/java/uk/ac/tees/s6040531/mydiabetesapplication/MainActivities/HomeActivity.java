@@ -1,6 +1,7 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,6 +25,7 @@ public class HomeActivity extends AppCompatActivity
     final HomeFragment homeFragment = new HomeFragment();
     final AddFragment addFragment = new AddFragment();
     final ForumFragment forumFragment = new ForumFragment();
+    final SettingsFragment settingFragment = new SettingsFragment();
     final FragmentManager fragMan = getSupportFragmentManager();
 
     String prev;
@@ -57,9 +59,10 @@ public class HomeActivity extends AppCompatActivity
 
         getUser();
 
-        fragMan.beginTransaction().add(R.id.home_parent, addFragment,"1").hide(addFragment).commit();
+        fragMan.beginTransaction().add(R.id.home_parent, addFragment,"2").hide(addFragment).commit();
         fragMan.beginTransaction().add(R.id.home_parent, forumFragment,"3").hide(forumFragment).commit();
-        fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"2").commit();
+        fragMan.beginTransaction().add(R.id.home_parent, settingFragment,"4").hide(settingFragment).commit();
+        fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"1").commit();
 
         getIncomingIntent();
     }
@@ -81,6 +84,10 @@ public class HomeActivity extends AppCompatActivity
                     fragMan.beginTransaction().hide(activeFragment).show(forumFragment).commit();
                     forumFragment.setUser(u);
                     activeFragment = forumFragment;
+                    return true;
+                case R.id.navigation_settings:
+                    fragMan.beginTransaction().hide(activeFragment).show(settingFragment).commit();
+                    activeFragment = settingFragment;
                     return true;
             }
             return false;
