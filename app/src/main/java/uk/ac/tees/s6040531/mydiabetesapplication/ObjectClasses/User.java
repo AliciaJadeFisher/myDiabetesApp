@@ -1,6 +1,7 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,6 +9,7 @@ public class User implements Serializable
 {
     String id, name, bs_m, cb_m,hypo, bottom, top, hyper, duration, precision, correction,portion;
     List<TimeBlock> time_blocks;
+    List<BloodSugarEntry> blood_sugars = new ArrayList<>();
 
     public User()
     {}
@@ -116,5 +118,13 @@ public class User implements Serializable
     public void setTime_blocks(List<TimeBlock> time_blocks)
     {
         this.time_blocks = time_blocks;
+    }
+
+    public List<BloodSugarEntry> getBlood_sugars() {
+        return blood_sugars;
+    }
+
+    public void setBlood_sugars(List<BloodSugarEntry> blood_sugars) {
+        this.blood_sugars = blood_sugars;
     }
 }

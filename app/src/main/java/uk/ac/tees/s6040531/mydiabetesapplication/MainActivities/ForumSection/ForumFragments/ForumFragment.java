@@ -84,7 +84,6 @@ public class ForumFragment extends Fragment
 
         super.onViewCreated(view, savedInstanceState);
 
-        threadDbRef = FirebaseFirestore.getInstance();
         btnAddThread = (Button)view.findViewById(R.id.btn_addThread);
         threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
 
@@ -100,11 +99,15 @@ public class ForumFragment extends Fragment
                 getActivity().finish();
             }
         });
+
+        setAdapter();
     }
 
     public List<ForumThread> getThreads()
     {
         final List<ForumThread> threadList = new ArrayList<>();
+
+        threadDbRef = FirebaseFirestore.getInstance();
 
         threadDbRef.collection("threads").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
         {
@@ -147,10 +150,12 @@ public class ForumFragment extends Fragment
     public void setUser(User u)
     {
         user = u;
+    }
 
+    public void setAdapter()
+    {
         adapterList = getThreads();
 
-        //Passes the current activity, thread list, project and user to the adapter
         adapter = new ThreadRecyclerViewAdapter(this, adapterList, user);
         threadRecycler.setAdapter(adapter);
         threadRecycler.setLayoutManager(new LinearLayoutManager(this.getContext()));

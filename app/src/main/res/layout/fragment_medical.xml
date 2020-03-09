@@ -223,11 +223,23 @@
             android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+            <!--Button that saves the user's details and links to the HomeActivity-->
+
             <!--Button that saves the user's details and links to the HomeActivity-->
             <Button
+                android:id="@+id/btn_next"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_background"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+            <Button
                 android:id="@+id/btn_go_back"
-                android:layout_width="150dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/button_background"
@@ -236,18 +248,6 @@
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 tools:ignore="ButtonStyle" />
-            <!--Button that saves the user's details and links to the HomeActivity-->
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/button_background"
-                android:text="@string/next"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="15sp" />
         </LinearLayout>
 
 

@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.TimeBlockRecyclerViewAdapter;
+import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.RegistrationActivity;
 
 public class TimeBlockFragment extends Fragment
 {
