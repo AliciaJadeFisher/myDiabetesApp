@@ -109,4 +109,10 @@
     <string name="help_and_contact">Help and Contact</string>
     <string name="terms_of_service">Terms of Service</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="entry_date">Entry Date :</string>
+    <string name="entry_time">Entry Time :</string>
+    <string name="set_time">Set Time</string>
+    <string name="set_date">Set Date</string>
+    <string name="dd_mm_yyyy">dd/mm/yyyy</string>
+    <string name="hh_mm">hh:mm</string>
 </resources>

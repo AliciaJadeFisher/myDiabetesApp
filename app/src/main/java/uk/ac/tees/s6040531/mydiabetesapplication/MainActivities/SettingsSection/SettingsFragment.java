@@ -49,6 +49,5 @@ public class SettingsFragment extends Fragment
     {
 
         super.onViewCreated(view, savedInstanceState);
-        textView = (TextView)view.findViewById(R.id.text_add);
     }
 }
