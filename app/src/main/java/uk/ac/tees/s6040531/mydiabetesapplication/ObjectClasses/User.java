@@ -12,7 +12,8 @@ public class User implements Serializable
     List<BloodSugarEntry> blood_sugars = new ArrayList<>();
 
     public User()
-    {}
+    {
+    }
 
     public String getId() {
         return id;

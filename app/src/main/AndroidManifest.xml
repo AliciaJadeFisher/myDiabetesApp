@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivities.SettingsSection.SettingsTermsActivity"></activity>
+        <activity android:name=".MainActivities.EntrySection.AddEntryActivity"></activity>
+        <activity android:name=".MainActivities.SettingsSection.SettingsTermsActivity" />
         <activity android:name=".MainActivities.SettingsSection.SettingsAboutActivity" />
         <activity android:name=".MainActivities.ForumSection.ViewPostsActivity" />
         <activity android:name=".MainActivities.ForumSection.CreatePostActivity" />

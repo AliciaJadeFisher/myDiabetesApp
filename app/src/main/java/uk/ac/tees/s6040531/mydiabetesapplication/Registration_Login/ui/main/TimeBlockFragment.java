@@ -137,7 +137,7 @@ public class TimeBlockFragment extends Fragment
                     @Override
                     public void onSuccess(Void aVoid)
                     {
-                        Toast.makeText(getActivity(), "Details Saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Details Saved", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener()
