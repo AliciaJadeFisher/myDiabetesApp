@@ -70,7 +70,7 @@
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
                     android:textColor="@android:color/white"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_date_display"
@@ -81,7 +81,7 @@
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <TextView
@@ -110,7 +110,7 @@
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
                     android:textColor="@android:color/white"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_time_display"
@@ -121,10 +121,8 @@
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

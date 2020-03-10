@@ -3,13 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_home"
+    tools:ignore="UnusedNavigation">
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.AddFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_add" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -19,7 +15,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.ForumFragments.ForumFragment"
+        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.ForumFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_forum" />
 </navigation>

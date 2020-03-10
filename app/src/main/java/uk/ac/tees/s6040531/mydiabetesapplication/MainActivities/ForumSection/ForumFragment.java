@@ -1,6 +1,5 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.ForumFragments;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +25,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.CreateThreadActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
@@ -119,6 +117,7 @@ public class ForumFragment extends Fragment
                     for (QueryDocumentSnapshot document : task.getResult())
                     {
                         ForumThread  t = document.toObject(ForumThread.class);
+
                         t.setThreadID(document.getId());
                         threadDbRef.collection("threads").document(t.getThreadID()).update("threadID",document.getId())
                                 .addOnSuccessListener(new OnSuccessListener<Void>()
@@ -136,6 +135,7 @@ public class ForumFragment extends Fragment
                                         Log.w(TAG, "Error updating document", e);
                                     }
                                 });
+
                         threadList.add(0,t);
                         adapter.notifyItemInserted(0);
                     }
