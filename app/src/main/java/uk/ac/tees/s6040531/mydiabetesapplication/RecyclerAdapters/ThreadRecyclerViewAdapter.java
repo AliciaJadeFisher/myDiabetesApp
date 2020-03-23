@@ -22,14 +22,10 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
     Fragment parent;
 
     List<ForumThread> threadList;
-
-    User user;
-
-    public ThreadRecyclerViewAdapter(Fragment parent, List<ForumThread> tempList, User u)
+    public ThreadRecyclerViewAdapter(Fragment parent, List<ForumThread> tempList)
     {
         this.parent = parent;
         this.threadList = tempList;
-        this.user = u;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder
@@ -90,7 +86,6 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
             {
                 //Passes the user and thread to the CreatePostActivity and loads it up
                 Intent i = new Intent(parent.getActivity(), ViewPostsActivity.class);
-                i.putExtra("user", user);
                 i.putExtra("thread", thread);
                 parent.getActivity().startActivity(i);
                 parent.getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

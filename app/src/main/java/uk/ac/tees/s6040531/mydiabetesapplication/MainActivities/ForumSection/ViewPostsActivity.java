@@ -13,8 +13,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -23,11 +26,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ThreadPost;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.PostRecyclerViewAdapter;
+import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.LoginActivity;
 
 public class ViewPostsActivity extends AppCompatActivity
 {
@@ -45,12 +50,17 @@ public class ViewPostsActivity extends AppCompatActivity
 
     //Variable used for database access
     FirebaseFirestore postDbRef;
+    FirebaseFirestore udbRef;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_posts);
+
+        auth = FirebaseAuth.getInstance();
+        udbRef = FirebaseFirestore.getInstance();
 
         postDbRef = FirebaseFirestore.getInstance();
         fabNewPost = (FloatingActionButton)findViewById(R.id.fab_add_post);
@@ -59,6 +69,8 @@ public class ViewPostsActivity extends AppCompatActivity
         postRecycler = (RecyclerView)findViewById(R.id.recyclerViewPosts);
 
         getIncomingIntent();
+        getUser();
+        getPosts();
 
 
         //onClickListener for newPost
@@ -80,7 +92,22 @@ public class ViewPostsActivity extends AppCompatActivity
                 finish();
             }
         });
+    }
 
+    public void getUser()
+    {
+        udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+        {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot)
+            {
+                user =  documentSnapshot.toObject(User.class);
+            }
+        });
+    }
+
+    public void getPosts()
+    {
         postDbRef.collection("thread_posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
         {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -122,7 +149,6 @@ public class ViewPostsActivity extends AppCompatActivity
                 postRecycler.setLayoutManager(new LinearLayoutManager(ViewPostsActivity.this));
             }
         });
-
     }
 
     /**
@@ -140,13 +166,14 @@ public class ViewPostsActivity extends AppCompatActivity
             threadName.setText(thread.getTitle());
             threadDesc.setText(thread.getDesc());
         }
+    }
 
-
-        //Checks if the intent has an extra with the reference user
-        if(this.getIntent().hasExtra("user"))
-        {
-            //Grabs the data in the extra
-            user = (User)this.getIntent().getSerializableExtra("user");
-        }
+    @Override
+    public void onBackPressed()
+    {
+        Intent i = new Intent(ViewPostsActivity.this, HomeActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+        finish();
     }
 }

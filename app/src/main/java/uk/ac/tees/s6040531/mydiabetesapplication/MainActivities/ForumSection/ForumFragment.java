@@ -35,8 +35,6 @@ public class ForumFragment extends Fragment
     RecyclerView threadRecycler;
     Button btnAddThread;
 
-    User user;
-
     List<ForumThread> adapterList = new ArrayList<>();
 
     //Variable used for the recyclerView adapter
@@ -79,7 +77,6 @@ public class ForumFragment extends Fragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
-
         super.onViewCreated(view, savedInstanceState);
 
         btnAddThread = (Button)view.findViewById(R.id.btn_addThread);
@@ -137,7 +134,6 @@ public class ForumFragment extends Fragment
                                 });
 
                         threadList.add(0,t);
-                        adapter.notifyItemInserted(0);
                     }
                 }
             }
@@ -147,16 +143,11 @@ public class ForumFragment extends Fragment
 
     }
 
-    public void setUser(User u)
-    {
-        user = u;
-    }
 
     public void setAdapter()
     {
         adapterList = getThreads();
-
-        adapter = new ThreadRecyclerViewAdapter(this, adapterList, user);
+        adapter = new ThreadRecyclerViewAdapter(this, adapterList);
         threadRecycler.setAdapter(adapter);
         threadRecycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
         adapter.notifyDataSetChanged();

@@ -32,7 +32,7 @@ public class PostRecyclerViewAdapter  extends RecyclerView.Adapter<PostRecyclerV
         this.context = context;
         this.postList = tempList;
         this.thread = th;
-        user = u;
+        this.user = u;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder

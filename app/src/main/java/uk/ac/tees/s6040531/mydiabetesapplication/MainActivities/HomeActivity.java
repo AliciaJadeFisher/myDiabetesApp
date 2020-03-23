@@ -76,7 +76,6 @@ public class HomeActivity extends AppCompatActivity
                 case R.id.navigation_forum:
                     fragMan.beginTransaction().hide(activeFragment).show(forumFragment).commit();
                     activeFragment = forumFragment;
-                    forumFragment.setUser(u);
                     return true;
                 case R.id.navigation_settings:
                     fragMan.beginTransaction().hide(activeFragment).show(settingFragment).commit();
