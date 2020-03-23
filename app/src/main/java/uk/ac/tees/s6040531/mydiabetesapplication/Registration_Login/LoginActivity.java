@@ -33,6 +33,10 @@ public class LoginActivity extends AppCompatActivity
     // Variable for Firebase access
     FirebaseAuth auth;
 
+    /**
+     * onCreate() method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
