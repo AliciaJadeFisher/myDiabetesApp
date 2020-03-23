@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,6 +35,9 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.PostRecyclerViewAdapter;
 import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.LoginActivity;
 
+/**
+ * ViewPostsActivity
+ */
 public class ViewPostsActivity extends AppCompatActivity
 {
     //Variables used for layout access
@@ -41,6 +45,7 @@ public class ViewPostsActivity extends AppCompatActivity
     RecyclerView postRecycler;
     FloatingActionButton fabNewPost;
 
+    // Variables for user and thread access
     User user;
     ForumThread thread;
     List<ThreadPost> adapterList = new ArrayList<>();
@@ -48,35 +53,43 @@ public class ViewPostsActivity extends AppCompatActivity
     //Variable used for the recyclerView adapter
     PostRecyclerViewAdapter adapter;
 
-    //Variable used for database access
+    //Variable used for Firebase access
     FirebaseFirestore postDbRef;
     FirebaseFirestore udbRef;
     FirebaseAuth auth;
 
+    /**
+     * onCreate() method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        // Grabs the relevant layout file
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_posts);
 
+        // Initialize Firebase variables
         auth = FirebaseAuth.getInstance();
         udbRef = FirebaseFirestore.getInstance();
-
         postDbRef = FirebaseFirestore.getInstance();
+
+        // Initialize widgets
         fabNewPost = (FloatingActionButton)findViewById(R.id.fab_add_post);
         threadName = (TextView)findViewById(R.id.tv_title);
         threadDesc = (TextView)findViewById(R.id.tv_desc);
         postRecycler = (RecyclerView)findViewById(R.id.recyclerViewPosts);
 
+        // Call required methods
         getIncomingIntent();
         getUser();
         getPosts();
 
-        //onClickListener for newPost
+        //onClickListener for fabNewPost
         fabNewPost.setOnClickListener(new View.OnClickListener()
         {
             /**
-             * Deals with the button being pressed
+             * onClick() for fabNewPost
              * @param v
              */
             @Override
@@ -93,8 +106,12 @@ public class ViewPostsActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * getUser() method
+     */
     public void getUser()
     {
+        // Retreives the user object from the database
         udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
         {
             @Override
@@ -105,8 +122,12 @@ public class ViewPostsActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * getPosts() method
+     */
     public void getPosts()
     {
+        // Retrieves the posts from the database
         postDbRef.collection("thread_posts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
         {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -115,24 +136,40 @@ public class ViewPostsActivity extends AppCompatActivity
             {
                 if (task.isSuccessful())
                 {
+                    // Loops through each post
                     for (QueryDocumentSnapshot document : task.getResult())
                     {
+                        // Grabs the current post
                         ThreadPost  p = document.toObject(ThreadPost.class);
+
+                        // Updates the post id
                         p.setPostID(document.getId());
+                        postDbRef.collection("thread_posts").document(p.getPostID()).update("postID",document.getId())
+                                .addOnSuccessListener(new OnSuccessListener<Void>()
+                                {
+                                    @Override
+                                    public void onSuccess(Void aVoid)
+                                    {
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+
+                                    }
+                                });
 
                         //Checks if the current post belongs to the current thread
                         if(p.getThreadID().equals(thread.getThreadID()))
                         {
-                            System.out.println("================================== " + p.getThreadID() + " ===================================");
+                            // Adds the post to the adapter list
                             adapterList.add(p);
-                            System.out.println("================================== List Size : " + adapterList.size() + " ======================");
                         }
 
                     }
                 }
 
-                System.out.println("================================== Final List Size : " + adapterList.size() + " ======================");
-
+                // Sorts the posts by date
                 adapterList.sort(new Comparator<ThreadPost>()
                 {
                     @Override
@@ -141,7 +178,8 @@ public class ViewPostsActivity extends AppCompatActivity
                         return o1.getPostDate().compareTo(o2.getPostDate());
                     }
                 });
-                //Passes the current activity, thread list, project and user to the adapter
+
+                //Passes the current activity, post list and current thread to the adapter
                 adapter = new PostRecyclerViewAdapter(ViewPostsActivity.this, adapterList, thread);
                 postRecycler.setAdapter(adapter);
                 postRecycler.setHasFixedSize(true);
@@ -167,9 +205,13 @@ public class ViewPostsActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * onBackPressed() method
+     */
     @Override
     public void onBackPressed()
     {
+        // Loads the HomeActivity
         Intent i = new Intent(ViewPostsActivity.this, HomeActivity.class);
         startActivity(i);
         overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
