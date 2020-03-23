@@ -26,24 +26,24 @@ import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ThreadPost;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
+/**
+ * CreatePostActivity
+ */
 public class CreatePostActivity extends AppCompatActivity
 {
     //Variables used for layout access
     EditText postContent;
     Button btnCreate, btnDelete;
 
-    //Variables used for project, thread and post access
+    //Variables used for thread and post access
     ForumThread thread;
     ThreadPost post;
     String pID;
 
-    //Variables used for database access
+    //Variables used for Firebase access
     FirebaseFirestore threadDbRef, postDbRef;
-
     FirebaseAuth auth;
     User u;
-
-    private static final String TAG = "CreatePostActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,60 +69,52 @@ public class CreatePostActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                //Increments the number of posts and saves this to the database
-                int posts = Integer.parseInt(thread.getPosts());
-                posts ++;
-                thread.setPosts(Integer.toString(posts));
-                threadDbRef.collection("threads").document(thread.getThreadID()).update("posts",Integer.toString(posts))
-                .addOnSuccessListener(new OnSuccessListener<Void>()
-                {
-                    @Override
-                    public void onSuccess(Void aVoid)
-                    {
-                        Log.d(TAG, "DocumentSnapshot successfully updated!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                        Log.w(TAG, "Error updating document", e);
-                    }
-                });
-
-                //Retrieves the user's input
+                // Retrieves the user's input
                 String p = postContent.getText().toString();
 
-                //Retrieves the new id and the current date, and creates a new ThreadPost
+                // Retrieves the new id and the current date, and creates a new ThreadPost
                 Date created = new Date();
                 post = new ThreadPost(thread.getThreadID(),"update",u.getId(), u.getName(), p, created);
 
+                // Saves the post to the database
                 postDbRef.collection("thread_posts").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>()
                 {
                     @Override
                     public void onSuccess(DocumentReference documentReference)
                     {
-                        Toast.makeText(CreatePostActivity.this, "Thread created", Toast.LENGTH_SHORT).show();
+                        // Increments the number of posts
+                        int posts = Integer.parseInt(thread.getPosts());
+                        posts ++;
+                        thread.setPosts(Integer.toString(posts));
+
+                        // Updates the thread in the database, to reflect the post number change
+                        threadDbRef.collection("threads").document(thread.getThreadID()).update("posts",Integer.toString(posts))
+                                .addOnSuccessListener(new OnSuccessListener<Void>()
+                                {
+                                    @Override
+                                    public void onSuccess(Void aVoid)
+                                    {
+                                        Toast.makeText(CreatePostActivity.this,"Post created." ,Toast.LENGTH_SHORT);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                    }
+                                });
                     }
                 })
-                        .addOnFailureListener(new OnFailureListener()
-                        {
-                            @Override
-                            public void onFailure(@NonNull Exception e)
-                            {
-                                Log.w(TAG, "========================== Error adding event document =====================", e);
-                                Toast.makeText(CreatePostActivity.this, "Error, details could not be saved", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                .addOnFailureListener(new OnFailureListener()
+                {
+                    @Override
+                    public void onFailure(@NonNull Exception e)
+                    {
+                        Toast.makeText(CreatePostActivity.this, "Post failed, please try again.",Toast.LENGTH_SHORT);
+                    }
+                });
 
-                // Loads the HomeActivity
-                Intent i = new Intent(CreatePostActivity.this, ViewPostsActivity.class);
-                i.putExtra("user", u);
-                i.putExtra("thread", thread);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                finish();
-
+                // Loads the ViewPostsActivity
+                onBackPressed();
             }
         });
 
@@ -144,5 +136,19 @@ public class CreatePostActivity extends AppCompatActivity
             //Grabs the data in the extra
             u = (User) this.getIntent().getSerializableExtra("user");
         }
+    }
+
+    /**
+     * onBackPressed() method
+     */
+    @Override
+    public void onBackPressed()
+    {
+        // Loads the ViewPostsActivity
+        Intent i = new Intent(CreatePostActivity.this, ViewPostsActivity.class);
+        i.putExtra("thread", thread);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+        finish();
     }
 }

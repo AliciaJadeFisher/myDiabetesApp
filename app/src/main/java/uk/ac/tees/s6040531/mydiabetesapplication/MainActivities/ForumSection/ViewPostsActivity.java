@@ -72,7 +72,6 @@ public class ViewPostsActivity extends AppCompatActivity
         getUser();
         getPosts();
 
-
         //onClickListener for newPost
         fabNewPost.setOnClickListener(new View.OnClickListener()
         {
@@ -143,7 +142,7 @@ public class ViewPostsActivity extends AppCompatActivity
                     }
                 });
                 //Passes the current activity, thread list, project and user to the adapter
-                adapter = new PostRecyclerViewAdapter(ViewPostsActivity.this, adapterList, thread, user);
+                adapter = new PostRecyclerViewAdapter(ViewPostsActivity.this, adapterList, thread);
                 postRecycler.setAdapter(adapter);
                 postRecycler.setHasFixedSize(true);
                 postRecycler.setLayoutManager(new LinearLayoutManager(ViewPostsActivity.this));

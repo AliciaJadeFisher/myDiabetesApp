@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
@@ -25,14 +27,14 @@ public class PostRecyclerViewAdapter  extends RecyclerView.Adapter<PostRecyclerV
     Context context;
     List<ThreadPost> postList;
     ForumThread thread;
-    User user;
+    FirebaseAuth auth;
 
-    public PostRecyclerViewAdapter(Context context, List<ThreadPost> tempList, ForumThread th, User u)
+    public PostRecyclerViewAdapter(Context context, List<ThreadPost> tempList, ForumThread th)
     {
         this.context = context;
         this.postList = tempList;
         this.thread = th;
-        this.user = u;
+        auth = FirebaseAuth.getInstance();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder
@@ -84,7 +86,7 @@ public class PostRecyclerViewAdapter  extends RecyclerView.Adapter<PostRecyclerV
         holder.postDate.setText(dateFormat.format(post.getPostDate()));
         holder.postContent.setText(post.getMessage());
 
-        if(post.getSenderID().equals(user.getId()))
+        if(post.getSenderID().equals(auth.getUid()))
         {
             holder.parentLayout.setBackgroundResource(R.drawable.post_background_user);
             holder.posterName.setText("You");
