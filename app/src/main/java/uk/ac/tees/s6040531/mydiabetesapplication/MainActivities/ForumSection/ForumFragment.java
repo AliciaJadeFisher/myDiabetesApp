@@ -82,6 +82,8 @@ public class ForumFragment extends Fragment
         btnAddThread = (Button)view.findViewById(R.id.btn_addThread);
         threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
 
+        setAdapter();
+
         btnAddThread.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -94,8 +96,6 @@ public class ForumFragment extends Fragment
                 getActivity().finish();
             }
         });
-
-        setAdapter();
     }
 
     public List<ForumThread> getThreads()
@@ -134,6 +134,7 @@ public class ForumFragment extends Fragment
                                 });
 
                         threadList.add(0,t);
+                        adapter.notifyItemChanged(0);
                     }
                 }
             }

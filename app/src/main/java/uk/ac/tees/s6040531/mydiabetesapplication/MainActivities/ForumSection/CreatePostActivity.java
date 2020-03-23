@@ -45,9 +45,14 @@ public class CreatePostActivity extends AppCompatActivity
     FirebaseAuth auth;
     User u;
 
+    /**
+     * onCreate() method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        // Grabs the relevant layout file
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
@@ -56,6 +61,7 @@ public class CreatePostActivity extends AppCompatActivity
         btnCreate = (Button) findViewById(R.id.btn_create);
         btnDelete = (Button)findViewById(R.id.btn_delete);
 
+        // Calls getIncomingIntent()
         getIncomingIntent();
 
         //Retrieves the current user

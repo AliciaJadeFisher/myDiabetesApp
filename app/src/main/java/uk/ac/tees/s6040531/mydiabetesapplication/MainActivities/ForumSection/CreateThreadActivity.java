@@ -20,6 +20,9 @@ import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
+/**
+ * CreateThreadActivity
+ */
 public class CreateThreadActivity extends AppCompatActivity
 {
     //Variables used for layout access
@@ -33,41 +36,52 @@ public class CreateThreadActivity extends AppCompatActivity
     //Variables used for database access
     FirebaseFirestore threadDbRef;
 
-    private static final String TAG = "CreateThreadActivity";
-    private static final String ARG_SECTION_NUMBER = "section_number";
-
+    /**
+     * onCreate() method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        // Grabs the relevant layout files
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_thread);
 
-        //Initialises the widgets
+        // Initialises the widgets
         etTitle = (EditText)findViewById(R.id.et_title);
         etDescription = (EditText)findViewById(R.id.et_description);
         btnCreate = (Button)findViewById(R.id.btn_create_thread);
         btnDelete = (Button)findViewById(R.id.btn_delete_thread);
 
+        // Initialises the database
         threadDbRef = FirebaseFirestore.getInstance();
 
+        // onClickListener() for btnCreate
         btnCreate.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnCreate
+             * @param v
+             */
             @Override
             public void onClick(View v)
             {
-                String id = "Update me please!";
+                // Grabs the new thread details
+                String id = "update";
                 String title = etTitle.getText().toString();
                 String desc = etDescription.getText().toString();
                 String posts = "0";
 
+                // Create a new ForumThread object
                 ForumThread newThread = new ForumThread(id, title, desc, posts);
 
+                // Saves the thread to the database
                 threadDbRef.collection("threads").add(newThread).addOnSuccessListener(new OnSuccessListener<DocumentReference>()
                 {
                     @Override
                     public void onSuccess(DocumentReference documentReference)
                     {
-                        Toast.makeText(CreateThreadActivity.this, "Thread created", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateThreadActivity.this, "Thread created.", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener()
@@ -75,18 +89,27 @@ public class CreateThreadActivity extends AppCompatActivity
                     @Override
                     public void onFailure(@NonNull Exception e)
                     {
-                        Log.w(TAG, "========================== Error adding event document =====================", e);
-                        Toast.makeText(CreateThreadActivity.this, "Error, details could not be saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateThreadActivity.this, "Thread failed to create, please try again.", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 // Loads the HomeActivity
-                Intent i = new Intent(CreateThreadActivity.this, HomeActivity.class);
-                i.putExtra("prev","CreateThread");
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                finish();
+                onBackPressed();
             }
         });
+    }
+
+    /**
+     * onBackPressed() method
+     */
+    @Override
+    public void onBackPressed()
+    {
+        // Loads the HomeActivity
+        Intent i = new Intent(CreateThreadActivity.this, HomeActivity.class);
+        i.putExtra("prev","CreateThread");
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+        finish();
     }
 }
