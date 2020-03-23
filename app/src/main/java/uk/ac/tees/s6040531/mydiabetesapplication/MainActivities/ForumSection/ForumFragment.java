@@ -26,15 +26,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
-import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.ThreadRecyclerViewAdapter;
 
+/**
+ * ForumFragment
+ */
 public class ForumFragment extends Fragment
 {
+    // Variables for layout access
     RecyclerView threadRecycler;
     Button btnAddThread;
 
+    // Variable for thread list
     List<ForumThread> adapterList = new ArrayList<>();
 
     //Variable used for the recyclerView adapter
@@ -43,9 +47,13 @@ public class ForumFragment extends Fragment
     //Variable used for database access
     FirebaseFirestore threadDbRef;
 
-    private static final String TAG = "ForumFragment";
     private static final String ARG_SECTION_NUMBER = "section_number";
 
+    /**
+     * ForumFragment constructor
+     * @param index
+     * @return fragment
+     */
     public static ForumFragment newInstance(int index)
     {
         ForumFragment fragment = new ForumFragment();
@@ -55,11 +63,16 @@ public class ForumFragment extends Fragment
         return fragment;
     }
 
-
+    /**
+     * onCreate() method
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        // Checks for any arguments
         int index = 1;
         if (getArguments() != null)
         {
@@ -67,29 +80,49 @@ public class ForumFragment extends Fragment
         }
     }
 
+    /**
+     * onCreateView() method
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        // Grabs the relevant layout file
         View root = inflater.inflate(R.layout.fragment_forum, container, false);
         return root;
     }
 
+    /**
+     * onViewCreated() method
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
 
+        // Initializes the widgets
         btnAddThread = (Button)view.findViewById(R.id.btn_addThread);
         threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
 
+        // Calls setAdapter()
         setAdapter();
 
+        // onClickListener() for btnAddThread
         btnAddThread.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnAddThread
+             * @param v
+             */
             @Override
             public void onClick(View v)
             {
-                // Loads the HomeActivity
+                // Loads the CreateThreadActivity
                 Intent i = new Intent(getActivity(), CreateThreadActivity.class);
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
@@ -98,12 +131,19 @@ public class ForumFragment extends Fragment
         });
     }
 
+    /**
+     * getThreads() method
+     * @return threadList
+     */
     public List<ForumThread> getThreads()
     {
+        // Crates a temporary list
         final List<ForumThread> threadList = new ArrayList<>();
 
+        // Initalizes the database
         threadDbRef = FirebaseFirestore.getInstance();
 
+        // Grabs all the threads in the database
         threadDbRef.collection("threads").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
         {
             @Override
@@ -111,10 +151,13 @@ public class ForumFragment extends Fragment
             {
                 if (task.isSuccessful())
                 {
+                    // Loops through the results
                     for (QueryDocumentSnapshot document : task.getResult())
                     {
+                        // Saves the curretn thread
                         ForumThread  t = document.toObject(ForumThread.class);
 
+                        // Updates the thread id in the database
                         t.setThreadID(document.getId());
                         threadDbRef.collection("threads").document(t.getThreadID()).update("threadID",document.getId())
                                 .addOnSuccessListener(new OnSuccessListener<Void>()
@@ -122,17 +165,16 @@ public class ForumFragment extends Fragment
                                     @Override
                                     public void onSuccess(Void aVoid)
                                     {
-                                        Log.d(TAG, "DocumentSnapshot successfully updated!");
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
 
-                                        Log.w(TAG, "Error updating document", e);
                                     }
                                 });
 
+                        // Adds the current thread to the thread list and notifys the adapter of a data change
                         threadList.add(0,t);
                         adapter.notifyItemChanged(0);
                     }
@@ -140,14 +182,20 @@ public class ForumFragment extends Fragment
             }
         });
 
+        // Returns the threadList
         return threadList;
-
     }
 
 
+    /**
+     * setAdapter() method
+     */
     public void setAdapter()
     {
+        // Grabs a list of threads
         adapterList = getThreads();
+
+        // Initializes the adapter
         adapter = new ThreadRecyclerViewAdapter(this, adapterList);
         threadRecycler.setAdapter(adapter);
         threadRecycler.setLayoutManager(new LinearLayoutManager(this.getContext()));
