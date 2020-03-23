@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -8,6 +8,11 @@
     android:padding="16dp"
     android:background="@color/colorAccent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_time"
@@ -29,16 +34,17 @@
                 android:text="@string/time_start"
                 android:textColor="@color/colorPrimaryDark"
                 android:paddingTop="10dp"
-                android:textSize="15sp"/>
+                android:textSize="13sp"/>
 
             <EditText
                 android:id="@+id/et_start"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/_00_00"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:paddingTop="10dp"
                 android:gravity="center"
+                android:textColorHighlight="@color/colorPrimaryDark"
                 android:textColorHint="@android:color/darker_gray"
                 android:textColor="@color/colorPrimaryDark"/>
 
@@ -51,16 +57,17 @@
                 android:text="@string/time_end"
                 android:textColor="@color/colorPrimaryDark"
                 android:paddingTop="10dp"
-                android:textSize="15sp"/>
+                android:textSize="13sp"/>
 
             <EditText
                 android:id="@+id/et_end"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/_08_00"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:paddingTop="10dp"
                 android:gravity="center"
+                android:textColorHighlight="@color/colorPrimaryDark"
                 android:textColorHint="@android:color/darker_gray"
                 android:textColor="@color/colorPrimaryDark"/>
 
@@ -73,16 +80,17 @@
                 android:text="@string/carbohydrate_ratio_insulin_for_1_cp"
                 android:textColor="@color/colorPrimaryDark"
                 android:paddingTop="10dp"
-                android:textSize="15sp"/>
+                android:textSize="13sp"/>
 
             <EditText
                 android:id="@+id/et_carb_ratio"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/_4"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:paddingTop="10dp"
                 android:gravity="center"
+                android:textColorHighlight="@color/colorPrimaryDark"
                 android:textColorHint="@android:color/darker_gray"
                 android:textColor="@color/colorPrimaryDark"/>
 
@@ -96,7 +104,7 @@
                 android:text="Add Time Block"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:textSize="15sp"/>
+                android:textSize="13sp"/>
 
             <LinearLayout
                 android:paddingTop="10dp"
@@ -113,7 +121,7 @@
                     android:text="@string/save_details"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp" />
+                    android:textSize="13sp" />
                 <Button
                     android:id="@+id/btn_back"
                     android:layout_width="fill_parent"
@@ -123,10 +131,11 @@
                     android:text="@string/back"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp"/>
+                    android:textSize="13sp"/>
                 <!--Button that saves the user's details and links to the HomeActivity-->
 
             </LinearLayout>
         </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

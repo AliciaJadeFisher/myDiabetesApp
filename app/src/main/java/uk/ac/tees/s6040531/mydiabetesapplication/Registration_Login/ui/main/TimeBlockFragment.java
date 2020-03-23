@@ -31,6 +31,7 @@ import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.TimeBlockRecyclerViewAdapter;
+import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.AccountSetupActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.RegistrationActivity;
 
 public class TimeBlockFragment extends Fragment
@@ -137,7 +138,7 @@ public class TimeBlockFragment extends Fragment
                     @Override
                     public void onSuccess(Void aVoid)
                     {
-                        Toast.makeText(getContext(), "Details Saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Details Saved", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener()
