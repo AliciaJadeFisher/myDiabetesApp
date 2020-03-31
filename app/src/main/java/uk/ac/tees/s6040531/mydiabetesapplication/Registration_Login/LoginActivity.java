@@ -24,13 +24,11 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
  */
 public class LoginActivity extends AppCompatActivity
 {
-    private static final String TAG = "LoginActivity";
-
     // Variables for layout access
     EditText etEmail, etPassword;
     Button btnReg, btnLogin, btnReset;
 
-    // Variable for Firebase access
+    // Variable for firebase access
     FirebaseAuth auth;
 
     /**
@@ -40,7 +38,7 @@ public class LoginActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        // Grab the layout file
+        // Grabs the layout file
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -48,7 +46,7 @@ public class LoginActivity extends AppCompatActivity
         auth = null;
         auth = FirebaseAuth.getInstance();
 
-         // Checks if a current user exists
+         // Checks if a user is currently logged in
         if(auth.getCurrentUser() != null)
         {
             // Loads the HomeActivity
@@ -68,6 +66,10 @@ public class LoginActivity extends AppCompatActivity
         // onClickListener for btnReg
         btnReg.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnReg
+             * @param v
+             */
             @Override
             public void onClick(View v)
             {
@@ -82,6 +84,10 @@ public class LoginActivity extends AppCompatActivity
         // onClickListener for btnReset
         btnReset.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick for btnReset()
+             * @param v
+             */
             @Override
             public void onClick(View v)
             {
@@ -95,6 +101,10 @@ public class LoginActivity extends AppCompatActivity
         // onClickListener for btnLogin
         btnLogin.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnLogin
+             * @param v
+             */
             @Override
             public void onClick(View v)
             {
@@ -133,7 +143,7 @@ public class LoginActivity extends AppCompatActivity
                             }
                             else
                             {
-                                Log.d(TAG, "======================================== onComplete: " + auth.getCurrentUser().getEmail() + "========================================");
+                                // Loads the HomeActivity
                                 Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                                 startActivity(i);
                                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -144,7 +154,6 @@ public class LoginActivity extends AppCompatActivity
                 }
             }
         });
-
 
     }
 }
