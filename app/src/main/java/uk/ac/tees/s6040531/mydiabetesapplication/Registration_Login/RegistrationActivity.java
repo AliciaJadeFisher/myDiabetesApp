@@ -28,7 +28,7 @@ public class RegistrationActivity extends AppCompatActivity
     EditText etEmail, etPassword;
     Button btnReg, btnTerms, btnLogin;
 
-    // Variable for Firebase access
+    // Variable for firebase access
     FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,9 +50,14 @@ public class RegistrationActivity extends AppCompatActivity
         // onClickListener for btnLogin
         btnLogin.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnLogin
+             * @param v
+             */
             @Override
             public void onClick(View v)
             {
+                // Loads the LoginActivity
                 Intent i = new Intent(RegistrationActivity.this,LoginActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -75,9 +80,14 @@ public class RegistrationActivity extends AppCompatActivity
         // onClickListener for btnReg
         btnReg.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnReg
+             * @param v
+             */
             @Override
             public void onClick(View v)
             {
+                // Grabs the user inputs
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
 
@@ -96,23 +106,31 @@ public class RegistrationActivity extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), R.string.short_pass, Toast.LENGTH_SHORT).show();
                 }
 
+                // Creates a new firebase user
                 auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>()
                 {
+                    /**
+                     * onComplete() method
+                     * @param task
+                     */
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task)
                     {
                         // Informs the user that they are creating an account
                         Toast.makeText(RegistrationActivity.this, R.string.create_account,Toast.LENGTH_SHORT).show();
 
-                        System.out.println("================== TASK : " + task.isSuccessful() + "=====================");
-
+                        // Checks if the task was successful
                         if(!task.isSuccessful())
                         {
+                            // Informs the user that the task failed
                             Toast.makeText(RegistrationActivity.this, R.string.create_failed, Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
+                            // Informs the user that the task was successful
                             Toast.makeText(RegistrationActivity.this, R.string.create_successs, Toast.LENGTH_SHORT).show();
+
+                            // Loads the AccountSetupActivity
                             Intent i = new Intent(RegistrationActivity.this, AccountSetupActivity.class);
                             startActivity(i);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -120,15 +138,17 @@ public class RegistrationActivity extends AppCompatActivity
                         }
                     }
                 });
-
-
             }
         });
-
     }
+
+    /**
+     * onBackPressed() method
+     */
     @Override
     public void onBackPressed()
     {
+        // Loads the LoginActivity
         Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
         startActivity(i);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
