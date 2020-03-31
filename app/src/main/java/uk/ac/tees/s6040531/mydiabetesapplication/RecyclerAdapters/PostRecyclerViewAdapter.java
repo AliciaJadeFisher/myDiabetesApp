@@ -22,13 +22,23 @@ import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ThreadPost;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
+/**
+ * PostRecyclerViewAdapter class
+ */
 public class PostRecyclerViewAdapter  extends RecyclerView.Adapter<PostRecyclerViewAdapter.ViewHolder>
 {
+    // RecyclerViewAdapter attributes
     Context context;
     List<ThreadPost> postList;
     ForumThread thread;
     FirebaseAuth auth;
 
+    /**
+     * Main constructor
+     * @param context
+     * @param tempList
+     * @param th
+     */
     public PostRecyclerViewAdapter(Context context, List<ThreadPost> tempList, ForumThread th)
     {
         this.context = context;
@@ -37,15 +47,24 @@ public class PostRecyclerViewAdapter  extends RecyclerView.Adapter<PostRecyclerV
         auth = FirebaseAuth.getInstance();
     }
 
+    /**
+     * ViewHolder class
+     */
     class ViewHolder extends RecyclerView.ViewHolder
     {
+        // View layout attributes
         public TextView posterName, postDate, postContent;
         LinearLayout parentLayout;
 
+        /**
+         * Main constructor
+         * @param itemView
+         */
         public ViewHolder(View itemView)
         {
             super(itemView);
 
+            // Initializes the layout and widgets
             parentLayout = itemView.findViewById(R.id.parent_layout);
             posterName = (TextView)itemView.findViewById(R.id.tv_poster);
             postDate = (TextView)itemView.findViewById(R.id.tv_datePosted);
@@ -61,6 +80,7 @@ public class PostRecyclerViewAdapter  extends RecyclerView.Adapter<PostRecyclerV
      */
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
+        // Grabs the recycler view layout
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_posts, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
@@ -76,7 +96,7 @@ public class PostRecyclerViewAdapter  extends RecyclerView.Adapter<PostRecyclerV
     {
         final Activity activity = (Activity)context;
 
-        //Grabs the note at the current position
+        //Grabs the post at the current position
         final ThreadPost post = postList.get(position);
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
@@ -86,21 +106,23 @@ public class PostRecyclerViewAdapter  extends RecyclerView.Adapter<PostRecyclerV
         holder.postDate.setText(dateFormat.format(post.getPostDate()));
         holder.postContent.setText(post.getMessage());
 
+        // Checks if the current user is the post sender
         if(post.getSenderID().equals(auth.getUid()))
         {
+            // If they are, changes the post background and poster name to reflect this
             holder.parentLayout.setBackgroundResource(R.drawable.post_background_user);
             holder.posterName.setText("You");
-
         }
         else
         {
+            // If they aren't, sets the secondary background
             holder.parentLayout.setBackgroundResource(R.drawable.post_background_other);
         }
     }
 
     /**
-     * Returns the amount of threads
-     * @return threadList.size()
+     * Returns the number of posts
+     * @return postList.size()
      */
     @Override
     public int getItemCount()
