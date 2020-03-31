@@ -34,24 +34,35 @@ import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.TimeBlockRecyc
 import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.AccountSetupActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.RegistrationActivity;
 
+/**
+ * TimeBlockFragment
+ */
 public class TimeBlockFragment extends Fragment
 {
+    // Variables for layout access
     EditText etStart, etEnd, etRatio;
     RecyclerView rvTime;
     Button btnAdd,btnBack,btnSave;
     ViewPager viewPager;
-    User user;
+
+    // Variable for recyclerView adapter
     TimeBlockRecyclerViewAdapter adapter;
+
+    // Variables for user data
+    User user;
     List<TimeBlock> time_blocks = new ArrayList<>();
 
+    // Variables for firebase access
     FirebaseFirestore udbRef;
     FirebaseAuth auth;
 
-    private static final String TAG = "TBFragment";
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    private PageViewModel pageViewModel;
-
+    /**
+     * TimeBlockFragment constructor
+     * @param index
+     * @return fragment
+     */
     public static TimeBlockFragment newInstance(int index)
     {
         TimeBlockFragment fragment = new TimeBlockFragment();
@@ -61,35 +72,54 @@ public class TimeBlockFragment extends Fragment
         return fragment;
     }
 
+    /**
+     * onCreate() method
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
+
         int index = 1;
+
+        // Checks for any arguments
         if (getArguments() != null)
         {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
         }
-        pageViewModel.setIndex(index);
     }
 
+    /**
+     * onCreateView() method
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return root
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        // Grabs the relevant layout file
         View root = inflater.inflate(R.layout.fragment_time_blocks, container, false);
         return root;
     }
 
+    /**
+     * onViewCreated() method
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
-
         super.onViewCreated(view, savedInstanceState);
 
+        // Initalize firebase variables
         auth = FirebaseAuth.getInstance();
         udbRef = FirebaseFirestore.getInstance();
 
+        // Intializes the widgets
         viewPager = (ViewPager)getActivity().findViewById(R.id.view_pager);
         etStart = (EditText)view.findViewById(R.id.et_start);
         etEnd = (EditText)view.findViewById(R.id.et_end);
@@ -97,69 +127,109 @@ public class TimeBlockFragment extends Fragment
         btnAdd = (Button)view.findViewById(R.id.btn_add);
         btnBack = (Button)view.findViewById(R.id.btn_back);
         btnSave = (Button)view.findViewById(R.id.btn_save);
-
         rvTime = (RecyclerView)view.findViewById(R.id.rv_time);
         rvTime.setHasFixedSize(true);
         rvTime.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // OnClickListener for btnAdd
         btnAdd.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnAdd
+             * @param v
+             */
             @Override
             public void onClick(View v)
             {
+                // Grabs the user inputs
                 String start = etStart.getText().toString();
                 String end = etEnd.getText().toString();
                 String ratio = etRatio.getText().toString();
 
+                // Creates a new time block and saves it to the list
                 TimeBlock tb = new TimeBlock(start, end , ratio);
                 time_blocks.add(tb);
 
+                // Passes the list to the adapter and then sets the adapter
                 adapter = new TimeBlockRecyclerViewAdapter(getActivity(),time_blocks);
                 rvTime.setAdapter(adapter);
+
+                // Clears the text fields
+                etStart.setText("");
+                etEnd.setText("");
+                etRatio.setText("");
             }
         });
+
+        // OnClickListener for btnBack
         btnBack.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnBack
+             * @param v
+             */
             @Override
             public void onClick(View v)
             {
+                // Returns to the previous tab
                 viewPager.setCurrentItem(1);
             }
         });
 
+        // OnClickListener for btnSave
         btnSave.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnSave
+             * @param v
+             */
             @Override
             public void onClick(View v)
             {
+                // Sets the time blocks attribute
                 user.setTime_blocks(time_blocks);
 
+                // Saves the user object to the database
                 udbRef.document("users/"+ auth.getUid()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    /**
+                     * onSuccess() method
+                     * @param aVoid
+                     */
                     @Override
                     public void onSuccess(Void aVoid)
                     {
-                        Toast.makeText(getActivity(), "Details Saved", Toast.LENGTH_SHORT).show();
+                        // Informs the user that the save was successful
+                        Toast.makeText(getActivity(), "Details saved", Toast.LENGTH_SHORT).show();
+
+                        // Loads the HomeActivity
+                        Intent i = new Intent(getActivity(), HomeActivity.class);
+                        i.putExtra("user",user);
+                        getActivity().startActivity(i);
+                        getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                        getActivity().finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener()
                 {
+                    /**
+                     * onFailure() method
+                     * @param e
+                     */
                     @Override
                     public void onFailure(@NonNull Exception e)
                     {
-                        Toast.makeText(getActivity(), "Error saving details", Toast.LENGTH_SHORT).show();
+                        // Informs the user that the save failed
+                        Toast.makeText(getActivity(), "Error saving details, please try again", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                Intent i = new Intent(getActivity(), HomeActivity.class);
-                i.putExtra("user",user);
-                getActivity().startActivity(i);
-                getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                getActivity().finish();
-
             }
         });
     }
 
+    /**
+     * dataReceived() method
+     * @param u
+     */
     public void dataReceived(User u)
     {
         user = u;

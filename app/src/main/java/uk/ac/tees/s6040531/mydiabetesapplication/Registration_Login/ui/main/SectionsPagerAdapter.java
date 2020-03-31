@@ -22,15 +22,26 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
     private static final int[] TAB_TITLES = new int[]{R.string.tab_basic, R.string.tab_medical, R.string.tab_time_blocks};
     private final Context mContext;
 
+    /**
+     * Main constructor
+     * @param context
+     * @param fm
+     */
     public SectionsPagerAdapter(Context context, FragmentManager fm)
     {
         super(fm);
         mContext = context;
     }
 
+    /**
+     * getItem() method
+     * @param position
+     * @return
+     */
     @Override
     public Fragment getItem(int position)
     {
+        // Switches between the fragments, depending on button clicks
         switch (position)
         {
             case 0:
@@ -57,7 +68,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
     @Override
     public int getCount()
     {
-        // Show 2 total pages.
+        // Show 3 total pages.
         return 3;
     }
 }
