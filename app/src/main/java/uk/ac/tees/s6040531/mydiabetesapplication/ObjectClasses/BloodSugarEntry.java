@@ -20,6 +20,11 @@ public class BloodSugarEntry implements Serializable
     String notes;
 
     /**
+     * Empty constructor
+     */
+    public BloodSugarEntry(){}
+
+    /**
      * Main constructor
      * @param d
      * @param t

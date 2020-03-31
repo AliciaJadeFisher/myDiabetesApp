@@ -2,12 +2,13 @@ package uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses;
 
 import java.io.Serializable;
 
+/**
+ * ForumThread Object Class
+ */
 public class ForumThread implements Serializable
 {
 
-    /**
-     * Attributes for Thread
-     */
+    // Class attributes
     String threadID, title, desc, posts;
 
     /**
@@ -29,7 +30,7 @@ public class ForumThread implements Serializable
         posts = p;
     }
     /**
-     * Retrieves the thread id
+     * Returns the thread id attribute
      * @return threadID
      */
     public String getThreadID()
@@ -38,7 +39,7 @@ public class ForumThread implements Serializable
     }
 
     /**
-     * Retrieves the title
+     * Returns the title attribute
      * @return title
      */
     public String getTitle()
@@ -47,7 +48,7 @@ public class ForumThread implements Serializable
     }
 
     /**
-     * Retrieves the description
+     * Returns the description attribute
      * @return desc
      */
     public String getDesc()
@@ -56,7 +57,7 @@ public class ForumThread implements Serializable
     }
 
     /**
-     * Retrieves the number of posts
+     * Returns the posts attribute
      * @return posts
      */
     public String getPosts()
@@ -65,7 +66,7 @@ public class ForumThread implements Serializable
     }
 
     /**
-     * Sets the thread id
+     * Sets the thread id attribute
      * @param threadID
      */
     public void setThreadID(String threadID)
@@ -74,7 +75,7 @@ public class ForumThread implements Serializable
     }
 
     /**
-     * Sets the title
+     * Sets the title attribute
      * @param title
      */
     public void setTitle(String title)
@@ -83,7 +84,7 @@ public class ForumThread implements Serializable
     }
 
     /**
-     * Sets the description
+     * Sets the description attribute
      * @param desc
      */
     public void setDesc(String desc)
@@ -92,7 +93,7 @@ public class ForumThread implements Serializable
     }
 
     /**
-     * Sets the posts
+     * Sets the posts attribute
      * @param posts
      */
     public void setPosts(String posts)
