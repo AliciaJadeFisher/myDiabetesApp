@@ -25,8 +25,10 @@ public class AccountSetupActivity extends AppCompatActivity implements BasicFrag
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
+        viewPager.setEnabled(false);
 
         TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setEnabled(false);
         tabs.setupWithViewPager(viewPager);
     }
 
