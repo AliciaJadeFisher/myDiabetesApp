@@ -7,8 +7,11 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import java.text.ParseException;
@@ -16,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**
@@ -31,8 +35,13 @@ public class AddEntryActivity extends AppCompatActivity
     String time;
 
     // Variables for layout access
-    TextView tvDate, tvTime;
-    Button btnDate, btnTime;
+    TextView tvDate, tvTime, tvIF, tvIC, tvIT;
+    EditText etBs, etCarbs, etNotes;
+    Button btnSearch, btnCalc, btnSaveEntry, btnBack;
+    Spinner spnMeal;
+
+    // Variable for user data
+    User u;
 
     /**
      * onCreate() method
@@ -52,14 +61,28 @@ public class AddEntryActivity extends AppCompatActivity
         h = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         min = Calendar.getInstance().get(Calendar.MINUTE);
 
-        // Initailize the widgets
+        // Initialize the widgets
         tvDate = (TextView)findViewById(R.id.tv_date_display);
         tvTime = (TextView)findViewById(R.id.tv_time_display);
-        btnDate = (Button)findViewById(R.id.btn_set_date);
-        btnTime = (Button)findViewById(R.id.btn_set_time);
+        tvIF = (TextView)findViewById(R.id.tv_if);
+        tvIC = (TextView)findViewById(R.id.tv_ic);
+        tvIT = (TextView)findViewById(R.id.tv_it);
+        etBs = (EditText)findViewById(R.id.et_bs);
+        etCarbs = (EditText)findViewById(R.id.et_carbs);
+        etNotes = (EditText)findViewById(R.id.et_notes);
+        spnMeal = (Spinner)findViewById(R.id.spn_meal);
+        btnSearch = (Button)findViewById(R.id.btn_search);
+        btnCalc = (Button)findViewById(R.id.btn_calculate);
+        btnSaveEntry = (Button)findViewById(R.id.btn_save_entry);
+        btnBack = (Button)findViewById(R.id.btn_back);
 
-        // onClickListener for btnDate
-        btnDate.setOnClickListener(new View.OnClickListener()
+        // ArrayAdapter for spnMeal
+        ArrayAdapter<CharSequence> mealAdapter = ArrayAdapter.createFromResource(AddEntryActivity.this, R.array.meal_types, android.R.layout.simple_spinner_item);
+        mealAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnMeal.setAdapter(mealAdapter);
+
+        // onClickListener for tvDate
+        tvDate.setOnClickListener(new View.OnClickListener()
         {
             /**
              * btnDate onClick() method
@@ -73,8 +96,8 @@ public class AddEntryActivity extends AppCompatActivity
             }
         });
 
-        // onClickListener for btnTime
-        btnTime.setOnClickListener(new View.OnClickListener()
+        // onClickListener for tvTime
+        tvTime.setOnClickListener(new View.OnClickListener()
         {
             /**
              * btnTime onClick() method
@@ -85,6 +108,20 @@ public class AddEntryActivity extends AppCompatActivity
             {
                 // Calls show_TimePicker()
                 show_TimePicker();
+            }
+        });
+
+        // onClickListener for btnSearch
+        btnSearch.setOnClickListener(new View.OnClickListener()
+        {
+            /**
+             * onClick for btnSearch
+             * @param view
+             */
+            @Override
+            public void onClick(View view)
+            {
+                // Loads up SearchCarbActivity
             }
         });
     }

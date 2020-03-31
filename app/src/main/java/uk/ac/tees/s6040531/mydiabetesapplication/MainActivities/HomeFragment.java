@@ -108,6 +108,7 @@ public class HomeFragment extends Fragment
             {
                 // Loads the AddEntryActivity
                 Intent i = new Intent(getActivity(), AddEntryActivity.class);
+                i.putExtra("user",user);
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 getActivity().finish();

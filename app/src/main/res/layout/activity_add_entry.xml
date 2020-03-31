@@ -221,6 +221,7 @@
                 android:textSize="15sp"/>
 
             <EditText
+                android:id="@+id/et_notes"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="10dp"
