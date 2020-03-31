@@ -133,7 +133,7 @@ public class BasicFragment extends Fragment
                 user.setBs_m(bs);
                 user.setCb_m(carb);
 
-                // Passes the data to the next tab and shows the next tab
+                // Passes the data to the next tab and then shows the next tab
                 sd.sendDataMedical(user);
                 viewPager.setCurrentItem(1);
             }

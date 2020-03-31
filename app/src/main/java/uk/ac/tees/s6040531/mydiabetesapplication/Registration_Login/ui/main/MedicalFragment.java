@@ -17,18 +17,26 @@ import androidx.viewpager.widget.ViewPager;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
+/**
+ * MedicalFragment
+ */
 public class MedicalFragment  extends Fragment
 {
-    sendDataTime sd;
+    // Variables for layout access
     EditText etHypo, etBottom, etTop, etHyper, etDuration, etPrecision, etPortion, etCorrection;
     Button btnBack,btnNext;
     ViewPager viewPager;
-    User user;
 
+    // Variables for user data
+    User user;
+    sendDataTime sd;
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    private PageViewModel pageViewModel;
-
+    /**
+     * MedicalFragment constructor
+     * @param index
+     * @return fragment
+     */
     public static MedicalFragment newInstance(int index)
     {
         MedicalFragment fragment = new MedicalFragment();
@@ -38,30 +46,49 @@ public class MedicalFragment  extends Fragment
         return fragment;
     }
 
+    /**
+     * onCreate() method
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
         int index = 1;
+
+        // Checks for any arguments
         if (getArguments() != null)
         {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
         }
-        pageViewModel.setIndex(index);
     }
 
+    /**
+     * onCreateView() method
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return root
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        // Grabs the relevant layout file
         View root = inflater.inflate(R.layout.fragment_medical, container, false);
         return root;
     }
 
+    /**
+     * onViewCreated() method
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
+
+        // Initializes the widgets
         viewPager = (ViewPager)getActivity().findViewById(R.id.view_pager);
         etHypo = (EditText)view.findViewById(R.id.et_hypo);
         etBottom = (EditText)view.findViewById(R.id.et_bottom);
@@ -74,19 +101,32 @@ public class MedicalFragment  extends Fragment
         btnBack = (Button)view.findViewById(R.id.btn_go_back);
         btnNext = (Button)view.findViewById(R.id.btn_next);
 
+        // OnClickListener for btnBack
         btnBack.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() method for btnBack
+             * @param v
+             */
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                // Returns to the previous tab
                 viewPager.setCurrentItem(0);
             }
         });
 
+        // OnClickListener for btnNext
         btnNext.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnNext
+             * @param v
+             */
             @Override
             public void onClick(View v)
             {
+                // Sets some of the user object's attributes
                 user.setHypo(etHypo.getText().toString());
                 user.setBottom(etBottom.getText().toString());
                 user.setTop(etTop.getText().toString());
@@ -96,6 +136,7 @@ public class MedicalFragment  extends Fragment
                 user.setPortion(etPortion.getText().toString());
                 user.setCorrection(etCorrection.getText().toString());
 
+                // Passes the data to the next tab and then shows the next tab
                 sd.sendDataTime(user);
                 viewPager.setCurrentItem(2);
             }
@@ -129,6 +170,10 @@ public class MedicalFragment  extends Fragment
         }
     }
 
+    /**
+     * dataReceived() method
+     * @param u
+     */
     public void dataReceived(User u)
     {
        user = u;
