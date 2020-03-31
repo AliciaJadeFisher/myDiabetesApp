@@ -2,11 +2,12 @@ package uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses;
 
 import java.util.Date;
 
+/**
+ * ThreadPost Object Class
+ */
 public class ThreadPost
 {
-    /**
-     * Attributes for ThreadPost
-     */
+    // Class attributes
     String threadID, postID, senderID, senderName, message;
     Date postDate;
 
@@ -33,7 +34,7 @@ public class ThreadPost
     }
 
     /**
-     * Retrieves the thread id
+     * Returns the thread id attribute
      * @return threadID
      */
     public String getThreadID()
@@ -41,12 +42,16 @@ public class ThreadPost
         return threadID;
     }
 
+    /**
+     * Returns the post id attribute
+     * @return postID
+     */
     public String getPostID() {
         return postID;
     }
 
     /**
-     * Retrieves teh sender id
+     * Returns the sender id attribute
      * @return senderID
      */
     public String getSenderID()
@@ -54,13 +59,17 @@ public class ThreadPost
         return senderID;
     }
 
+    /**
+     * Returns the sender name attribute
+     * @return
+     */
     public String getSenderName()
     {
         return senderName;
     }
 
     /**
-     * Retrieves the message
+     * Returns the message attribute
      * @return message
      */
     public String getMessage()
@@ -69,7 +78,7 @@ public class ThreadPost
     }
 
     /**
-     * Retrieves the post date
+     * Returns the post date attribute
      * @return postDate
      */
     public Date getPostDate()
@@ -78,7 +87,7 @@ public class ThreadPost
     }
 
     /**
-     * Sets the thread id
+     * Sets the thread id attribute
      * @param threadID
      */
     public void setThreadID(String threadID)
@@ -86,12 +95,16 @@ public class ThreadPost
         this.threadID = threadID;
     }
 
+    /**
+     * Sets the post id attribute
+     * @param postID
+     */
     public void setPostID(String postID) {
         this.postID = postID;
     }
 
     /**
-     * Sets the sender id
+     * Sets the sender id attribute
      * @param senderID
      */
     public void setSenderID(String senderID)
@@ -99,13 +112,17 @@ public class ThreadPost
         this.senderID = senderID;
     }
 
+    /**
+     * Sets the sender name attribute
+     * @param senderName
+     */
     public void setSenderName(String senderName)
     {
         this.senderName = senderName;
     }
 
     /**
-     * Sets the message
+     * Sets the message attribute
      * @param message
      */
     public void setMessage(String message)
@@ -114,7 +131,7 @@ public class ThreadPost
     }
 
     /**
-     * Sets the post date
+     * Sets the post date attribute
      * @param postDate
      */
     public void setPostDate(Date postDate)
