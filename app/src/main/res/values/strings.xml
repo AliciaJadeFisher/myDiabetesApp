@@ -115,4 +115,14 @@
     <string name="set_date">Set Date</string>
     <string name="dd_mm_yyyy">dd/mm/yyyy</string>
     <string name="hh_mm">hh:mm</string>
+    <string name="blood_sugar">Blood Sugar:</string>
+    <string name="search">Search</string>
+    <string name="calculate_insulin">Calculate Insulin</string>
+    <string name="carbohydrates">Carbohydrates:</string>
+    <string name="insulin_food_8u">Insulin (food): 8U</string>
+    <string name="insulin_correction_2u">Insulin (correction): 2U</string>
+    <string name="total_insulin_10u">Total Insulin: 10U</string>
+    <string name="meal_type">Meal Type:</string>
+    <string name="notes">Notes:</string>
+    <string name="save_entry">Save Entry</string>
 </resources>

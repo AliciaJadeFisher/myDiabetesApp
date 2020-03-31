@@ -39,6 +39,8 @@
 
         <LinearLayout
             android:paddingTop="56dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -46,43 +48,25 @@
 
             <TextView
                 android:id="@+id/tv_date"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/entry_date"
                 android:textColor="@color/colorPrimaryDark"
                 android:paddingTop="10dp"
+                android:textStyle="bold"
                 android:textSize="15sp"/>
-            <LinearLayout
+
+            <TextView
+                android:id="@+id/tv_date_display"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center"
-                android:paddingTop="10dp">
-
-                <Button
-                    android:id="@+id/btn_set_date"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/button_background"
-                    android:text="@string/set_date"
-                    android:textAllCaps="false"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="13sp"/>
-
-                <TextView
-                    android:id="@+id/tv_date_display"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/dd_mm_yyyy"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="13sp"/>
-            </LinearLayout>
+                android:text="@string/dd_mm_yyyy"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_time"
@@ -92,7 +76,70 @@
                 android:text="@string/entry_time"
                 android:textColor="@color/colorPrimaryDark"
                 android:paddingTop="10dp"
+                android:textStyle="bold"
                 android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_time_display"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/hh_mm"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_meal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/meal_type"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="10dp"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+
+            <!--Spinner for the meal type-->
+            <Spinner
+                android:id="@+id/spn_meal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:id="@+id/tv_bs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/blood_sugar"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="10dp"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_bs"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:hint="@string/_5_0_mol_l"/>
+
+            <TextView
+                android:id="@+id/tv_carbs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/carbohydrates"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="10dp"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,29 +147,107 @@
                 android:gravity="center"
                 android:paddingTop="10dp">
 
-                <Button
-                    android:id="@+id/btn_set_time"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/button_background"
-                    android:text="@string/set_time"
-                    android:textAllCaps="false"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="13sp"/>
-
-                <TextView
-                    android:id="@+id/tv_time_display"
+                <EditText
+                    android:id="@+id/et_carbs"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/hh_mm"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
+                    android:textSize="15sp"
+                    android:hint="@string/_10g"/>
+
+                <Button
+                    android:id="@+id/btn_search"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/secondary_button_background"
+                    android:text="@string/search"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="13sp"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_calculate"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_background"
+                android:text="@string/calculate_insulin"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_if"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/insulin_food_8u"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="30dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_ic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/insulin_correction_2u"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="10dp"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_it"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/total_insulin_10u"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="10dp"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/notes"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="20dp"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:inputType="textMultiLine"
+                android:background="@drawable/textbox_background">
+            </EditText>
+
+            <Button
+                android:id="@+id/btn_save_entry"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_background"
+                android:text="@string/save_entry"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_background"
+                android:text="@string/back"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
