@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,11 +15,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TooManyListenersException;
 
+import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
@@ -54,6 +59,9 @@ public class AddEntryActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
 
+        // Calls getIncomingIntent()
+        getIncomingIntent();
+
         // Gets the current date and time components
         y = Calendar.getInstance().get(Calendar.YEAR);
         m = Calendar.getInstance().get(Calendar.MONTH);
@@ -63,7 +71,9 @@ public class AddEntryActivity extends AppCompatActivity
 
         // Initialize the widgets
         tvDate = (TextView)findViewById(R.id.tv_date_display);
+        tvDate.setText(d + "/" + (m) + "/" + y);
         tvTime = (TextView)findViewById(R.id.tv_time_display);
+        tvTime.setText(h + ":" + min);
         tvIF = (TextView)findViewById(R.id.tv_if);
         tvIC = (TextView)findViewById(R.id.tv_ic);
         tvIT = (TextView)findViewById(R.id.tv_it);
@@ -122,6 +132,57 @@ public class AddEntryActivity extends AppCompatActivity
             public void onClick(View view)
             {
                 // Loads up SearchCarbActivity
+            }
+        });
+
+        // onClickListener for btnCalc
+        btnCalc.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onCLick for btnCalc
+             * @param view
+             */
+            @Override
+            public void onClick(View view)
+            {
+                // Grabs the user inputs
+                String b = etBs.getText().toString();
+                String c = etCarbs.getText().toString();
+
+                // Checks if the blood sugar field is empty
+                if(b.equals(""))
+                {
+                    // Informs the user that the field needs to filled in
+                    Toast.makeText(AddEntryActivity.this,"Please enter a blood sugar.", Toast.LENGTH_SHORT);
+                }
+                // Checks if the blood sugar field contains any characters other than numbers and decimal points
+                else if(!b.matches("[0-9.]"))
+                {
+                    // Informs the user of the validation error
+                    Toast.makeText(AddEntryActivity.this, "Invalid type in blood sugar, please only input a number", Toast.LENGTH_SHORT);
+                }
+                else
+                {
+                    // Saves the value as a double
+                    double bs = Double.parseDouble(b);
+                }
+
+                // Checks if the carbs field is empty
+                if(c.equals(""))
+                {
+                    // Iforms the user that field needs to be filled in
+                    Toast.makeText(AddEntryActivity.this,"Please enter a carbs amount, if no carbs eaten please enter 0.", Toast.LENGTH_SHORT);
+                }
+                // Checks if the carbs frield contains any characters other than numbers and decimal points
+                else if(c.contains("[a-zA-Z]+"))
+                {
+                    // Infroms the user of the validation error
+                    Toast.makeText(AddEntryActivity.this, "Invalid type in carbohydrates, please only input a number", Toast.LENGTH_SHORT);
+                }
+                else
+                {
+                    // Saves the value as a doible
+                    double carbs = Double.parseDouble(c);
+                }
             }
         });
     }
@@ -201,5 +262,31 @@ public class AddEntryActivity extends AppCompatActivity
 
         // Shows the timePickerDialog
         timePickerDialog.show();
+    }
+
+    /**
+     * Retrieves data sent with the intent in the extra field
+     */
+    private void getIncomingIntent()
+    {
+
+        //Checks if the intent has an extra with the reference user
+        if (this.getIntent().hasExtra("user")) {
+            //Grabs the data in the extra
+            u = (User) this.getIntent().getSerializableExtra("user");
+        }
+    }
+
+    /**
+     * onBackPressed() method
+     */
+    @Override
+    public void onBackPressed()
+    {
+        // Loads the HomeActivity
+        Intent i = new Intent(AddEntryActivity.this, HomeActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+        finish();
     }
 }
