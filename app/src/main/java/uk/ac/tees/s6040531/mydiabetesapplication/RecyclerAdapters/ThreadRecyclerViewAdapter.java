@@ -17,31 +17,48 @@ import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
+/**
+ * ThreadRecyclerViewAdapter
+ */
 public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecyclerViewAdapter.ViewHolder>
 {
+    // RecyclerViewAdapter attribtues
     Fragment parent;
-
     List<ForumThread> threadList;
+
+    /**
+     * Main constructor
+     * @param parent
+     * @param tempList
+     */
     public ThreadRecyclerViewAdapter(Fragment parent, List<ForumThread> tempList)
     {
         this.parent = parent;
         this.threadList = tempList;
     }
 
+    /**
+     * ViewHolder class
+     */
     class ViewHolder extends RecyclerView.ViewHolder
     {
+        // View layout attributes
         public TextView threadTitle, threadDesc, threadPosts;
         RelativeLayout parentLayout;
 
+        /**
+         * Main constructor
+         * @param itemView
+         */
         public ViewHolder(View itemView)
         {
             super(itemView);
 
+            // Initializes the layout and widgets
             parentLayout = itemView.findViewById(R.id.parent_layout);
             threadTitle = (TextView)itemView.findViewById(R.id.tv_viewThreadTitle);
             threadDesc = (TextView)itemView.findViewById(R.id.tv_viewThreadDesc);
             threadPosts = (TextView)itemView.findViewById(R.id.tv_viewThreadPosts);
-
         }
     }
 
@@ -53,6 +70,7 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
      */
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
+        // Grabs the recycler view layout
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_threads, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
@@ -105,6 +123,11 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
         return threadList.size();
     }
 
+    /**
+     * Returns the current position
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
