@@ -21,11 +21,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TooManyListenersException;
-
 import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.HomeActivity;
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
+
+import static java.util.concurrent.TimeUnit.HOURS;
 
 /**
  * AddEntryActivity
@@ -144,9 +146,23 @@ public class AddEntryActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
+                // Grabs the user's insulin settings
+                double targetTop = Double.parseDouble(u.getTop());
+                double targetBottom = Double.parseDouble(u.getTop());
+                double hyper = Double.parseDouble(u.getHyper());
+                double hypo = Double.parseDouble(u.getHypo());
+                double correction = Double.parseDouble(u.getCorrection());
+                double pres = Double.parseDouble(u.getPrecision());
+                double ratio = getTimeBlocks();
+
+                double iob = getInsulinOnBoard();
+
                 // Grabs the user inputs
                 String b = etBs.getText().toString();
                 String c = etCarbs.getText().toString();
+                double bs;
+                double carbs ;
+
 
                 // Checks if the blood sugar field is empty
                 if(b.equals(""))
@@ -163,26 +179,32 @@ public class AddEntryActivity extends AppCompatActivity
                 else
                 {
                     // Saves the value as a double
-                    double bs = Double.parseDouble(b);
+                    bs = Double.parseDouble(b);
+
+                    // Checks if the carbs field is empty
+                    if(c.equals(""))
+                    {
+                        // Informs the user that field needs to be filled in
+                        Toast.makeText(AddEntryActivity.this,"Please enter a carbs amount, if no carbs eaten please enter 0.", Toast.LENGTH_SHORT);
+                    }
+                    // Checks if the carbs frield contains any characters other than numbers and decimal points
+                    else if(c.contains("[a-zA-Z]+"))
+                    {
+                        // Informs the user of the validation error
+                        Toast.makeText(AddEntryActivity.this, "Invalid type in carbohydrates, please only input a number", Toast.LENGTH_SHORT);
+                    }
+                    else
+                    {
+                        // Saves the value as a double
+                        carbs = Double.parseDouble(c);
+
+                        if(u.getCb_m().equals("g"))
+                        {
+                            double iF = carbs / ratio;
+                        }
+                    }
                 }
 
-                // Checks if the carbs field is empty
-                if(c.equals(""))
-                {
-                    // Iforms the user that field needs to be filled in
-                    Toast.makeText(AddEntryActivity.this,"Please enter a carbs amount, if no carbs eaten please enter 0.", Toast.LENGTH_SHORT);
-                }
-                // Checks if the carbs frield contains any characters other than numbers and decimal points
-                else if(c.contains("[a-zA-Z]+"))
-                {
-                    // Infroms the user of the validation error
-                    Toast.makeText(AddEntryActivity.this, "Invalid type in carbohydrates, please only input a number", Toast.LENGTH_SHORT);
-                }
-                else
-                {
-                    // Saves the value as a doible
-                    double carbs = Double.parseDouble(c);
-                }
             }
         });
     }
@@ -262,6 +284,78 @@ public class AddEntryActivity extends AppCompatActivity
 
         // Shows the timePickerDialog
         timePickerDialog.show();
+    }
+
+    public double getTimeBlocks()
+    {
+        // Time variables
+        Date ct;
+        Date st;
+        Date et;
+        SimpleDateFormat tF = new SimpleDateFormat("HH:mm");
+
+        try
+        {
+            // Parse the current time to a date to check if in range
+            ct = tF.parse(time);
+
+            // Loops through each time block
+            for(TimeBlock t : u.getTime_blocks())
+            {
+                // Parse the start and end times to date
+                st = tF.parse(t.getStart());
+                et = tF.parse(t.getEnd());
+
+                // Checks if the current time is within the time block range,
+                // includes if it is equal to one of the boundary times
+                if(!(ct.before(st) || ct.after(et)))
+                {
+                    return Double.parseDouble(t.getRatio());
+                }
+            }
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        return 456;
+    }
+
+    public double getInsulinOnBoard()
+    {
+        Date ct;
+        Date rt;
+        SimpleDateFormat tF = new SimpleDateFormat("HH:mm");
+
+        try
+        {
+            ct = tF.parse(time);
+            rt = new Date(ct.getTime() - HOURS.toMillis(5));
+
+            for(BloodSugarEntry bse : u.getBlood_sugars())
+            {
+                Date bt = tF.parse(bse.getTime());
+
+                if(bt.after(rt))
+                {
+                    long diffSec = (bt.getTime() - rt.getTime()) / 1000;
+                    int diffHour =(int) diffSec / 3600;
+
+                    double percRem = 1 - (diffHour * 0.2);
+                    double insRem = bse.getInsulin_t() * percRem;
+
+                    return insRem ;
+                }
+
+            }
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        return 456;
     }
 
     /**

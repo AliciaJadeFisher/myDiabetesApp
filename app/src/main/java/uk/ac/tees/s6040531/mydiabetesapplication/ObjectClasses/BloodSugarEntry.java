@@ -11,11 +11,12 @@ public class BloodSugarEntry implements Serializable
 {
     // Class attributes
     Date date;
-    Time time;
+    String time;
     double bs;
     double carbs;
     double insulin_f;
     double insulin_c;
+    double insulin_t;
     String meal;
     String notes;
 
@@ -35,7 +36,7 @@ public class BloodSugarEntry implements Serializable
      * @param m
      * @param n
      */
-    public void BloodSugarEntry(Date d, Time t, double b, double c, double inf, double inc, String m, String n)
+    public void BloodSugarEntry(Date d, String t, double b, double c, double inf, double inc, String m, String n)
     {
         date = d;
         time = t;
@@ -67,7 +68,7 @@ public class BloodSugarEntry implements Serializable
      * Returns the time attribute
      * @return time
      */
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
@@ -75,7 +76,7 @@ public class BloodSugarEntry implements Serializable
      * Sets the time attribute
      * @param time
      */
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -141,6 +142,22 @@ public class BloodSugarEntry implements Serializable
      */
     public void setInsulin_c(double insulin_c) {
         this.insulin_c = insulin_c;
+    }
+
+    /**
+     * Returns the total insulin attribute
+     * @return insulin_t
+     */
+    public double getInsulin_t() {
+        return insulin_t;
+    }
+
+    /**
+     * Sets the total insulin attribute
+     * @param insulin_t
+     */
+    public void setInsulin_t(double insulin_t) {
+        this.insulin_t = insulin_t;
     }
 
     /**
