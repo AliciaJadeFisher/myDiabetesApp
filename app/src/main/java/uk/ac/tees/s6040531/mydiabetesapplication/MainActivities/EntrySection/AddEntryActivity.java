@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,7 +35,7 @@ import static java.util.concurrent.TimeUnit.HOURS;
  */
 public class AddEntryActivity extends AppCompatActivity
 {
-    // Variables for date and time acess
+    // Variables for date and time access
     int y, m,d, h,min;
     Calendar cal;
     Context con = this;
@@ -49,6 +50,7 @@ public class AddEntryActivity extends AppCompatActivity
 
     // Variable for user data
     User u;
+    String meal = "None selected";
 
     /**
      * onCreate() method
@@ -146,15 +148,26 @@ public class AddEntryActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
+                // Create a new blood sugar entry object and sets the date and time
+                BloodSugarEntry newEntry = new BloodSugarEntry();
+                newEntry.setDate(date);
+                newEntry.setTime(time);
+
+                // Grabs the spinner inputs and sets the object's meal type
+                meal = spnMeal.getSelectedItem().toString();
+                newEntry.setMeal(meal);
+
                 // Grabs the user's insulin settings
                 double targetTop = Double.parseDouble(u.getTop());
                 double targetBottom = Double.parseDouble(u.getTop());
                 double hyper = Double.parseDouble(u.getHyper());
                 double hypo = Double.parseDouble(u.getHypo());
                 double correction = Double.parseDouble(u.getCorrection());
-                double pres = Double.parseDouble(u.getPrecision());
-                double ratio = getTimeBlocks();
+                String prec = u.getPrecision();
+                double portion = Double.parseDouble(u.getPortion());
 
+                // Calculates the ratio and iob to be used
+                double ratio = getTimeBlocks();
                 double iob = getInsulinOnBoard();
 
                 // Grabs the user inputs
@@ -180,6 +193,7 @@ public class AddEntryActivity extends AppCompatActivity
                 {
                     // Saves the value as a double
                     bs = Double.parseDouble(b);
+                    newEntry.setBs(bs);
 
                     // Checks if the carbs field is empty
                     if(c.equals(""))
@@ -197,10 +211,66 @@ public class AddEntryActivity extends AppCompatActivity
                     {
                         // Saves the value as a double
                         carbs = Double.parseDouble(c);
+                        newEntry.setCarbs(carbs);
 
-                        if(u.getCb_m().equals("g"))
+                        // Converts the carbs into grams if needed
+                        if(u.getCb_m().equals("CP"))
                         {
-                            double iF = carbs / ratio;
+                            carbs = carbs * portion;
+                        }
+
+                        // Works out the food insulin
+                        Double inF = carbs / ratio;
+
+                        // Calculates the insulin precision if needed
+                        if(!prec.equals("1"))
+                        {
+                            // Formats the insulin based on the user's entered precision
+                            int dec = prec.substring(prec.indexOf(".")).length();
+                            DecimalFormat formatter = new DecimalFormat();
+                            formatter.setMaximumFractionDigits(dec);
+                            inF = Double.parseDouble(formatter.format(inF));
+                            newEntry.setInsulin_f(inF);
+                        }
+
+
+
+                        // Checks if the entered blood sugar is within target
+                        if(bs >= targetBottom && bs <= targetTop)
+                        {
+
+                            if(!prec.equals("1"))
+                            {
+                                // Calculates the total insulin and sets the insulin total and correction
+                                Double totalIn = formatInsulin(inF - iob, prec);
+                                newEntry.setInsulin_c(0);
+                                newEntry.setInsulin_t(totalIn);
+
+                                // Displays the insulin values
+                                tvIF.setText("Insulin (food) : " + inF + "U");
+                                tvIC.setText("Insulin (correction) : 0U");
+                                tvIT.setText("Total Insulin : " + totalIn + "U");
+                            }
+                            else
+                            {
+                                Double totalIn = inF - iob;
+                                // Displays the insulin values
+                                tvIF.setText("Insulin (food) : " + (int)Math.round(inF) + "U");
+                                tvIC.setText("Insulin (correction) : 0U");
+                                tvIT.setText("Total Insulin : " + (int)Math.round(totalIn) + "U");
+                            }
+
+
+
+                        }
+                        else if(bs <= hypo)
+                        {
+                            Toast.makeText(AddEntryActivity.this, "Low blood sugar, please do not take any insulin and make sure to eat 25g of carbohydrates. ", Toast.LENGTH_SHORT);
+
+                        }
+                        else if(bs >= hyper)
+                        {
+                            Double corr = (bs - hyper) / correction;
                         }
                     }
                 }
@@ -356,6 +426,15 @@ public class AddEntryActivity extends AppCompatActivity
         }
 
         return 456;
+    }
+
+    public double formatInsulin(double insulin, String prec)
+    {
+        // Formats the insulin based on the user's entered precision
+        int dec = prec.substring(prec.indexOf(".")).length();
+        DecimalFormat formatter = new DecimalFormat();
+        formatter.setMaximumFractionDigits(dec);
+        return Double.parseDouble(formatter.format(insulin));
     }
 
     /**

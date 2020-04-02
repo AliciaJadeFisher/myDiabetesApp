@@ -1,8 +1,7 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
 
 /**
  * BloodSugarEntry Object Class
@@ -36,7 +35,7 @@ public class BloodSugarEntry implements Serializable
      * @param m
      * @param n
      */
-    public void BloodSugarEntry(Date d, String t, double b, double c, double inf, double inc, String m, String n)
+    public void BloodSugarEntry(Date d, String t, double b, double c, double inf, double inc, double into, String m, String n)
     {
         date = d;
         time = t;
@@ -44,6 +43,7 @@ public class BloodSugarEntry implements Serializable
         carbs = c;
         insulin_f = inf;
         insulin_c = inc;
+        insulin_t = into;
         meal = m;
         notes = n;
     }
