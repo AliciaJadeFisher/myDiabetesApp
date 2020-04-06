@@ -437,6 +437,13 @@ public class AddEntryActivity extends AppCompatActivity
         return Double.parseDouble(formatter.format(insulin));
     }
 
+    public void displayInsulin (double food, double corr, double total)
+    {
+        tvIF.setText("Insulin (food) : " + food + "U");
+        tvIC.setText("Insulin (correction) : " + corr + "U");
+        tvIT.setText("Total Insulin : " + total + "U");
+    }
+
     /**
      * Retrieves data sent with the intent in the extra field
      */
