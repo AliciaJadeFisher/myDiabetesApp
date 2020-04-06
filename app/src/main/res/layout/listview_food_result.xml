@@ -3,4 +3,28 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tv_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/food_item_here"
+        android:textColor="@color/colorPrimaryDark"/>
+    <TextView
+        android:id="@+id/tv_carbs_100"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/carbohydrates_per_100g"
+        android:textColor="@color/colorPrimaryDark"/>
+    <TextView
+        android:id="@+id/tv_carbs_serving"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/carbohydrates_per_serving_xg"
+        android:textColor="@color/colorPrimaryDark"/>
 </LinearLayout>
