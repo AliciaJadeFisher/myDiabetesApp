@@ -163,6 +163,10 @@ public class AddEntryActivity extends AppCompatActivity
             public void onClick(View view)
             {
                 // Loads up SearchCarbActivity
+                // Loads the HomeActivity
+                Intent i = new Intent(AddEntryActivity.this, SearchCarbActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 
