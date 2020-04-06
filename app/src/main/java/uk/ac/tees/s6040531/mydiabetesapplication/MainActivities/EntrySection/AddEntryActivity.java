@@ -207,13 +207,13 @@ public class AddEntryActivity extends AppCompatActivity
                 if(b.equals(""))
                 {
                     // Informs the user that the field needs to filled in
-                    Toast.makeText(AddEntryActivity.this,"Please enter a blood sugar.", Toast.LENGTH_SHORT);
+                    Toast.makeText(AddEntryActivity.this,"Please enter a blood sugar.", Toast.LENGTH_SHORT).show();
                 }
                 // Checks if the blood sugar field contains any characters other than numbers and decimal points
                 else if(!isNumeric(b))
                 {
                     // Informs the user of the validation error
-                    Toast.makeText(AddEntryActivity.this, "Invalid type in blood sugar, please only input a number", Toast.LENGTH_SHORT);
+                    Toast.makeText(AddEntryActivity.this, "Invalid type in blood sugar, please only input a number", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -225,13 +225,13 @@ public class AddEntryActivity extends AppCompatActivity
                     if(c.equals(""))
                     {
                         // Informs the user that field needs to be filled in
-                        Toast.makeText(AddEntryActivity.this,"Please enter a carbs amount, if no carbs eaten please enter 0.", Toast.LENGTH_SHORT);
+                        Toast.makeText(AddEntryActivity.this,"Please enter a carbs amount, if no carbs eaten please enter 0.", Toast.LENGTH_SHORT).show();
                     }
                     // Checks if the carbs frield contains any characters other than numbers and decimal points
                     else if(!isNumeric(c))
                     {
                         // Informs the user of the validation error
-                        Toast.makeText(AddEntryActivity.this, "Invalid type in carbohydrates, please only input a number", Toast.LENGTH_SHORT);
+                        Toast.makeText(AddEntryActivity.this, "Invalid type in carbohydrates, please only input a number", Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
@@ -262,7 +262,7 @@ public class AddEntryActivity extends AppCompatActivity
                         }
                         else if(bs <= hypo)
                         {
-                            Toast.makeText(AddEntryActivity.this, "Low blood sugar, please do not take any insulin and make sure to eat 25g of carbohydrates. ", Toast.LENGTH_SHORT);
+                            Toast.makeText(AddEntryActivity.this, "Low blood sugar, please do not take any insulin and make sure to eat 25g of carbohydrates. ", Toast.LENGTH_SHORT).show();
                         }
                         else if(bs >= hyper)
                         {
@@ -302,7 +302,7 @@ public class AddEntryActivity extends AppCompatActivity
                             @Override
                             public void onSuccess(Void aVoid)
                             {
-                                Toast.makeText(AddEntryActivity.this, "Entry saved", Toast.LENGTH_SHORT);
+                                Toast.makeText(AddEntryActivity.this, "Entry saved", Toast.LENGTH_SHORT).show();
 
                                 // Loads the HomeActivity
                                 Intent i = new Intent(AddEntryActivity.this, HomeActivity.class);
@@ -315,7 +315,7 @@ public class AddEntryActivity extends AppCompatActivity
                             @Override
                             public void onFailure(@NonNull Exception e)
                             {
-                                Toast.makeText(AddEntryActivity.this, "Entry failed to save, please try again", Toast.LENGTH_SHORT);
+                                Toast.makeText(AddEntryActivity.this, "Entry failed to save, please try again", Toast.LENGTH_SHORT).show();
                             }
                         });
 
