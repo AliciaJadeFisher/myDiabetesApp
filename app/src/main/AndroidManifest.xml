@@ -11,18 +11,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivities.EntrySection.AddEntryActivity"
-            android:theme="@style/noActionbar"></activity>
-        <activity android:name=".MainActivities.SettingsSection.SettingsTermsActivity"
-            android:theme="@style/noActionbar"/>
-        <activity android:name=".MainActivities.SettingsSection.SettingsAboutActivity"
-            android:theme="@style/noActionbar"/>
-        <activity android:name=".MainActivities.ForumSection.ViewPostsActivity"
-            android:theme="@style/noActionbar"/>
-        <activity android:name=".MainActivities.ForumSection.CreatePostActivity"
-            android:theme="@style/noActionbar"/>
-        <activity android:name=".MainActivities.ForumSection.CreateThreadActivity"
-            android:theme="@style/noActionbar"/>
+        <activity android:name=".MainActivities.EntrySection.SearchCarbActivity"></activity>
+        <activity
+            android:name=".MainActivities.EntrySection.AddEntryActivity"
+            android:theme="@style/noActionbar" />
+        <activity
+            android:name=".MainActivities.SettingsSection.SettingsTermsActivity"
+            android:theme="@style/noActionbar" />
+        <activity
+            android:name=".MainActivities.SettingsSection.SettingsAboutActivity"
+            android:theme="@style/noActionbar" />
+        <activity
+            android:name=".MainActivities.ForumSection.ViewPostsActivity"
+            android:theme="@style/noActionbar" />
+        <activity
+            android:name=".MainActivities.ForumSection.CreatePostActivity"
+            android:theme="@style/noActionbar" />
+        <activity
+            android:name=".MainActivities.ForumSection.CreateThreadActivity"
+            android:theme="@style/noActionbar" />
         <activity
             android:name=".Registration_Login.AccountSetupActivity"
             android:label="@string/title_activity_account_setup"
