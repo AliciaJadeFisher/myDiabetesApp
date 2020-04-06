@@ -28,6 +28,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Pattern;
+
 import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
@@ -87,12 +89,22 @@ public class AddEntryActivity extends AppCompatActivity
         d = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         h = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         min = Calendar.getInstance().get(Calendar.MINUTE);
+        String da = d + "/" + m + "/" + y;
+        try
+        {
+            date = new SimpleDateFormat("dd/MM/yyy").parse(da);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        time = h + ":" + min;
 
         // Initialize the widgets
         tvDate = (TextView)findViewById(R.id.tv_date_display);
         tvDate.setText(d + "/" + (m) + "/" + y);
         tvTime = (TextView)findViewById(R.id.tv_time_display);
-        tvTime.setText(h + ":" + min);
+        tvTime.setText(time);
         tvIF = (TextView)findViewById(R.id.tv_if);
         tvIC = (TextView)findViewById(R.id.tv_ic);
         tvIT = (TextView)findViewById(R.id.tv_it);
@@ -173,7 +185,7 @@ public class AddEntryActivity extends AppCompatActivity
 
                 // Grabs the user's insulin settings
                 double targetTop = Double.parseDouble(u.getTop());
-                double targetBottom = Double.parseDouble(u.getTop());
+                double targetBottom = Double.parseDouble(u.getBottom());
                 double hyper = Double.parseDouble(u.getHyper());
                 double hypo = Double.parseDouble(u.getHypo());
                 double correction = Double.parseDouble(u.getCorrection());
@@ -198,7 +210,7 @@ public class AddEntryActivity extends AppCompatActivity
                     Toast.makeText(AddEntryActivity.this,"Please enter a blood sugar.", Toast.LENGTH_SHORT);
                 }
                 // Checks if the blood sugar field contains any characters other than numbers and decimal points
-                else if(!b.matches("[0-9.]"))
+                else if(!isNumeric(b))
                 {
                     // Informs the user of the validation error
                     Toast.makeText(AddEntryActivity.this, "Invalid type in blood sugar, please only input a number", Toast.LENGTH_SHORT);
@@ -216,7 +228,7 @@ public class AddEntryActivity extends AppCompatActivity
                         Toast.makeText(AddEntryActivity.this,"Please enter a carbs amount, if no carbs eaten please enter 0.", Toast.LENGTH_SHORT);
                     }
                     // Checks if the carbs frield contains any characters other than numbers and decimal points
-                    else if(c.contains("[a-zA-Z]+"))
+                    else if(!isNumeric(c))
                     {
                         // Informs the user of the validation error
                         Toast.makeText(AddEntryActivity.this, "Invalid type in carbohydrates, please only input a number", Toast.LENGTH_SHORT);
@@ -395,25 +407,37 @@ public class AddEntryActivity extends AppCompatActivity
         Date st;
         Date et;
         SimpleDateFormat tF = new SimpleDateFormat("HH:mm");
+        Double ratio = 123.123;
 
         try
         {
             // Parse the current time to a date to check if in range
             ct = tF.parse(time);
 
+            int no_blocks = u.getTime_blocks().size();
+
             // Loops through each time block
             for(TimeBlock t : u.getTime_blocks())
             {
-                // Parse the start and end times to date
-                st = tF.parse(t.getStart());
-                et = tF.parse(t.getEnd());
-
-                // Checks if the current time is within the time block range,
-                // includes if it is equal to one of the boundary times
-                if(!(ct.before(st) || ct.after(et)))
+                if(no_blocks == 1)
                 {
-                    return Double.parseDouble(t.getRatio());
+                    ratio = Double.parseDouble(t.getRatio());
                 }
+                else
+                {
+                    // Parse the start and end times to date
+                    st = tF.parse(t.getStart());
+                    et = tF.parse(t.getEnd());
+
+                    // Checks if the current time is within the time block range,
+                    // includes if it is equal to one of the boundary times
+                    if((ct.after(st) && ct.before(et)))
+                    {
+                        ratio =  Double.parseDouble(t.getRatio());
+                    }
+                }
+
+
             }
         }
         catch (ParseException e)
@@ -421,7 +445,7 @@ public class AddEntryActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        return 456;
+        return ratio;
     }
 
     public double getInsulinOnBoard()
@@ -491,6 +515,18 @@ public class AddEntryActivity extends AppCompatActivity
         tvIF.setText("Insulin (food) : " + food + "U");
         tvIC.setText("Insulin (correction) : " + corr + "U");
         tvIT.setText("Total Insulin : " + total + "U");
+    }
+
+    /**
+     * isNumeric() method
+     * @param val
+     * @return  numPat.matcher(val).matches()
+     */
+    public boolean isNumeric(String val)
+    {
+        Pattern numPat = Pattern.compile("\\d+(\\.\\d+)?");
+
+        return numPat.matcher(val).matches();
     }
 
     /**
