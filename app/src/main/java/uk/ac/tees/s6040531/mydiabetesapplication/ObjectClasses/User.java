@@ -244,4 +244,13 @@ public class User implements Serializable
     public void setBlood_sugars(List<BloodSugarEntry> blood_sugars) {
         this.blood_sugars = blood_sugars;
     }
+
+    /**
+     * Adds a new blood sugar entry
+     * @param newEntry
+     */
+    public void addBlood_sugar(BloodSugarEntry newEntry)
+    {
+        blood_sugars.add(newEntry);
+    }
 }
