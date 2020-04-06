@@ -266,7 +266,7 @@ public class AddEntryActivity extends AppCompatActivity
                         }
                         else if(bs >= hyper)
                         {
-                            Double corr = (bs - hyper) / correction;
+                            Double corr = (bs - targetTop) / correction;
                             newEntry.setInsulin_c(corr);
 
                             Double totalIn = (inF + corr) - iob;
@@ -481,7 +481,7 @@ public class AddEntryActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        return 456;
+        return 0;
     }
 
     /**
