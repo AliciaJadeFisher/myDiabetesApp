@@ -1,4 +1,4 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection;
 
 import android.content.Intent;
 import android.os.Bundle;

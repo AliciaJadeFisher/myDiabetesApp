@@ -1,4 +1,4 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.EntrySection;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection;
 
 import androidx.appcompat.app.AppCompatActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;

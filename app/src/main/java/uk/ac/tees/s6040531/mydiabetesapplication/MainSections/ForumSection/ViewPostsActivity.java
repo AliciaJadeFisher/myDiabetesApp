@@ -1,4 +1,4 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -27,13 +27,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.HomeActivity;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ThreadPost;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.PostRecyclerViewAdapter;
-import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.LoginActivity;
 
 /**
  * ViewPostsActivity

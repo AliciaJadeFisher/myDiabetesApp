@@ -1,6 +1,5 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.ui.main;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -26,13 +24,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.HomeActivity;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.TimeBlockRecyclerViewAdapter;
-import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.AccountSetupActivity;
-import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.RegistrationActivity;
 
 /**
  * TimeBlockFragment

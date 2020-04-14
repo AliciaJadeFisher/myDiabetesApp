@@ -1,11 +1,10 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +15,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.HomeActivity;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 

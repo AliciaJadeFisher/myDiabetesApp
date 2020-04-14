@@ -1,11 +1,10 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.MainActivities;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainSections;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -14,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.EntrySection.AddEntryActivity;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection.AddEntryActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 

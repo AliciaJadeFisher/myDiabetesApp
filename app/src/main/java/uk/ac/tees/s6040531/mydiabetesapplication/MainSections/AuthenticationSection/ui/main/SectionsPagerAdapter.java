@@ -1,4 +1,4 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.ui.main;
 
 import android.content.Context;
 

@@ -9,13 +9,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.HomeFragment"
+        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainActivities.ForumSection.ForumFragment"
+        android:name="uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection.ForumFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_forum" />
 </navigation>

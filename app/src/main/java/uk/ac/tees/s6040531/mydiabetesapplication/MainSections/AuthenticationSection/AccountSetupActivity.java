@@ -1,4 +1,4 @@
-package uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection;
 
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
@@ -8,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
-import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.BasicFragment;
-import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.MedicalFragment;
-import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.SectionsPagerAdapter;
-import uk.ac.tees.s6040531.mydiabetesapplication.Registration_Login.ui.main.TimeBlockFragment;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.ui.main.BasicFragment;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.ui.main.MedicalFragment;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.ui.main.SectionsPagerAdapter;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.ui.main.TimeBlockFragment;
 
 /**
  * AccountSetupActivity
