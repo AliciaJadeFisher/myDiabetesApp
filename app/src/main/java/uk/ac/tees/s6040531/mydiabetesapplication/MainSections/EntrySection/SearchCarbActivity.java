@@ -94,38 +94,55 @@ public class SearchCarbActivity extends AppCompatActivity
         String search = s.replaceAll("\\s","+");
 
         // Create the request url to return JSON data
-        final String url = "https://world.openfoodsfacts.org/cgi.search.p1?search_terms=" + search +"&search_simple=1&action=process&json=1";
+        final String url = "https://world.openfoodfacts.org/cgi/search.pl?search_terms=" + search +"&search_simple=1&action=process&json=1";
 
+        // Creates an API GET request
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
+                new Response.Listener<String>()
+                {
+                    /**
+                     * onResponse() method
+                     * @param response
+                     */
                     @Override
-                    public void onResponse(String response) {
-                        System.out.println("========== Search url : " + url);
-                        System.out.println("========== API Respon : " + response);
-
-                        try {
+                    public void onResponse(String response)
+                    {
+                        try
+                        {
+                            // Converts the string response to a JSON object
                             JSONObject object = new JSONObject(response);
 
+                            // Sets the list view adapter and passes in the api response
                             adapter = new FoodListViewAdapter(SearchCarbActivity.this, object.getJSONArray("products"));
                             lvResults.setAdapter(adapter);
 
+                            // Displays the number of relevant results
                             tvDisplay.setText("No. results : " + adapter.getCount());
-                        } catch (JSONException e) {
-                            Toast.makeText(SearchCarbActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        catch(JSONException e)
+                        {
+                            // Informs the user that the search failed
+                            Toast.makeText(SearchCarbActivity.this, "Search failed, please try again", Toast.LENGTH_SHORT).show();
                         }
                         queue.stop();
                     }
                 },
                 new Response.ErrorListener()
                 {
+                    /**
+                     * onErrorResponse() method
+                     * @param error
+                     */
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
-                        Toast.makeText(SearchCarbActivity.this, "API response : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        // Informs the user that the search failed
+                        Toast.makeText(SearchCarbActivity.this, "Search failed, please try again", Toast.LENGTH_SHORT).show();
                         queue.stop();
                     }
                 });
 
+        // Adds the request to the queue
         queue.add(stringRequest);
     }
 
