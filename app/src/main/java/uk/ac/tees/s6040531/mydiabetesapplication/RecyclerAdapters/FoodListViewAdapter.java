@@ -109,62 +109,58 @@ public class FoodListViewAdapter extends BaseAdapter
             // Grabs the current JSONObject
             JSONObject product = products.getJSONObject(i);
 
-            // Checks if the product is in the UK
-            if(product.getString("countries_tags").contains("united-kingdom"))
+            String n;
+            System.out.println("=========== Product : " + product);
+            // Gets the product name
+            try
             {
-                String n;
-                System.out.println("=========== Product : " + product);
-                // Gets the product name
-                try
-                {
-                    n = product.getString("product_name");
-                    System.out.println("=============== Product Name : " + n + "===============");
-                }
-                catch(JSONException e)
-                {
-                    n="n/a";
-                }
-
-
-                int s;
-                double c,cs;
-
-                // Gets the product details
-                try
-                {
-                    s = product.getInt("serving_quantity");
-                }
-                catch(JSONException e)
-                {
-                    s = 0;
-                }
-
-                try
-                {
-                    c = product.getJSONObject("nutriments").getDouble("carbohydrates_100g");
-                }
-                catch(JSONException e)
-                {
-                    c = 0;
-                }
-                try
-                {
-                    cs = product.getJSONObject("nutriments").getDouble("carbohydrates_serving");
-                }
-                catch(JSONException e)
-                {
-                    cs = 0;
-                }
-
-                // Creates a new FoodItem with the product details and adds it to the list,
-                // if all information is present
-
-                if(!(n.equals("n/a") || s == 0 || c == 0 || cs == 0))
-                {
-                    FoodItem newFood = new FoodItem(n, s, c, cs);
-                    foods.add(newFood);
-                }
+                n = product.getString("product_name");
+                System.out.println("=============== Product Name : " + n + "===============");
             }
+            catch(JSONException e)
+            {
+                n="n/a";
+            }
+
+
+            int s;
+            double c,cs;
+
+            // Gets the product details
+            try
+            {
+                s = product.getInt("serving_quantity");
+            }
+            catch(JSONException e)
+            {
+                s = 0;
+            }
+
+            try
+            {
+                c = product.getJSONObject("nutriments").getDouble("carbohydrates_100g");
+            }
+            catch(JSONException e)
+            {
+                c = 0;
+            }
+            try
+            {
+                cs = product.getJSONObject("nutriments").getDouble("carbohydrates_serving");
+            }
+            catch(JSONException e)
+            {
+                cs = 0;
+            }
+
+            // Creates a new FoodItem with the product details and adds it to the list,
+            // if all information is present
+            if(!(n.equals("n/a") || s == 0 || c == 0 || cs == 0))
+            {
+                FoodItem newFood = new FoodItem(n, s, c, cs);
+                foods.add(newFood);
+            }
+
         }
         return foods;
     }
