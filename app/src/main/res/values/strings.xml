@@ -129,4 +129,6 @@
     <string name="food_item_here">Food item here</string>
     <string name="carbohydrates_per_100g">Carbohydrates per 100g:</string>
     <string name="carbohydrates_per_serving_xg">Carbohydrates per serving(xg) :</string>
+    <string name="records">Records</string>
+    <string name="graph">Graph</string>
 </resources>
