@@ -29,7 +29,7 @@
          <LinearLayout
              android:paddingTop="10dp"
              android:layout_width="match_parent"
-             android:layout_height="95dp"
+             android:layout_height="100dp"
              android:orientation="horizontal"
              android:gravity="center"
              android:background="@color/colorPrimaryDark">
@@ -42,6 +42,7 @@
                 android:gravity="center"
                 android:text="@string/_8_5_mml_l"
                 android:textSize="15sp"
+                android:textColor="@color/colorAccent"
                 android:background="@drawable/textview_circle"/>
             <TextView
                 android:id="@+id/tv_weeklyDisplay"
@@ -51,6 +52,7 @@
                 android:gravity="center"
                 android:text="@string/_8_5_mml_l"
                 android:textSize="15sp"
+                android:textColor="@color/colorAccent"
                 android:background="@drawable/textview_circle" />
             <TextView
                 android:id="@+id/tv_monthlyDisplay"
@@ -60,6 +62,7 @@
                 android:gravity="center"
                 android:text="@string/_8_5_mml_l"
                 android:textSize="15sp"
+                android:textColor="@color/colorAccent"
                 android:background="@drawable/textview_circle"/>
         </LinearLayout>
 
@@ -77,9 +80,8 @@
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:text="@string/daily_average"
-                android:textSize="18sp"
-                android:textColor="@color/colorAccent"
-                />
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"/>
 
             <TextView
                 android:id="@+id/tv_weekly"
@@ -89,9 +91,9 @@
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:text="@string/weekly_average"
-                android:textSize="18sp"
-                android:textColor="@color/colorAccent"
-                />
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"/>
+
             <TextView
                 android:id="@+id/tv_monthly"
                 android:layout_width="90dp"
@@ -99,7 +101,7 @@
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:text="@string/monthly_average"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/colorAccent"
                 />
         </LinearLayout>
