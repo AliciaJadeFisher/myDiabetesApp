@@ -26,14 +26,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/colorPrimaryDark">
+         <LinearLayout
+             android:paddingTop="10dp"
+             android:layout_width="match_parent"
+             android:layout_height="95dp"
+             android:orientation="horizontal"
+             android:gravity="center"
+             android:background="@color/colorPrimaryDark">
 
             <TextView
                 android:id="@+id/tv_dailyDisplay"
-                android:layout_alignParentStart="true"
                 android:layout_margin="10dp"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
@@ -41,75 +43,66 @@
                 android:text="@string/_8_5_mml_l"
                 android:textSize="15sp"
                 android:background="@drawable/textview_circle"/>
+            <TextView
+                android:id="@+id/tv_weeklyDisplay"
+                android:layout_margin="10dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:gravity="center"
+                android:text="@string/_8_5_mml_l"
+                android:textSize="15sp"
+                android:background="@drawable/textview_circle" />
+            <TextView
+                android:id="@+id/tv_monthlyDisplay"
+                android:layout_margin="10dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:gravity="center"
+                android:text="@string/_8_5_mml_l"
+                android:textSize="15sp"
+                android:background="@drawable/textview_circle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@color/colorPrimaryDark">
+
             <TextView
                 android:id="@+id/tv_daily"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
-                android:layout_below="@+id/tv_dailyDisplay"
                 android:text="@string/daily_average"
                 android:textSize="18sp"
                 android:textColor="@color/colorAccent"
                 />
 
             <TextView
-                android:id="@+id/tv_weeklyDisplay"
-                android:layout_toStartOf="@+id/tv_monthlyDisplay"
-                android:layout_toEndOf="@+id/tv_dailyDisplay"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:background="@drawable/textview_circle"
-                android:gravity="center"
-                android:text="@string/_8_5_mml_l"
-                android:textSize="15sp" />
-
-            <TextView
                 android:id="@+id/tv_weekly"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:maxWidth="90dp"
+                android:layout_margin="10dp"
                 android:gravity="center"
-                android:layout_below="@id/tv_weeklyDisplay"
-                android:layout_toStartOf="@+id/tv_monthlyDisplay"
-                android:layout_toEndOf="@+id/tv_dailyDisplay"
                 android:text="@string/weekly_average"
                 android:textSize="18sp"
                 android:textColor="@color/colorAccent"
                 />
-
-            <TextView
-                android:id="@+id/tv_monthlyDisplay"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="10dp"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:gravity="center"
-                android:text="@string/_8_5_mml_l"
-                android:textSize="15sp"
-                android:background="@drawable/textview_circle"/>
             <TextView
                 android:id="@+id/tv_monthly"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/tv_monthlyDisplay"
                 android:text="@string/monthly_average"
                 android:textSize="18sp"
                 android:textColor="@color/colorAccent"
                 />
-
-        </RelativeLayout>
-
+        </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"

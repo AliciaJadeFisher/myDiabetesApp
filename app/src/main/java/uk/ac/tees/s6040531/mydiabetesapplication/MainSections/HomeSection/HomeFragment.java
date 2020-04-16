@@ -155,8 +155,7 @@ public class HomeFragment extends Fragment
         double average = 15.4;
         double total;
         int count;
-        cal.setTime(today);
-        cal.set(Calendar.DAY_OF_WEEK, 1);
+        cal.set(Calendar.DAY_OF_WEEK, 2);
         Date start = cal.getTime();
 
         System.out.println("======= Week Start : " + start + "===========");
@@ -169,7 +168,6 @@ public class HomeFragment extends Fragment
         double average = 21.8;
         double total;
         int count;
-        cal.setTime(today);
         cal.set(Calendar.DAY_OF_MONTH, 1);
         Date start = cal.getTime();
 
