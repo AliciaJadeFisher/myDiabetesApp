@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection.AddEntryActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
@@ -23,11 +26,14 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 public class HomeFragment extends Fragment
 {
     // Variables for layout access
-    TextView tvTitle;
+    TextView tvWelcome, tvDaily, tvWeekly, tvMonthly;
     FloatingActionButton fabAdd;
 
     // Variable for the current user details
     User user;
+
+    Date today = new Date();
+    Calendar cal = Calendar.getInstance();
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -88,11 +94,17 @@ public class HomeFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         // Initializes the widgets
-        tvTitle = (TextView)view.findViewById(R.id.text_home);
+        tvWelcome = (TextView)view.findViewById(R.id.tv_welcome);
+        tvDaily = (TextView)view.findViewById(R.id.tv_dailyDisplay);
+        tvWeekly = (TextView)view.findViewById(R.id.tv_weeklyDisplay);
+        tvMonthly = (TextView)view.findViewById(R.id.tv_monthlyDisplay);
         fabAdd = (FloatingActionButton)view.findViewById(R.id.fab_add_entry);
 
         // Sets the deafult welcome text
-        tvTitle.setText("Welcome!");
+        tvWelcome.setText("Welcome!");
+        tvDaily.setText(Double.toString(getDailyAverage()));
+        tvWeekly.setText(Double.toString(getWeeklyAverage()));
+        tvMonthly.setText(Double.toString(getMonthlyAverage()));
 
         // OnClickListener() for fabAdd
         fabAdd.setOnClickListener(new View.OnClickListener()
@@ -124,7 +136,45 @@ public class HomeFragment extends Fragment
         // Grabs the passed in user and sets the welcome text
         if(u != null) {
             user = u;
-            tvTitle.setText("Welcome " + user.getName());
+            tvWelcome.setText("Welcome " + user.getName());
         }
+    }
+
+    public double getDailyAverage()
+    {
+        double average = 7.3;
+        double total;
+        int count;
+        System.out.println("======= Today's Date : " + today + "===========");
+
+        return average;
+    }
+
+    public double getWeeklyAverage()
+    {
+        double average = 15.4;
+        double total;
+        int count;
+        cal.setTime(today);
+        cal.set(Calendar.DAY_OF_WEEK, 1);
+        Date start = cal.getTime();
+
+        System.out.println("======= Week Start : " + start + "===========");
+
+        return average;
+    }
+
+    public double getMonthlyAverage()
+    {
+        double average = 21.8;
+        double total;
+        int count;
+        cal.setTime(today);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        Date start = cal.getTime();
+
+        System.out.println("======= Month Start : " + start + "===========");
+
+        return average;
     }
 }
