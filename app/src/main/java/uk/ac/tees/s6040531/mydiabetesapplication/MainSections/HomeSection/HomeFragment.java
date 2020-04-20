@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Calendar;
 import java.util.Date;
 
+import androidx.fragment.app.FragmentTabHost;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection.AddEntryActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
@@ -28,6 +29,7 @@ public class HomeFragment extends Fragment
     // Variables for layout access
     TextView tvWelcome, tvDaily, tvWeekly, tvMonthly;
     FloatingActionButton fabAdd;
+    FragmentTabHost tabHost;
 
     // Variable for the current user details
     User user;
@@ -80,6 +82,9 @@ public class HomeFragment extends Fragment
     {
         // Grabs the relevant layout file
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+        tabHost = (FragmentTabHost)root.findViewById(R.id.tabs_home);
+        tabHost.setup(getActivity(), getChildFragmentManager(),R.id.);
+
         return root;
     }
 

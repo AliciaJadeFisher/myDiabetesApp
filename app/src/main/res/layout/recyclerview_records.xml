@@ -33,7 +33,7 @@
             android:gravity="start"
             android:text="@string/show_date_here"
             android:fontFamily="sans-serif-condensed"
-            android:textColor="@color/cardview_dark_background"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/tv_recordDate"
@@ -62,7 +62,7 @@
             android:gravity="start"
             android:text="@string/show_blood_sugar_here"
             android:fontFamily="sans-serif-condensed"
-            android:textColor="@color/cardview_dark_background"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
         <!--TextView for the field title-->
@@ -88,6 +88,6 @@
             android:gravity="start"
             android:text="@string/show_insulin_here"
             android:fontFamily="sans-serif-condensed"
-            android:textColor="@color/cardview_dark_background"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
     </RelativeLayout>
