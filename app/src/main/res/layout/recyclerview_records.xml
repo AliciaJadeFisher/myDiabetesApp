@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="5dp"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/parent_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/recycler_background"
+    android:paddingBottom="20sp"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+        <!--TextView for the field title-->
+        <TextView
+            android:id="@+id/tv_recordDate"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/date"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <!--TextView to display the thread title-->
+        <TextView
+            android:id="@+id/tv_viewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/show_date_here"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="17sp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/tv_recordDate"
+            android:layout_marginStart="11dp" />
+
+        <!--TextView for the field title-->
+        <TextView
+            android:id="@+id/tv_bs"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:layout_below="@+id/tv_recordDate"
+            android:text="@string/blood_sugar"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <!--TextView to display the thread description-->
+        <TextView
+            android:id="@+id/tv_viewBs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_viewDate"
+            android:layout_below="@+id/tv_viewDate"
+            android:gravity="start"
+            android:text="@string/show_blood_sugar_here"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="17sp" />
+
+        <!--TextView for the field title-->
+        <TextView
+            android:id="@+id/tv_insulin"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:layout_below="@+id/tv_bs"
+            android:text="@string/insulin"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <!--TextView to display the no. posts in the thread-->
+        <TextView
+            android:id="@+id/tv_viewInsulin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_viewBs"
+            android:layout_below="@+id/tv_viewBs"
+            android:gravity="start"
+            android:text="@string/show_insulin_here"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="17sp" />
+    </RelativeLayout>
