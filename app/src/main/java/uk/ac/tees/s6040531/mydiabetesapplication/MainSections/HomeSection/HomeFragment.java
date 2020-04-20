@@ -1,6 +1,5 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,14 +11,16 @@ import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 import java.util.Date;
 
 import androidx.fragment.app.FragmentTabHost;
-import androidx.viewpager.widget.ViewPager;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection.AddEntryActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
@@ -36,6 +37,8 @@ public class HomeFragment extends Fragment
 
     // Variable for the current user details
     User user;
+    FirebaseAuth auth;
+    FirebaseFirestore udbRef;
 
     Date today = new Date();
     Date week;
@@ -100,6 +103,9 @@ public class HomeFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
+        auth = FirebaseAuth.getInstance();
+        udbRef = FirebaseFirestore.getInstance();
+
         // Initializes the widgets
         tvWelcome = (TextView)view.findViewById(R.id.tv_welcome);
         tvDaily = (TextView)view.findViewById(R.id.tv_dailyDisplay);
@@ -107,21 +113,30 @@ public class HomeFragment extends Fragment
         tvMonthly = (TextView)view.findViewById(R.id.tv_monthlyDisplay);
         fabAdd = (FloatingActionButton)view.findViewById(R.id.fab_add_entry);
 
+        udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+        {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot)
+            {
+                user = documentSnapshot.toObject(User.class);
+            }
+        });
+
         // Sets the deafult welcome text
-        tvWelcome.setText("Welcome!");
+        tvWelcome.setText("Welcome " + user.getName());
         tvDaily.setText(Double.toString(getDailyAverage()));
         tvWeekly.setText(Double.toString(getWeeklyAverage()));
         tvMonthly.setText(Double.toString(getMonthlyAverage()));// Initializes the pagerAdapter
 
-        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager(), user, today, week, month);
-        ViewPager viewPager = view.findViewById(R.id.view_pager_records);
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setEnabled(false);
-
-        // Initializes the tabLayout
-        TabLayout tabs = view.findViewById(R.id.tabs_home);
-        tabs.setEnabled(true);
-        tabs.setupWithViewPager(viewPager);
+//        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager(), user, today, week, month);
+//        ViewPager viewPager = view.findViewById(R.id.view_pager_records);
+//        viewPager.setAdapter(pagerAdapter);
+//        viewPager.setEnabled(false);
+//
+//        // Initializes the tabLayout
+//        TabLayout tabs = view.findViewById(R.id.tabs_home);
+//        tabs.setEnabled(true);
+//        tabs.setupWithViewPager(viewPager);
 
         // OnClickListener() for fabAdd
         fabAdd.setOnClickListener(new View.OnClickListener()
@@ -142,19 +157,6 @@ public class HomeFragment extends Fragment
                 getActivity().finish();
             }
         });
-    }
-
-    /**
-     * setUser() method
-     * @param u
-     */
-    public void setUser(User u)
-    {
-        // Grabs the passed in user and sets the welcome text
-        if(u != null) {
-            user = u;
-            tvWelcome.setText("Welcome " + user.getName());
-        }
     }
 
     public double getDailyAverage()

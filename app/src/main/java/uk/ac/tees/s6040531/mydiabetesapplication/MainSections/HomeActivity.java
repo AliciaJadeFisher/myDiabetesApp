@@ -3,11 +3,7 @@ package uk.ac.tees.s6040531.mydiabetesapplication.MainSections;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection.ForumFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection.HomeFragment;
-import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection.RecordsFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.SettingsSection.SettingsFragment;
-import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**
@@ -38,12 +32,7 @@ public class HomeActivity extends AppCompatActivity
     // Variables for navigation
     BottomNavigationView navView;
     Fragment activeFragment = homeFragment;
-
-    // Variable for Firebase access
-    FirebaseAuth auth;
-    FirebaseFirestore udbRef;
-    User u;
-
+    
     /**
      * onCreate() method
      * @param savedInstanceState
@@ -60,14 +49,6 @@ public class HomeActivity extends AppCompatActivity
         navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         navView.setSelectedItemId(R.id.navigation_home);
         getSupportActionBar().hide();
-
-        // Grabs the current firebase authentication and firestore instances
-        auth = null;
-        auth = FirebaseAuth.getInstance();
-        udbRef = FirebaseFirestore.getInstance();
-
-        // Calls the method getUser()
-        getUser();
 
         // Adds all the fragments to the fragments manager and sets the home fragment to be shown
         fragMan.beginTransaction().add(R.id.home_parent, forumFragment,"3").hide(forumFragment).commit();
@@ -107,22 +88,6 @@ public class HomeActivity extends AppCompatActivity
         }
     };
 
-    /**
-     * getUser() method
-     */
-    public void getUser()
-    {
-        // Finds the current user's database entry and then sets the user details on the home fragment
-        udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
-        {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot)
-            {
-                u = documentSnapshot.toObject(User.class);
-                homeFragment.setUser(u);
-            }
-        });
-    }
 
     /**
      * Retrieves data sent with the intent in the extra field
