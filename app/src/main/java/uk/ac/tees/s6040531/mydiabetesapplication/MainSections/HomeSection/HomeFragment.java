@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -37,6 +38,8 @@ public class HomeFragment extends Fragment
     User user;
 
     Date today = new Date();
+    Date week;
+    Date month;
     Calendar cal = Calendar.getInstance();
 
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -98,7 +101,7 @@ public class HomeFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         // Initializes the pagerAdapter
-        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager());
+        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager(), user, today, week, month);
         ViewPager viewPager = view.findViewById(R.id.view_pager_records);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setEnabled(false);
@@ -171,9 +174,9 @@ public class HomeFragment extends Fragment
         double total;
         int count;
         cal.set(Calendar.DAY_OF_WEEK, 2);
-        Date start = cal.getTime();
+        week = cal.getTime();
 
-        System.out.println("======= Week Start : " + start + "===========");
+        System.out.println("======= Week Start : " + week + "===========");
 
         return average;
     }
@@ -184,9 +187,9 @@ public class HomeFragment extends Fragment
         double total;
         int count;
         cal.set(Calendar.DAY_OF_MONTH, 1);
-        Date start = cal.getTime();
+        month = cal.getTime();
 
-        System.out.println("======= Month Start : " + start + "===========");
+        System.out.println("======= Month Start : " + month + "===========");
 
         return average;
     }

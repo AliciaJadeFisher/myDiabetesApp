@@ -7,10 +7,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Date;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**
@@ -19,9 +24,17 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 public class RecordsFragment extends Fragment
 {
     // Variables for layout access
-    Button btnAll, btnToday, btnWeek, btMonth;
+    Button btnAll, btnToday, btnWeek, btnMonth;
     TextView tvDisplay;
     RecyclerView rvRecords;
+
+    User user;
+    List<BloodSugarEntry> entries;
+    Date today;
+    Date week;
+    Date month;
+
+    String selected = "All";
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -81,6 +94,67 @@ public class RecordsFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+
+        btnAll = (Button)view.findViewById(R.id.btn_all);
+        btnToday = (Button)view.findViewById(R.id.btn_today);
+        btnWeek = (Button)view.findViewById(R.id.btn_week);
+        btnMonth = (Button)view.findViewById(R.id.btn_month);
+        tvDisplay = (TextView)view.findViewById(R.id.tv_title);
+
+        btnAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selected = "All";
+                tvDisplay.setText(R.string.all);
+                displayEntries();
+            }
+        });
+
+        btnToday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selected = "Today";
+                tvDisplay.setText(R.string.today);
+                displayEntries();
+            }
+        });
+
+        btnWeek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selected = "Week";
+                tvDisplay.setText(R.string.this_week);
+                displayEntries();
+            }
+        });
+
+        btnMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selected = "Month";
+                tvDisplay.setText(R.string.this_month);
+                displayEntries();
+            }
+        });
     }
 
+    /**
+     * dataReceived() method
+     * @param u
+     */
+    public void dataReceived(User u, Date t, Date w, Date m)
+    {
+        user = u;
+        entries = user.getBlood_sugars();
+        today = t;
+        week = w;
+        month = m;
+
+        displayEntries();
+    }
+
+    public void displayEntries()
+    {
+
+    }
 }

@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection.ForumFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection.HomeFragment;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection.RecordsFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.SettingsSection.SettingsFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
