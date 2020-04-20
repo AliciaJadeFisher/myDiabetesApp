@@ -85,7 +85,7 @@ public class AddEntryActivity extends AppCompatActivity
 
         // Gets the current date and time components
         y = Calendar.getInstance().get(Calendar.YEAR);
-        m = Calendar.getInstance().get(Calendar.MONTH);
+        m = Calendar.getInstance().get(Calendar.MONTH) + 1;
         d = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         h = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         min = Calendar.getInstance().get(Calendar.MINUTE);
@@ -93,6 +93,7 @@ public class AddEntryActivity extends AppCompatActivity
         try
         {
             date = new SimpleDateFormat("dd/MM/yyy").parse(da);
+            System.out.println("=== Today : " + date);
         }
         catch (ParseException e)
         {
@@ -335,7 +336,7 @@ public class AddEntryActivity extends AppCompatActivity
         // Initializes the calendar and date components
         cal = Calendar.getInstance();
         int yearParam = y;
-        int monthParam = m;
+        int monthParam = m - 1;
         int dayParam = d;
 
         // Creates a new DatePickerDialog, displaying the current date initially
