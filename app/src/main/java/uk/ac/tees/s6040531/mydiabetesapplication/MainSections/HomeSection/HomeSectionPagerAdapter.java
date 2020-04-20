@@ -40,9 +40,9 @@ public class HomeSectionPagerAdapter extends FragmentPagerAdapter
             case 0:
                 RecordsFragment records = new RecordsFragment();
                 return records;
-//            case 1:
-//                GraphFragment graph = new GraphFragment();
-//                return graph;
+            case 1:
+                GraphFragment graph = new GraphFragment();
+                return graph;
             default:
                 return null;
         }

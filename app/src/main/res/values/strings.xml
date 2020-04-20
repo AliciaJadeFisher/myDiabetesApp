@@ -142,7 +142,6 @@
     <string name="month">Month</string>
     <string name="date">Date:</string>
     <string name="show_date_here">Show date here</string>
-    <string name="blood_sugar">Blood Sugar:</string>
     <string name="insulin">Insulin:</string>
     <string name="show_insulin_here">Show insulin here</string>
     <string name="show_blood_sugar_here">Show blood sugar here</string>

@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        // Initalizes the pagerAdapter
+        // Initializes the pagerAdapter
         HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager());
         ViewPager viewPager = view.findViewById(R.id.view_pager_records);
         viewPager.setAdapter(pagerAdapter);
