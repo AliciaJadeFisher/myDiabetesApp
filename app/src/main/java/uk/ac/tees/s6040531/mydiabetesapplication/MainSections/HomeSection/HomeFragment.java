@@ -100,17 +100,6 @@ public class HomeFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        // Initializes the pagerAdapter
-        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager(), user, today, week, month);
-        ViewPager viewPager = view.findViewById(R.id.view_pager_records);
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setEnabled(false);
-
-        // Initializes the tabLayout
-        TabLayout tabs = view.findViewById(R.id.tabs_home);
-        tabs.setEnabled(true);
-        tabs.setupWithViewPager(viewPager);
-
         // Initializes the widgets
         tvWelcome = (TextView)view.findViewById(R.id.tv_welcome);
         tvDaily = (TextView)view.findViewById(R.id.tv_dailyDisplay);
@@ -122,7 +111,17 @@ public class HomeFragment extends Fragment
         tvWelcome.setText("Welcome!");
         tvDaily.setText(Double.toString(getDailyAverage()));
         tvWeekly.setText(Double.toString(getWeeklyAverage()));
-        tvMonthly.setText(Double.toString(getMonthlyAverage()));
+        tvMonthly.setText(Double.toString(getMonthlyAverage()));// Initializes the pagerAdapter
+
+        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager(), user, today, week, month);
+        ViewPager viewPager = view.findViewById(R.id.view_pager_records);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setEnabled(false);
+
+        // Initializes the tabLayout
+        TabLayout tabs = view.findViewById(R.id.tabs_home);
+        tabs.setEnabled(true);
+        tabs.setupWithViewPager(viewPager);
 
         // OnClickListener() for fabAdd
         fabAdd.setOnClickListener(new View.OnClickListener()
