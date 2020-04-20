@@ -149,4 +149,5 @@
     <string name="graph_will_go_here">Graph will go here</string>
     <string name="time">Time:</string>
     <string name="show_time_here">Show time here</string>
+    <string name="loading">Loading...</string>
 </resources>
