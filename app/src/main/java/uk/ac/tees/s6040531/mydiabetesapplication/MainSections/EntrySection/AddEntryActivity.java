@@ -1,8 +1,5 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -30,6 +27,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;

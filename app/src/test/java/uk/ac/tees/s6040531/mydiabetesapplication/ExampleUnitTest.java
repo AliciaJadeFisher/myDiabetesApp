@@ -2,7 +2,7 @@ package uk.ac.tees.s6040531.mydiabetesapplication;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

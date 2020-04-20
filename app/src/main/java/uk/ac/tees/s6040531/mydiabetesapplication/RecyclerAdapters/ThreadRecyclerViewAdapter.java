@@ -7,14 +7,12 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection.ViewPostsActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
-import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**

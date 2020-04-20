@@ -7,8 +7,6 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**

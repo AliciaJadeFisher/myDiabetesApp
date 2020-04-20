@@ -7,12 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,7 +17,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Calendar;
 import java.util.Date;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTabHost;
+import androidx.viewpager.widget.ViewPager;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection.AddEntryActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
@@ -99,7 +100,7 @@ public class HomeFragment extends Fragment
      * @param savedInstanceState
      */
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
 
@@ -113,30 +114,26 @@ public class HomeFragment extends Fragment
         tvMonthly = (TextView)view.findViewById(R.id.tv_monthlyDisplay);
         fabAdd = (FloatingActionButton)view.findViewById(R.id.fab_add_entry);
 
+
         udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
         {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot)
             {
                 user = documentSnapshot.toObject(User.class);
+                tvWelcome.setText("Hello " + user.getName());
+
+                // Sets the average textViews
+                tvDaily.setText(Double.toString(getDailyAverage()));
+                tvWeekly.setText(Double.toString(getWeeklyAverage()));
+                tvMonthly.setText(Double.toString(getMonthlyAverage()));
+
+                setupTabs(view);
             }
         });
 
-        // Sets the deafult welcome text
-        tvWelcome.setText("Welcome " + user.getName());
-        tvDaily.setText(Double.toString(getDailyAverage()));
-        tvWeekly.setText(Double.toString(getWeeklyAverage()));
-        tvMonthly.setText(Double.toString(getMonthlyAverage()));// Initializes the pagerAdapter
+        // Initializes the pagerAdapter
 
-//        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager(), user, today, week, month);
-//        ViewPager viewPager = view.findViewById(R.id.view_pager_records);
-//        viewPager.setAdapter(pagerAdapter);
-//        viewPager.setEnabled(false);
-//
-//        // Initializes the tabLayout
-//        TabLayout tabs = view.findViewById(R.id.tabs_home);
-//        tabs.setEnabled(true);
-//        tabs.setupWithViewPager(viewPager);
 
         // OnClickListener() for fabAdd
         fabAdd.setOnClickListener(new View.OnClickListener()
@@ -157,6 +154,19 @@ public class HomeFragment extends Fragment
                 getActivity().finish();
             }
         });
+    }
+
+    public void setupTabs(View view)
+    {
+        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager(), user, today, week, month);
+        ViewPager viewPager = view.findViewById(R.id.view_pager_records);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setEnabled(false);
+
+        // Initializes the tabLayout
+        TabLayout tabs = view.findViewById(R.id.tabs_home);
+        tabs.setEnabled(true);
+        tabs.setupWithViewPager(viewPager);
     }
 
     public double getDailyAverage()

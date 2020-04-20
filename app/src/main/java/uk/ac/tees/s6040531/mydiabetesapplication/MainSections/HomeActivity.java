@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection.ForumFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection.HomeFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.SettingsSection.SettingsFragment;
@@ -32,7 +31,7 @@ public class HomeActivity extends AppCompatActivity
     // Variables for navigation
     BottomNavigationView navView;
     Fragment activeFragment = homeFragment;
-    
+
     /**
      * onCreate() method
      * @param savedInstanceState

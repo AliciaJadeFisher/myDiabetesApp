@@ -1,8 +1,5 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +13,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**

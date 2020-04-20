@@ -134,7 +134,7 @@
     <string name="daily_average">Daily Average</string>
     <string name="monthly_average">Monthly Average</string>
     <string name="weekly_average">Weekly Average</string>
-    <string name="welcome_user">Welcome user!</string>
+    <string name="hello">Hello</string>
     <string name="today">Today</string>
     <string name="this_week">This Week</string>
     <string name="this_month">This Month</string>

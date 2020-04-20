@@ -1,11 +1,5 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +21,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ThreadPost;

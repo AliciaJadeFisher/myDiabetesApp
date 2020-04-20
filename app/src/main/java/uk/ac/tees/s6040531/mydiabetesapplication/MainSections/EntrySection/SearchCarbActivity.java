@@ -1,9 +1,5 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection;
 
-import androidx.appcompat.app.AppCompatActivity;
-import uk.ac.tees.s6040531.mydiabetesapplication.R;
-import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.FoodListViewAdapter;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +17,10 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import androidx.appcompat.app.AppCompatActivity;
+import uk.ac.tees.s6040531.mydiabetesapplication.R;
+import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.FoodListViewAdapter;
 
 /**
  * SearchCarbActivity

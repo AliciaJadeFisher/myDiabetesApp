@@ -1,18 +1,17 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters;
 
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 

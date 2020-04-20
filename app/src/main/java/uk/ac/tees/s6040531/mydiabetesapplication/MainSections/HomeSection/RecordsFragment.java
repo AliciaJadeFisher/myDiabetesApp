@@ -19,7 +19,6 @@ import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.RecordsRecyclerViewAdapter;
-import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.ThreadRecyclerViewAdapter;
 
 /**
  * RecordsFragment

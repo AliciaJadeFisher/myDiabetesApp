@@ -2,7 +2,6 @@ package uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +10,13 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ThreadPost;
-import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**
