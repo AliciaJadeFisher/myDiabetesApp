@@ -86,6 +86,14 @@ public class RecordsFragment extends Fragment
     {
         // Grabs the relevant layout file
         View root = inflater.inflate(R.layout.fragment_records, container, false);
+
+        btnAll = (Button)root.findViewById(R.id.btn_all);
+        btnToday = (Button)root.findViewById(R.id.btn_today);
+        btnWeek = (Button)root.findViewById(R.id.btn_week);
+        btnMonth = (Button)root.findViewById(R.id.btn_month);
+        tvDisplay = (TextView)root.findViewById(R.id.tv_title);
+        rvRecords = (RecyclerView)root.findViewById(R.id.rv_records);
+
         return root;
     }
 
@@ -99,12 +107,7 @@ public class RecordsFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        btnAll = (Button)view.findViewById(R.id.btn_all);
-        btnToday = (Button)view.findViewById(R.id.btn_today);
-        btnWeek = (Button)view.findViewById(R.id.btn_week);
-        btnMonth = (Button)view.findViewById(R.id.btn_month);
-        tvDisplay = (TextView)view.findViewById(R.id.tv_title);
-        rvRecords = (RecyclerView)view.findViewById(R.id.rv_records);
+        displayEntries();
 
         btnAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,8 +157,6 @@ public class RecordsFragment extends Fragment
         today = t;
         week = w;
         month = m;
-
-        displayEntries();
     }
 
     public void displayEntries()

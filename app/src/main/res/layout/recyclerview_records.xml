@@ -16,13 +16,13 @@
         <!--TextView for the field title-->
         <TextView
             android:id="@+id/tv_recordDate"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:gravity="end"
             android:text="@string/date"
             android:fontFamily="sans-serif"
             android:textColor="@color/colorPrimary"
-            android:textSize="17sp"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <!--TextView to display the thread title-->
@@ -34,22 +34,47 @@
             android:text="@string/show_date_here"
             android:fontFamily="sans-serif-condensed"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="17sp"
+            android:textSize="13sp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/tv_recordDate"
             android:layout_marginStart="11dp" />
 
+        <TextView
+            android:id="@+id/tv_recordTime"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/time"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/colorPrimary"
+            android:layout_below="@+id/tv_recordDate"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!--TextView to display the thread title-->
+        <TextView
+            android:id="@+id/tv_viewTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/show_time_here"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="13sp"
+            android:layout_alignStart="@+id/tv_viewDate"
+            android:layout_below="@+id/tv_viewDate" />
+
         <!--TextView for the field title-->
         <TextView
             android:id="@+id/tv_bs"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:layout_below="@+id/tv_recordDate"
+            android:layout_below="@+id/tv_recordTime"
             android:text="@string/blood_sugar"
             android:fontFamily="sans-serif"
             android:textColor="@color/colorPrimary"
-            android:textSize="17sp"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <!--TextView to display the thread description-->
@@ -57,25 +82,25 @@
             android:id="@+id/tv_viewBs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_viewDate"
-            android:layout_below="@+id/tv_viewDate"
+            android:layout_alignStart="@+id/tv_viewTime"
+            android:layout_below="@+id/tv_viewTime"
             android:gravity="start"
             android:text="@string/show_blood_sugar_here"
             android:fontFamily="sans-serif-condensed"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="17sp" />
+            android:textSize="13sp" />
 
         <!--TextView for the field title-->
         <TextView
             android:id="@+id/tv_insulin"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:gravity="end"
             android:layout_below="@+id/tv_bs"
             android:text="@string/insulin"
             android:fontFamily="sans-serif"
             android:textColor="@color/colorPrimary"
-            android:textSize="17sp"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <!--TextView to display the no. posts in the thread-->
@@ -89,5 +114,5 @@
             android:text="@string/show_insulin_here"
             android:fontFamily="sans-serif-condensed"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="17sp" />
+            android:textSize="13sp" />
     </RelativeLayout>

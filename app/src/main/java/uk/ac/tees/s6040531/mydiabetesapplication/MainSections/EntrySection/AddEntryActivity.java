@@ -88,6 +88,7 @@ public class AddEntryActivity extends AppCompatActivity
         d = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         h = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         min = Calendar.getInstance().get(Calendar.MINUTE);
+
         String da = d + "/" + m + "/" + y;
         try
         {
@@ -98,7 +99,9 @@ public class AddEntryActivity extends AppCompatActivity
         {
             e.printStackTrace();
         }
-        time = h + ":" + min;
+
+
+        time = timeFormat();
 
         // Initialize the widgets
         tvDate = (TextView)findViewById(R.id.tv_date_display);
@@ -395,7 +398,7 @@ public class AddEntryActivity extends AppCompatActivity
                 min = minute;
 
                 // Formats the date and sets the time TextView
-                time = h + ":" + min;
+                time = timeFormat();
                 tvTime.setText(time);
             }
         }, h, min, true);
@@ -417,6 +420,7 @@ public class AddEntryActivity extends AppCompatActivity
         {
             // Parse the current time to a date to check if in range
             ct = tF.parse(time);
+            System.out.println("====== Current time : " + ct);
 
             int no_blocks = u.getTime_blocks().size();
 
@@ -531,6 +535,13 @@ public class AddEntryActivity extends AppCompatActivity
         Pattern numPat = Pattern.compile("\\d+(\\.\\d+)?");
 
         return numPat.matcher(val).matches();
+    }
+
+    public String timeFormat()
+    {
+        String hz = (h >= 10)? Integer.toString(h) : String.format("0%s", Integer.toString(h));
+        String mz = (min >= 10)? Integer.toString(min) : String.format("0%s", Integer.toString(min));
+        return hz + ":" + mz;
     }
 
     /**

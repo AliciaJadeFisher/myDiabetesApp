@@ -54,7 +54,7 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
     class ViewHolder extends RecyclerView.ViewHolder
     {
         // View layout attributes
-        public TextView entryDate, entryBS, entryIn;
+        public TextView entryDate, entryTime,entryBS, entryIn;
         RelativeLayout parentLayout;
 
         /**
@@ -68,6 +68,7 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
             // Initializes the layout and widgets
             parentLayout = itemView.findViewById(R.id.parent_layout);
             entryDate = (TextView)itemView.findViewById(R.id.tv_viewDate);
+            entryTime = (TextView)itemView.findViewById(R.id.tv_viewTime);
             entryBS = (TextView)itemView.findViewById(R.id.tv_viewBs);
             entryIn = (TextView)itemView.findViewById(R.id.tv_viewInsulin);
         }
@@ -100,6 +101,7 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
 
         //Sets the TextViews
         holder.entryDate.setText(dateFormat.format(entry.getDate()));
+        holder.entryTime.setText(entry.getTime());
         holder.entryBS.setText(Double.toString(entry.getBs()));
         holder.entryIn.setText(Double.toString(entry.getInsulin_t()));
     }
@@ -126,8 +128,10 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
         {
             for(BloodSugarEntry e : list)
             {
-                if(dateFormat.format(e.getDate()) == dateFormat.format(today))
-                {
+                System.out.println("===== E Date : " + dateFormat.format(e.getDate()));
+                System.out.println("===== Today : " + dateFormat.format(today));
+
+                if(dateFormat.format(e.getDate()).equals(dateFormat.format(today))) {
                     filteredList.add(e);
                 }
             }
@@ -136,7 +140,7 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
         {
             for(BloodSugarEntry e : list)
             {
-                if(e.getDate().after(week))
+                if(e.getDate().after(week) || dateFormat.format(e.getDate()).equals(dateFormat.format(today)))
                 {
                     filteredList.add(e);
                 }
