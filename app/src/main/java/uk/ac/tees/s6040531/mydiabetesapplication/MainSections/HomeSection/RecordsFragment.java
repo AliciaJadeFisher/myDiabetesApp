@@ -13,10 +13,13 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
+import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.RecordsRecyclerViewAdapter;
+import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.ThreadRecyclerViewAdapter;
 
 /**
  * RecordsFragment
@@ -27,6 +30,8 @@ public class RecordsFragment extends Fragment
     Button btnAll, btnToday, btnWeek, btnMonth;
     TextView tvDisplay;
     RecyclerView rvRecords;
+
+    RecordsRecyclerViewAdapter adapter;
 
     User user;
     List<BloodSugarEntry> entries;
@@ -100,6 +105,7 @@ public class RecordsFragment extends Fragment
         btnWeek = (Button)view.findViewById(R.id.btn_week);
         btnMonth = (Button)view.findViewById(R.id.btn_month);
         tvDisplay = (TextView)view.findViewById(R.id.tv_title);
+        rvRecords = (RecyclerView)view.findViewById(R.id.rv_records);
 
         btnAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +161,9 @@ public class RecordsFragment extends Fragment
 
     public void displayEntries()
     {
-
+        adapter = new RecordsRecyclerViewAdapter(this,entries,selected,today,week,month);
+        rvRecords.setAdapter(adapter);
+        rvRecords.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        adapter.notifyDataSetChanged();
     }
 }

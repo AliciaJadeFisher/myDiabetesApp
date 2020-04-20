@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
@@ -23,7 +24,7 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     // RecyclerViewAdapter attributes
-    Context context;
+    Fragment parent;
     List<BloodSugarEntry> entriesList;
     String filter;
     Date today;
@@ -31,14 +32,17 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
     Date month;
 
     /**
-     * Main constructor
-     * @param context
+     * Main construcor
+     * @param parent
      * @param tempList
      * @param f
+     * @param t
+     * @param w
+     * @param m
      */
-    public RecordsRecyclerViewAdapter(Context context, List<BloodSugarEntry> tempList, String f, Date t, Date w, Date m)
+    public RecordsRecyclerViewAdapter(Fragment parent, List<BloodSugarEntry> tempList, String f, Date t, Date w, Date m)
     {
-        this.context = context;
+        this.parent = parent;
         this.filter = f;
         this.today = t;
         this.week = w;
@@ -93,8 +97,6 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position)
     {
-        final Activity activity = (Activity)context;
-
         //Grabs the post at the current position
         final BloodSugarEntry entry = entriesList.get(position);
 
