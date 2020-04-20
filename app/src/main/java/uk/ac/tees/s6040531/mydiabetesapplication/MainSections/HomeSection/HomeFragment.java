@@ -12,11 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
 import java.util.Date;
 
 import androidx.fragment.app.FragmentTabHost;
+import androidx.viewpager.widget.ViewPager;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection.AddEntryActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
@@ -82,9 +84,6 @@ public class HomeFragment extends Fragment
     {
         // Grabs the relevant layout file
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        tabHost = (FragmentTabHost)root.findViewById(R.id.tabs_home);
-        tabHost.setup(getActivity(), getChildFragmentManager(),R.id.);
-
         return root;
     }
 
@@ -97,6 +96,17 @@ public class HomeFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+
+        // Initalizes the pagerAdapter
+        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager());
+        ViewPager viewPager = view.findViewById(R.id.view_pager_records);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setEnabled(false);
+
+        // Initializes the tabLayout
+        TabLayout tabs = view.findViewById(R.id.tabs_home);
+        tabs.setEnabled(true);
+        tabs.setupWithViewPager(viewPager);
 
         // Initializes the widgets
         tvWelcome = (TextView)view.findViewById(R.id.tv_welcome);
