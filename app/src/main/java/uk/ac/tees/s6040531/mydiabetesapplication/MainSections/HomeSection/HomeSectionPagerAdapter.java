@@ -15,7 +15,7 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 public class HomeSectionPagerAdapter extends FragmentPagerAdapter
 {
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.records, R.string.graph};
+    private static final int[] TAB_TITLES = new int[]{R.string.today, R.string.week,R.string.month,R.string.all};
     private final Context mContext;
 
     /**
@@ -32,7 +32,7 @@ public class HomeSectionPagerAdapter extends FragmentPagerAdapter
     /**
      * getItem() method
      * @param position
-     * @return
+     * @return selected fragment
      */
     @Override
     public Fragment getItem(int position)
@@ -72,6 +72,6 @@ public class HomeSectionPagerAdapter extends FragmentPagerAdapter
     public int getCount()
     {
         // Show 2 total pages.
-        return 2;
+        return 4;
     }
 }

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,7 +36,7 @@ public class HomeActivity extends AppCompatActivity
     final SettingsFragment settingFragment = new SettingsFragment();
     final FragmentManager fragMan = getSupportFragmentManager();
 
-    TextView tvLoading;
+    ProgressBar pbHome;
     //
     User user;
     FirebaseAuth auth;
@@ -59,7 +60,14 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        tvLoading = (TextView)findViewById(R.id.tv_loading);
+        pbHome = (ProgressBar)findViewById(R.id.pb_home);
+        pbHome.setVisibility(View.VISIBLE);
+
+        // Sets up the navigation view
+        navView = (BottomNavigationView) findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        navView.setSelectedItemId(R.id.navigation_home);
+
 
         getUser();
 
@@ -115,22 +123,17 @@ public class HomeActivity extends AppCompatActivity
                 String json = gson.toJson(user);
                 prefEd.putString(getResources().getString(R.string.user_key),json);
                 prefEd.commit();
-                setUpNav();
+                setUpFrags();
             }
         });
     }
 
-    public void setUpNav()
+    public void setUpFrags()
     {
-        // Sets up the navigation view
-        navView = (BottomNavigationView) findViewById(R.id.nav_view);
-        navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-        navView.setSelectedItemId(R.id.navigation_home);
-
         // Adds all the fragments to the fragments manager and sets the home fragment to be shown
         fragMan.beginTransaction().add(R.id.home_parent, forumFragment,"3").hide(forumFragment).commit();
         fragMan.beginTransaction().add(R.id.home_parent, settingFragment,"1").hide(settingFragment).commit();
-        tvLoading.setVisibility(View.INVISIBLE);
+        pbHome.setVisibility(View.GONE);
         fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"2").commit();
     }
 

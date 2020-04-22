@@ -42,11 +42,11 @@ public class RecordsFragment extends Fragment
     int hypo,hyper;
     User user;
 
+    Calendar cal = Calendar.getInstance();
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     Date today = new Date();
     Date week;
     Date month;
-    Calendar cal = Calendar.getInstance();
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     String selected = "Today";
 
@@ -114,11 +114,17 @@ public class RecordsFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
+        cal.set(Calendar.DAY_OF_WEEK,2);
+        week = cal.getTime();
+
+        cal.set(Calendar.DAY_OF_MONTH,1);
+        month = cal.getTime();
+
         SharedPreferences myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = myPref.getString(getResources().getString(R.string.user_key),"");
         user = gson.fromJson(json,User.class);
-
+        displayEntries();
     }
 
     /**
@@ -128,14 +134,13 @@ public class RecordsFragment extends Fragment
     public void dataReceived(String sel)
     {
         selected = sel;
-        displayEntries();
     }
 
     public void displayEntries()
     {
         List<BloodSugarEntry> entries = getEntries();
 
-        tvAverage.setText(String.valueOf(getAverage(entries)));
+        tvAverage.setText(String.valueOf(Math.round(getAverage(entries) * 10)/ 10.0));
         tvHypos.setText(String.valueOf(getHypos(entries)));
         tvHypers.setText(String.valueOf(getHypers(entries)));
 
@@ -228,7 +233,7 @@ public class RecordsFragment extends Fragment
 
         for(BloodSugarEntry e : list)
         {
-            if(e.getBs() > hypo)
+            if(e.getBs() > hyper)
             {
                 count++;
             }

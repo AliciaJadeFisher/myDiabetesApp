@@ -184,6 +184,8 @@ public class AddEntryActivity extends AppCompatActivity
             {
                 // Sets the date and time
                 newEntry.setDate(date);
+
+                System.out.println("======== Date : " + date);
                 newEntry.setTime(time);
 
                 // Grabs the spinner inputs and sets the object's meal type
@@ -201,6 +203,7 @@ public class AddEntryActivity extends AppCompatActivity
 
                 // Calculates the ratio and iob to be used
                 double ratio = getTimeBlocks();
+
                 double iob = getInsulinOnBoard();
 
                 // Grabs the user inputs
@@ -277,6 +280,7 @@ public class AddEntryActivity extends AppCompatActivity
                             newEntry.setInsulin_c(corr);
 
                             Double totalIn = (inF + corr) - iob;
+
                             newEntry.setInsulin_t(totalIn);
 
                             displayInsulin(prec, inF, corr, totalIn);
@@ -469,19 +473,21 @@ public class AddEntryActivity extends AppCompatActivity
 
             for(BloodSugarEntry bse : u.getBlood_sugars())
             {
-                Date bt = tF.parse(bse.getTime());
-
-                if(bt.after(rt))
+                if(bse.getDate().equals(date))
                 {
-                    long diffSec = (bt.getTime() - rt.getTime()) / 1000;
-                    int diffHour =(int) diffSec / 3600;
+                    Date bt = tF.parse(bse.getTime());
 
-                    double percRem = 1 - (diffHour * 0.2);
-                    double insRem = bse.getInsulin_t() * percRem;
+                    if(bt.after(rt))
+                    {
+                        long diffSec = (bt.getTime() - rt.getTime()) / 1000;
+                        int diffHour =(5 - (int) diffSec / 3600);
 
-                    return insRem ;
+                        double percRem = 1 - (diffHour * 0.2);
+                        double insRem = bse.getInsulin_t() * percRem;
+
+                        return insRem ;
+                    }
                 }
-
             }
         }
         catch (ParseException e)

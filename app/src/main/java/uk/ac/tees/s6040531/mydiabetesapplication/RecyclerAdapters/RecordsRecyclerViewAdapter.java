@@ -90,8 +90,8 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
         //Sets the TextViews
         holder.entryDate.setText(dateFormat.format(entry.getDate()));
         holder.entryTime.setText(entry.getTime());
-        holder.entryBS.setText(Double.toString(entry.getBs()));
-        holder.entryIn.setText(Double.toString(entry.getInsulin_t()));
+        holder.entryBS.setText(String.valueOf(entry.getBs()));
+        holder.entryIn.setText(String.valueOf(Math.round(entry.getInsulin_t())));
     }
 
     /**
