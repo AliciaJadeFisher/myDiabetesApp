@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainSections.EntrySection.SearchCarbActivity"></activity>
+        <activity
+            android:name=".MainSections.EntrySection.SearchCarbActivity"
+            android:theme="@style/noActionbar"/>
         <activity
             android:name=".MainSections.EntrySection.AddEntryActivity"
             android:theme="@style/noActionbar" />
@@ -37,6 +39,7 @@
         <activity android:name=".MainSections.AuthenticationSection.ResetPasswordActivity" />
         <activity
             android:name=".MainSections.HomeActivity"
+            android:theme="@style/noActionbar"
             android:label="@string/title_activity_home" />
         <activity
             android:name=".MainSections.AuthenticationSection.RegistrationActivity"

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,6 +35,7 @@ public class HomeActivity extends AppCompatActivity
     final SettingsFragment settingFragment = new SettingsFragment();
     final FragmentManager fragMan = getSupportFragmentManager();
 
+    TextView tvLoading;
     //
     User user;
     FirebaseAuth auth;
@@ -56,16 +59,9 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Sets up the navigation view
-        navView = (BottomNavigationView) findViewById(R.id.nav_view);
-        navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-        navView.setSelectedItemId(R.id.navigation_home);
-        getSupportActionBar().hide();
+        tvLoading = (TextView)findViewById(R.id.tv_loading);
 
-        // Adds all the fragments to the fragments manager and sets the home fragment to be shown
-        fragMan.beginTransaction().add(R.id.home_parent, forumFragment,"3").hide(forumFragment).commit();
-        fragMan.beginTransaction().add(R.id.home_parent, settingFragment,"1").hide(settingFragment).commit();
-        fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"2").commit();
+        getUser();
 
         // Calls the method getIncomingIntent()
         getIncomingIntent();
@@ -119,8 +115,23 @@ public class HomeActivity extends AppCompatActivity
                 String json = gson.toJson(user);
                 prefEd.putString(getResources().getString(R.string.user_key),json);
                 prefEd.commit();
+                setUpNav();
             }
         });
+    }
+
+    public void setUpNav()
+    {
+        // Sets up the navigation view
+        navView = (BottomNavigationView) findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        navView.setSelectedItemId(R.id.navigation_home);
+
+        // Adds all the fragments to the fragments manager and sets the home fragment to be shown
+        fragMan.beginTransaction().add(R.id.home_parent, forumFragment,"3").hide(forumFragment).commit();
+        fragMan.beginTransaction().add(R.id.home_parent, settingFragment,"1").hide(settingFragment).commit();
+        tvLoading.setVisibility(View.INVISIBLE);
+        fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"2").commit();
     }
 
 
