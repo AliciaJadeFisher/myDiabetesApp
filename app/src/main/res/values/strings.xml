@@ -152,4 +152,8 @@
     <string name="time">Time:</string>
     <string name="show_time_here">Show time here</string>
     <string name="loading">Loading...</string>
+    <string name="average">Average</string>
+    <string name="hypos">Hypos</string>
+    <string name="hypers">Hypers</string>
+    <string name="bi_week">Bi-Week</string>
 </resources>
