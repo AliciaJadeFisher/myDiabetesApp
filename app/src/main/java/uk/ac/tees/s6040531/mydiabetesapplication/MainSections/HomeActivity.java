@@ -1,9 +1,16 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection.ForumFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection.HomeFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.SettingsSection.SettingsFragment;
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**
@@ -24,6 +32,11 @@ public class HomeActivity extends AppCompatActivity
     final ForumFragment forumFragment = new ForumFragment();
     final SettingsFragment settingFragment = new SettingsFragment();
     final FragmentManager fragMan = getSupportFragmentManager();
+
+    //
+    User user;
+    FirebaseAuth auth;
+    FirebaseFirestore udbRef;
 
     // Variable to store the previous activity
     String prev;
@@ -86,6 +99,29 @@ public class HomeActivity extends AppCompatActivity
             return false;
         }
     };
+
+    public void getUser()
+    {
+
+        auth = FirebaseAuth.getInstance();
+        udbRef = FirebaseFirestore.getInstance();
+
+        udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+        {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot)
+            {
+                user = documentSnapshot.toObject(User.class);
+
+                SharedPreferences myPref = getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
+                SharedPreferences.Editor prefEd = myPref.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(user);
+                prefEd.putString(getResources().getString(R.string.user_key),json);
+                prefEd.commit();
+            }
+        });
+    }
 
 
     /**

@@ -1,6 +1,8 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -114,23 +117,29 @@ public class HomeFragment extends Fragment
         tvMonthly = (TextView)view.findViewById(R.id.tv_monthlyDisplay);
         fabAdd = (FloatingActionButton)view.findViewById(R.id.fab_add_entry);
 
+        SharedPreferences myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = myPref.getString(getResources().getString(R.string.user_key),"");
+        user = gson.fromJson(json,User.class);
 
-        udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
-        {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot)
-            {
-                user = documentSnapshot.toObject(User.class);
-                tvWelcome.setText("Hello " + user.getName());
+        tvWelcome.setText("Hello " + user.getName());
 
-                // Sets the average textViews
-                tvDaily.setText(Double.toString(getDailyAverage()));
-                tvWeekly.setText(Double.toString(getWeeklyAverage()));
-                tvMonthly.setText(Double.toString(getMonthlyAverage()));
+        // Sets the average textViews
+        tvDaily.setText(Double.toString(getDailyAverage()));
+        tvWeekly.setText(Double.toString(getWeeklyAverage()));
+        tvMonthly.setText(Double.toString(getMonthlyAverage()));
 
-                setupTabs(view);
-            }
-        });
+        setupTabs(view);
+
+//        udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+//        {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot)
+//            {
+//                user = documentSnapshot.toObject(User.class);
+//
+//            }
+//        });
 
         // Initializes the pagerAdapter
 

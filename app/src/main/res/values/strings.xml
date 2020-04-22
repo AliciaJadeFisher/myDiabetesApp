@@ -2,6 +2,8 @@
     <!--Application Name-->
     <string name="app_name">MyDiabetesApplication</string>
     <string name="slogan">Own your diabetes!</string>
+    <string name="pref_key">myDiabetesAppPref</string>
+    <string name="user_key">myDiabetesUser</string>
 
     <!--Activity Names-->
     <string name="title_activity_home">HomeActivity</string>
