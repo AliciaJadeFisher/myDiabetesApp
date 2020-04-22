@@ -24,28 +24,16 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
     // RecyclerViewAdapter attributes
     Fragment parent;
     List<BloodSugarEntry> entriesList;
-    String filter;
-    Date today;
-    Date week;
-    Date month;
 
     /**
      * Main construcor
      * @param parent
      * @param tempList
-     * @param f
-     * @param t
-     * @param w
-     * @param m
      */
-    public RecordsRecyclerViewAdapter(Fragment parent, List<BloodSugarEntry> tempList, String f, Date t, Date w, Date m)
+    public RecordsRecyclerViewAdapter(Fragment parent, List<BloodSugarEntry> tempList)
     {
         this.parent = parent;
-        this.filter = f;
-        this.today = t;
-        this.week = w;
-        this.month = m;
-        this.entriesList = filterList(tempList);
+        this.entriesList = tempList;
     }
 
     /**
@@ -114,49 +102,5 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
     public int getItemCount()
     {
         return entriesList.size();
-    }
-
-    public List<BloodSugarEntry> filterList(List<BloodSugarEntry> list)
-    {
-        List<BloodSugarEntry> filteredList = new ArrayList<>();
-
-        if(filter.equals("All"))
-        {
-            filteredList = list;
-        }
-        else if(filter.equals("Today"))
-        {
-            for(BloodSugarEntry e : list)
-            {
-                System.out.println("===== E Date : " + dateFormat.format(e.getDate()));
-                System.out.println("===== Today : " + dateFormat.format(today));
-
-                if(dateFormat.format(e.getDate()).equals(dateFormat.format(today))) {
-                    filteredList.add(e);
-                }
-            }
-        }
-        else if(filter.equals("Week"))
-        {
-            for(BloodSugarEntry e : list)
-            {
-                if(e.getDate().after(week) || dateFormat.format(e.getDate()).equals(dateFormat.format(today)))
-                {
-                    filteredList.add(e);
-                }
-            }
-        }
-        else if(filter.equals("Month"))
-        {
-            for(BloodSugarEntry e : list)
-            {
-                if(e.getDate().after(month))
-                {
-                    filteredList.add(e);
-                }
-            }
-        }
-
-        return filteredList;
     }
 }

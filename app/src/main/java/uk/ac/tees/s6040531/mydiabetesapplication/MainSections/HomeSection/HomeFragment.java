@@ -35,7 +35,7 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 public class HomeFragment extends Fragment
 {
     // Variables for layout access
-    TextView tvWelcome, tvDaily, tvWeekly, tvMonthly;
+    TextView tvWelcome;
     FloatingActionButton fabAdd;
     FragmentTabHost tabHost;
 
@@ -43,11 +43,6 @@ public class HomeFragment extends Fragment
     User user;
     FirebaseAuth auth;
     FirebaseFirestore udbRef;
-
-    Date today = new Date();
-    Date week;
-    Date month;
-    Calendar cal = Calendar.getInstance();
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -112,9 +107,6 @@ public class HomeFragment extends Fragment
 
         // Initializes the widgets
         tvWelcome = (TextView)view.findViewById(R.id.tv_welcome);
-        tvDaily = (TextView)view.findViewById(R.id.tv_dailyDisplay);
-        tvWeekly = (TextView)view.findViewById(R.id.tv_weeklyDisplay);
-        tvMonthly = (TextView)view.findViewById(R.id.tv_monthlyDisplay);
         fabAdd = (FloatingActionButton)view.findViewById(R.id.fab_add_entry);
 
         SharedPreferences myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
@@ -124,25 +116,7 @@ public class HomeFragment extends Fragment
 
         tvWelcome.setText("Hello " + user.getName());
 
-        // Sets the average textViews
-        tvDaily.setText(Double.toString(getDailyAverage()));
-        tvWeekly.setText(Double.toString(getWeeklyAverage()));
-        tvMonthly.setText(Double.toString(getMonthlyAverage()));
-
         setupTabs(view);
-
-//        udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
-//        {
-//            @Override
-//            public void onSuccess(DocumentSnapshot documentSnapshot)
-//            {
-//                user = documentSnapshot.toObject(User.class);
-//
-//            }
-//        });
-
-        // Initializes the pagerAdapter
-
 
         // OnClickListener() for fabAdd
         fabAdd.setOnClickListener(new View.OnClickListener()
@@ -167,7 +141,7 @@ public class HomeFragment extends Fragment
 
     public void setupTabs(View view)
     {
-        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager(), user, today, week, month);
+        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager());
         ViewPager viewPager = view.findViewById(R.id.view_pager_records);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setEnabled(false);
@@ -176,41 +150,5 @@ public class HomeFragment extends Fragment
         TabLayout tabs = view.findViewById(R.id.tabs_home);
         tabs.setEnabled(true);
         tabs.setupWithViewPager(viewPager);
-    }
-
-    public double getDailyAverage()
-    {
-        double average = 7.3;
-        double total;
-        int count;
-        System.out.println("======= Today's Date : " + today + "===========");
-
-        return average;
-    }
-
-    public double getWeeklyAverage()
-    {
-        double average = 15.4;
-        double total;
-        int count;
-        cal.set(Calendar.DAY_OF_WEEK, 2);
-        week = cal.getTime();
-
-        System.out.println("======= Week Start : " + week + "===========");
-
-        return average;
-    }
-
-    public double getMonthlyAverage()
-    {
-        double average = 21.8;
-        double total;
-        int count;
-        cal.set(Calendar.DAY_OF_MONTH, 1);
-        month = cal.getTime();
-
-        System.out.println("======= Month Start : " + month + "===========");
-
-        return average;
     }
 }

@@ -1,5 +1,7 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -26,19 +34,21 @@ import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.RecordsRecycle
 public class RecordsFragment extends Fragment
 {
     // Variables for layout access
-    Button btnAll, btnToday, btnWeek, btnMonth;
-    TextView tvDisplay;
+    TextView tvAverage, tvHypos, tvHypers;
     RecyclerView rvRecords;
 
     RecordsRecyclerViewAdapter adapter;
 
+    int hypo,hyper;
     User user;
-    List<BloodSugarEntry> entries;
-    Date today;
+
+    Date today = new Date();
     Date week;
     Date month;
+    Calendar cal = Calendar.getInstance();
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    String selected = "All";
+    String selected = "Today";
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -86,12 +96,9 @@ public class RecordsFragment extends Fragment
     {
         // Grabs the relevant layout file
         View root = inflater.inflate(R.layout.fragment_records, container, false);
-
-        btnAll = (Button)root.findViewById(R.id.btn_all);
-        btnToday = (Button)root.findViewById(R.id.btn_today);
-        btnWeek = (Button)root.findViewById(R.id.btn_week);
-        btnMonth = (Button)root.findViewById(R.id.btn_month);
-        tvDisplay = (TextView)root.findViewById(R.id.tv_title);
+        tvAverage = (TextView)root.findViewById(R.id.tv_average);
+        tvHypos = (TextView)root.findViewById(R.id.tv_hypos);
+        tvHypers = (TextView)root.findViewById(R.id.tv_hypers);
         rvRecords = (RecyclerView)root.findViewById(R.id.rv_records);
 
         return root;
@@ -107,63 +114,127 @@ public class RecordsFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        displayEntries();
+        SharedPreferences myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = myPref.getString(getResources().getString(R.string.user_key),"");
+        user = gson.fromJson(json,User.class);
 
-        btnAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selected = "All";
-                tvDisplay.setText(R.string.all);
-                displayEntries();
-            }
-        });
-
-        btnToday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selected = "Today";
-                tvDisplay.setText(R.string.today);
-                displayEntries();
-            }
-        });
-
-        btnWeek.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selected = "Week";
-                tvDisplay.setText(R.string.this_week);
-                displayEntries();
-            }
-        });
-
-        btnMonth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selected = "Month";
-                tvDisplay.setText(R.string.this_month);
-                displayEntries();
-            }
-        });
     }
 
     /**
      * dataReceived() method
-     * @param u
+     * @param sel
      */
-    public void dataReceived(User u, Date t, Date w, Date m)
+    public void dataReceived(String sel)
     {
-        user = u;
-        entries = user.getBlood_sugars();
-        today = t;
-        week = w;
-        month = m;
+        selected = sel;
+        displayEntries();
     }
 
     public void displayEntries()
     {
-        adapter = new RecordsRecyclerViewAdapter(this,entries,selected,today,week,month);
+        List<BloodSugarEntry> entries = getEntries();
+
+        tvAverage.setText(String.valueOf(getAverage(entries)));
+        tvHypos.setText(String.valueOf(getHypos(entries)));
+        tvHypers.setText(String.valueOf(getHypers(entries)));
+
+        adapter = new RecordsRecyclerViewAdapter(this,entries);
         rvRecords.setAdapter(adapter);
         rvRecords.setLayoutManager(new LinearLayoutManager(this.getContext()));
         adapter.notifyDataSetChanged();
     }
+
+    public List<BloodSugarEntry> getEntries()
+    {
+        List<BloodSugarEntry> unfilteredList = user.getBlood_sugars();
+        List<BloodSugarEntry> filteredList = new ArrayList<>();
+
+        if(selected.equals("All"))
+        {
+            filteredList = unfilteredList;
+        }
+        else if(selected.equals("Today"))
+        {
+            for(BloodSugarEntry e : unfilteredList)
+            {
+                System.out.println("===== E Date : " + dateFormat.format(e.getDate()));
+                System.out.println("===== Today : " + dateFormat.format(today));
+
+                if(dateFormat.format(e.getDate()).equals(dateFormat.format(today))) {
+                    filteredList.add(e);
+                }
+            }
+        }
+        else if(selected.equals("Week"))
+        {
+            for(BloodSugarEntry e : unfilteredList)
+            {
+                if(e.getDate().after(week) || dateFormat.format(e.getDate()).equals(dateFormat.format(week)))
+                {
+                    filteredList.add(e);
+                }
+            }
+        }
+        else if(selected.equals("Month"))
+        {
+            for(BloodSugarEntry e : unfilteredList)
+            {
+                if(e.getDate().after(month))
+                {
+                    filteredList.add(e);
+                }
+            }
+        }
+
+        return filteredList;
+    }
+
+    public double getAverage(List<BloodSugarEntry> list)
+    {
+        double total = 0;
+        int count = 0;
+
+        for(BloodSugarEntry e : list)
+        {
+            total += e.getBs();
+            count++;
+        }
+
+        double average = total/count;
+        return average;
+    }
+
+    public int getHypos(List<BloodSugarEntry> list)
+    {
+        int count = 0;
+        double hypo = Double.parseDouble(user.getHypo());
+
+        for(BloodSugarEntry e : list)
+        {
+            if(e.getBs() < hypo)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public int getHypers(List<BloodSugarEntry> list)
+    {
+        int count = 0;
+        double hyper = Double.parseDouble(user.getHyper());
+
+        for(BloodSugarEntry e : list)
+        {
+            if(e.getBs() > hypo)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
 }

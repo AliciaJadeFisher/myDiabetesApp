@@ -17,24 +17,16 @@ public class HomeSectionPagerAdapter extends FragmentPagerAdapter
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.records, R.string.graph};
     private final Context mContext;
-    User user;
-    Date today;
-    Date week;
-    Date month;
 
     /**
      * Main constructor
      * @param context
      * @param fm
      */
-    public HomeSectionPagerAdapter(Context context, FragmentManager fm, User u, Date t, Date w, Date m)
+    public HomeSectionPagerAdapter(Context context, FragmentManager fm)
     {
         super(fm);
         mContext = context;
-        user = u;
-        today = t;
-        week = w;
-        month = m;
     }
 
     /**
@@ -49,12 +41,21 @@ public class HomeSectionPagerAdapter extends FragmentPagerAdapter
         switch (position)
         {
             case 0:
-                RecordsFragment records = new RecordsFragment();
-                records.dataReceived(user, today, week , month);
-                return records;
+                RecordsFragment today = new RecordsFragment();
+                today.dataReceived("Today");
+                return today;
             case 1:
-                GraphFragment graph = new GraphFragment();
-                return graph;
+                RecordsFragment week = new RecordsFragment();
+                week.dataReceived("Week");
+                return week;
+            case 2:
+                RecordsFragment month = new RecordsFragment();
+                month.dataReceived("Month");
+                return month;
+            case 3:
+                RecordsFragment all = new RecordsFragment();
+                all.dataReceived("All");
+                return all;
             default:
                 return null;
         }
