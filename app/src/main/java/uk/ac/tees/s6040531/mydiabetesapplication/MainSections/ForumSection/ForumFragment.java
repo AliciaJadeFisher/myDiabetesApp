@@ -152,6 +152,7 @@ public class ForumFragment extends Fragment
     {
         if(state)
         {
+            tvNetCon.setText("");
             tvNetCon.setVisibility(View.GONE);
             btnAddThread.setVisibility(View.VISIBLE);
             threadRecycler.setVisibility(View.VISIBLE);
@@ -160,6 +161,7 @@ public class ForumFragment extends Fragment
         {
             btnAddThread.setVisibility(View.GONE);
             threadRecycler.setVisibility(View.GONE);
+            tvNetCon.setVisibility(View.VISIBLE);
             tvNetCon.setText("Error connecting to network. Please connect to a network and try again.");
 
         }
