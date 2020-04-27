@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -60,9 +62,12 @@ public class AddEntryActivity extends AppCompatActivity
     FirebaseAuth auth;
 
     // Variable for user data
-    User u;
+    User user;
     BloodSugarEntry newEntry = new BloodSugarEntry();
     String meal = "None selected";
+
+    SharedPreferences myPref = getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
+    Gson gson = new Gson();
 
     /**
      * onCreate() method
@@ -75,12 +80,12 @@ public class AddEntryActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
 
+        String json = myPref.getString(getResources().getString(R.string.user_key),"");
+        user = gson.fromJson(json,User.class);
+
         // Initalise firebase variables
         auth = FirebaseAuth.getInstance();
         uDbRef = FirebaseFirestore.getInstance();
-
-        // Calls getIncomingIntent()
-        getIncomingIntent();
 
         // Gets the current date and time components
         y = Calendar.getInstance().get(Calendar.YEAR);
@@ -193,13 +198,13 @@ public class AddEntryActivity extends AppCompatActivity
                 newEntry.setMeal(meal);
 
                 // Grabs the user's insulin settings
-                double targetTop = Double.parseDouble(u.getTop());
-                double targetBottom = Double.parseDouble(u.getBottom());
-                double hyper = Double.parseDouble(u.getHyper());
-                double hypo = Double.parseDouble(u.getHypo());
-                double correction = Double.parseDouble(u.getCorrection());
-                String prec = u.getPrecision();
-                double portion = Double.parseDouble(u.getPortion());
+                double targetTop = Double.parseDouble(user.getTop());
+                double targetBottom = Double.parseDouble(user.getBottom());
+                double hyper = Double.parseDouble(user.getHyper());
+                double hypo = Double.parseDouble(user.getHypo());
+                double correction = Double.parseDouble(user.getCorrection());
+                String prec = user.getPrecision();
+                double portion = Double.parseDouble(user.getPortion());
 
                 // Calculates the ratio and iob to be used
                 double ratio = getTimeBlocks();
@@ -250,7 +255,7 @@ public class AddEntryActivity extends AppCompatActivity
                         newEntry.setCarbs(carbs);
 
                         // Converts the carbs into grams if needed
-                        if(u.getCb_m().equals("CP"))
+                        if(user.getCb_m().equals("CP"))
                         {
                             carbs = carbs * portion;
                         }
@@ -263,7 +268,7 @@ public class AddEntryActivity extends AppCompatActivity
                         if(bs >= targetBottom && bs <= targetTop)
                         {
                             // Calculates the total insulin and sets the insulin total and correction
-                            Double totalIn = inF - iob;
+                            Double totalIn = inF;
                             newEntry.setInsulin_c(0);
                             newEntry.setInsulin_t(totalIn);
 
@@ -279,7 +284,12 @@ public class AddEntryActivity extends AppCompatActivity
                             Double corr = (bs - targetTop) / correction;
                             newEntry.setInsulin_c(corr);
 
-                            Double totalIn = (inF + corr) - iob;
+                            if(corr - iob <= 0.0)
+                            {
+                                corr = 0.0;
+                            }
+
+                            Double totalIn = (inF + corr);
 
                             newEntry.setInsulin_t(totalIn);
 
@@ -305,15 +315,21 @@ public class AddEntryActivity extends AppCompatActivity
                 String note = etNotes.getText().toString();
                 newEntry.setNotes(note);
 
-                u.addBlood_sugar(newEntry);
+                user.addBlood_sugar(newEntry);
 
-                uDbRef.collection("users").document(auth.getUid()).set(u)
+                uDbRef.collection("users").document(auth.getUid()).set(user)
                         .addOnSuccessListener(new OnSuccessListener<Void>()
                         {
                             @Override
                             public void onSuccess(Void aVoid)
                             {
                                 Toast.makeText(AddEntryActivity.this, "Entry saved", Toast.LENGTH_SHORT).show();
+
+                                SharedPreferences.Editor prefEd = myPref.edit();
+                                String json = gson.toJson(user);
+                                prefEd.putString(getResources().getString(R.string.user_key),json);
+                                prefEd.commit();
+
 
                                 // Loads the HomeActivity
                                 Intent i = new Intent(AddEntryActivity.this, HomeActivity.class);
@@ -426,10 +442,10 @@ public class AddEntryActivity extends AppCompatActivity
             ct = tF.parse(time);
             System.out.println("====== Current time : " + ct);
 
-            int no_blocks = u.getTime_blocks().size();
+            int no_blocks = user.getTime_blocks().size();
 
             // Loops through each time block
-            for(TimeBlock t : u.getTime_blocks())
+            for(TimeBlock t : user.getTime_blocks())
             {
                 if(no_blocks == 1)
                 {
@@ -471,7 +487,7 @@ public class AddEntryActivity extends AppCompatActivity
             ct = tF.parse(time);
             rt = new Date(ct.getTime() - HOURS.toMillis(5));
 
-            for(BloodSugarEntry bse : u.getBlood_sugars())
+            for(BloodSugarEntry bse : user.getBlood_sugars())
             {
                 if(bse.getDate().equals(date))
                 {
@@ -550,18 +566,6 @@ public class AddEntryActivity extends AppCompatActivity
         return hz + ":" + mz;
     }
 
-    /**
-     * Retrieves data sent with the intent in the extra field
-     */
-    private void getIncomingIntent()
-    {
-
-        //Checks if the intent has an extra with the reference user
-        if (this.getIntent().hasExtra("user")) {
-            //Grabs the data in the extra
-            u = (User) this.getIntent().getSerializableExtra("user");
-        }
-    }
 
     /**
      * onBackPressed() method
