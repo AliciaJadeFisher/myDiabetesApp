@@ -1,4 +1,4 @@
-package uk.ac.tees.s6040531.mydiabetesapplication;
+package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import static uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection.ForumFragment.showState;
+import static uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection.SearchCarbActivity.showSearch;
 
-public class NetworkChecker extends BroadcastReceiver
+public class APINetworkChecker extends BroadcastReceiver
 {
     @Override
     public void onReceive(Context context, Intent intent)
@@ -17,13 +17,11 @@ public class NetworkChecker extends BroadcastReceiver
         {
             if(hasConnection(context))
             {
-                showState(true);
-                System.out.println("====== Network state : connected ======");
+                showSearch(true);
             }
             else
             {
-                showState(false);
-                System.out.println("====== Network state : not connected ======");
+                showSearch(false);
             }
         }
         catch(NullPointerException e)
@@ -31,6 +29,7 @@ public class NetworkChecker extends BroadcastReceiver
             e.printStackTrace();
         }
     }
+
 
     private boolean hasConnection(Context context)
     {

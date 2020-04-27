@@ -1,5 +1,8 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection;
 
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,11 +30,14 @@ import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.FoodListViewAd
  */
 public class SearchCarbActivity extends AppCompatActivity
 {
+    private BroadcastReceiver bRec;
+
     // Variables for layout access
-    SearchView sv;
-    TextView tvDisplay;
-    Button btnSearch;
-    ListView lvResults;
+    static TextView tvNetCon;
+    static SearchView sv;
+    static TextView tvDisplay;
+    static Button btnSearch;
+    static ListView lvResults;
 
     // Variable for adapter
     FoodListViewAdapter adapter;
@@ -48,10 +54,14 @@ public class SearchCarbActivity extends AppCompatActivity
         setContentView(R.layout.activity_search_carb);
 
         // Initializes the widgets
+        tvNetCon = (TextView)findViewById(R.id.tv_net_con);
         sv = (SearchView)findViewById(R.id.sv_food);
         tvDisplay = (TextView)findViewById(R.id.tv_noRes);
         btnSearch = (Button)findViewById(R.id.btn_search);
         lvResults = (ListView)findViewById(R.id.lv_results);
+
+        // Calls checkCon()
+        checkCon();
 
         // OnClickListner() for btnSearch
         btnSearch.setOnClickListener(new View.OnClickListener()
@@ -79,6 +89,35 @@ public class SearchCarbActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    public void checkCon()
+    {
+        bRec = new APINetworkChecker();
+        registerReceiver(bRec, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    public static void showSearch(Boolean state)
+    {
+        if(state)
+        {
+            tvNetCon.setText("");
+            tvNetCon.setVisibility(View.GONE);
+            sv.setVisibility(View.VISIBLE);
+            tvDisplay.setVisibility(View.VISIBLE);
+            btnSearch.setVisibility(View.VISIBLE);
+            lvResults.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            sv.setVisibility(View.GONE);
+            tvDisplay.setVisibility(View.GONE);
+            btnSearch.setVisibility(View.GONE);
+            lvResults.setVisibility(View.GONE);
+            tvNetCon.setVisibility(View.VISIBLE);
+            tvNetCon.setText("Error connecting to network. Please connect to a network and try again.");
+
+        }
     }
 
     /**
@@ -144,6 +183,21 @@ public class SearchCarbActivity extends AppCompatActivity
 
         // Adds the request to the queue
         queue.add(stringRequest);
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+
+        try
+        {
+            unregisterReceiver(bRec);
+        }
+        catch (IllegalArgumentException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +27,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import uk.ac.tees.s6040531.mydiabetesapplication.NetworkChecker;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.ThreadRecyclerViewAdapter;
@@ -144,11 +142,11 @@ public class ForumFragment extends Fragment
 
     public void checkCon()
     {
-        bRec = new NetworkChecker();
+        bRec = new ForumNetworkChecker();
         getActivity().registerReceiver(bRec, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
-    public static void showState(Boolean state)
+    public static void showForum(Boolean state)
     {
         if(state)
         {

@@ -66,8 +66,8 @@ public class AddEntryActivity extends AppCompatActivity
     BloodSugarEntry newEntry = new BloodSugarEntry();
     String meal = "None selected";
 
-    SharedPreferences myPref = getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
-    Gson gson = new Gson();
+    SharedPreferences myPref;
+    Gson gson;
 
     /**
      * onCreate() method
@@ -80,6 +80,8 @@ public class AddEntryActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
 
+        myPref = getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
+        gson = new Gson();
         String json = myPref.getString(getResources().getString(R.string.user_key),"");
         user = gson.fromJson(json,User.class);
 
