@@ -16,17 +16,29 @@
         android:gravity="center">
 
             <!--TextView for the page title-->
-            <TextView
-                android:id="@+id/tv_Threads"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:paddingEnd="5dp"
-                android:paddingStart="5dp"
-                android:paddingTop="5dp"
-                android:text="@string/threads"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/tv_Threads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/threads"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv_net_con"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:text=""
+            android:textColor="@android:color/black"
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/btn_addThread"
