@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="uk.ac.tees.s6040531.mydiabetesapplication">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,16 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".MainSections.HomeSection.ViewRecordActivity"></activity>
 
         <receiver android:name=".MainSections.ForumSection.ForumNetworkChecker">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
         <activity
             android:name=".MainSections.EntrySection.SearchCarbActivity"
-            android:theme="@style/noActionbar"/>
+            android:theme="@style/noActionbar" />
         <activity
             android:name=".MainSections.EntrySection.AddEntryActivity"
             android:theme="@style/noActionbar" />
@@ -49,8 +50,8 @@
         <activity android:name=".MainSections.AuthenticationSection.ResetPasswordActivity" />
         <activity
             android:name=".MainSections.HomeActivity"
-            android:theme="@style/noActionbar"
-            android:label="@string/title_activity_home" />
+            android:label="@string/title_activity_home"
+            android:theme="@style/noActionbar" />
         <activity
             android:name=".MainSections.AuthenticationSection.RegistrationActivity"
             android:theme="@style/noActionbar" />

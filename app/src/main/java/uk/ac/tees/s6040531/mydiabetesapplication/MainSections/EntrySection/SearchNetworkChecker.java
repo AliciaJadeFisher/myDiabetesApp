@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
 
 import static uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection.SearchCarbActivity.showSearch;
 
-public class APINetworkChecker extends BroadcastReceiver
+public class SearchNetworkChecker extends BroadcastReceiver
 {
     @Override
     public void onReceive(Context context, Intent intent)

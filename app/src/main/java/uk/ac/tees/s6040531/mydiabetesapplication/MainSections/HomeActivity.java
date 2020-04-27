@@ -1,7 +1,10 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,9 +71,6 @@ public class HomeActivity extends AppCompatActivity
         navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         navView.setSelectedItemId(R.id.navigation_home);
 
-
-        getUser();
-
         // Calls the method getIncomingIntent()
         getIncomingIntent();
     }
@@ -104,9 +104,8 @@ public class HomeActivity extends AppCompatActivity
         }
     };
 
-    public void getUser()
+    public void getUser(Boolean state)
     {
-
         auth = FirebaseAuth.getInstance();
         udbRef = FirebaseFirestore.getInstance();
 

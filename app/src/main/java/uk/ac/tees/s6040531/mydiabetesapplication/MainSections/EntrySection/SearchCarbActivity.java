@@ -93,7 +93,7 @@ public class SearchCarbActivity extends AppCompatActivity
 
     public void checkCon()
     {
-        bRec = new APINetworkChecker();
+        bRec = new SearchNetworkChecker();
         registerReceiver(bRec, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
