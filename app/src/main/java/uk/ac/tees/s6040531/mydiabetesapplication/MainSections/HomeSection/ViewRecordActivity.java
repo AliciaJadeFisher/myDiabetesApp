@@ -5,7 +5,8 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 import android.os.Bundle;
 
-public class ViewRecordActivity extends AppCompatActivity {
+public class ViewRecordActivity extends AppCompatActivity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
