@@ -44,7 +44,6 @@ public class ViewPostsActivity extends AppCompatActivity
     FloatingActionButton fabNewPost;
 
     // Variables for user and thread access
-    User user;
     ForumThread thread;
     List<ThreadPost> adapterList = new ArrayList<>();
 
@@ -53,7 +52,6 @@ public class ViewPostsActivity extends AppCompatActivity
 
     //Variable used for Firebase access
     FirebaseFirestore postDbRef;
-    FirebaseFirestore udbRef;
     FirebaseAuth auth;
 
     /**
@@ -69,7 +67,6 @@ public class ViewPostsActivity extends AppCompatActivity
 
         // Initialize Firebase variables
         auth = FirebaseAuth.getInstance();
-        udbRef = FirebaseFirestore.getInstance();
         postDbRef = FirebaseFirestore.getInstance();
 
         // Initialize widgets
@@ -80,7 +77,6 @@ public class ViewPostsActivity extends AppCompatActivity
 
         // Call required methods
         getIncomingIntent();
-        getUser();
         getPosts();
 
         //onClickListener for fabNewPost
@@ -95,27 +91,10 @@ public class ViewPostsActivity extends AppCompatActivity
             {
                 //Passes the user and thread to the CreatePostActivity and loads it up
                 Intent i = new Intent(ViewPostsActivity.this, CreatePostActivity.class);
-                i.putExtra("user", user);
                 i.putExtra("thread", thread);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
-            }
-        });
-    }
-
-    /**
-     * getUser() method
-     */
-    public void getUser()
-    {
-        // Retreives the user object from the database
-        udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
-        {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot)
-            {
-                user =  documentSnapshot.toObject(User.class);
             }
         });
     }
