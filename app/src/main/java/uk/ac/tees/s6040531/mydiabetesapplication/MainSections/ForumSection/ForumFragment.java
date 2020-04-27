@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -184,6 +185,11 @@ public class ForumFragment extends Fragment
         return threadList;
     }
 
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+    }
 
     /**
      * setAdapter() method
