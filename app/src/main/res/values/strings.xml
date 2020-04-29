@@ -156,4 +156,12 @@
     <string name="hypos">Hypos</string>
     <string name="hypers">Hypers</string>
     <string name="bi_week">Bi-Week</string>
+    <string name="record_details">Record Details</string>
+    <string name="record_date_date_here">Record Date: (date here)</string>
+    <string name="record_time_time_here">Record Time: (time here)</string>
+    <string name="blood_sugar_bs_here">Blood Sugar: (bs here)</string>
+    <string name="carbohydrates_carbs_here">Carbohydrates: (carbs here)</string>
+    <string name="insulin_food_inf_here">Insulin (food): (inf here)</string>
+    <string name="insulin_total_int_here">Insulin (total): (int here)</string>
+    <string name="note_note_here">Note: (note here)</string>
 </resources>

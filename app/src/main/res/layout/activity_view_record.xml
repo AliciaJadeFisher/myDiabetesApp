@@ -6,4 +6,150 @@
     android:layout_height="match_parent"
     tools:context=".MainSections.HomeSection.ViewRecordActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <!--Toolbar for the toolbar layout-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <!--ImageView to display the solo logo-->
+            <ImageView
+                android:maxWidth="@dimen/logo_w_h"
+                android:src="@drawable/logo_icon"
+                android:paddingEnd="15dp"
+                android:paddingStart="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:contentDescription="@string/logo_icon"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--ScrollView for the entire screen-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:paddingTop="56dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/record_details"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/record_date_date_here"
+                android:textColor="@android:color/black"
+                android:background="@drawable/textview_border"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:text="@string/record_time_time_here"
+                android:textColor="@android:color/black"
+                android:background="@drawable/textview_border"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_bs"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:text="@string/blood_sugar_bs_here"
+                android:textColor="@android:color/black"
+                android:background="@drawable/textview_border"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_carbs"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:text="@string/carbohydrates_carbs_here"
+                android:textColor="@android:color/black"
+                android:background="@drawable/textview_border"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_meal"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:text="Meal Type: (meal here)"
+                android:textColor="@android:color/black"
+                android:background="@drawable/textview_border"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_inFood"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:text="@string/insulin_food_inf_here"
+                android:textColor="@android:color/black"
+                android:background="@drawable/textview_border"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_inCorr"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:text="Insulin (correction): (inc here)"
+                android:textColor="@android:color/black"
+                android:background="@drawable/textview_border"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_total"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:text="@string/insulin_total_int_here"
+                android:textColor="@android:color/black"
+                android:background="@drawable/textview_border"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:text="@string/note_note_here"
+                android:textColor="@android:color/black"
+                android:background="@drawable/textview_border"
+                android:textSize="15sp"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
