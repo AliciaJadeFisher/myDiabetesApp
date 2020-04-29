@@ -7,27 +7,29 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTabHost;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection.AddEntryActivity;
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
+import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.RecordsRecyclerViewAdapter;
 
 /**
  * HomeFragment
@@ -35,14 +37,21 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 public class HomeFragment extends Fragment
 {
     // Variables for layout access
-    TextView tvWelcome;
+    TextView tvWelcome, tvAverage, tvHypos, tvHypers;
+    Button btnToday, btnWeek, btnMonth, btnAll;
+    RecyclerView rvRecords;
     FloatingActionButton fabAdd;
-    FragmentTabHost tabHost;
+
+    Calendar cal = Calendar.getInstance();
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    Date today = new Date();
+    Date week;
+    Date month;
+
+    RecordsRecyclerViewAdapter adapter;
 
     // Variable for the current user details
     User user;
-    FirebaseAuth auth;
-    FirebaseFirestore udbRef;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -102,21 +111,32 @@ public class HomeFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        auth = FirebaseAuth.getInstance();
-        udbRef = FirebaseFirestore.getInstance();
+        cal.set(Calendar.DAY_OF_WEEK,2);
+        week = cal.getTime();
 
-        // Initializes the widgets
-        tvWelcome = (TextView)view.findViewById(R.id.tv_welcome);
-        fabAdd = (FloatingActionButton)view.findViewById(R.id.fab_add_entry);
+        cal.set(Calendar.DAY_OF_MONTH,1);
+        month = cal.getTime();
 
         SharedPreferences myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = myPref.getString(getResources().getString(R.string.user_key),"");
         user = gson.fromJson(json,User.class);
 
-        tvWelcome.setText("Hello " + user.getName());
+        // Initializes the widgets
+        tvWelcome = (TextView)view.findViewById(R.id.tv_welcome);
+        tvAverage = (TextView)view.findViewById(R.id.tv_average);
+        tvHypos = (TextView)view.findViewById(R.id.tv_hypos);
+        tvHypers = (TextView)view.findViewById(R.id.tv_hypers);
+        rvRecords = (RecyclerView)view.findViewById(R.id.rv_records);
+        fabAdd = (FloatingActionButton)view.findViewById(R.id.fab_add_entry);
+        btnToday = (Button)view.findViewById(R.id.btn_today);
+        btnWeek = (Button)view.findViewById(R.id.btn_week);
+        btnMonth = (Button)view.findViewById(R.id.btn_month);
+        btnAll = (Button)view.findViewById(R.id.btn_all);
 
-        setupTabs(view);
+        tvWelcome.setText("Hello " + user.getName());
+        btnToday.setBackgroundResource(R.drawable.selection_button_selected_background);
+        displayEntries("Today");
 
         // OnClickListener() for fabAdd
         fabAdd.setOnClickListener(new View.OnClickListener()
@@ -137,18 +157,167 @@ public class HomeFragment extends Fragment
                 getActivity().finish();
             }
         });
+
+        btnToday.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                btnToday.setBackgroundResource(R.drawable.selection_button_selected_background);
+                btnWeek.setBackgroundResource(R.drawable.selection_button_background);
+                btnMonth.setBackgroundResource(R.drawable.selection_button_background);
+                btnAll.setBackgroundResource(R.drawable.selection_button_background);
+
+                displayEntries("Today");
+            }
+        });
+
+        btnWeek.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                btnWeek.setBackgroundResource(R.drawable.selection_button_selected_background);
+                btnToday.setBackgroundResource(R.drawable.selection_button_background);
+                btnMonth.setBackgroundResource(R.drawable.selection_button_background);
+                btnAll.setBackgroundResource(R.drawable.selection_button_background);
+
+                displayEntries("Week");
+            }
+        });
+
+        btnMonth.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                btnMonth.setBackgroundResource(R.drawable.selection_button_selected_background);
+                btnWeek.setBackgroundResource(R.drawable.selection_button_background);
+                btnToday.setBackgroundResource(R.drawable.selection_button_background);
+                btnAll.setBackgroundResource(R.drawable.selection_button_background);
+
+                displayEntries("Month");
+            }
+        });
+
+        btnAll.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                btnAll.setBackgroundResource(R.drawable.selection_button_selected_background);
+                btnWeek.setBackgroundResource(R.drawable.selection_button_background);
+                btnMonth.setBackgroundResource(R.drawable.selection_button_background);
+                btnToday.setBackgroundResource(R.drawable.selection_button_background);
+
+                displayEntries("All");
+            }
+        });
     }
 
-    public void setupTabs(View view)
+    public void displayEntries(String input)
     {
-        HomeSectionPagerAdapter pagerAdapter = new HomeSectionPagerAdapter(getActivity(), getActivity().getSupportFragmentManager());
-        ViewPager viewPager = view.findViewById(R.id.view_pager_records);
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setEnabled(false);
+        List<BloodSugarEntry> entries = getEntries(input);
 
-        // Initializes the tabLayout
-        TabLayout tabs = view.findViewById(R.id.tabs_home);
-        tabs.setEnabled(true);
-        tabs.setupWithViewPager(viewPager);
+        tvAverage.setText(String.valueOf(Math.round(getAverage(entries) * 10)/ 10.0));
+        tvHypos.setText(String.valueOf(getHypos(entries)));
+        tvHypers.setText(String.valueOf(getHypers(entries)));
+
+        adapter = new RecordsRecyclerViewAdapter(this,entries);
+        rvRecords.setAdapter(adapter);
+        rvRecords.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        adapter.notifyDataSetChanged();
+    }
+
+    public List<BloodSugarEntry> getEntries(String selected)
+    {
+        List<BloodSugarEntry> unfilteredList = user.getBlood_sugars();
+        List<BloodSugarEntry> filteredList = new ArrayList<>();
+
+        if(selected.equals("All"))
+        {
+            filteredList = unfilteredList;
+        }
+        else if(selected.equals("Today"))
+        {
+            for(BloodSugarEntry e : unfilteredList)
+            {
+                System.out.println("===== E Date : " + dateFormat.format(e.getDate()));
+                System.out.println("===== Today : " + dateFormat.format(today));
+
+                if(dateFormat.format(e.getDate()).equals(dateFormat.format(today))) {
+                    filteredList.add(e);
+                }
+            }
+        }
+        else if(selected.equals("Week"))
+        {
+            for(BloodSugarEntry e : unfilteredList)
+            {
+                if(e.getDate().after(week) || dateFormat.format(e.getDate()).equals(dateFormat.format(week)))
+                {
+                    filteredList.add(e);
+                }
+            }
+        }
+        else if(selected.equals("Month"))
+        {
+            for(BloodSugarEntry e : unfilteredList)
+            {
+                if(e.getDate().after(month))
+                {
+                    filteredList.add(e);
+                }
+            }
+        }
+
+        return filteredList;
+    }
+
+    public double getAverage(List<BloodSugarEntry> list)
+    {
+        double total = 0;
+        int count = 0;
+
+        for(BloodSugarEntry e : list)
+        {
+            total += e.getBs();
+            count++;
+        }
+
+        double average = total/count;
+        return average;
+    }
+
+    public int getHypos(List<BloodSugarEntry> list)
+    {
+        int count = 0;
+        double hypo = Double.parseDouble(user.getHypo());
+
+        for(BloodSugarEntry e : list)
+        {
+            if(e.getBs() < hypo)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public int getHypers(List<BloodSugarEntry> list)
+    {
+        int count = 0;
+        double hyper = Double.parseDouble(user.getHyper());
+
+        for(BloodSugarEntry e : list)
+        {
+            if(e.getBs() > hyper)
+            {
+                count++;
+            }
+        }
+
+        return count;
     }
 }

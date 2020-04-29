@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity
     final FragmentManager fragMan = getSupportFragmentManager();
 
     ProgressBar pbHome;
+
     //
     User user;
     FirebaseAuth auth;
