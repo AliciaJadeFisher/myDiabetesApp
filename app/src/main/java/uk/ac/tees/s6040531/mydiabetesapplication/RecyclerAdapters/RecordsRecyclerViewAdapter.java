@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +93,25 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
         holder.entryTime.setText(entry.getTime());
         holder.entryBS.setText(String.valueOf(entry.getBs()));
         holder.entryIn.setText(String.valueOf(Math.round(entry.getInsulin_t())));
+
+        //Sets the onClickListener for the parent layout
+        holder.parentLayout.setOnClickListener(new View.OnClickListener()
+        {
+            /**
+             * onClick
+             * @param v
+             */
+            @Override
+            public void onClick(View v)
+            {
+                //Passes the user and thread to the CreatePostActivity and loads it up
+                Intent i = new Intent(parent.getActivity(), View.class);
+                i.putExtra("bs_entry", entry);
+                parent.getActivity().startActivity(i);
+                parent.getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                parent.getActivity().finish();
+            }
+        });
     }
 
     /**
