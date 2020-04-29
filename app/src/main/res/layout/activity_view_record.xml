@@ -62,7 +62,6 @@
                 android:gravity="center"
                 android:text="@string/record_date_date_here"
                 android:textColor="@android:color/black"
-                android:background="@drawable/textview_border"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/tv_time"
@@ -72,7 +71,6 @@
                 android:gravity="center"
                 android:text="@string/record_time_time_here"
                 android:textColor="@android:color/black"
-                android:background="@drawable/textview_border"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/tv_bs"
@@ -82,7 +80,6 @@
                 android:gravity="center"
                 android:text="@string/blood_sugar_bs_here"
                 android:textColor="@android:color/black"
-                android:background="@drawable/textview_border"
                 android:textSize="15sp"/>
 
             <TextView
@@ -93,7 +90,6 @@
                 android:gravity="center"
                 android:text="@string/carbohydrates_carbs_here"
                 android:textColor="@android:color/black"
-                android:background="@drawable/textview_border"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/tv_meal"
@@ -101,9 +97,8 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="1dp"
                 android:gravity="center"
-                android:text="Meal Type: (meal here)"
+                android:text="@string/meal_type_meal_here"
                 android:textColor="@android:color/black"
-                android:background="@drawable/textview_border"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/tv_inFood"
@@ -113,7 +108,6 @@
                 android:gravity="center"
                 android:text="@string/insulin_food_inf_here"
                 android:textColor="@android:color/black"
-                android:background="@drawable/textview_border"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/tv_inCorr"
@@ -123,7 +117,6 @@
                 android:gravity="center"
                 android:text="@string/insulin_correction_inc_here"
                 android:textColor="@android:color/black"
-                android:background="@drawable/textview_border"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/tv_inTotal"
@@ -133,7 +126,17 @@
                 android:gravity="center"
                 android:text="@string/insulin_total_int_here"
                 android:textColor="@android:color/black"
-                android:background="@drawable/textview_border"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_note_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:text="@string/notes"
+                android:textColor="@android:color/black"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/tv_note"
@@ -144,7 +147,6 @@
                 android:gravity="center"
                 android:text="@string/note_note_here"
                 android:textColor="@android:color/black"
-                android:background="@drawable/textview_border"
                 android:textSize="15sp"/>
 
 

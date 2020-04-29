@@ -165,4 +165,5 @@
     <string name="insulin_total_int_here">Insulin (total): (int here)</string>
     <string name="note_note_here">Note: (note here)</string>
     <string name="insulin_correction_inc_here">Insulin (correction): (inc here)</string>
+    <string name="meal_type_meal_here">Meal Type: (meal here)</string>
 </resources>

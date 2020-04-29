@@ -80,7 +80,7 @@ public class ViewRecordActivity extends AppCompatActivity
         String inF_display = "Insulin (Food): " + entry.getInsulin_f();
         String inC_display = "Insulin (Correction): " + entry.getInsulin_c();
         String inT_display = "Total Insulin: " + entry.getInsulin_t();
-        String note_display = "Note: " + entry.getNotes();
+        String note_display = entry.getNotes();
 
         // Update the text view displays
         tvDate.setText(date_display);
