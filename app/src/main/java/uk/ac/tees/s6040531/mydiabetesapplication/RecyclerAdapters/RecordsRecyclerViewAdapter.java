@@ -15,6 +15,7 @@ import java.util.List;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection.ViewRecordActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
@@ -105,7 +106,7 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
             public void onClick(View v)
             {
                 //Passes the user and thread to the CreatePostActivity and loads it up
-                Intent i = new Intent(parent.getActivity(), View.class);
+                Intent i = new Intent(parent.getActivity(), ViewRecordActivity.class);
                 i.putExtra("bs_entry", entry);
                 parent.getActivity().startActivity(i);
                 parent.getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

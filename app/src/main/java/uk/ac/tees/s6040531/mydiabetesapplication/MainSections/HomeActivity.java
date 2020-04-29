@@ -73,6 +73,9 @@ public class HomeActivity extends AppCompatActivity
 
         // Calls the method getIncomingIntent()
         getIncomingIntent();
+
+        // Call getUser()
+        getUser();
     }
 
     /**
@@ -104,7 +107,7 @@ public class HomeActivity extends AppCompatActivity
         }
     };
 
-    public void getUser(Boolean state)
+    public void getUser()
     {
         auth = FirebaseAuth.getInstance();
         udbRef = FirebaseFirestore.getInstance();

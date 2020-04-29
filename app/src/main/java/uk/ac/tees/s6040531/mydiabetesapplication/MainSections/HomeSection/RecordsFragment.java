@@ -48,20 +48,19 @@ public class RecordsFragment extends Fragment
     Date week;
     Date month;
 
-    String selected = "Today";
+    String selected;
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
     /**
      * RecordsFragment constructor
-     * @param index
+     * @param sel
      * @return fragment
      */
-    public static RecordsFragment newInstance(int index)
+    public static RecordsFragment newInstance(String sel)
     {
         RecordsFragment fragment = new RecordsFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(ARG_SECTION_NUMBER, index);
+        bundle.putString("sel", sel);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -75,12 +74,10 @@ public class RecordsFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
 
-        int index = 1;
-
         // Checks for any arguments
         if (getArguments() != null)
         {
-            index = getArguments().getInt(ARG_SECTION_NUMBER);
+            selected = getArguments().getString("sel");
         }
     }
 
@@ -124,16 +121,9 @@ public class RecordsFragment extends Fragment
         Gson gson = new Gson();
         String json = myPref.getString(getResources().getString(R.string.user_key),"");
         user = gson.fromJson(json,User.class);
-        displayEntries();
-    }
 
-    /**
-     * dataReceived() method
-     * @param sel
-     */
-    public void dataReceived(String sel)
-    {
-        selected = sel;
+        System.out.println("====== Selected: " + selected + " =======");
+        displayEntries();
     }
 
     public void displayEntries()

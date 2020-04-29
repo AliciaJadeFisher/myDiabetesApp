@@ -1,6 +1,7 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection;
 
 import android.content.Context;
+import android.icu.text.AlphabeticIndex;
 
 import java.util.Date;
 
@@ -17,6 +18,11 @@ public class HomeSectionPagerAdapter extends FragmentPagerAdapter
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.today, R.string.week,R.string.month,R.string.all};
     private final Context mContext;
+
+    RecordsFragment today = RecordsFragment.newInstance("Today");
+    RecordsFragment week = RecordsFragment.newInstance("Week");
+    RecordsFragment month = RecordsFragment.newInstance("Month");
+    RecordsFragment all = RecordsFragment.newInstance("All");
 
     /**
      * Main constructor
@@ -41,20 +47,12 @@ public class HomeSectionPagerAdapter extends FragmentPagerAdapter
         switch (position)
         {
             case 0:
-                RecordsFragment today = new RecordsFragment();
-                today.dataReceived("Today");
                 return today;
             case 1:
-                RecordsFragment week = new RecordsFragment();
-                week.dataReceived("Week");
                 return week;
             case 2:
-                RecordsFragment month = new RecordsFragment();
-                month.dataReceived("Month");
                 return month;
             case 3:
-                RecordsFragment all = new RecordsFragment();
-                all.dataReceived("All");
                 return all;
             default:
                 return null;
@@ -71,7 +69,7 @@ public class HomeSectionPagerAdapter extends FragmentPagerAdapter
     @Override
     public int getCount()
     {
-        // Show 2 total pages.
+        // Show 4 total pages.
         return 4;
     }
 }
