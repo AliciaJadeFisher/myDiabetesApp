@@ -47,7 +47,6 @@ public class SettingsAboutActivity extends AppCompatActivity
                 Intent i = new Intent(SettingsAboutActivity.this, SettingsTermsActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                finish();
             }
         });
 
@@ -65,7 +64,6 @@ public class SettingsAboutActivity extends AppCompatActivity
 //                Intent i = new Intent(SettingsAboutActivity.this, SettingsPrivacyActivity.class);
 //                startActivity(i);
 //                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-//                finish();
             }
         });
 

@@ -102,15 +102,7 @@
     <string name="new_post">New Post</string>
     <string name="post_here">Post here...</string>
     <string name="post">Post</string>
-    <string name="settings">Settings</string>
-    <string name="this_is_the_settings_fragment">This is the settings fragment</string>
-    <string name="application_settings">Application Settings</string>
-    <string name="account_settings">Account Settings</string>
-    <string name="other">Other</string>
-    <string name="about_my_diabetes">About My Diabetes</string>
-    <string name="help_and_contact">Help and Contact</string>
-    <string name="terms_of_service">Terms of Service</string>
-    <string name="privacy_policy">Privacy Policy</string>
+
     <string name="entry_date">Entry Date :</string>
     <string name="entry_time">Entry Time :</string>
     <string name="set_time">Set Time</string>
@@ -166,4 +158,43 @@
     <string name="note_note_here">Note: (note here)</string>
     <string name="insulin_correction_inc_here">Insulin (correction): (inc here)</string>
     <string name="meal_type_meal_here">Meal Type: (meal here)</string>
+
+    <!-- Settings Strings -->
+    <string name="settings">Settings</string>
+    <string name="application_settings">Application Settings</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="other">Other</string>
+    <string name="about_my_diabetes">About My Diabetes</string>
+    <string name="help_and_contact">Help and Contact</string>
+
+
+    <!-- Terms of Service Strings-->
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="last_revised">Last Revised: May 01 2020</string>
+    <string name="terms_1">Welcome to the myDiabetes mobile application. These Terms of Service, which include the Code of Conduct and the Privacy Policy, are a contract between you and myDiabetes. By creating your myDiabetes account and using this application, you are agreeing to these Terms of Service. If you do not agree to any of these terms, then you cannot use the Plannerly application.</string>
+    <string name="license_to_use">License to Use</string>
+    <string name="terms_2">Subject to your agreement to and compliance with the terms of this Agreement, we grant you a non-exclusive, non-transferable, non-shareable, revocable limited license to use the Services (including the Software in connection with the Services) solely for your personal, non-commercial use to the Services in accordance with this Agreement.</string>
+    <string name="need_account">You Need an Account</string>
+    <string name="terms_3">To access the services of the myDiabetes application, you will need to register for an account.\nYou are responsible for all the activity that occurs on your account, and for keeping your account details confidential. If you share your account information with anyone, the other person may be able to take control of your account. If this occurs, we may not be able to determine who is the proper account holder. We will not have any liability to you (or anyone with whom you share your account information with), as a result of your (or their) actions under those circumstances.\nIf you discover that someone has used your account without your permission, you should report it using the details provided in the Help and Contact section.</string>
+    <string name="code_of_conduct">Code of Conduct</string>
+    <string name="terms_4">This code of conduct is designed purely for the (extremely rare) cases where users might abuse our services. We reserve the right to terminate your access to our application and our services if you breach the following terms.\nI. You cannot share your account: Each account must only be used by a single person at one time\nII. You cannot provide us with false information: You cannot use a false email address, impersonate others, or misrepresent your affiliation with others</string>
+    <string name="terminate_right">Right to Terminate Accounts</string>
+    <string name="terms_5">If we find that you are in breach of any of these terms, we reserve the right to terminate your right to access or use the myDiabetes application. We are not responsible for any loss, damage or harm related to your inability to access or use the myDiabetes application based on such termination.</string>
+    <string name="cancel_terminate">How a User Can Cancel/Terminate their Account</string>
+    <string name="terms_6">You can delete your myDiabetes account at any time in the Account Settings section. When you delete your account, we delete all individual content you have saved and your personal profile data. No further information from your account will be used. We are unable to retrieve specific details about individuals after completing this process.</string>
+    <string name="app_license">Application License</string>
+    <string name="terms_7">We are the owner, or licensee of all intellectual property rights for the myDiabetes application, which is protected by copyright laws and treaties around the world. All such rights are reserved.\nIn accessing the myDiabetes application, you agree that you will access its contents and use the Services only for your personal, non-commercial use. The myDiabetes application may not be downloaded, copied, reproduced, transmitted, sold or distributed without the prior written consent of the copyright holder. This excludes the downloading of the myDiabetes application for personal, non-commercial use only.</string>
+    <string name="terms_change">Will These Terms Ever Change?</string>
+    <string name="terms_8">We reserve the right to change these terms at any time. If we do, we will bring it to your attention, by sending you an email. Please note that your continued use of the Services after any change means that you agree with, and consent to be bound by the new Terms of Service. If you disagree with any changes in the Terms of Service and do not wish to be subject to the revised terms, you will need to delete your account and/or stop using the Services.</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="terms_9">This application does not replace the relationship between you and your doctor/nurse. This application does not claim to be a solution to diabetes, but rather a support tool to use alongside your prescribed tools/medication from your doctor/nurse</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_10">We take the privacy of our users very seriously. You can learn how we handle your information when you use our Services, by reading our Privacy Policy. We encourage you to give the Privacy Policy a careful look because, by using our Services, you agree that myDiabetes can collect, use, and share your information consistent with that policy</string>
+    <string name="general">General Terms</string>
+    <string name="terms_11">I. Entire agreement: These Terms constitute the entire agreement between us and they may only be modified by written agreement between us and you. \nII. Governing law and jurisdiction: These Terms (and any non-contractual disputes/claims arising out of, or in connection with them) are subject to UK laws, without regard to choice or conflicts of law principles. \nIII. Non-assignment: You may not assign, sub-license or otherwise transfer any of your rights under these Terms. \nIV. Rights of third parties: Only the parties to these Terms of Service may seek to enforce them under the Contracts (Rights of Third PArties) Act 1999 \nV. Comments and complaints: We value any comments or complaints that you may have and we will always aim to fix problems where we can. If you have any questions, suggestions or complaints about the application or the content features, please let us know by contacting us.</string>
+
+
+
+
+
 </resources>
