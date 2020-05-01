@@ -171,7 +171,7 @@
     <!-- Terms of Service Strings-->
     <string name="terms_of_service">Terms of Service</string>
     <string name="last_revised">Last Revised: May 01 2020</string>
-    <string name="terms_1">Welcome to the myDiabetes mobile application. These Terms of Service, which include the Code of Conduct and the Privacy Policy, are a contract between you and myDiabetes. By creating your myDiabetes account and using this application, you are agreeing to these Terms of Service. If you do not agree to any of these terms, then you cannot use the Plannerly application.</string>
+    <string name="terms_1">Welcome to the myDiabetes mobile application. These Terms of Service, which include the Code of Conduct and the Privacy Policy, are a contract between you and myDiabetes. By creating your myDiabetes account and using this application, you are agreeing to these Terms of Service. If you do not agree to any of these terms, then you cannot use the myDiabetes application.</string>
     <string name="license_to_use">License to Use</string>
     <string name="terms_2">Subject to your agreement to and compliance with the terms of this Agreement, we grant you a non-exclusive, non-transferable, non-shareable, revocable limited license to use the Services (including the Software in connection with the Services) solely for your personal, non-commercial use to the Services in accordance with this Agreement.</string>
     <string name="need_account">You Need an Account</string>

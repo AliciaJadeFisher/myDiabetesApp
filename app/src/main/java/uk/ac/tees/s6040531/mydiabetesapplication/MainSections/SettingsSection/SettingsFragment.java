@@ -1,9 +1,11 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.SettingsSection;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,7 +15,7 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class SettingsFragment extends Fragment
 {
-    TextView textView;
+    Button btnAbout;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -46,7 +48,18 @@ public class SettingsFragment extends Fragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
-
         super.onViewCreated(view, savedInstanceState);
+
+        btnAbout = (Button)view.findViewById(R.id.btn_about);
+
+        btnAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(getActivity(), SettingsAboutActivity.class);
+                getActivity().startActivity(i);
+                getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            }
+        });
     }
 }
