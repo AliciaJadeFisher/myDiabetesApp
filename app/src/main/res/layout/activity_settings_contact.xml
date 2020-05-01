@@ -6,4 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".MainSections.SettingsSection.SettingsContactActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <!--Toolbar for the toolbar layout-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <!--ImageView to display the solo logo-->
+            <ImageView
+                android:maxWidth="@dimen/logo_w_h"
+                android:src="@drawable/logo_icon"
+                android:paddingEnd="15dp"
+                android:paddingStart="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:contentDescription="@string/logo_icon"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:id="@+id/sv_terms"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/contact_us"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/con_sec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/contact_sec"
+            android:textSize="12sp"/>
+        <TextView
+            android:id="@+id/con_em"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/contact_em"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"/>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
