@@ -164,7 +164,6 @@
     <string name="account_settings">Account Settings</string>
     <string name="edit_account_details">Edit Account Details</string>
     <string name="log_out">Log Out</string>
-    <string name="contact_us">Contact Us</string>
     <string name="delete_account">Delete Account</string>
     <string name="other">Other</string>
     <string name="about_my_diabetes">About My Diabetes</string>
@@ -221,4 +220,9 @@
     <string name="faq_4">We’re always looking for any ideas or ways to improve our application. Get in touch using the contact details in the ‘Contact Us’ section, if you have any suggestions or feedback.</string>
     <string name="not_cov">I have a question that is not covered here</string>
     <string name="faq_5">You can contact us using the details in the ‘Contact Us’ section and we will be happy to help you.</string>
+
+    <!-- Contact Us Strings -->
+    <string name="contact_us">Contact Us</string>
+    <string name="contact_sec">If you need to contact us for any reason, please use the email provided below. We aim to respond to all emails within 48 hours.</string>
+    <string name="contact_em">mydiabetesapplicationhelp@gmail.com</string>
 </resources>
