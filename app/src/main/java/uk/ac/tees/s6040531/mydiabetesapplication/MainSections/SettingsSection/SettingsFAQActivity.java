@@ -13,4 +13,11 @@ public class SettingsFAQActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_faq);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+        finish();
+    }
 }
