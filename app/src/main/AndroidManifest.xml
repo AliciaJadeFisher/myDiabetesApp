@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".MainSections.SettingsSection.SettingsPrivacyActivity"></activity>
 
         <receiver android:name=".MainSections.ForumSection.ForumNetworkChecker">
             <intent-filter>
@@ -23,7 +24,7 @@
 
         <activity
             android:name=".MainSections.HomeSection.ViewRecordActivity"
-            android:theme="@style/noActionbar"></activity>
+            android:theme="@style/noActionbar" />
         <activity
             android:name=".MainSections.EntrySection.SearchCarbActivity"
             android:theme="@style/noActionbar" />
@@ -51,7 +52,7 @@
             android:theme="@style/noActionbar" />
         <activity
             android:name=".MainSections.AuthenticationSection.ResetPasswordActivity"
-            android:theme="@style/noActionbar"/>
+            android:theme="@style/noActionbar" />
         <activity
             android:name=".MainSections.HomeActivity"
             android:label="@string/title_activity_home"
