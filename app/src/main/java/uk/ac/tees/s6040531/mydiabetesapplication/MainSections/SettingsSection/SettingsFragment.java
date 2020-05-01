@@ -11,11 +11,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.AccountSetupActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class SettingsFragment extends Fragment
 {
-    Button btnAbout;
+    Button btnEdit, btnLogOut, btnAbout, btnHelp;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -50,13 +52,45 @@ public class SettingsFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
+        btnEdit = (Button)view.findViewById(R.id.btn_edit);
+        btnLogOut = (Button)view.findViewById(R.id.btn_log_out);
         btnAbout = (Button)view.findViewById(R.id.btn_about);
+        btnHelp = (Button)view.findViewById(R.id.btn_help);
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(getActivity(), AccountSetupActivity.class);
+                i.putExtra("previous", "settings");
+                getActivity().startActivity(i);
+                getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                getActivity().finish();
+            }
+        });
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // alert dialog with sign out code
+            }
+        });
 
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent i = new Intent(getActivity(), SettingsAboutActivity.class);
+                getActivity().startActivity(i);
+                getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            }
+        });
+
+        btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getActivity(), SettingsHelpActivity.class);
                 getActivity().startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
             }

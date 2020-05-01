@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainSections.SettingsSection.SettingsPrivacyActivity"></activity>
+        <activity android:name=".MainSections.SettingsSection.SettingsHelpActivity"></activity>
+        <activity android:name=".MainSections.SettingsSection.SettingsPrivacyActivity" />
 
         <receiver android:name=".MainSections.ForumSection.ForumNetworkChecker">
             <intent-filter>
