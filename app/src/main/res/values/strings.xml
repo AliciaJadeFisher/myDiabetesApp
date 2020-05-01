@@ -207,7 +207,7 @@
     <string name="policy_5">We may send your service emails, which will include: \nI. Registration confirmations \nII. Welcome emails \nIII. Notification about any substantial changes to our Terms of Service, Code of Conduct or our Privacy Policy</string>
     <string name="general_pol">General Policies</string>
     <string name="policy_6">I. If you want to see what personal data we hold on you, get in contact and we’ll be happy to supply you with it via email. \nII. If the data we store about you is inaccurate or out of date, please update your details in the Account Settings section. \nIII. We might make changes to this Privacy Policy from time to time - check back here to stay up to date. If there are any major changes then we will send you an email outlining these changes to you.</string>
-    
+
     <!-- FAQ Strings-->
     <string name="faq">FAQ</string>
     <string name="get_info">How do I get information about my data?</string>
