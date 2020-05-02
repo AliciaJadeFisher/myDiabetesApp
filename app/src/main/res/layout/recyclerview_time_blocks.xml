@@ -1,102 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:id="@+id/time_card"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="5dp"
-    android:paddingStart="5dp"
-    android:paddingEnd="5dp"
+    android:background="@drawable/recycler_background"
+    android:layout_marginTop="7dp"
+    android:layout_marginStart="7dp"
+    android:layout_marginEnd="7dp"
+    android:padding="10dp"
     android:clickable="true"
     android:focusable="true">
 
-    <!--RelativeLayout for the widgets-->
-    <RelativeLayout
-        android:id="@+id/parent_layout"
-        android:layout_width="fill_parent"
+    <!--TextView for the field title-->
+    <TextView
+        android:id="@+id/startTitle"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/recycler_background"
-        android:paddingBottom="20sp"
-        android:padding="10dp"
-        android:orientation="vertical">
+        android:gravity="end"
+        android:text="@string/start"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/colorPrimary"
+        android:textSize="13sp"
+        android:textStyle="bold" />
 
-        <!--TextView for the field title-->
-        <TextView
-            android:id="@+id/startTitle"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="@string/start"
-            android:fontFamily="sans-serif"
-            android:textColor="@color/colorPrimary"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+    <!--TextView to display the thread title-->
+    <TextView
+        android:id="@+id/tv_viewStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/show_start_time"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="13sp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/startTitle"
+        android:layout_marginStart="11dp" />
 
-        <!--TextView to display the thread title-->
-        <TextView
-            android:id="@+id/tv_viewStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/show_start_time"
-            android:fontFamily="sans-serif-condensed"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="17sp"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/startTitle"
-            android:layout_marginStart="11dp" />
+    <!--TextView for the field title-->
+    <TextView
+        android:id="@+id/endTitle"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_below="@+id/startTitle"
+        android:text="@string/end"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/colorPrimary"
+        android:textSize="13sp"
+        android:textStyle="bold" />
 
-        <!--TextView for the field title-->
-        <TextView
-            android:id="@+id/endTitle"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:layout_below="@+id/startTitle"
-            android:text="@string/end"
-            android:fontFamily="sans-serif"
-            android:textColor="@color/colorPrimary"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+    <!--TextView to display the thread description-->
+    <TextView
+        android:id="@+id/tv_viewEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tv_viewStart"
+        android:layout_below="@+id/tv_viewStart"
+        android:gravity="start"
+        android:text="@string/show_end_time"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="13sp" />
 
-        <!--TextView to display the thread description-->
-        <TextView
-            android:id="@+id/tv_viewEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_viewStart"
-            android:layout_below="@+id/tv_viewStart"
-            android:gravity="start"
-            android:text="@string/show_end_time"
-            android:fontFamily="sans-serif-condensed"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="17sp" />
+    <!--TextView for the field title-->
+    <TextView
+        android:id="@+id/ratioTile"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_below="@+id/endTitle"
+        android:text="@string/ratio"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/colorPrimary"
+        android:textSize="13sp"
+        android:textStyle="bold" />
 
-        <!--TextView for the field title-->
-        <TextView
-            android:id="@+id/ratioTile"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:layout_below="@+id/endTitle"
-            android:text="@string/ratio"
-            android:fontFamily="sans-serif"
-            android:textColor="@color/colorPrimary"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <!--TextView to display the no. posts in the thread-->
-        <TextView
-            android:id="@+id/tv_viewRatio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_viewEnd"
-            android:layout_below="@+id/tv_viewEnd"
-            android:gravity="start"
-            android:text="@string/show_ratio"
-            android:fontFamily="sans-serif-condensed"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="17sp" />
-    </RelativeLayout>
-
-</LinearLayout>
+    <!--TextView to display the no. posts in the thread-->
+    <TextView
+        android:id="@+id/tv_viewRatio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tv_viewEnd"
+        android:layout_below="@+id/tv_viewEnd"
+        android:gravity="start"
+        android:text="@string/show_ratio"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="13sp" />
+</RelativeLayout>
