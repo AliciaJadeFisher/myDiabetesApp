@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -166,6 +167,7 @@ public class SettingsFragment extends Fragment
         changeEmail.setTitle("Change Email");
         final EditText email = new EditText(getActivity());
         email.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        email.setHint("Email Address");
         changeEmail.setView(email);
         changeEmail.setPositiveButton("Change", new DialogInterface.OnClickListener()
         {
@@ -183,7 +185,79 @@ public class SettingsFragment extends Fragment
             }
         });
 
-                deleteAccount = new AlertDialog.Builder(getActivity());
+        changePass = new AlertDialog.Builder(getActivity());
+        changePass.setTitle("Change Password");
+        LinearLayout layout = new LinearLayout(getActivity());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        final EditText oldPass = new EditText(getActivity());
+        oldPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        oldPass.setHint("Current Password");
+        final EditText newPass = new EditText(getActivity());
+        newPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        newPass.setHint("New Password");
+        final EditText conPass = new EditText(getActivity());
+        conPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        conPass.setHint("Confirm New Password");
+        layout.addView(oldPass);
+        layout.addView(newPass);
+        layout.addView(conPass);
+        changePass.setView(layout);
+        changePass.setPositiveButton("Change", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(final DialogInterface dialog, int which)
+            {
+                cred = EmailAuthProvider.getCredential(cUser.getEmail(), oldPass.getText().toString());
+                cUser.reauthenticate(cred).addOnCompleteListener(new OnCompleteListener<Void>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task)
+                    {
+                        if(!task.isSuccessful())
+                        {
+                            Toast.makeText(getActivity(),"Incorrect Password", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            if(newPass.getText().toString().equals("") || conPass.toString().equals(""))
+                            {
+                                Toast.makeText(getActivity(),"All fields must be filled in", Toast.LENGTH_SHORT).show();
+                            }
+                            else if(newPass.getText().toString().equals(conPass.getText().toString()))
+                            {
+                                cUser.updatePassword(newPass.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        if(task.isSuccessful())
+                                        {
+                                            Toast.makeText(getActivity(),"Password Updated", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(getActivity(),"Failed to Update Password", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                Toast.makeText(getActivity(),"Passwords do not match", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        changePass.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        deleteAccount = new AlertDialog.Builder(getActivity());
         deleteAccount.setTitle("Delete Account");
         final EditText dPassword = new EditText(getActivity());
         dPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
