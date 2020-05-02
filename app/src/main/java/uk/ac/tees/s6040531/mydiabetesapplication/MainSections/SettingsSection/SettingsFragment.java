@@ -47,6 +47,7 @@ public class SettingsFragment extends Fragment
     FirebaseFirestore uDbRef;
 
     User user;
+    SharedPreferences myPref;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -84,7 +85,7 @@ public class SettingsFragment extends Fragment
         auth = FirebaseAuth.getInstance();
         uDbRef = FirebaseFirestore.getInstance();
 
-        SharedPreferences myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
+        myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = myPref.getString(getResources().getString(R.string.user_key),"");
         user = gson.fromJson(json,User.class);
@@ -198,7 +199,11 @@ public class SettingsFragment extends Fragment
                             @Override
                             public void onSuccess(Void aVoid)
                             {
+                                SharedPreferences.Editor prefEd = myPref.edit();
+                                prefEd.remove(getResources().getString(R.string.user_key));
+
                                 Toast.makeText(getActivity(),"Account Deleted", Toast.LENGTH_SHORT).show();
+
                                 auth.signOut();
                                 getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
                                 getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
@@ -207,7 +212,6 @@ public class SettingsFragment extends Fragment
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-
                                 Toast.makeText(getActivity(),"Error delteing account, please try again", Toast.LENGTH_SHORT).show();
                             }
                         });
