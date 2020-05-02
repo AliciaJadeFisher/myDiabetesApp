@@ -20,6 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -78,6 +80,9 @@ public class SettingsFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+
+        auth = FirebaseAuth.getInstance();
+        uDbRef = FirebaseFirestore.getInstance();
 
         SharedPreferences myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -175,6 +180,46 @@ public class SettingsFragment extends Fragment
         });
 
         checkDelete = new AlertDialog.Builder(getActivity());
+        checkDelete.setTitle("Confirm Delete Account");
+        final TextView check = new TextView(getActivity());
+        check.setText("Are you sure you want to delete your account?");
+        checkDelete.setView(check);
+        checkDelete.setPositiveButton("Yes, Delete", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                cUser.delete().addOnCompleteListener(new OnCompleteListener<Void>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task)
+                    {
+                        uDbRef.collection("users").document(auth.getUid()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid)
+                            {
+                                Toast.makeText(getActivity(),"Account Deleted", Toast.LENGTH_SHORT).show();
+                                auth.signOut();
+                                getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                                getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                                getActivity().finish();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
 
+                                Toast.makeText(getActivity(),"Error delteing account, please try again", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        checkDelete.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
     }
 }
