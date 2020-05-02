@@ -12,12 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.AccountSetupActivity;
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.LoginActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class SettingsFragment extends Fragment
 {
     Button btnEdit, btnLogOut, btnAbout, btnHelp;
+
+    FirebaseAuth auth;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -69,10 +74,15 @@ public class SettingsFragment extends Fragment
             }
         });
 
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
+        btnLogOut.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                // alert dialog with sign out code
+            public void onClick(View v)
+            {
+                auth.signOut();
+                getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                getActivity().finish();
             }
         });
 
