@@ -102,7 +102,6 @@ public class SettingsFragment extends Fragment
             public void onClick(View v)
             {
                 Intent i = new Intent(getActivity(), AccountSetupActivity.class);
-                i.putExtra("previous", "settings");
                 getActivity().startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 getActivity().finish();

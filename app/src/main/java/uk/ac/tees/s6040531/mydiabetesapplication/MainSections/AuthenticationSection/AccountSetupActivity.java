@@ -22,7 +22,6 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 public class AccountSetupActivity extends AppCompatActivity implements BasicFragment.sendDataMedical, MedicalFragment.sendDataTime
 {
     User cUser;
-    String previous;
     /**
      * onCreate() method
      * @param savedInstanceState
@@ -33,9 +32,6 @@ public class AccountSetupActivity extends AppCompatActivity implements BasicFrag
         // Retreives the relevant layout file
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setup);
-
-        // Calls getIncomingIntent()
-        getIncomingIntent();
 
         // Initalizes the pagerAdapter
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), cUser);
@@ -72,28 +68,7 @@ public class AccountSetupActivity extends AppCompatActivity implements BasicFrag
         // Sends the data to the time block fragment
         String tag = "android:switcher:" + R.id.view_pager + ":" + 2;
         TimeBlockFragment tf = (TimeBlockFragment) getSupportFragmentManager().findFragmentByTag(tag);
-        tf.dataReceived(u, previous);
-    }
-
-    /**
-     * Retrieves data sent with the intent in the extra field
-     */
-    public void getIncomingIntent()
-    {
-        //Checks if the intent has an extra with the reference previous
-        if(this.getIntent().hasExtra("previous"))
-        {
-            //Grabs the data in the extra
-            previous =  this.getIntent().getStringExtra("previous");
-
-            if(previous.equals("settings"))
-            {
-                SharedPreferences myPref = getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
-                Gson gson = new Gson();
-                String json = myPref.getString(getResources().getString(R.string.user_key),"");
-                cUser = gson.fromJson(json,User.class);
-            }
-        }
+        tf.dataReceived(u);
     }
 
 }

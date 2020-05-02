@@ -54,9 +54,6 @@ public class TimeBlockFragment extends Fragment
     FirebaseFirestore udbRef;
     FirebaseAuth auth;
 
-    // Variable to store previous activity
-    String prev;
-
     /**
      * TimeBlockFragment constructor
      * @param u
@@ -222,10 +219,6 @@ public class TimeBlockFragment extends Fragment
 
                         // Loads the HomeActivity
                         Intent i = new Intent(getActivity(), HomeActivity.class);
-                        if(prev != null)
-                        {
-                            i.putExtra("prev", prev);
-                        }
                         getActivity().startActivity(i);
                         getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                         getActivity().finish();
@@ -261,9 +254,8 @@ public class TimeBlockFragment extends Fragment
      * dataReceived() method
      * @param u
      */
-    public void dataReceived(User u, String p)
+    public void dataReceived(User u)
     {
         user = u;
-        prev = p;
     }
 }
