@@ -26,20 +26,19 @@ public class MedicalFragment  extends Fragment
     ViewPager viewPager;
 
     // Variables for user data
-    User user;
+    User user, cUser;
     sendDataTime sd;
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
     /**
      * MedicalFragment constructor
-     * @param index
+     * @param u
      * @return fragment
      */
-    public static MedicalFragment newInstance(int index)
+    public static MedicalFragment newInstance(User u)
     {
         MedicalFragment fragment = new MedicalFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(ARG_SECTION_NUMBER, index);
+        bundle.putSerializable("current", u);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -52,12 +51,11 @@ public class MedicalFragment  extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        int index = 1;
 
         // Checks for any arguments
         if (getArguments() != null)
         {
-            index = getArguments().getInt(ARG_SECTION_NUMBER);
+            cUser = (User)getArguments().getSerializable("current");
         }
     }
 
@@ -99,6 +97,11 @@ public class MedicalFragment  extends Fragment
         btnBack = (Button)view.findViewById(R.id.btn_go_back);
         btnNext = (Button)view.findViewById(R.id.btn_next);
 
+        if(cUser != null)
+        {
+            setUpDetails();
+        }
+
         // OnClickListener for btnBack
         btnBack.setOnClickListener(new View.OnClickListener()
         {
@@ -139,6 +142,18 @@ public class MedicalFragment  extends Fragment
                 viewPager.setCurrentItem(2);
             }
         });
+    }
+
+    public void setUpDetails()
+    {
+        etHypo.setText(cUser.getHypo());
+        etBottom.setText(cUser.getBottom());
+        etTop.setText(cUser.getTop());
+        etHyper.setText(cUser.getHyper());
+        etDuration.setText(cUser.getDuration());
+        etPrecision.setText(cUser.getPrecision());
+        etPortion.setText(cUser.getPortion());
+        etCorrection.setText(cUser.getCorrection());
     }
 
     /**

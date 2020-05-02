@@ -40,14 +40,14 @@ public class TimeBlockFragment extends Fragment
     // Variables for layout access
     EditText etStart, etEnd, etRatio;
     RecyclerView rvTime;
-    Button btnAdd,btnBack,btnSave;
+    Button btnAdd,btnClear, btnBack,btnSave;
     ViewPager viewPager;
 
     // Variable for recyclerView adapter
     TimeBlockRecyclerViewAdapter adapter;
 
     // Variables for user data
-    User user;
+    User user,cUser;;
     List<TimeBlock> time_blocks = new ArrayList<>();
 
     // Variables for firebase access
@@ -57,18 +57,16 @@ public class TimeBlockFragment extends Fragment
     // Variable to store previous activity
     String prev;
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
-
     /**
      * TimeBlockFragment constructor
-     * @param index
+     * @param u
      * @return fragment
      */
-    public static TimeBlockFragment newInstance(int index)
+    public static TimeBlockFragment newInstance(User u)
     {
         TimeBlockFragment fragment = new TimeBlockFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(ARG_SECTION_NUMBER, index);
+        bundle.putSerializable("current",u);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -82,12 +80,10 @@ public class TimeBlockFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
 
-        int index = 1;
-
         // Checks for any arguments
         if (getArguments() != null)
         {
-            index = getArguments().getInt(ARG_SECTION_NUMBER);
+            cUser = (User)getArguments().getSerializable("current");
         }
     }
 
@@ -126,11 +122,17 @@ public class TimeBlockFragment extends Fragment
         etEnd = (EditText)view.findViewById(R.id.et_end);
         etRatio = (EditText)view.findViewById(R.id.et_carb_ratio);
         btnAdd = (Button)view.findViewById(R.id.btn_add);
+        btnClear = (Button)view.findViewById(R.id.btn_clear);
         btnBack = (Button)view.findViewById(R.id.btn_back);
         btnSave = (Button)view.findViewById(R.id.btn_save);
         rvTime = (RecyclerView)view.findViewById(R.id.rv_time);
         rvTime.setHasFixedSize(true);
         rvTime.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        if(cUser != null)
+        {
+            setUpDetails();
+        }
 
         // OnClickListener for btnAdd
         btnAdd.setOnClickListener(new View.OnClickListener()
@@ -159,6 +161,14 @@ public class TimeBlockFragment extends Fragment
                 etStart.setText("");
                 etEnd.setText("");
                 etRatio.setText("");
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                time_blocks.clear();
+                adapter.notifyItemRangeRemoved(0,0);
             }
         });
 
@@ -234,6 +244,15 @@ public class TimeBlockFragment extends Fragment
                 });
             }
         });
+    }
+
+    public void setUpDetails()
+    {
+        time_blocks = cUser.getTime_blocks();
+
+        // Passes the list to the adapter and then sets the adapter
+        adapter = new TimeBlockRecyclerViewAdapter(getActivity(),time_blocks);
+        rvTime.setAdapter(adapter);
     }
 
     /**

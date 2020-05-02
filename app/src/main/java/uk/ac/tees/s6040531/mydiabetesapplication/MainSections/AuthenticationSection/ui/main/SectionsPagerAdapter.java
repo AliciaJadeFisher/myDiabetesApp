@@ -7,6 +7,8 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**
@@ -15,6 +17,7 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter
 {
+    User cUser;
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_basic, R.string.tab_medical, R.string.tab_time_blocks};
@@ -25,10 +28,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
      * @param context
      * @param fm
      */
-    public SectionsPagerAdapter(Context context, FragmentManager fm)
+    public SectionsPagerAdapter(Context context, FragmentManager fm, User u)
     {
         super(fm);
         mContext = context;
+        cUser = u;
     }
 
     /**
@@ -43,13 +47,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
         switch (position)
         {
             case 0:
-                BasicFragment basic = new BasicFragment();
+                BasicFragment basic = BasicFragment.newInstance(cUser);
                 return basic;
             case 1:
-                MedicalFragment medical = new MedicalFragment();
+                MedicalFragment medical = MedicalFragment.newInstance(cUser);
                 return medical;
             case 2:
-                TimeBlockFragment time = new TimeBlockFragment();
+                TimeBlockFragment time = TimeBlockFragment.newInstance(cUser);
                 return time;
             default:
                 return null;

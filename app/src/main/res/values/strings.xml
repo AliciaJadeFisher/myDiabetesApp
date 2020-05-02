@@ -225,4 +225,6 @@
     <string name="contact_us">Contact Us</string>
     <string name="contact_sec">If you need to contact us for any reason, please use the email provided below. We aim to respond to all emails within 48 hours.</string>
     <string name="contact_em">mydiabetesapplicationhelp@gmail.com</string>
+    <string name="add_time_block">Add Time Block</string>
+    <string name="clear_time_blocks">Clear Time Blocks</string>
 </resources>

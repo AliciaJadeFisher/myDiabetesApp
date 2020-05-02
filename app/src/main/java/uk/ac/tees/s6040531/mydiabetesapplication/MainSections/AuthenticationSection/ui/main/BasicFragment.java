@@ -34,22 +34,24 @@ public class BasicFragment extends Fragment
     FirebaseAuth auth;
 
     // Variables for user data
-    User user;
+    User user, cUser;
     String bs, carb, id;
     sendDataMedical sd;
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
+    ArrayAdapter<CharSequence> bsAdapter;
+    ArrayAdapter<CharSequence> carbAdapter;
+
 
     /**
      * BasicFragment constructor
-     * @param index
+     * @param u
      * @return fragment
      */
-    public static BasicFragment newInstance(int index)
+    public static BasicFragment newInstance(User u)
     {
         BasicFragment fragment = new BasicFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(ARG_SECTION_NUMBER, index);
+        bundle.putSerializable("current",u);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -62,12 +64,11 @@ public class BasicFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        int index = 1;
 
         // Checks for any arguments
         if (getArguments() != null)
         {
-            index = getArguments().getInt(ARG_SECTION_NUMBER);
+            cUser = (User)getArguments().getSerializable("current");
         }
     }
 
@@ -103,9 +104,16 @@ public class BasicFragment extends Fragment
         spnCarb = (Spinner)view.findViewById(R.id.spn_carb);
         btnNext = (Button)view.findViewById(R.id.btn_next);
 
-        // Sets default values
-        bs = "mmol/L";
-        carb = "g";
+        if(cUser != null)
+        {
+            setUpDetails();
+        }
+        else
+        {
+            // Sets default values
+            bs = "mmol/L";
+            carb = "g";
+        }
 
         // OnClickListener for btnNext
         btnNext.setOnClickListener(new View.OnClickListener()
@@ -139,14 +147,27 @@ public class BasicFragment extends Fragment
         });
 
         // ArrayAdapter for spnBs
-        ArrayAdapter<CharSequence> bsAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.bs_types, android.R.layout.simple_spinner_item);
+        bsAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.bs_types, android.R.layout.simple_spinner_item);
         bsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnBs.setAdapter(bsAdapter);
 
         // ArrayAdapter for spnCarb
-        ArrayAdapter<CharSequence> carbAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.carb_types, android.R.layout.simple_spinner_item);
+        carbAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.carb_types, android.R.layout.simple_spinner_item);
         carbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnCarb.setAdapter(carbAdapter);
+    }
+
+    public void setUpDetails()
+    {
+        etName.setText(cUser.getName());
+
+        int bsPos = bsAdapter.getPosition(cUser.getBs_m());
+        spnBs.setSelection(bsPos);
+        bs = cUser.getBs_m();
+
+        int cbPos = carbAdapter.getPosition(cUser.getCb_m());
+        spnCarb.setSelection(cbPos);
+        carb = cUser.getCb_m();
     }
 
     /**

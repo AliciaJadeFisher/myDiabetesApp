@@ -1,8 +1,11 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -18,6 +21,7 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
  */
 public class AccountSetupActivity extends AppCompatActivity implements BasicFragment.sendDataMedical, MedicalFragment.sendDataTime
 {
+    User cUser;
     String previous;
     /**
      * onCreate() method
@@ -30,10 +34,11 @@ public class AccountSetupActivity extends AppCompatActivity implements BasicFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setup);
 
+        // Calls getIncomingIntent()
         getIncomingIntent();
 
         // Initalizes the pagerAdapter
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), cUser);
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         viewPager.setEnabled(false);
@@ -81,6 +86,13 @@ public class AccountSetupActivity extends AppCompatActivity implements BasicFrag
             //Grabs the data in the extra
             previous =  this.getIntent().getStringExtra("previous");
 
+            if(previous.equals("settings"))
+            {
+                SharedPreferences myPref = getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
+                Gson gson = new Gson();
+                String json = myPref.getString(getResources().getString(R.string.user_key),"");
+                cUser = gson.fromJson(json,User.class);
+            }
         }
     }
 

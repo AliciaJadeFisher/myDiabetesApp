@@ -101,7 +101,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/button_background"
-                android:text="Add Time Block"
+                android:text="@string/add_time_block"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="13sp"/>
+            <Button
+                android:id="@+id/btn_clear"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_background"
+                android:text="@string/clear_time_blocks"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="13sp"/>

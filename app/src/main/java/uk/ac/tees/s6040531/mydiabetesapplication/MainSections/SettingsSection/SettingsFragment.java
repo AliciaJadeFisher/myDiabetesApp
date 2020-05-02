@@ -83,6 +83,7 @@ public class SettingsFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         auth = FirebaseAuth.getInstance();
+        cUser = auth.getCurrentUser();
         uDbRef = FirebaseFirestore.getInstance();
 
         myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
@@ -157,7 +158,7 @@ public class SettingsFragment extends Fragment
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                cred = EmailAuthProvider.getCredential(auth.getCurrentUser().getEmail(), dPassword.getText().toString());
+                cred = EmailAuthProvider.getCredential(cUser.getEmail(), dPassword.getText().toString());
                 cUser.reauthenticate(cred).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
