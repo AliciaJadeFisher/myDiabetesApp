@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.SettingsSection.SettingsAboutActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**
@@ -64,16 +66,17 @@ public class RegistrationActivity extends AppCompatActivity
         });
 
         // onClickListener for btnTerms
-//        btnTerms.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                Intent i = new Intent(RegistrationActivity.this, AboutActivity.class);
-//                startActivity(i);
-//                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-//            }
-//        });
+        btnTerms.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(RegistrationActivity.this, SettingsAboutActivity.class);
+                i.putExtra("previous", "registration");
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
 
         // onClickListener for btnReg
         btnReg.setOnClickListener(new View.OnClickListener()

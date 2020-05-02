@@ -1,6 +1,8 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.ui.main;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +53,9 @@ public class TimeBlockFragment extends Fragment
     // Variables for firebase access
     FirebaseFirestore udbRef;
     FirebaseAuth auth;
+
+    // Variable to store previous activity
+    String prev;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -194,11 +200,20 @@ public class TimeBlockFragment extends Fragment
                     public void onSuccess(Void aVoid)
                     {
                         // Informs the user that the save was successful
+
+                        SharedPreferences myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
+                        SharedPreferences.Editor prefEd = myPref.edit();
+                        Gson gson = new Gson();
+                        String json = gson.toJson(user);
+                        prefEd.putString(getResources().getString(R.string.user_key),json);
+                        prefEd.commit();
+
                         Toast.makeText(getActivity(), "Details saved", Toast.LENGTH_SHORT).show();
 
                         // Loads the HomeActivity
                         Intent i = new Intent(getActivity(), HomeActivity.class);
                         i.putExtra("user",user);
+                        i.putExtra("prev", prev);
                         getActivity().startActivity(i);
                         getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                         getActivity().finish();
@@ -225,8 +240,9 @@ public class TimeBlockFragment extends Fragment
      * dataReceived() method
      * @param u
      */
-    public void dataReceived(User u)
+    public void dataReceived(User u, String p)
     {
         user = u;
+        prev = p;
     }
 }

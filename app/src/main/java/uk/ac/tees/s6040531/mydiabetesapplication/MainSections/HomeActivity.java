@@ -157,6 +157,10 @@ public class HomeActivity extends AppCompatActivity
             {
                 navView.setSelectedItemId(R.id.navigation_forum);
             }
+            else if(prev.equals("settings"))
+            {
+                navView.setSelectedItemId(R.id.navigation_settings);
+            }
         }
     }
 }
