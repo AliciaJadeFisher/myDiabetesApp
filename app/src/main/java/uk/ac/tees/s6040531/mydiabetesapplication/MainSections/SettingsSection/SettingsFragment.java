@@ -46,7 +46,7 @@ public class SettingsFragment extends Fragment
     AuthCredential cred;
     FirebaseFirestore uDbRef;
 
-    User user;
+    String id;
     SharedPreferences myPref;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -85,11 +85,9 @@ public class SettingsFragment extends Fragment
         auth = FirebaseAuth.getInstance();
         cUser = auth.getCurrentUser();
         uDbRef = FirebaseFirestore.getInstance();
+        id = auth.getUid();
 
         myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = myPref.getString(getResources().getString(R.string.user_key),"");
-        user = gson.fromJson(json,User.class);
 
         btnEdit = (Button)view.findViewById(R.id.btn_edit);
         btnDelete = (Button)view.findViewById(R.id.btn_delete);
@@ -102,6 +100,7 @@ public class SettingsFragment extends Fragment
             public void onClick(View v)
             {
                 Intent i = new Intent(getActivity(), AccountSetupActivity.class);
+                i.putExtra("previous", "settings");
                 getActivity().startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 getActivity().finish();
@@ -111,7 +110,7 @@ public class SettingsFragment extends Fragment
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteAccount.show();
+                deleteAccount.create().show();
             }
         });
 
@@ -151,6 +150,7 @@ public class SettingsFragment extends Fragment
         deleteAccount.setTitle("Delete Account");
         final EditText dPassword = new EditText(getActivity());
         dPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        dPassword.setHint("Password");
         deleteAccount.setView(dPassword);
         deleteAccount.setPositiveButton("Delete", new DialogInterface.OnClickListener()
         {
@@ -167,7 +167,7 @@ public class SettingsFragment extends Fragment
                         }
                         else
                         {
-                            checkDelete.show();
+                            checkDelete.create().show();
                         }
                     }
                 });
@@ -176,7 +176,7 @@ public class SettingsFragment extends Fragment
         deleteAccount.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+             dialog.dismiss();
             }
         });
 
@@ -190,14 +190,14 @@ public class SettingsFragment extends Fragment
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                cUser.delete().addOnCompleteListener(new OnCompleteListener<Void>()
-                {
+                uDbRef.collection("users").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task)
+                    public void onSuccess(Void aVoid)
                     {
-                        uDbRef.collection("users").document(auth.getUid()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        cUser.delete().addOnCompleteListener(new OnCompleteListener<Void>()
+                        {
                             @Override
-                            public void onSuccess(Void aVoid)
+                            public void onComplete(@NonNull Task<Void> task)
                             {
                                 SharedPreferences.Editor prefEd = myPref.edit();
                                 prefEd.remove(getResources().getString(R.string.user_key));
@@ -209,12 +209,13 @@ public class SettingsFragment extends Fragment
                                 getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                                 getActivity().finish();
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getActivity(),"Error delteing account, please try again", Toast.LENGTH_SHORT).show();
-                            }
                         });
+                    }
+                }).addOnFailureListener(new OnFailureListener()
+                {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(),"Error deleteing account, please try again", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -222,7 +223,7 @@ public class SettingsFragment extends Fragment
         checkDelete.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+                dialog.dismiss();
             }
         });
     }
