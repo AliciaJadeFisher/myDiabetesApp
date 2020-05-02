@@ -37,9 +37,9 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class SettingsFragment extends Fragment
 {
-    Button btnEdit, btnDelete, btnAbout, btnHelp, btnLogOut;
+    Button btnEdit, btnChEmail, btnChPass, btnDelete, btnAbout, btnHelp, btnLogOut;
 
-    AlertDialog.Builder deleteAccount, checkDelete;
+    AlertDialog.Builder deleteAccount, checkDelete, changeEmail, changePass;
 
     FirebaseAuth auth;
     FirebaseUser cUser;
@@ -90,6 +90,8 @@ public class SettingsFragment extends Fragment
         myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
 
         btnEdit = (Button)view.findViewById(R.id.btn_edit);
+        btnChEmail = (Button)view.findViewById(R.id.btn_change_email);
+        btnChPass = (Button)view.findViewById(R.id.btn_change_password);
         btnDelete = (Button)view.findViewById(R.id.btn_delete);
         btnAbout = (Button)view.findViewById(R.id.btn_about);
         btnHelp = (Button)view.findViewById(R.id.btn_help);
@@ -104,6 +106,20 @@ public class SettingsFragment extends Fragment
                 getActivity().startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 getActivity().finish();
+            }
+        });
+
+        btnChEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeEmail.create().show();
+            }
+        });
+
+        btnChPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePass.create().show();
             }
         });
 
@@ -146,7 +162,28 @@ public class SettingsFragment extends Fragment
             }
         });
 
-        deleteAccount = new AlertDialog.Builder(getActivity());
+        changeEmail = new AlertDialog.Builder(getActivity());
+        changeEmail.setTitle("Change Email");
+        final EditText email = new EditText(getActivity());
+        email.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        changeEmail.setView(email);
+        changeEmail.setPositiveButton("Change", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                String em = email.getText().toString();
+                cUser.updateEmail(em);
+            }
+        });
+        changeEmail.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+                deleteAccount = new AlertDialog.Builder(getActivity());
         deleteAccount.setTitle("Delete Account");
         final EditText dPassword = new EditText(getActivity());
         dPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);

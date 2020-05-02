@@ -49,6 +49,46 @@
             android:layout_height="1sp"
             android:background="@android:color/black"
             tools:ignore="SmallSp" />
+        <Button
+            android:id="@+id/btn_change_email"
+            android:layout_width="match_parent"
+            android:layout_gravity="start"
+            android:layout_height="50sp"
+            android:background="@drawable/settings_button_background"
+            android:text="@string/change_email_address"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:gravity="start|center_vertical"/>
+
+        <!--View for section separation-->
+        <View
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@android:color/black"
+            tools:ignore="SmallSp" />
+        <Button
+            android:id="@+id/btn_change_password"
+            android:layout_width="match_parent"
+            android:layout_gravity="start"
+            android:layout_height="50sp"
+            android:background="@drawable/settings_button_background"
+            android:text="@string/change_password"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:gravity="start|center_vertical"/>
+
+        <!--View for section separation-->
+        <View
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@android:color/black"
+            tools:ignore="SmallSp" />
 
         <!--Button that links to the SettingsEditActivity-->
         <Button
