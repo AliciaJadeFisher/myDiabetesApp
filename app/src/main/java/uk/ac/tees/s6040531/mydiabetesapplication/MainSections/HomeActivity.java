@@ -97,6 +97,7 @@ public class HomeActivity extends AppCompatActivity
                 case R.id.navigation_forum:
                     fragMan.beginTransaction().hide(activeFragment).show(forumFragment).commit();
                     activeFragment = forumFragment;
+                    pbHome.setVisibility(View.GONE);
                     return true;
                 // If the settings icon is clicked, hides the current fragment and shows the settings fragment
                 case R.id.navigation_settings:
@@ -155,11 +156,8 @@ public class HomeActivity extends AppCompatActivity
             // If the previous activity was the CreateThreadActivity, it returns the user to the forum activity
             if(prev.equals("CreateThread"))
             {
+                pbHome.setVisibility(View.VISIBLE);
                 navView.setSelectedItemId(R.id.navigation_forum);
-            }
-            else if(prev.equals("settings"))
-            {
-                navView.setSelectedItemId(R.id.navigation_settings);
             }
         }
     }

@@ -37,6 +37,8 @@
         android:textColorHighlight="@color/colorPrimaryDark"
         android:textColorHint="@android:color/darker_gray"
         android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/account_details_et_bg"
+        android:textCursorDrawable="@drawable/et_cursor"
         android:gravity="center"/>
 
     <!--TextView for the blood sugar type-->

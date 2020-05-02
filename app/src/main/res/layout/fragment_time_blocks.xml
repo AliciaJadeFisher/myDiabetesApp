@@ -46,7 +46,9 @@
                 android:gravity="center"
                 android:textColorHighlight="@color/colorPrimaryDark"
                 android:textColorHint="@android:color/darker_gray"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@drawable/account_details_et_bg"
+                android:textCursorDrawable="@drawable/et_cursor"/>
 
             <!--TextView for the blood sugar type-->
             <TextView
@@ -69,7 +71,9 @@
                 android:gravity="center"
                 android:textColorHighlight="@color/colorPrimaryDark"
                 android:textColorHint="@android:color/darker_gray"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@drawable/account_details_et_bg"
+                android:textCursorDrawable="@drawable/et_cursor"/>
 
             <!--TextView for the blood sugar type-->
             <TextView
@@ -92,7 +96,9 @@
                 android:gravity="center"
                 android:textColorHighlight="@color/colorPrimaryDark"
                 android:textColorHint="@android:color/darker_gray"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@drawable/account_details_et_bg"
+                android:textCursorDrawable="@drawable/et_cursor"/>
 
             <!--Button that saves the user's details and links to the HomeActivity-->
             <Button

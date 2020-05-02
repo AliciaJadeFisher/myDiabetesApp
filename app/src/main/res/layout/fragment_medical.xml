@@ -56,7 +56,9 @@
                     android:gravity="center"
                     android:textColorHighlight="@color/colorPrimaryDark"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:background="@drawable/account_details_et_bg"
+                    android:textCursorDrawable="@drawable/et_cursor"/>
             </LinearLayout>
 
             <LinearLayout
@@ -81,7 +83,9 @@
                     android:gravity="center"
                     android:textColorHighlight="@color/colorPrimaryDark"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:background="@drawable/account_details_et_bg"
+                    android:textCursorDrawable="@drawable/et_cursor"/>
             </LinearLayout>
 
             <LinearLayout
@@ -106,7 +110,9 @@
                     android:gravity="center"
                     android:textColorHighlight="@color/colorPrimaryDark"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:background="@drawable/account_details_et_bg"
+                    android:textCursorDrawable="@drawable/et_cursor"/>
             </LinearLayout>
 
             <LinearLayout
@@ -130,7 +136,9 @@
                     android:gravity="center"
                     android:textColorHighlight="@color/colorPrimaryDark"
                     android:textColorHint="@android:color/darker_gray"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:background="@drawable/account_details_et_bg"
+                    android:textCursorDrawable="@drawable/et_cursor"/>
             </LinearLayout>
 
 
@@ -157,7 +165,9 @@
             android:gravity="center"
             android:textColorHighlight="@color/colorPrimaryDark"
             android:textColorHint="@android:color/darker_gray"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/account_details_et_bg"
+            android:textCursorDrawable="@drawable/et_cursor"/>
 
         <!--TextView for the blood sugar type-->
         <TextView
@@ -180,7 +190,9 @@
             android:gravity="center"
             android:textColorHighlight="@color/colorPrimaryDark"
             android:textColorHint="@android:color/darker_gray"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/account_details_et_bg"
+            android:textCursorDrawable="@drawable/et_cursor"/>
 
         <!--TextView for the blood sugar type-->
         <TextView
@@ -203,7 +215,9 @@
             android:gravity="center"
             android:textColorHighlight="@color/colorPrimaryDark"
             android:textColorHint="@android:color/darker_gray"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/account_details_et_bg"
+            android:textCursorDrawable="@drawable/et_cursor"/>
 
         <!--TextView for the blood sugar type-->
         <TextView
@@ -226,7 +240,9 @@
             android:gravity="center"
             android:textColorHighlight="@color/colorPrimaryDark"
             android:textColorHint="@android:color/darker_gray"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/account_details_et_bg"
+            android:textCursorDrawable="@drawable/et_cursor"/>
         <LinearLayout
             android:paddingTop="10dp"
             android:layout_width="match_parent"

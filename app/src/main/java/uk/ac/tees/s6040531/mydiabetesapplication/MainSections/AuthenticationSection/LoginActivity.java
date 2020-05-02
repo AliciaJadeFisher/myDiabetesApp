@@ -46,14 +46,14 @@ public class LoginActivity extends AppCompatActivity
         auth = FirebaseAuth.getInstance();
 
          // Checks if a user is currently logged in
-        if(auth.getCurrentUser() != null)
-        {
-            // Loads the HomeActivity
-            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(i);
-            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-            finish();
-        }
+//        if(auth.getCurrentUser() != null)
+//        {
+//            // Loads the HomeActivity
+//            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+//            startActivity(i);
+//            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+//            finish();
+//        }
 
         // Initialize widgets
         etEmail = (EditText)findViewById(R.id.et_email);

@@ -104,17 +104,6 @@ public class BasicFragment extends Fragment
         spnCarb = (Spinner)view.findViewById(R.id.spn_carb);
         btnNext = (Button)view.findViewById(R.id.btn_next);
 
-        if(cUser != null)
-        {
-            setUpDetails();
-        }
-        else
-        {
-            // Sets default values
-            bs = "mmol/L";
-            carb = "g";
-        }
-
         // OnClickListener for btnNext
         btnNext.setOnClickListener(new View.OnClickListener()
         {
@@ -155,6 +144,17 @@ public class BasicFragment extends Fragment
         carbAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.carb_types, android.R.layout.simple_spinner_item);
         carbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnCarb.setAdapter(carbAdapter);
+
+        if(cUser != null)
+        {
+            setUpDetails();
+        }
+        else
+        {
+            // Sets default values
+            bs = "mmol/L";
+            carb = "g";
+        }
     }
 
     public void setUpDetails()

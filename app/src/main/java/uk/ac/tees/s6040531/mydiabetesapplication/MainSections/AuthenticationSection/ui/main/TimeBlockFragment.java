@@ -222,8 +222,10 @@ public class TimeBlockFragment extends Fragment
 
                         // Loads the HomeActivity
                         Intent i = new Intent(getActivity(), HomeActivity.class);
-                        i.putExtra("user",user);
-                        i.putExtra("prev", prev);
+                        if(prev != null)
+                        {
+                            i.putExtra("prev", prev);
+                        }
                         getActivity().startActivity(i);
                         getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                         getActivity().finish();
