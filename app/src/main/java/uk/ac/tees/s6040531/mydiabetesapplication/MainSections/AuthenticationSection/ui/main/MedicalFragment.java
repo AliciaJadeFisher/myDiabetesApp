@@ -56,7 +56,7 @@ public class MedicalFragment  extends Fragment
         // Checks for any arguments
         if (getArguments() != null)
         {
-            // Gets t
+            // Gets the current user
             cUser = (User)getArguments().getSerializable("current");
         }
     }
@@ -99,8 +99,10 @@ public class MedicalFragment  extends Fragment
         btnBack = (Button)view.findViewById(R.id.btn_go_back);
         btnNext = (Button)view.findViewById(R.id.btn_next);
 
+        // Checks if there is a current user
         if(cUser != null)
         {
+            // Call setUpDetails()
             setUpDetails();
         }
 
@@ -146,8 +148,12 @@ public class MedicalFragment  extends Fragment
         });
     }
 
+    /**
+     * setUpDetails() method : displays the user's details to edit
+     */
     public void setUpDetails()
     {
+        // Displays the medical details
         etHypo.setText(cUser.getHypo());
         etBottom.setText(cUser.getBottom());
         etTop.setText(cUser.getTop());
