@@ -22,24 +22,25 @@ public class SettingsAboutActivity extends AppCompatActivity
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState  instance bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        // Grabs the relevant layout file
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_about);
 
         // Initialises the widgets
-        btnTerms = (Button)findViewById(R.id.btn_terms);
-        btnPrivacy = (Button)findViewById(R.id.btn_privacy);
+        btnTerms = findViewById(R.id.btn_terms);
+        btnPrivacy = findViewById(R.id.btn_privacy);
 
         // onClickListener() for btnTerms
         btnTerms.setOnClickListener(new View.OnClickListener()
         {
             /**
              * onClick() for btnTerms
-             * @param view
+             * @param view - activity view
              */
             @Override
             public void onClick(View view)
@@ -56,7 +57,7 @@ public class SettingsAboutActivity extends AppCompatActivity
         {
             /**
              * onClick() for btnPrivacy
-             * @param view
+             * @param view - activity view
              */
             @Override
             public void onClick(View view)
