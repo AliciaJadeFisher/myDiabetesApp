@@ -17,7 +17,7 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter
 {
-    User cUser;
+    private User cUser;
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_basic, R.string.tab_medical, R.string.tab_time_blocks};
@@ -25,8 +25,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
 
     /**
      * Main constructor
-     * @param context
-     * @param fm
+     * @param context - activity called from
+     * @param fm - activity fragment manager
+     * @param u - current user
      */
     public SectionsPagerAdapter(Context context, FragmentManager fm, User u)
     {
@@ -37,8 +38,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
 
     /**
      * getItem() method
-     * @param position
-     * @return
+     * @param position - position of the selected tab
+     * @return relevant tab
      */
     @Override
     public Fragment getItem(int position)
@@ -47,23 +48,20 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
         switch (position)
         {
             case 0:
-                BasicFragment basic = BasicFragment.newInstance(cUser);
-                return basic;
+                return BasicFragment.newInstance(cUser);
             case 1:
-                MedicalFragment medical = MedicalFragment.newInstance(cUser);
-                return medical;
+                return MedicalFragment.newInstance(cUser);
             case 2:
-                TimeBlockFragment time = TimeBlockFragment.newInstance(cUser);
-                return time;
+                return TimeBlockFragment.newInstance(cUser);
             default:
                 return null;
         }
     }
 
     /**
-     * Returns the position of the tab based on the tab title
-     * @param position
-     * @return
+     * Returns the title of the tab based on the position
+     * @param position - position of selected tab
+     * @return tab position
      */
     @Nullable
     @Override
@@ -74,7 +72,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
 
     /**
      * Returns the number of tabs
-     * @return
+     * @return 3
      */
     @Override
     public int getCount()
