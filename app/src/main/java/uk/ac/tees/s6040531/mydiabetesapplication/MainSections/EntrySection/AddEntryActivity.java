@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -30,6 +31,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeActivity;
@@ -67,13 +69,15 @@ public class AddEntryActivity extends AppCompatActivity
     BloodSugarEntry newEntry = new BloodSugarEntry();
     String meal = "None selected";
 
+    // Variables for shared preferences access
     SharedPreferences myPref;
     Gson gson;
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
+    @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -97,11 +101,11 @@ public class AddEntryActivity extends AppCompatActivity
         h = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         min = Calendar.getInstance().get(Calendar.MINUTE);
 
+        // Formats the date
         String da = d + "/" + m + "/" + y;
         try
         {
             date = new SimpleDateFormat("dd/MM/yyy").parse(da);
-            System.out.println("=== Today : " + date);
         }
         catch (ParseException e)
         {
@@ -109,24 +113,25 @@ public class AddEntryActivity extends AppCompatActivity
         }
 
 
+        // Calls timeFormat()
         time = timeFormat();
 
         // Initialize the widgets
-        tvDate = (TextView)findViewById(R.id.tv_date_display);
+        tvDate = findViewById(R.id.tv_date_display);
         tvDate.setText(d + "/" + (m) + "/" + y);
-        tvTime = (TextView)findViewById(R.id.tv_time_display);
+        tvTime = findViewById(R.id.tv_time_display);
         tvTime.setText(time);
-        tvIF = (TextView)findViewById(R.id.tv_if);
-        tvIC = (TextView)findViewById(R.id.tv_ic);
-        tvIT = (TextView)findViewById(R.id.tv_it);
-        etBs = (EditText)findViewById(R.id.et_bs);
-        etCarbs = (EditText)findViewById(R.id.et_carbs);
-        etNotes = (EditText)findViewById(R.id.et_notes);
-        spnMeal = (Spinner)findViewById(R.id.spn_meal);
-        btnSearch = (Button)findViewById(R.id.btn_search);
-        btnCalc = (Button)findViewById(R.id.btn_calculate);
-        btnSaveEntry = (Button)findViewById(R.id.btn_save_entry);
-        btnBack = (Button)findViewById(R.id.btn_back);
+        tvIF = findViewById(R.id.tv_if);
+        tvIC = findViewById(R.id.tv_ic);
+        tvIT = findViewById(R.id.tv_it);
+        etBs = findViewById(R.id.et_bs);
+        etCarbs = findViewById(R.id.et_carbs);
+        etNotes = findViewById(R.id.et_notes);
+        spnMeal = findViewById(R.id.spn_meal);
+        btnSearch = findViewById(R.id.btn_search);
+        btnCalc = findViewById(R.id.btn_calculate);
+        btnSaveEntry = findViewById(R.id.btn_save_entry);
+        btnBack = findViewById(R.id.btn_back);
 
         // ArrayAdapter for spnMeal
         ArrayAdapter<CharSequence> mealAdapter = ArrayAdapter.createFromResource(AddEntryActivity.this, R.array.meal_types, android.R.layout.simple_spinner_item);
@@ -138,7 +143,7 @@ public class AddEntryActivity extends AppCompatActivity
         {
             /**
              * btnDate onClick() method
-             * @param v
+             * @param v - activity view
              */
             @Override
             public void onClick(View v)
@@ -153,7 +158,7 @@ public class AddEntryActivity extends AppCompatActivity
         {
             /**
              * btnTime onClick() method
-             * @param v
+             * @param v - activity view
              */
             @Override
             public void onClick(View v)
@@ -168,13 +173,12 @@ public class AddEntryActivity extends AppCompatActivity
         {
             /**
              * onClick for btnSearch
-             * @param view
+             * @param view - activity view
              */
             @Override
             public void onClick(View view)
             {
                 // Loads up SearchCarbActivity
-                // Loads the HomeActivity
                 Intent i = new Intent(AddEntryActivity.this, SearchCarbActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
@@ -185,15 +189,13 @@ public class AddEntryActivity extends AppCompatActivity
         btnCalc.setOnClickListener(new View.OnClickListener() {
             /**
              * onCLick for btnCalc
-             * @param view
+             * @param view - activity view
              */
             @Override
             public void onClick(View view)
             {
                 // Sets the date and time
                 newEntry.setDate(date);
-
-                System.out.println("======== Date : " + date);
                 newEntry.setTime(time);
 
                 // Grabs the spinner inputs and sets the object's meal type
@@ -211,7 +213,6 @@ public class AddEntryActivity extends AppCompatActivity
 
                 // Calculates the ratio and iob to be used
                 double ratio = getTimeBlocks();
-
                 double iob = getInsulinOnBoard();
 
                 // Grabs the user inputs
@@ -228,7 +229,7 @@ public class AddEntryActivity extends AppCompatActivity
                     Toast.makeText(AddEntryActivity.this,"Please enter a blood sugar.", Toast.LENGTH_SHORT).show();
                 }
                 // Checks if the blood sugar field contains any characters other than numbers and decimal points
-                else if(!isNumeric(b))
+                else if(isNumeric(b))
                 {
                     // Informs the user of the validation error
                     Toast.makeText(AddEntryActivity.this, "Invalid type in blood sugar, please only input a number", Toast.LENGTH_SHORT).show();
@@ -246,7 +247,7 @@ public class AddEntryActivity extends AppCompatActivity
                         Toast.makeText(AddEntryActivity.this,"Please enter a carbs amount, if no carbs eaten please enter 0.", Toast.LENGTH_SHORT).show();
                     }
                     // Checks if the carbs frield contains any characters other than numbers and decimal points
-                    else if(!isNumeric(c))
+                    else if(isNumeric(c))
                     {
                         // Informs the user of the validation error
                         Toast.makeText(AddEntryActivity.this, "Invalid type in carbohydrates, please only input a number", Toast.LENGTH_SHORT).show();
@@ -271,36 +272,41 @@ public class AddEntryActivity extends AppCompatActivity
                         if(bs >= targetBottom && bs <= targetTop)
                         {
                             // Calculates the total insulin and sets the insulin total and correction
-                            Double totalIn = inF;
                             newEntry.setInsulin_c(0);
-                            newEntry.setInsulin_t(totalIn);
+                            newEntry.setInsulin_t(inF);
 
-                            displayInsulin(prec, inF, 0, totalIn);
+                            // calls displayInsulin() with relevant parameters
+                            displayInsulin(prec, inF, 0, inF);
 
                         }
+                        // Checks if the user has a low blood sugar
                         else if(bs <= hypo)
                         {
+                            // Informs the user to not do any insulin and consume carbohydrates
                             Toast.makeText(AddEntryActivity.this, "Low blood sugar, please do not take any insulin and make sure to eat 25g of carbohydrates. ", Toast.LENGTH_SHORT).show();
                         }
+                        // Checks if the user has a high blood sugar
                         else if(bs >= hyper)
                         {
+                            // Calculates and saves the correction dosgae
                             Double corr = (bs - targetTop) / correction;
                             newEntry.setInsulin_c(corr);
 
+                            // Checks if correction can be ignored due to active insulin
                             if(corr - iob <= 0.0)
                             {
                                 corr = 0.0;
                             }
 
-                            Double totalIn = (inF + corr);
-
+                            // Calculates and saves total insulin
+                            double totalIn = (inF + corr);
                             newEntry.setInsulin_t(totalIn);
 
+                            // calls displayInsulin() with relevant parameters
                             displayInsulin(prec, inF, corr, totalIn);
                         }
                     }
                 }
-
             }
         });
 
@@ -309,7 +315,7 @@ public class AddEntryActivity extends AppCompatActivity
         {
             /**
              * onClick() for btnSaveEntr\y
-             * @param view
+             * @param view - activity view
              */
             @Override
             public void onClick(View view)
@@ -318,37 +324,49 @@ public class AddEntryActivity extends AppCompatActivity
                 String note = etNotes.getText().toString();
                 newEntry.setNotes(note);
 
+                // Adds the new blood sugar entry to the list
                 user.addBlood_sugar(newEntry);
 
-                uDbRef.collection("users").document(auth.getUid()).set(user)
-                        .addOnSuccessListener(new OnSuccessListener<Void>()
+                // Updates the firebase database
+                uDbRef.collection("users").document(Objects.requireNonNull(auth.getUid())).set(user)
+                    .addOnSuccessListener(new OnSuccessListener<Void>()
+                    {
+                        /**
+                         * onSuccess() method
+                         * @param aVoid - method parameter
+                         */
+                        @Override
+                        public void onSuccess(Void aVoid)
                         {
-                            @Override
-                            public void onSuccess(Void aVoid)
-                            {
-                                Toast.makeText(AddEntryActivity.this, "Entry saved", Toast.LENGTH_SHORT).show();
+                            // Informs the user that the entry was saved
+                            Toast.makeText(AddEntryActivity.this, "Entry saved", Toast.LENGTH_SHORT).show();
 
-                                SharedPreferences.Editor prefEd = myPref.edit();
-                                String json = gson.toJson(user);
-                                prefEd.putString(getResources().getString(R.string.user_key),json);
-                                prefEd.commit();
+                            // Updated the local data
+                            SharedPreferences.Editor prefEd = myPref.edit();
+                            String json = gson.toJson(user);
+                            prefEd.putString(getResources().getString(R.string.user_key),json);
+                            prefEd.apply();
 
-
-                                // Loads the HomeActivity
-                                Intent i = new Intent(AddEntryActivity.this, HomeActivity.class);
-                                startActivity(i);
-                                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                                finish();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e)
-                            {
-                                Toast.makeText(AddEntryActivity.this, "Entry failed to save, please try again", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
+                            // Loads the HomeActivity
+                            Intent i = new Intent(AddEntryActivity.this, HomeActivity.class);
+                            startActivity(i);
+                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                            finish();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener()
+                    {
+                        /**
+                         * onFailure() method
+                         * @param e - error
+                         */
+                        @Override
+                        public void onFailure(@NonNull Exception e)
+                        {
+                            // Informs the user that the save failed
+                            Toast.makeText(AddEntryActivity.this, "Entry failed to save, please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    });
             }
         });
     }
@@ -369,11 +387,12 @@ public class AddEntryActivity extends AppCompatActivity
         {
             /**
              * onDateSet() method
-             * @param view
-             * @param year
-             * @param month
-             * @param dayOfMonth
+             * @param view - activity view
+             * @param year - current year
+             * @param month - current month
+             * @param dayOfMonth - current day
              */
+            @SuppressLint("SimpleDateFormat")
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)
             {
@@ -409,9 +428,9 @@ public class AddEntryActivity extends AppCompatActivity
         {
             /**
              * onTimeSet() method
-             * @param view
-             * @param hourOfDay
-             * @param minute
+             * @param view - activity view
+             * @param hourOfDay - current hour
+             * @param minute - current minute
              */
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute)
@@ -430,6 +449,11 @@ public class AddEntryActivity extends AppCompatActivity
         timePickerDialog.show();
     }
 
+    /**
+     * getTimeBlocks() method
+     * @return ratio
+     */
+    @SuppressLint("SimpleDateFormat")
     public double getTimeBlocks()
     {
         // Time variables
@@ -437,7 +461,7 @@ public class AddEntryActivity extends AppCompatActivity
         Date st;
         Date et;
         SimpleDateFormat tF = new SimpleDateFormat("HH:mm");
-        Double ratio = 123.123;
+        double ratio = 123.123;
 
         try
         {
@@ -462,13 +486,11 @@ public class AddEntryActivity extends AppCompatActivity
 
                     // Checks if the current time is within the time block range,
                     // includes if it is equal to one of the boundary times
-                    if((ct.after(st) && ct.before(et)))
+                    if((Objects.requireNonNull(ct).after(st) && ct.before(et)))
                     {
                         ratio =  Double.parseDouble(t.getRatio());
                     }
                 }
-
-
             }
         }
         catch (ParseException e)
@@ -476,35 +498,49 @@ public class AddEntryActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
+        // Returns the correct ration
         return ratio;
     }
 
+    /**
+     * getInsulinOnboard() method
+     * @return insRem
+     */
+    @SuppressLint("SimpleDateFormat")
     public double getInsulinOnBoard()
     {
+        // Time variables
         Date ct;
         Date rt;
         SimpleDateFormat tF = new SimpleDateFormat("HH:mm");
 
         try
         {
+            // Formats times and works out duration range
             ct = tF.parse(time);
-            rt = new Date(ct.getTime() - HOURS.toMillis(5));
+            rt = new Date(Objects.requireNonNull(ct).getTime() - HOURS.toMillis(Integer.parseInt(user.getDuration())));
 
+            // Loops through blood sugar entries
             for(BloodSugarEntry bse : user.getBlood_sugars())
             {
+                // Checks if the entry date is today
                 if(bse.getDate().equals(date))
                 {
+                    // Grabs the entry time
                     Date bt = tF.parse(bse.getTime());
 
-                    if(bt.after(rt))
+                    // Checks if the entry time is int the duration range
+                    if(Objects.requireNonNull(bt).after(rt))
                     {
+                        // Calculates the differnce between current time and duration time
                         long diffSec = (bt.getTime() - rt.getTime()) / 1000;
                         int diffHour =(5 - (int) diffSec / 3600);
 
+                        // Calculates percentage
                         double percRem = 1 - (diffHour * 0.2);
-                        double insRem = bse.getInsulin_t() * percRem;
 
-                        return insRem ;
+                        // Calculates percentage of insulin remaining and returns it
+                        return bse.getInsulin_t() * percRem;
                     }
                 }
             }
@@ -519,13 +555,14 @@ public class AddEntryActivity extends AppCompatActivity
 
     /**
      * displayInsulin() method
-     * @param prec
-     * @param food
-     * @param corr
-     * @param total
+     * @param prec - insuliln precision
+     * @param food - insulin for food
+     * @param corr - insulin for correction
+     * @param total - total insulin
      */
     public void displayInsulin (String prec, double food, double corr, double total)
     {
+        // Checks the precision does not equal 1
         if(!prec.equals("1"))
         {
             // Formats the insulin based on the user's entered precision
@@ -544,26 +581,38 @@ public class AddEntryActivity extends AppCompatActivity
             total = Math.rint(total);
         }
 
+        // TextView displays
+        String foodDisplay = "Insulin (food) : " + food + "U";
+        String corrDisplay = "Insulin (correction) : " + corr + "U";
+        String totalDisplay = "Total Insulin : " + total + "U";
+
         // Displays the insulin values
-        tvIF.setText("Insulin (food) : " + food + "U");
-        tvIC.setText("Insulin (correction) : " + corr + "U");
-        tvIT.setText("Total Insulin : " + total + "U");
+        tvIF.setText(foodDisplay);
+        tvIC.setText(corrDisplay);
+        tvIT.setText(totalDisplay);
     }
 
     /**
      * isNumeric() method
-     * @param val
+     * @param val - val to check
      * @return  numPat.matcher(val).matches()
      */
     public boolean isNumeric(String val)
     {
+        // Matcher pattern
         Pattern numPat = Pattern.compile("\\d+(\\.\\d+)?");
 
-        return numPat.matcher(val).matches();
+        // Returns if a value is numeric
+        return !numPat.matcher(val).matches();
     }
 
+    /**
+     * timeFormat() method
+     * @return formatted time
+     */
     public String timeFormat()
     {
+        // Formats the currently stored time
         String hz = (h >= 10)? Integer.toString(h) : String.format("0%s", Integer.toString(h));
         String mz = (min >= 10)? Integer.toString(min) : String.format("0%s", Integer.toString(min));
         return hz + ":" + mz;
