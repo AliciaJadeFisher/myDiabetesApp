@@ -8,13 +8,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -41,7 +41,7 @@ public class ForumFragment extends Fragment
     // Variables for layout access
     static TextView tvNetCon;
     static RecyclerView threadRecycler;
-    static Button btnAddThread;
+    static FloatingActionButton fabAddThread;
 
     // Variable for thread list
     List<ForumThread> adapterList = new ArrayList<>();
@@ -112,7 +112,7 @@ public class ForumFragment extends Fragment
 
         // Initializes the widgets
         tvNetCon = (TextView)view.findViewById(R.id.tv_net_con);
-        btnAddThread = (Button)view.findViewById(R.id.btn_addThread);
+        fabAddThread = (FloatingActionButton) view.findViewById(R.id.fab_add_thread);
         threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
 
         // Calls checkCon()
@@ -121,11 +121,11 @@ public class ForumFragment extends Fragment
         // Calls setAdapter()
         setAdapter();
 
-        // onClickListener() for btnAddThread
-        btnAddThread.setOnClickListener(new View.OnClickListener()
+        // onClickListener() for fabAddThread
+        fabAddThread.setOnClickListener(new View.OnClickListener()
         {
             /**
-             * onClick() for btnAddThread
+             * onClick() for fabAddThread
              * @param v
              */
             @Override
@@ -152,12 +152,12 @@ public class ForumFragment extends Fragment
         {
             tvNetCon.setText("");
             tvNetCon.setVisibility(View.GONE);
-            btnAddThread.setVisibility(View.VISIBLE);
+            fabAddThread.setVisibility(View.VISIBLE);
             threadRecycler.setVisibility(View.VISIBLE);
         }
         else
         {
-            btnAddThread.setVisibility(View.GONE);
+            fabAddThread.setVisibility(View.GONE);
             threadRecycler.setVisibility(View.GONE);
             tvNetCon.setVisibility(View.VISIBLE);
             tvNetCon.setText("Error connecting to network. Please connect to a network and try again.");
