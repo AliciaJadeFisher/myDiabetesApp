@@ -29,14 +29,10 @@
 
     <!--Navigation Strings -->
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="create_account">Creating account...</string>
     <string name="create_failed">Create account failed, please try again</string>
     <string name="logo_icon">Logo icon</string>
-    <string name="account_setup">Account Setup</string>
     <string name="blood_sugar_measurement">Blood Sugar measurement :</string>
-    <string name="mg_dl">mg/dL</string>
     <string name="carbohydrate_measurement">Carbohydrate measurement:</string>
     <string name="blood_sugar_target_ranges">Blood Sugar Target Ranges :</string>
     <string name="hypo">Hypo:</string>
@@ -52,7 +48,6 @@
     <string name="insulin_precision">Insulin Precision:</string>
     <string name="_0_1">0.1</string>
     <string name="carbohydrate_portion">Carbohydrate Portion:</string>
-    <string name="_10">10</string>
     <string name="_10g">10g</string>
     <string name="carbohydrate_ratio_insulin_for_1_cp">Carbohydrate Ratio (insulin for 1 CP):</string>
     <string name="_4">4</string>
@@ -78,13 +73,7 @@
     <string name="ratio">Ratio</string>
     <string name="show_ratio">Show ratio</string>
     <string name="create_successs">Create account successful!</string>
-    <string name="add_entry">Add Entry</string>
     <string name="forum">Forum</string>
-    <string name="home_fragment">This is the home fragment</string>
-    <string name="this_is_the_forum_fragment">This is the forum fragment</string>
-    <string name="this_is_the_add_entry_fragment">This is the add entry fragment</string>
-    <string name="this_is_the_thread_fragment">This is the thread fragment</string>
-    <string name="thread_fragment">Thread Fragment</string>
     <string name="threads">Threads</string>
     <string name="title">Title</string>
     <string name="show_thread_title">show thread title</string>
@@ -107,8 +96,6 @@
 
     <string name="entry_date">Entry Date :</string>
     <string name="entry_time">Entry Time :</string>
-    <string name="set_time">Set Time</string>
-    <string name="set_date">Set Date</string>
     <string name="dd_mm_yyyy">dd/mm/yyyy</string>
     <string name="hh_mm">hh:mm</string>
     <string name="blood_sugar">Blood Sugar:</string>
@@ -125,15 +112,7 @@
     <string name="food_item_here">Food item here</string>
     <string name="carbohydrates_per_100g">Carbohydrates per 100g:</string>
     <string name="carbohydrates_per_serving_xg">Carbohydrates per serving(xg) :</string>
-    <string name="records">Records</string>
-    <string name="graph">Graph</string>
-    <string name="daily_average">Daily Average</string>
-    <string name="monthly_average">Monthly Average</string>
-    <string name="weekly_average">Weekly Average</string>
-    <string name="hello">Hello</string>
     <string name="today">Today</string>
-    <string name="this_week">This Week</string>
-    <string name="this_month">This Month</string>
     <string name="all">All</string>
     <string name="week">Week</string>
     <string name="month">Month</string>
@@ -142,24 +121,13 @@
     <string name="insulin">Insulin:</string>
     <string name="show_insulin_here">Show insulin here</string>
     <string name="show_blood_sugar_here">Show blood sugar here</string>
-    <string name="graph_will_go_here">Graph will go here</string>
     <string name="time">Time:</string>
     <string name="show_time_here">Show time here</string>
     <string name="loading">Loading...</string>
     <string name="average">Average</string>
     <string name="hypos">Hypos</string>
     <string name="hypers">Hypers</string>
-    <string name="bi_week">Bi-Week</string>
     <string name="record_details">Record Details</string>
-    <string name="record_date_date_here">Record Date: (date here)</string>
-    <string name="record_time_time_here">Record Time: (time here)</string>
-    <string name="blood_sugar_bs_here">Blood Sugar: (bs here)</string>
-    <string name="carbohydrates_carbs_here">Carbohydrates: (carbs here)</string>
-    <string name="insulin_food_inf_here">Insulin (food): (inf here)</string>
-    <string name="insulin_total_int_here">Insulin (total): (int here)</string>
-    <string name="note_note_here">Note: (note here)</string>
-    <string name="insulin_correction_inc_here">Insulin (correction): (inc here)</string>
-    <string name="meal_type_meal_here">Meal Type: (meal here)</string>
 
     <!-- Settings Strings -->
     <string name="settings">Settings</string>
@@ -235,7 +203,6 @@
     <string name="change_password">Change Password</string>
     <string name="record_date">Record Date:</string>
     <string name="record_time">Record Time:</string>
-    <string name="show_blood_sugar_here">Show blood sugar here</string>
     <string name="show_carbs_here">Show carbs here</string>
     <string name="show_meal_type_here">Show meal type here</string>
     <string name="insulin_food">Insulin (Food):</string>
