@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,18 +57,18 @@ public class LoginActivity extends AppCompatActivity
         }
 
         // Initialize widgets
-        etEmail = (EditText)findViewById(R.id.et_email);
-        etPassword = (EditText)findViewById(R.id.et_password);
-        btnReg = (Button)findViewById(R.id.btn_reg);
-        btnLogin = (Button)findViewById(R.id.btn_login);
-        btnReset = (Button)findViewById(R.id.btn_reset_password);
+        etEmail = findViewById(R.id.et_email);
+        etPassword = findViewById(R.id.et_password);
+        btnReg = findViewById(R.id.btn_reg);
+        btnLogin = findViewById(R.id.btn_login);
+        btnReset = findViewById(R.id.btn_reset_password);
 
         // onClickListener for btnReg
         btnReg.setOnClickListener(new View.OnClickListener()
         {
             /**
              * onClick() for btnReg
-             * @param v
+             * @param v - activity view
              */
             @Override
             public void onClick(View v)
@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity
         {
             /**
              * onClick for btnReset()
-             * @param v
+             * @param v - activity view
              */
             @Override
             public void onClick(View v)
@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity
         {
             /**
              * onClick() for btnLogin
-             * @param v
+             * @param v - activity view
              */
             @Override
             public void onClick(View v)
@@ -154,6 +154,5 @@ public class LoginActivity extends AppCompatActivity
                 }
             }
         });
-
     }
 }
