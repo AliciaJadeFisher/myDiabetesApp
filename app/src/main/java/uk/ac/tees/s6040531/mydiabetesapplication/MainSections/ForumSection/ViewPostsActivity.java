@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
@@ -55,7 +54,7 @@ public class ViewPostsActivity extends AppCompatActivity
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,10 +68,10 @@ public class ViewPostsActivity extends AppCompatActivity
         postDbRef = FirebaseFirestore.getInstance();
 
         // Initialize widgets
-        fabNewPost = (FloatingActionButton)findViewById(R.id.fab_add_post);
-        threadName = (TextView)findViewById(R.id.tv_title);
-        threadDesc = (TextView)findViewById(R.id.tv_desc);
-        postRecycler = (RecyclerView)findViewById(R.id.recyclerViewPosts);
+        fabNewPost = findViewById(R.id.fab_add_post);
+        threadName = findViewById(R.id.tv_title);
+        threadDesc = findViewById(R.id.tv_desc);
+        postRecycler = findViewById(R.id.recyclerViewPosts);
 
         // Call required methods
         getIncomingIntent();
@@ -83,7 +82,7 @@ public class ViewPostsActivity extends AppCompatActivity
         {
             /**
              * onClick() for fabNewPost
-             * @param v
+             * @param v - activity view
              */
             @Override
             public void onClick(View v)
@@ -113,27 +112,13 @@ public class ViewPostsActivity extends AppCompatActivity
                 if (task.isSuccessful())
                 {
                     // Loops through each post
-                    for (QueryDocumentSnapshot document : task.getResult())
+                    for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult()))
                     {
                         // Grabs the current post
                         ThreadPost  p = document.toObject(ThreadPost.class);
 
-                        // Updates the post id
+                        // Grabs the post id
                         p.setPostID(document.getId());
-                        postDbRef.collection("thread_posts").document(p.getPostID()).update("postID",document.getId())
-                                .addOnSuccessListener(new OnSuccessListener<Void>()
-                                {
-                                    @Override
-                                    public void onSuccess(Void aVoid)
-                                    {
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-
-                                    }
-                                });
 
                         //Checks if the current post belongs to the current thread
                         if(p.getThreadID().equals(thread.getThreadID()))
@@ -176,7 +161,7 @@ public class ViewPostsActivity extends AppCompatActivity
             thread = (ForumThread) this.getIntent().getSerializableExtra("thread");
 
             //Sets the text of the EditText
-            threadName.setText(thread.getTitle());
+            threadName.setText(Objects.requireNonNull(thread).getTitle());
             threadDesc.setText(thread.getDesc());
         }
     }
