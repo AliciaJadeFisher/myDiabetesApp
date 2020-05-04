@@ -39,6 +39,7 @@ public class BasicFragment extends Fragment
     String bs, carb, id;
     sendDataMedical sd;
 
+    // Varriables for array adapters for spinners
     ArrayAdapter<CharSequence> bsAdapter;
     ArrayAdapter<CharSequence> carbAdapter;
 
@@ -69,6 +70,7 @@ public class BasicFragment extends Fragment
         // Checks for any arguments
         if (getArguments() != null)
         {
+            // Grabs the current user
             cUser = (User)getArguments().getSerializable("current");
         }
     }
@@ -146,8 +148,10 @@ public class BasicFragment extends Fragment
         carbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnCarb.setAdapter(carbAdapter);
 
+        // Checks if there is a current user
         if(cUser != null)
         {
+            // Calls setUpDetails()
             setUpDetails();
         }
         else
@@ -158,14 +162,20 @@ public class BasicFragment extends Fragment
         }
     }
 
+    /**
+     * setUpDetails() method : displays the user's details to edit
+     */
     public void setUpDetails()
     {
+        // Displays the name
         etName.setText(cUser.getName());
 
+        // Displays the blood sugar measurement
         int bsPos = bsAdapter.getPosition(cUser.getBs_m());
         spnBs.setSelection(bsPos);
         bs = cUser.getBs_m();
 
+        // Displays the carbs measurement
         int cbPos = carbAdapter.getPosition(cUser.getCb_m());
         spnCarb.setSelection(cbPos);
         carb = cUser.getCb_m();

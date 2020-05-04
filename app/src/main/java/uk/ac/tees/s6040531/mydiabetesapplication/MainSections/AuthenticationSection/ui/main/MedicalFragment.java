@@ -56,6 +56,7 @@ public class MedicalFragment  extends Fragment
         // Checks for any arguments
         if (getArguments() != null)
         {
+            // Gets t
             cUser = (User)getArguments().getSerializable("current");
         }
     }
