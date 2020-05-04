@@ -38,7 +38,6 @@ public class CreatePostActivity extends AppCompatActivity
     //Variables used for thread and post access
     ForumThread thread;
     ThreadPost post;
-    String pID;
 
     //Variables used for Firebase access
     FirebaseFirestore threadDbRef, postDbRef;
@@ -47,7 +46,7 @@ public class CreatePostActivity extends AppCompatActivity
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,15 +55,16 @@ public class CreatePostActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
+        // Grabs the current user
         SharedPreferences myPref = getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = myPref.getString(getResources().getString(R.string.user_key),"");
         user = gson.fromJson(json,User.class);
 
         //Initialises the widgets
-        postContent = (EditText)findViewById(R.id.et_post);
-        btnCreate = (Button) findViewById(R.id.btn_create);
-        btnDelete = (Button)findViewById(R.id.btn_delete);
+        postContent = findViewById(R.id.et_post);
+        btnCreate = findViewById(R.id.btn_create);
+        btnDelete = findViewById(R.id.btn_delete);
 
         // Calls getIncomingIntent()
         getIncomingIntent();
@@ -72,11 +72,17 @@ public class CreatePostActivity extends AppCompatActivity
         //Retrieves the current user
         auth = FirebaseAuth.getInstance();
 
+        // Intialises database references
         threadDbRef = FirebaseFirestore.getInstance();
         postDbRef = FirebaseFirestore.getInstance();
 
+        // onClickListener for btnCreate
         btnCreate.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnCreate
+             * @param v - activity view
+             */
             @Override
             public void onClick(View v)
             {
@@ -102,13 +108,23 @@ public class CreatePostActivity extends AppCompatActivity
                         threadDbRef.collection("threads").document(thread.getThreadID()).update("posts",Integer.toString(posts))
                                 .addOnSuccessListener(new OnSuccessListener<Void>()
                                 {
+                                    /**
+                                     * onSuccess() method
+                                     * @param aVoid - method parameter
+                                     */
                                     @Override
                                     public void onSuccess(Void aVoid)
                                     {
-                                        Toast.makeText(CreatePostActivity.this,"Post created." ,Toast.LENGTH_SHORT);
+                                        // Informs the user that the post was successful
+                                        Toast.makeText(CreatePostActivity.this,"Post created." ,Toast.LENGTH_SHORT).show();
                                     }
                                 })
-                                .addOnFailureListener(new OnFailureListener() {
+                                .addOnFailureListener(new OnFailureListener()
+                                {
+                                    /**
+                                     * onFailure() method
+                                     * @param e - error
+                                     */
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                     }
@@ -117,10 +133,14 @@ public class CreatePostActivity extends AppCompatActivity
                 })
                 .addOnFailureListener(new OnFailureListener()
                 {
+                    /**
+                     * onFailure() method
+                     * @param e - error
+                     */
                     @Override
                     public void onFailure(@NonNull Exception e)
                     {
-                        Toast.makeText(CreatePostActivity.this, "Post failed, please try again.",Toast.LENGTH_SHORT);
+                        Toast.makeText(CreatePostActivity.this, "Post failed, please try again.",Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -128,7 +148,6 @@ public class CreatePostActivity extends AppCompatActivity
                 onBackPressed();
             }
         });
-
     }
 
     /**
