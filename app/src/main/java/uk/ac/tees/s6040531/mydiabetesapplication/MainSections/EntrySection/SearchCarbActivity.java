@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -31,13 +32,19 @@ import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.FoodListViewAd
  */
 public class SearchCarbActivity extends AppCompatActivity
 {
+    // Variable for broadcast receiver
     private BroadcastReceiver bRec;
 
     // Variables for layout access
+    @SuppressLint("StaticFieldLeak")
     static TextView tvNetCon;
+    @SuppressLint("StaticFieldLeak")
     static SearchView sv;
+    @SuppressLint("StaticFieldLeak")
     static TextView tvDisplay;
+    @SuppressLint("StaticFieldLeak")
     static Button btnSearch;
+    @SuppressLint("StaticFieldLeak")
     static ListView lvResults;
 
     // Variable for adapter
@@ -45,7 +52,7 @@ public class SearchCarbActivity extends AppCompatActivity
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,11 +62,11 @@ public class SearchCarbActivity extends AppCompatActivity
         setContentView(R.layout.activity_search_carb);
 
         // Initializes the widgets
-        tvNetCon = (TextView)findViewById(R.id.tv_net_con);
-        sv = (SearchView)findViewById(R.id.sv_food);
-        tvDisplay = (TextView)findViewById(R.id.tv_noRes);
-        btnSearch = (Button)findViewById(R.id.btn_search);
-        lvResults = (ListView)findViewById(R.id.lv_results);
+        tvNetCon = findViewById(R.id.tv_net_con);
+        sv = findViewById(R.id.sv_food);
+        tvDisplay = findViewById(R.id.tv_noRes);
+        btnSearch = findViewById(R.id.btn_search);
+        lvResults = findViewById(R.id.lv_results);
 
         // Calls checkCon()
         checkCon();
@@ -69,7 +76,7 @@ public class SearchCarbActivity extends AppCompatActivity
         {
             /**
              * onClick() for btnSearch
-             * @param view
+             * @param view - activity view
              */
             @Override
             public void onClick(View view)
@@ -92,18 +99,31 @@ public class SearchCarbActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * checkCon() method
+     */
     public void checkCon()
     {
+        // Creates and registers a new broadcast receiver
         bRec = new SearchNetworkChecker();
         registerReceiver(bRec, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
+    /**
+     * showSearch() method
+     * @param state - network connection
+     */
+    @SuppressLint("SetTextI18n")
     public static void showSearch(Boolean state)
     {
+        // Checks if there is a network connection
         if(state)
         {
+            // Hides the network TextView
             tvNetCon.setText("");
             tvNetCon.setVisibility(View.GONE);
+
+            // Shows the widgets
             sv.setVisibility(View.VISIBLE);
             tvDisplay.setVisibility(View.VISIBLE);
             btnSearch.setVisibility(View.VISIBLE);
@@ -111,11 +131,14 @@ public class SearchCarbActivity extends AppCompatActivity
         }
         else
         {
+            // Hides the widgets
             sv.setVisibility(View.GONE);
             tvDisplay.setVisibility(View.GONE);
             btnSearch.setVisibility(View.GONE);
             lvResults.setVisibility(View.GONE);
             tvNetCon.setVisibility(View.VISIBLE);
+
+            // Shows the network TextView
             tvNetCon.setText("Error connecting to network. Please connect to a network and try again.");
 
         }
@@ -123,7 +146,7 @@ public class SearchCarbActivity extends AppCompatActivity
 
     /**
      * getApiResult() method
-     * @param s
+     * @param s - search string
      */
     public void getApiResult(String s)
     {
@@ -142,7 +165,7 @@ public class SearchCarbActivity extends AppCompatActivity
                 {
                     /**
                      * onResponse() method
-                     * @param response
+                     * @param response - api response
                      */
                     @Override
                     public void onResponse(String response)
@@ -156,8 +179,11 @@ public class SearchCarbActivity extends AppCompatActivity
                             adapter = new FoodListViewAdapter(SearchCarbActivity.this, object.getJSONArray("products"));
                             lvResults.setAdapter(adapter);
 
+                            // TextView display
+                            String display ="No. results : " + adapter.getCount() ;
+
                             // Displays the number of relevant results
-                            tvDisplay.setText("No. results : " + adapter.getCount());
+                            tvDisplay.setText(display);
                         }
                         catch(JSONException e)
                         {
@@ -171,7 +197,7 @@ public class SearchCarbActivity extends AppCompatActivity
                 {
                     /**
                      * onErrorResponse() method
-                     * @param error
+                     * @param error - error
                      */
                     @Override
                     public void onErrorResponse(VolleyError error)
@@ -186,11 +212,15 @@ public class SearchCarbActivity extends AppCompatActivity
         queue.add(stringRequest);
     }
 
+    /**
+     * onPause() method
+     */
     @Override
     public void onPause()
     {
         super.onPause();
 
+        // Unregisters broadcast receiver
         try
         {
             unregisterReceiver(bRec);
