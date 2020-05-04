@@ -36,12 +36,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
+
+        <RelativeLayout
             android:paddingTop="56dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_title"
@@ -50,108 +49,259 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center_horizontal"
                 android:text="@string/record_details"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 android:textSize="18sp"/>
 
             <TextView
-                android:id="@+id/tv_date"
-                android:layout_width="match_parent"
+                android:id="@+id/tv_dateTitle"
+                android:layout_width="200dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="@string/record_date_date_here"
-                android:textColor="@android:color/black"
+                android:layout_marginBottom="10dp"
+                android:gravity="end"
+                android:layout_below="@id/tv_title"
+                android:text="@string/record_date"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="start"
+                android:layout_below="@id/tv_title"
+                android:layout_toEndOf="@+id/tv_dateTitle"
+                android:text="@string/show_date_here"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_timeTitle"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="end"
+                android:layout_below="@id/tv_dateTitle"
+                android:text="@string/record_time"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"/>
+
             <TextView
                 android:id="@+id/tv_time"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center"
-                android:text="@string/record_time_time_here"
-                android:textColor="@android:color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="start"
+                android:layout_below="@id/tv_dateTitle"
+                android:layout_toEndOf="@+id/tv_timeTitle"
+                android:text="@string/show_time_here"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_bsTitle"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="end"
+                android:layout_below="@id/tv_timeTitle"
+                android:text="@string/blood_sugar"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"/>
+
             <TextView
                 android:id="@+id/tv_bs"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center"
-                android:text="@string/blood_sugar_bs_here"
-                android:textColor="@android:color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="start"
+                android:layout_below="@id/tv_timeTitle"
+                android:layout_toEndOf="@+id/tv_bsTitle"
+                android:text="@string/show_blood_sugar_here"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_carbsTitle"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="end"
+                android:layout_below="@id/tv_bsTitle"
+                android:text="@string/carbohydrates"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_carbs"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center"
-                android:text="@string/carbohydrates_carbs_here"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"/>
-            <TextView
-                android:id="@+id/tv_meal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center"
-                android:text="@string/meal_type_meal_here"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"/>
-            <TextView
-                android:id="@+id/tv_inFood"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center"
-                android:text="@string/insulin_food_inf_here"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"/>
-            <TextView
-                android:id="@+id/tv_inCorr"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center"
-                android:text="@string/insulin_correction_inc_here"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"/>
-            <TextView
-                android:id="@+id/tv_inTotal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center"
-                android:text="@string/insulin_total_int_here"
-                android:textColor="@android:color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="start"
+                android:layout_below="@id/tv_bsTitle"
+                android:layout_toEndOf="@+id/tv_carbsTitle"
+                android:text="@string/show_carbs_here"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
 
             <TextView
-                android:id="@+id/tv_note_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="30dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center"
-                android:text="@string/notes"
-                android:textColor="@android:color/black"
+                android:id="@+id/tv_mealTitle"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="end"
+                android:layout_below="@id/tv_carbsTitle"
+                android:text="@string/meal_type"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="start"
+                android:layout_below="@id/tv_carbsTitle"
+                android:layout_toEndOf="@+id/tv_mealTitle"
+                android:text="@string/show_meal_type_here"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_inFTitle"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="end"
+                android:layout_below="@id/tv_mealTitle"
+                android:text="@string/insulin_food"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_inFood"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="start"
+                android:layout_below="@id/tv_mealTitle"
+                android:layout_toEndOf="@+id/tv_inFTitle"
+                android:text="@string/show_insulin_for_food_here"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_inCTitle"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="end"
+                android:layout_below="@id/tv_inFTitle"
+                android:text="@string/insulin_correction"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_inCorr"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="start"
+                android:layout_below="@id/tv_inFTitle"
+                android:layout_toEndOf="@+id/tv_inCTitle"
+                android:text="@string/show_insulin_for_correction_here"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_inTTitle"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="end"
+                android:layout_below="@id/tv_inCTitle"
+                android:text="@string/total_insulin"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_inTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="start"
+                android:layout_below="@id/tv_inCTitle"
+                android:layout_toEndOf="@+id/tv_inTTitle"
+                android:text="@string/show_insulin_total_here"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_noteTitle"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:layout_below="@id/tv_inTTitle"
+                android:text="@string/notes"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"/>
+
             <TextView
                 android:id="@+id/tv_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="30dp"
-                android:layout_marginTop="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="@string/note_note_here"
-                android:textColor="@android:color/black"
+                android:layout_below="@id/tv_noteTitle"
+                android:text="@string/show_notes_here"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
-
-
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

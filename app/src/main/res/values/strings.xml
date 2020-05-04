@@ -233,4 +233,16 @@
     <string name="reset_password">Reset Password</string>
     <string name="change_email_address">Change Email Address</string>
     <string name="change_password">Change Password</string>
+    <string name="record_date">Record Date:</string>
+    <string name="record_time">Record Time:</string>
+    <string name="show_blood_sugar_here">Show blood sugar here</string>
+    <string name="show_carbs_here">Show carbs here</string>
+    <string name="show_meal_type_here">Show meal type here</string>
+    <string name="insulin_food">Insulin (Food):</string>
+    <string name="insulin_correction">Insulin (Correction):</string>
+    <string name="show_insulin_for_food_here">Show insulin for food here</string>
+    <string name="show_insulin_for_correction_here">Show insulin for correction here</string>
+    <string name="total_insulin">Total Insulin:</string>
+    <string name="show_insulin_total_here">Show insulin total here</string>
+    <string name="show_notes_here">Show notes here</string>
 </resources>
