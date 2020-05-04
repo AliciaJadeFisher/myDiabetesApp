@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
@@ -39,28 +40,27 @@ import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.TimeBlockRecyc
 public class TimeBlockFragment extends Fragment
 {
     // Variables for layout access
-    EditText etStart, etEnd, etRatio;
-    RecyclerView rvTime;
-    Button btnAdd,btnClear, btnBack,btnSave;
-    ViewPager viewPager;
+    private EditText etStart, etEnd, etRatio;
+    private RecyclerView rvTime;
+    private ViewPager viewPager;
 
     // Variable for recyclerView adapter
-    TimeBlockRecyclerViewAdapter adapter;
+    private TimeBlockRecyclerViewAdapter adapter;
 
     // Variables for user data
-    User user,cUser;;
-    List<TimeBlock> time_blocks = new ArrayList<>();
+    private User user,cUser;
+    private List<TimeBlock> time_blocks = new ArrayList<>();
 
     // Variables for firebase access
-    FirebaseFirestore udbRef;
-    FirebaseAuth auth;
+    private FirebaseFirestore udbRef;
+    private FirebaseAuth auth;
 
     /**
      * TimeBlockFragment constructor
-     * @param u
+     * @param u - current user
      * @return fragment
      */
-    public static TimeBlockFragment newInstance(User u)
+    static TimeBlockFragment newInstance(User u)
     {
         TimeBlockFragment fragment = new TimeBlockFragment();
         Bundle bundle = new Bundle();
@@ -71,7 +71,7 @@ public class TimeBlockFragment extends Fragment
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -81,29 +81,29 @@ public class TimeBlockFragment extends Fragment
         // Checks for any arguments
         if (getArguments() != null)
         {
+            // Grabs the current user
             cUser = (User)getArguments().getSerializable("current");
         }
     }
 
     /**
      * onCreateView() method
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
+     * @param inflater - layout inflator for fragment
+     * @param container - view group for fargment
+     * @param savedInstanceState - instance bundle
      * @return root
      */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Grabs the relevant layout file
-        View root = inflater.inflate(R.layout.fragment_time_blocks, container, false);
-        return root;
+        return inflater.inflate(R.layout.fragment_time_blocks, container, false);
     }
 
     /**
      * onViewCreated() method
-     * @param view
-     * @param savedInstanceState
+     * @param view - view for fragment
+     * @param savedInstanceState - instance bundle
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
@@ -115,20 +115,22 @@ public class TimeBlockFragment extends Fragment
         udbRef = FirebaseFirestore.getInstance();
 
         // Intializes the widgets
-        viewPager = (ViewPager)getActivity().findViewById(R.id.view_pager);
-        etStart = (EditText)view.findViewById(R.id.et_start);
-        etEnd = (EditText)view.findViewById(R.id.et_end);
-        etRatio = (EditText)view.findViewById(R.id.et_carb_ratio);
-        btnAdd = (Button)view.findViewById(R.id.btn_add);
-        btnClear = (Button)view.findViewById(R.id.btn_clear);
-        btnBack = (Button)view.findViewById(R.id.btn_back);
-        btnSave = (Button)view.findViewById(R.id.btn_save);
-        rvTime = (RecyclerView)view.findViewById(R.id.rv_time);
+        viewPager = Objects.requireNonNull(getActivity()).findViewById(R.id.view_pager);
+        etStart = view.findViewById(R.id.et_start);
+        etEnd = view.findViewById(R.id.et_end);
+        etRatio = view.findViewById(R.id.et_carb_ratio);
+        Button btnAdd = view.findViewById(R.id.btn_add);
+        Button btnClear = view.findViewById(R.id.btn_clear);
+        Button btnBack = view.findViewById(R.id.btn_back);
+        Button btnSave = view.findViewById(R.id.btn_save);
+        rvTime = view.findViewById(R.id.rv_time);
         rvTime.setHasFixedSize(true);
         rvTime.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // Checks if there is a current user
         if(cUser != null)
         {
+            // Calls setUpDetails()
             setUpDetails();
         }
 
@@ -137,7 +139,7 @@ public class TimeBlockFragment extends Fragment
         {
             /**
              * onClick() for btnAdd
-             * @param v
+             * @param v - view for fragment
              */
             @Override
             public void onClick(View v)
@@ -162,7 +164,13 @@ public class TimeBlockFragment extends Fragment
             }
         });
 
-        btnClear.setOnClickListener(new View.OnClickListener() {
+        // onClickListener for btnClear
+        btnClear.setOnClickListener(new View.OnClickListener()
+        {
+            /**
+             * onClick() for btnClear
+             * @param v - view for fragment
+             */
             @Override
             public void onClick(View v) {
                 time_blocks.clear();
@@ -175,7 +183,7 @@ public class TimeBlockFragment extends Fragment
         {
             /**
              * onClick() for btnBack
-             * @param v
+             * @param v - view for fragment
              */
             @Override
             public void onClick(View v)
@@ -190,7 +198,7 @@ public class TimeBlockFragment extends Fragment
         {
             /**
              * onClick() for btnSave
-             * @param v
+             * @param v - view for fragment
              */
             @Override
             public void onClick(View v)
@@ -202,20 +210,20 @@ public class TimeBlockFragment extends Fragment
                 udbRef.document("users/"+ auth.getUid()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     /**
                      * onSuccess() method
-                     * @param aVoid
+                     * @param aVoid - method paramaeter
                      */
                     @Override
                     public void onSuccess(Void aVoid)
                     {
-                        // Informs the user that the save was successful
-
-                        SharedPreferences myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
+                        // Cache's the user's details locally
+                        SharedPreferences myPref = Objects.requireNonNull(getActivity()).getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
                         SharedPreferences.Editor prefEd = myPref.edit();
                         Gson gson = new Gson();
                         String json = gson.toJson(user);
                         prefEd.putString(getResources().getString(R.string.user_key),json);
-                        prefEd.commit();
+                        prefEd.apply();
 
+                        // Informs the user that the save was successful
                         Toast.makeText(getActivity(), "Details saved", Toast.LENGTH_SHORT).show();
 
                         // Loads the HomeActivity
@@ -229,7 +237,7 @@ public class TimeBlockFragment extends Fragment
                 {
                     /**
                      * onFailure() method
-                     * @param e
+                     * @param e - error
                      */
                     @Override
                     public void onFailure(@NonNull Exception e)
@@ -242,8 +250,12 @@ public class TimeBlockFragment extends Fragment
         });
     }
 
-    public void setUpDetails()
+    /**
+     * setUpDetails() method : displays the user's details to edit
+     */
+    private void setUpDetails()
     {
+        // Displays the time blocks
         time_blocks = cUser.getTime_blocks();
 
         // Passes the list to the adapter and then sets the adapter
@@ -253,7 +265,7 @@ public class TimeBlockFragment extends Fragment
 
     /**
      * dataReceived() method
-     * @param u
+     * @param u - current user
      */
     public void dataReceived(User u)
     {
