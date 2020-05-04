@@ -30,71 +30,84 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.AccountSetupActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.LoginActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
+/**
+ * SettingsFragment
+ */
 public class SettingsFragment extends Fragment
 {
-    Button btnEdit, btnChEmail, btnChPass, btnDelete, btnAbout, btnHelp, btnLogOut;
+    // Variables for alert dialogs
+    private AlertDialog.Builder deleteAccount, checkDelete, changeEmail, changePass;
 
-    AlertDialog.Builder deleteAccount, checkDelete, changeEmail, changePass;
+    // Variables for firebase access
+    private FirebaseAuth auth;
+    private FirebaseUser cUser;
+    private AuthCredential cred;
+    private FirebaseFirestore uDbRef;
 
-    FirebaseAuth auth;
-    FirebaseUser cUser;
-    AuthCredential cred;
-    FirebaseFirestore uDbRef;
+    // Variable to store user's id
+    private String id;
 
-    String id;
-    SharedPreferences myPref;
+    // Variable for shared preference
+    private SharedPreferences myPref;
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
-
-    public static SettingsFragment newInstance(int index)
-    {
-        SettingsFragment fragment = new SettingsFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(ARG_SECTION_NUMBER, index);
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
+    /**
+     * onCreate() method
+     * @param savedInstanceState - instance bundle
+     */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        int index = 1;
-        if (getArguments() != null)
-        {
-            index = getArguments().getInt(ARG_SECTION_NUMBER);
-        }
     }
 
+    /**
+     * onCreateView() method
+     * @param inflater - layout inflator for fragment
+     * @param container - view group for fragment
+     * @param savedInstanceState - instance bundle
+     * @return root
+     */
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View root = inflater.inflate(R.layout.fragment_settings, container, false);
-        return root;
+        // Grabs the relevant layout file
+        return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
+    /**
+     * onViewCreated() method
+     * @param view - view for fragment
+     * @param savedInstanceState - instance bundle
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
 
+        // Initialise firebase variables
         auth = FirebaseAuth.getInstance();
         cUser = auth.getCurrentUser();
         uDbRef = FirebaseFirestore.getInstance();
+
+        // Grabs the user's id
         id = auth.getUid();
 
-        myPref = getActivity().getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
+        // Initialise shared preference
+        myPref = Objects.requireNonNull(getActivity()).getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
 
-        btnEdit = (Button)view.findViewById(R.id.btn_edit);
-        btnChEmail = (Button)view.findViewById(R.id.btn_change_email);
-        btnChPass = (Button)view.findViewById(R.id.btn_change_password);
-        btnDelete = (Button)view.findViewById(R.id.btn_delete);
-        btnAbout = (Button)view.findViewById(R.id.btn_about);
-        btnHelp = (Button)view.findViewById(R.id.btn_help);
-        btnLogOut = (Button)view.findViewById(R.id.btn_log_out);
+        // Variables for layout access
+        Button btnEdit = view.findViewById(R.id.btn_edit);
+        Button btnChEmail = view.findViewById(R.id.btn_change_email);
+        Button btnChPass = view.findViewById(R.id.btn_change_password);
+        Button btnDelete = view.findViewById(R.id.btn_delete);
+        Button btnAbout = view.findViewById(R.id.btn_about);
+        Button btnHelp = view.findViewById(R.id.btn_help);
+        Button btnLogOut = view.findViewById(R.id.btn_log_out);
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
