@@ -60,6 +60,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
         }
     }
 
+    /**
+     * Returns the position of the tab based on the tab title
+     * @param position
+     * @return
+     */
     @Nullable
     @Override
     public CharSequence getPageTitle(int position)
@@ -67,6 +72,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
         return mContext.getResources().getString(TAB_TITLES[position]);
     }
 
+    /**
+     * Returns the number of tabs
+     * @return
+     */
     @Override
     public int getCount()
     {
