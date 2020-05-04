@@ -26,18 +26,14 @@ public class CreateThreadActivity extends AppCompatActivity
 {
     //Variables used for layout access
     EditText etTitle, etDescription;
-    Button btnCreate, btnDelete;
-
-    //Variables used for  thread access
-    ForumThread thread;
-    String tID;
+    Button btnCreate;
 
     //Variables used for database access
     FirebaseFirestore threadDbRef;
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,10 +43,9 @@ public class CreateThreadActivity extends AppCompatActivity
         setContentView(R.layout.activity_create_thread);
 
         // Initialises the widgets
-        etTitle = (EditText)findViewById(R.id.et_title);
-        etDescription = (EditText)findViewById(R.id.et_description);
-        btnCreate = (Button)findViewById(R.id.btn_create_thread);
-        btnDelete = (Button)findViewById(R.id.btn_delete_thread);
+        etTitle = findViewById(R.id.et_title);
+        etDescription = findViewById(R.id.et_description);
+        btnCreate = findViewById(R.id.btn_create_thread);
 
         // Initialises the database
         threadDbRef = FirebaseFirestore.getInstance();
@@ -60,7 +55,7 @@ public class CreateThreadActivity extends AppCompatActivity
         {
             /**
              * onClick() for btnCreate
-             * @param v
+             * @param v - activity view
              */
             @Override
             public void onClick(View v)
