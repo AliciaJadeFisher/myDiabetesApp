@@ -1,11 +1,11 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.SettingsSection;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 

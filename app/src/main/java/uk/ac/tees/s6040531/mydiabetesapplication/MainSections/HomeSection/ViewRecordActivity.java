@@ -1,16 +1,16 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeActivity;
-import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
-import uk.ac.tees.s6040531.mydiabetesapplication.R;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.SimpleDateFormat;
+
+import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeActivity;
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
+import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**
  * ViewRecordActivity

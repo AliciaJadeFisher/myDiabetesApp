@@ -3,6 +3,7 @@ package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.SettingsSection;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class SettingsTermsActivity extends AppCompatActivity

@@ -4,11 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.ui.main.BasicFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.ui.main.MedicalFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSection.ui.main.SectionsPagerAdapter;
