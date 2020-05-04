@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ public class ViewRecordActivity extends AppCompatActivity
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,15 +36,15 @@ public class ViewRecordActivity extends AppCompatActivity
         setContentView(R.layout.activity_view_record);
 
         // Initialise the widgets
-        tvDate = (TextView)findViewById(R.id.tv_date);
-        tvTime = (TextView)findViewById(R.id.tv_time);
-        tvBs = (TextView)findViewById(R.id.tv_bs);
-        tvCarbs = (TextView)findViewById(R.id.tv_carbs);
-        tvMeal = (TextView)findViewById(R.id.tv_meal);
-        tvInF = (TextView)findViewById(R.id.tv_inFood);
-        tvInC = (TextView)findViewById(R.id.tv_inCorr);
-        tvInT = (TextView)findViewById(R.id.tv_inTotal);
-        tvNote = (TextView)findViewById(R.id.tv_note);
+        tvDate = findViewById(R.id.tv_date);
+        tvTime = findViewById(R.id.tv_time);
+        tvBs = findViewById(R.id.tv_bs);
+        tvCarbs = findViewById(R.id.tv_carbs);
+        tvMeal = findViewById(R.id.tv_meal);
+        tvInF = findViewById(R.id.tv_inFood);
+        tvInC = findViewById(R.id.tv_inCorr);
+        tvInT = findViewById(R.id.tv_inTotal);
+        tvNote = findViewById(R.id.tv_note);
 
         // Calls getIncomingIntent()
         getIncomingIntent();
@@ -70,8 +71,8 @@ public class ViewRecordActivity extends AppCompatActivity
      */
     public void setTextViews()
     {
-        // Saves the text dispalys
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        // Saves the text displays
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         String date_display = "Date: " + format.format(entry.getDate());
         String time_display = "Time: " + entry.getTime();
         String bs_display = "Blood Sugar: " + entry.getBs();
