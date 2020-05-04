@@ -30,6 +30,11 @@ public class RegistrationActivity extends AppCompatActivity
 
     // Variable for firebase access
     FirebaseAuth auth;
+
+    /**
+     * onCreate() method
+     * @param savedInstanceState - instance bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -41,18 +46,18 @@ public class RegistrationActivity extends AppCompatActivity
         auth = FirebaseAuth.getInstance();
 
         // Initialize widgets
-        etEmail = (EditText)findViewById(R.id.et_email);
-        etPassword = (EditText)findViewById(R.id.et_password);
-        btnReg = (Button) findViewById(R.id.btn_register);
-        btnLogin = (Button)findViewById(R.id.btn_login);
-        btnTerms = (Button)findViewById(R.id.btn_terms);
+        etEmail = findViewById(R.id.et_email);
+        etPassword = findViewById(R.id.et_password);
+        btnReg = findViewById(R.id.btn_register);
+        btnLogin = findViewById(R.id.btn_login);
+        btnTerms = findViewById(R.id.btn_terms);
 
         // onClickListener for btnLogin
         btnLogin.setOnClickListener(new View.OnClickListener()
         {
             /**
              * onClick() for btnLogin
-             * @param v
+             * @param v - activity view
              */
             @Override
             public void onClick(View v)
@@ -68,6 +73,10 @@ public class RegistrationActivity extends AppCompatActivity
         // onClickListener for btnTerms
         btnTerms.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnTerms
+             * @param v - activity view
+             */
             @Override
             public void onClick(View v)
             {
@@ -83,7 +92,7 @@ public class RegistrationActivity extends AppCompatActivity
         {
             /**
              * onClick() for btnReg
-             * @param v
+             * @param v - activity view
              */
             @Override
             public void onClick(View v)
@@ -112,7 +121,7 @@ public class RegistrationActivity extends AppCompatActivity
                 {
                     /**
                      * onComplete() method
-                     * @param task
+                     * @param task - contains result of task
                      */
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task)
