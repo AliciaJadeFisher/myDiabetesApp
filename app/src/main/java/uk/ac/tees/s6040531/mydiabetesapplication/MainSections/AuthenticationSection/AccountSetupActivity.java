@@ -51,11 +51,11 @@ public class AccountSetupActivity extends AppCompatActivity implements BasicFrag
     }
 
     /**
-     * sendDataMedical() method
+     * sendDatatoMedical() method
      * @param u
      */
     @Override
-    public void sendDataMedical(User u)
+    public void sendDatatoMedical(User u)
     {
         // Sends the data to the medical fragment
         String tag = "android:switcher:" + R.id.view_pager + ":" + 1;

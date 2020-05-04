@@ -17,6 +17,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
@@ -26,30 +28,29 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 public class BasicFragment extends Fragment
 {
     // Variables for layout access
-    EditText etName;
-    Spinner spnBs, spnCarb;
-    Button btnNext;
-    ViewPager viewPager;
+    private EditText etName;
+    private Spinner spnBs, spnCarb;
+    private ViewPager viewPager;
 
     // Variable for firebase access
-    FirebaseAuth auth;
+    private FirebaseAuth auth;
 
     // Variables for user data
-    User user, cUser;
-    String bs, carb, id;
-    sendDataMedical sd;
+    private User user, cUser;
+    private String bs, carb, id;
+    private sendDataMedical sd;
 
     // Varriables for array adapters for spinners
-    ArrayAdapter<CharSequence> bsAdapter;
-    ArrayAdapter<CharSequence> carbAdapter;
+    private ArrayAdapter<CharSequence> bsAdapter;
+    private ArrayAdapter<CharSequence> carbAdapter;
 
 
     /**
      * BasicFragment constructor
-     * @param u
+     * @param u - current user
      * @return fragment
      */
-    public static BasicFragment newInstance(User u)
+    static BasicFragment newInstance(User u)
     {
         BasicFragment fragment = new BasicFragment();
         Bundle bundle = new Bundle();
@@ -60,7 +61,7 @@ public class BasicFragment extends Fragment
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -77,49 +78,48 @@ public class BasicFragment extends Fragment
 
     /**
      * onCreateView() method
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
+     * @param inflater - layout inflater for fragment
+     * @param container - view group for fragment
+     * @param savedInstanceState - instance bundle for fragment
      * @return root
      */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Grabs the relevant layout file
-        View root = inflater.inflate(R.layout.fragment_basic, container, false);
-        return root;
+        return inflater.inflate(R.layout.fragment_basic, container, false);
     }
 
     /**
      * onViewCreated() method
-     * @param view
-     * @param savedInstanceState
+     * @param view - fragmetn view
+     * @param savedInstanceState - instance bundle
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
 
-        // Initializes the widgets
-        viewPager = (ViewPager)getActivity().findViewById(R.id.view_pager);
-        etName = (EditText)view.findViewById(R.id.et_name);
-        spnBs = (Spinner)view.findViewById(R.id.spn_bs);
-        spnCarb = (Spinner)view.findViewById(R.id.spn_carb);
-        btnNext = (Button)view.findViewById(R.id.btn_next);
+        /* Initializes the widgets */
+        viewPager = Objects.requireNonNull(getActivity()).findViewById(R.id.view_pager);
+        etName = view.findViewById(R.id.et_name);
+        spnBs = view.findViewById(R.id.spn_bs);
+        spnCarb = view.findViewById(R.id.spn_carb);
+        Button btnNext = view.findViewById(R.id.btn_next);
 
         // OnClickListener for btnNext
         btnNext.setOnClickListener(new View.OnClickListener()
         {
             /**
              * onClick for btnNext
-             * @param v
+             * @param v - fragment view
              */
             @Override
             public void onClick(View v)
             {
                 // Gets the current user's id
                 auth = FirebaseAuth.getInstance();
-                id = auth.getCurrentUser().getUid();
+                id = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
                 // Grabs the spinner inputs
                 bs = spnBs.getSelectedItem().toString();
@@ -133,7 +133,7 @@ public class BasicFragment extends Fragment
                 user.setCb_m(carb);
 
                 // Passes the data to the next tab and then shows the next tab
-                sd.sendDataMedical(user);
+                sd.sendDatatoMedical(user);
                 viewPager.setCurrentItem(1);
             }
         });
@@ -165,7 +165,7 @@ public class BasicFragment extends Fragment
     /**
      * setUpDetails() method : displays the user's details to edit
      */
-    public void setUpDetails()
+    private void setUpDetails()
     {
         // Displays the name
         etName.setText(cUser.getName());
@@ -186,12 +186,12 @@ public class BasicFragment extends Fragment
      */
     public interface sendDataMedical
     {
-        void sendDataMedical(User user);
+        void sendDatatoMedical(User user);
     }
 
     /**
      * Called when fragment is first attached to its context
-     * @param context
+     * @param context - context fragment called from
      */
     @Override
     public void onAttach(Context context)
