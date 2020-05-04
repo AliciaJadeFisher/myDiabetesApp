@@ -11,7 +11,7 @@ import java.util.Objects;
 import static uk.ac.tees.s6040531.mydiabetesapplication.MainSections.EntrySection.SearchCarbActivity.showSearch;
 
 /**
- * SearchNetworkChecker class
+ * SearchNetworkChecker
  */
 public class SearchNetworkChecker extends BroadcastReceiver
 {
