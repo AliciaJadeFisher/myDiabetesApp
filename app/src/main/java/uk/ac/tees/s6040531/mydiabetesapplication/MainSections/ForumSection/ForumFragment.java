@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -17,8 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
@@ -40,71 +40,42 @@ public class ForumFragment extends Fragment
     private BroadcastReceiver bRec;
 
     // Variables for layout access
-    static TextView tvNetCon;
-    static RecyclerView threadRecycler;
-    static FloatingActionButton fabAddThread;
-
-    // Variable for thread list
-    List<ForumThread> adapterList = new ArrayList<>();
+    @SuppressLint("StaticFieldLeak")
+    private static TextView tvNetCon;
+    private static RecyclerView threadRecycler;
+    private static FloatingActionButton fabAddThread;
 
     //Variable used for the recyclerView adapter
-    ThreadRecyclerViewAdapter adapter;
-
-    //Variable used for database access
-    FirebaseFirestore threadDbRef;
-
-    private static final String ARG_SECTION_NUMBER = "section_number";
-
-    /**
-     * ForumFragment constructor
-     * @param index
-     * @return fragment
-     */
-    public static ForumFragment newInstance(int index)
-    {
-        ForumFragment fragment = new ForumFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(ARG_SECTION_NUMBER, index);
-        fragment.setArguments(bundle);
-        return fragment;
-    }
+    private ThreadRecyclerViewAdapter adapter;
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        // Checks for any arguments
-        int index = 1;
-        if (getArguments() != null)
-        {
-            index = getArguments().getInt(ARG_SECTION_NUMBER);
-        }
     }
 
     /**
      * onCreateView() method
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater - layout inflater for fragment
+     * @param container - view group for fragment
+     * @param savedInstanceState - isntancce bundle
+     * @return root
      */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Grabs the relevant layout file
-        View root = inflater.inflate(R.layout.fragment_forum, container, false);
-        return root;
+        return inflater.inflate(R.layout.fragment_forum, container, false);
     }
 
     /**
      * onViewCreated() method
-     * @param view
-     * @param savedInstanceState
+     * @param view - view for fragment
+     * @param savedInstanceState - instance bundle
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
@@ -112,9 +83,9 @@ public class ForumFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         // Initializes the widgets
-        tvNetCon = (TextView)view.findViewById(R.id.tv_net_con);
-        fabAddThread = (FloatingActionButton) view.findViewById(R.id.fab_add_thread);
-        threadRecycler = (RecyclerView)view.findViewById(R.id.recyclerViewThreads);
+        tvNetCon = view.findViewById(R.id.tv_net_con);
+        fabAddThread = view.findViewById(R.id.fab_add_thread);
+        threadRecycler = view.findViewById(R.id.recyclerViewThreads);
 
         // Calls checkCon()
         checkCon();
@@ -127,7 +98,7 @@ public class ForumFragment extends Fragment
         {
             /**
              * onClick() for fabAddThread
-             * @param v
+             * @param v - view for fragment
              */
             @Override
             public void onClick(View v)
@@ -135,34 +106,49 @@ public class ForumFragment extends Fragment
                 // Loads the CreateThreadActivity
                 Intent i = new Intent(getActivity(), CreateThreadActivity.class);
                 startActivity(i);
-                getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 getActivity().finish();
             }
         });
     }
 
-    public void checkCon()
+    /**
+     * checkCon() method
+     */
+    private void checkCon()
     {
+        // Creates and registers the broadcast receiver
         bRec = new ForumNetworkChecker();
-        getActivity().registerReceiver(bRec, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        Objects.requireNonNull(getActivity()).registerReceiver(bRec, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
-    public static void showForum(Boolean state)
+    /**
+     * showForum() method
+     * @param state - network connection
+     */
+    @SuppressLint({"RestrictedApi", "SetTextI18n"})
+    static void showForum(Boolean state)
     {
+        // Checks if there is a network connect
         if(state)
         {
+            // Hides the network TextView
             tvNetCon.setText("");
             tvNetCon.setVisibility(View.GONE);
+
+            // Shows the widgets
             fabAddThread.setVisibility(View.VISIBLE);
             threadRecycler.setVisibility(View.VISIBLE);
         }
         else
         {
+            // Hides the widgets
             fabAddThread.setVisibility(View.GONE);
             threadRecycler.setVisibility(View.GONE);
+
+            // Shows the network TextView
             tvNetCon.setVisibility(View.VISIBLE);
             tvNetCon.setText("Error connecting to network. Please connect to a network and try again.");
-
         }
     }
 
@@ -170,13 +156,14 @@ public class ForumFragment extends Fragment
      * getThreads() method
      * @return threadList
      */
-    public List<ForumThread> getThreads()
+    private List<ForumThread> getThreads()
     {
         // Crates a temporary list
         final List<ForumThread> threadList = new ArrayList<>();
 
         // Initalizes the database
-        threadDbRef = FirebaseFirestore.getInstance();
+        //Variable used for database access
+        FirebaseFirestore threadDbRef = FirebaseFirestore.getInstance();
 
         // Grabs all the threads in the database
         threadDbRef.collection("threads").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
@@ -187,27 +174,13 @@ public class ForumFragment extends Fragment
                 if (task.isSuccessful())
                 {
                     // Loops through the results
-                    for (QueryDocumentSnapshot document : task.getResult())
+                    for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult()))
                     {
                         // Saves the curretn thread
                         ForumThread  t = document.toObject(ForumThread.class);
 
                         // Updates the thread id in the database
                         t.setThreadID(document.getId());
-                        threadDbRef.collection("threads").document(t.getThreadID()).update("threadID",document.getId())
-                                .addOnSuccessListener(new OnSuccessListener<Void>()
-                                {
-                                    @Override
-                                    public void onSuccess(Void aVoid)
-                                    {
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-
-                                    }
-                                });
 
                         // Adds the current thread to the thread list and notifys the adapter of a data change
                         threadList.add(0,t);
@@ -221,14 +194,18 @@ public class ForumFragment extends Fragment
         return threadList;
     }
 
+    /**
+     * onPause() method
+     */
     @Override
     public void onPause()
     {
         super.onPause();
 
+        // Unregisters the broadcast receiver
         try
         {
-            getActivity().unregisterReceiver(bRec);
+            Objects.requireNonNull(getActivity()).unregisterReceiver(bRec);
         }
         catch (IllegalArgumentException e)
         {
@@ -239,10 +216,11 @@ public class ForumFragment extends Fragment
     /**
      * setAdapter() method
      */
-    public void setAdapter()
+    private void setAdapter()
     {
         // Grabs a list of threads
-        adapterList = getThreads();
+        // Variable for thread list
+        List<ForumThread> adapterList = getThreads();
 
         // Initializes the adapter
         adapter = new ThreadRecyclerViewAdapter(this, adapterList);
