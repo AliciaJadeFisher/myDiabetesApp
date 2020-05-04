@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import java.util.Objects;
+
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
@@ -22,20 +24,19 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 public class MedicalFragment  extends Fragment
 {
     // Variables for layout access
-    EditText etHypo, etBottom, etTop, etHyper, etDuration, etPrecision, etPortion, etCorrection;
-    Button btnBack,btnNext;
-    ViewPager viewPager;
+    private EditText etHypo, etBottom, etTop, etHyper, etDuration, etPrecision, etPortion, etCorrection;
+    private ViewPager viewPager;
 
     // Variables for user data
-    User user, cUser;
-    sendDataTime sd;
+    private User user, cUser;
+    private sendDataTime sd;
 
     /**
      * MedicalFragment constructor
-     * @param u
+     * @param u - current user
      * @return fragment
      */
-    public static MedicalFragment newInstance(User u)
+    static MedicalFragment newInstance(User u)
     {
         MedicalFragment fragment = new MedicalFragment();
         Bundle bundle = new Bundle();
@@ -46,7 +47,7 @@ public class MedicalFragment  extends Fragment
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -63,23 +64,22 @@ public class MedicalFragment  extends Fragment
 
     /**
      * onCreateView() method
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
+     * @param inflater - layout inflater for fragment
+     * @param container - view group for fragment
+     * @param savedInstanceState - instance bundle
      * @return root
      */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Grabs the relevant layout file
-        View root = inflater.inflate(R.layout.fragment_medical, container, false);
-        return root;
+        return inflater.inflate(R.layout.fragment_medical, container, false);
     }
 
     /**
      * onViewCreated() method
-     * @param view
-     * @param savedInstanceState
+     * @param view - view for fragment
+     * @param savedInstanceState - instance bundle
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
@@ -87,17 +87,17 @@ public class MedicalFragment  extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         // Initializes the widgets
-        viewPager = (ViewPager)getActivity().findViewById(R.id.view_pager);
-        etHypo = (EditText)view.findViewById(R.id.et_hypo);
-        etBottom = (EditText)view.findViewById(R.id.et_bottom);
-        etTop = (EditText)view.findViewById(R.id.et_top);
-        etHyper = (EditText)view.findViewById(R.id.et_hyper);
-        etDuration = (EditText)view.findViewById(R.id.et_duration);
-        etPrecision = (EditText)view.findViewById(R.id.et_precision);
-        etPortion = (EditText)view.findViewById(R.id.et_carb_portion);
-        etCorrection = (EditText)view.findViewById(R.id.et_correction);
-        btnBack = (Button)view.findViewById(R.id.btn_go_back);
-        btnNext = (Button)view.findViewById(R.id.btn_next);
+        viewPager = Objects.requireNonNull(getActivity()).findViewById(R.id.view_pager);
+        etHypo = view.findViewById(R.id.et_hypo);
+        etBottom = view.findViewById(R.id.et_bottom);
+        etTop = view.findViewById(R.id.et_top);
+        etHyper = view.findViewById(R.id.et_hyper);
+        etDuration = view.findViewById(R.id.et_duration);
+        etPrecision = view.findViewById(R.id.et_precision);
+        etPortion = view.findViewById(R.id.et_carb_portion);
+        etCorrection = view.findViewById(R.id.et_correction);
+        Button btnBack = view.findViewById(R.id.btn_go_back);
+        Button btnNext = view.findViewById(R.id.btn_next);
 
         // Checks if there is a current user
         if(cUser != null)
@@ -111,7 +111,7 @@ public class MedicalFragment  extends Fragment
         {
             /**
              * onClick() method for btnBack
-             * @param v
+             * @param v - view for fragment
              */
             @Override
             public void onClick(View v)
@@ -126,7 +126,7 @@ public class MedicalFragment  extends Fragment
         {
             /**
              * onClick() for btnNext
-             * @param v
+             * @param v - view for fragment
              */
             @Override
             public void onClick(View v)
@@ -142,7 +142,7 @@ public class MedicalFragment  extends Fragment
                 user.setCorrection(etCorrection.getText().toString());
 
                 // Passes the data to the next tab and then shows the next tab
-                sd.sendDataTime(user);
+                sd.sendDataToTime(user);
                 viewPager.setCurrentItem(2);
             }
         });
@@ -151,7 +151,7 @@ public class MedicalFragment  extends Fragment
     /**
      * setUpDetails() method : displays the user's details to edit
      */
-    public void setUpDetails()
+    private void setUpDetails()
     {
         // Displays the medical details
         etHypo.setText(cUser.getHypo());
@@ -169,12 +169,12 @@ public class MedicalFragment  extends Fragment
      */
     public interface sendDataTime
     {
-        void sendDataTime(User user);
+        void sendDataToTime(User user);
     }
 
     /**
      * Called when fragment is first attached to its context
-     * @param context
+     * @param context - activity fragment called from
      */
     @Override
     public void onAttach(Context context)
@@ -193,7 +193,7 @@ public class MedicalFragment  extends Fragment
 
     /**
      * dataReceived() method
-     * @param u
+     * @param u - current user
      */
     public void dataReceived(User u)
     {

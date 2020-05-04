@@ -64,11 +64,11 @@ public class AccountSetupActivity extends AppCompatActivity implements BasicFrag
     }
 
     /**
-     * sendDataTime() method
+     * sendDataToTime() method
      * @param u
      */
     @Override
-    public void sendDataTime(User u)
+    public void sendDataToTime(User u)
     {
         // Sends the data to the time block fragment
         String tag = "android:switcher:" + R.id.view_pager + ":" + 2;
