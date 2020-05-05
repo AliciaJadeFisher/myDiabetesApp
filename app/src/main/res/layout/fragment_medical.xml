@@ -26,6 +26,7 @@
             android:paddingTop="10dp"
             android:textSize="13sp"/>
 
+        <!--LinearLayout for target section-->
         <LinearLayout
             android:id="@+id/ll_targets"
             android:paddingTop="10dp"
@@ -34,12 +35,16 @@
             android:orientation="horizontal"
             android:gravity="center">
 
+            <!--LinearLayout for hypo section-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:paddingEnd="5dp">
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp">
+
+                <!--TextView for hypo title-->
                 <TextView
                     android:id="@+id/tv_hypo"
                     android:layout_width="wrap_content"
@@ -47,6 +52,8 @@
                     android:text="@string/hypo"
                     android:textSize="12sp"
                     android:layout_gravity="center"/>
+
+                <!--EditText for hypo input-->
                 <EditText
                     android:id="@+id/et_hypo"
                     android:layout_width="50dp"
@@ -58,15 +65,21 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@drawable/account_details_et_bg"
-                    android:textCursorDrawable="@drawable/et_cursor"/>
+                    android:textCursorDrawable="@drawable/et_cursor"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal" />
             </LinearLayout>
 
+            <!--LinearLayout for target bottom section-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:paddingEnd="5dp">
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp">
+
+                <!--TextView for bottom title-->
                 <TextView
                     android:id="@+id/tv_bottom"
                     android:layout_width="wrap_content"
@@ -74,6 +87,8 @@
                     android:text="@string/bottom_target"
                     android:textSize="12sp"
                     android:layout_gravity="center"/>
+
+                <!--EditText for target bottom input-->
                 <EditText
                     android:id="@+id/et_bottom"
                     android:layout_width="50dp"
@@ -85,15 +100,21 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@drawable/account_details_et_bg"
-                    android:textCursorDrawable="@drawable/et_cursor"/>
+                    android:textCursorDrawable="@drawable/et_cursor"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal" />
             </LinearLayout>
 
+            <!--LinearLayout for target top section-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:paddingEnd="5dp">
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp">
+
+                <!--TextView for top title-->
                 <TextView
                     android:id="@+id/tv_top"
                     android:layout_width="wrap_content"
@@ -101,6 +122,8 @@
                     android:text="@string/top_target"
                     android:textSize="12sp"
                     android:layout_gravity="center"/>
+
+                <!--EditText for target top input-->
                 <EditText
                     android:id="@+id/et_top"
                     android:layout_width="50dp"
@@ -112,14 +135,21 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@drawable/account_details_et_bg"
-                    android:textCursorDrawable="@drawable/et_cursor"/>
+                    android:textCursorDrawable="@drawable/et_cursor"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal" />
             </LinearLayout>
 
+            <!--LinearLayout for hyper section-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp">
+
+                <!--TextView for hyper title-->
                 <TextView
                     android:id="@+id/tv_hyper"
                     android:layout_width="wrap_content"
@@ -127,6 +157,8 @@
                     android:text="@string/hyper"
                     android:textSize="12sp"
                     android:layout_gravity="center"/>
+
+                <!--EditText for hyper input-->
                 <EditText
                     android:id="@+id/et_hyper"
                     android:layout_width="50dp"
@@ -138,13 +170,13 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@drawable/account_details_et_bg"
-                    android:textCursorDrawable="@drawable/et_cursor"/>
+                    android:textCursorDrawable="@drawable/et_cursor"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal" />
             </LinearLayout>
-
-
         </LinearLayout>
 
-        <!--TextView for the blood sugar type-->
+        <!--TextView for duration title-->
         <TextView
             android:id="@+id/tv_duration"
             android:layout_width="match_parent"
@@ -155,6 +187,7 @@
             android:paddingTop="10dp"
             android:textSize="13sp"/>
 
+        <!--EditText for duration input-->
         <EditText
             android:id="@+id/et_duration"
             android:layout_width="100dp"
@@ -167,9 +200,11 @@
             android:textColorHint="@android:color/darker_gray"
             android:textColor="@color/colorPrimaryDark"
             android:background="@drawable/account_details_et_bg"
-            android:textCursorDrawable="@drawable/et_cursor"/>
+            android:textCursorDrawable="@drawable/et_cursor"
+            android:importantForAutofill="no"
+            android:inputType="number" />
 
-        <!--TextView for the blood sugar type-->
+        <!--TextView for precision title-->
         <TextView
             android:id="@+id/tv_precision"
             android:layout_width="match_parent"
@@ -180,6 +215,7 @@
             android:paddingTop="10dp"
             android:textSize="13sp"/>
 
+        <!--EditText for precision input-->
         <EditText
             android:id="@+id/et_precision"
             android:layout_width="100dp"
@@ -192,9 +228,11 @@
             android:textColorHint="@android:color/darker_gray"
             android:textColor="@color/colorPrimaryDark"
             android:background="@drawable/account_details_et_bg"
-            android:textCursorDrawable="@drawable/et_cursor"/>
+            android:textCursorDrawable="@drawable/et_cursor"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal" />
 
-        <!--TextView for the blood sugar type-->
+        <!--TextView for portion title-->
         <TextView
             android:id="@+id/tv_carb_portion"
             android:layout_width="match_parent"
@@ -205,6 +243,7 @@
             android:paddingTop="10dp"
             android:textSize="13sp"/>
 
+        <!--EditText for portion input-->
         <EditText
             android:id="@+id/et_carb_portion"
             android:layout_width="100dp"
@@ -217,9 +256,11 @@
             android:textColorHint="@android:color/darker_gray"
             android:textColor="@color/colorPrimaryDark"
             android:background="@drawable/account_details_et_bg"
-            android:textCursorDrawable="@drawable/et_cursor"/>
+            android:textCursorDrawable="@drawable/et_cursor"
+            android:inputType="numberDecimal"
+            android:importantForAutofill="no" />
 
-        <!--TextView for the blood sugar type-->
+        <!--TextView for correction title-->
         <TextView
             android:id="@+id/tv_correction"
             android:layout_width="match_parent"
@@ -230,6 +271,7 @@
             android:paddingTop="10dp"
             android:textSize="13sp"/>
 
+        <!--EditText for correction input-->
         <EditText
             android:id="@+id/et_correction"
             android:layout_width="100dp"
@@ -242,39 +284,34 @@
             android:textColorHint="@android:color/darker_gray"
             android:textColor="@color/colorPrimaryDark"
             android:background="@drawable/account_details_et_bg"
-            android:textCursorDrawable="@drawable/et_cursor"/>
-        <LinearLayout
-            android:paddingTop="10dp"
-            android:layout_width="match_parent"
+            android:textCursorDrawable="@drawable/et_cursor"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal" />
+
+
+        <!--Button that saves the user's details and links to the next fragment-->
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!--Button that saves the user's details and links to the HomeActivity-->
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_background"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
 
-            <!--Button that saves the user's details and links to the HomeActivity-->
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/button_background"
-                android:text="@string/next"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="13sp" />
-            <Button
-                android:id="@+id/btn_go_back"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/button_background"
-                android:text="@string/back"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="13sp"
-                tools:ignore="ButtonStyle" />
-        </LinearLayout>
-
-
+        <!--Button that goes to the previous fragment-->
+        <Button
+            android:id="@+id/btn_go_back"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_background"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
-
 </ScrollView>
