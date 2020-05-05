@@ -9,44 +9,20 @@ import java.util.Date;
 public class BloodSugarEntry implements Serializable
 {
     // Class attributes
-    Date date;
-    String time;
-    double bs;
-    double carbs;
-    double insulin_f;
-    double insulin_c;
-    double insulin_t;
-    String meal;
-    String notes;
+    private Date date;
+    private String time;
+    private double bs;
+    private double carbs;
+    private double insulin_f;
+    private double insulin_c;
+    private double insulin_t;
+    private String meal;
+    private String notes;
 
     /**
      * Empty constructor
      */
     public BloodSugarEntry(){}
-
-    /**
-     * Main constructor
-     * @param d
-     * @param t
-     * @param b
-     * @param c
-     * @param inf
-     * @param inc
-     * @param m
-     * @param n
-     */
-    public void BloodSugarEntry(Date d, String t, double b, double c, double inf, double inc, double into, String m, String n)
-    {
-        date = d;
-        time = t;
-        bs = b;
-        carbs = c;
-        insulin_f = inf;
-        insulin_c = inc;
-        insulin_t = into;
-        meal = m;
-        notes = n;
-    }
 
     /**
      * Returns the date attribute
@@ -58,7 +34,7 @@ public class BloodSugarEntry implements Serializable
 
     /**
      * Sets the date attribute
-     * @param date
+     * @param date - entry date
      */
     public void setDate(Date date) {
         this.date = date;
@@ -74,7 +50,7 @@ public class BloodSugarEntry implements Serializable
 
     /**
      * Sets the time attribute
-     * @param time
+     * @param time - entry time
      */
     public void setTime(String time) {
         this.time = time;
@@ -90,7 +66,7 @@ public class BloodSugarEntry implements Serializable
 
     /**
      * Sets the blood sugar attribute
-     * @param bs
+     * @param bs - blood sugar
      */
     public void setBs(double bs) {
         this.bs = bs;
@@ -106,7 +82,7 @@ public class BloodSugarEntry implements Serializable
 
     /**
      * Sets the carbs attribute
-     * @param carbs
+     * @param carbs - carbohydrates
      */
     public void setCarbs(double carbs) {
         this.carbs = carbs;
@@ -122,7 +98,7 @@ public class BloodSugarEntry implements Serializable
 
     /**
      * Sets the food insulin attribute
-     * @param insulin_f
+     * @param insulin_f - insulin for food
      */
     public void setInsulin_f(double insulin_f) {
         this.insulin_f = insulin_f;
@@ -138,7 +114,7 @@ public class BloodSugarEntry implements Serializable
 
     /**
      * Sets the correction insulin attribute
-     * @param insulin_c
+     * @param insulin_c - insulin for correction
      */
     public void setInsulin_c(double insulin_c) {
         this.insulin_c = insulin_c;
@@ -154,7 +130,7 @@ public class BloodSugarEntry implements Serializable
 
     /**
      * Sets the total insulin attribute
-     * @param insulin_t
+     * @param insulin_t - total insuliln
      */
     public void setInsulin_t(double insulin_t) {
         this.insulin_t = insulin_t;
@@ -170,7 +146,7 @@ public class BloodSugarEntry implements Serializable
 
     /**
      * Sets the meal attribute
-     * @param meal
+     * @param meal - meal type
      */
     public void setMeal(String meal) {
         this.meal = meal;
@@ -186,7 +162,7 @@ public class BloodSugarEntry implements Serializable
 
     /**
      * Sets the notes attribute
-     * @param notes
+     * @param notes - entry notes
      */
     public void setNotes(String notes) {
         this.notes = notes;
