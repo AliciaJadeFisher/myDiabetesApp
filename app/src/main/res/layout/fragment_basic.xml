@@ -82,7 +82,7 @@
             android:paddingTop="10dp"
             android:textColor="@color/colorPrimaryDark"/>
 
-        <!--Button that saves the user's details and links to the HomeActivity-->
+        <!--Button that saves the user's details and links to the next fragment-->
         <Button
             android:id="@+id/btn_next"
             android:layout_width="fill_parent"
