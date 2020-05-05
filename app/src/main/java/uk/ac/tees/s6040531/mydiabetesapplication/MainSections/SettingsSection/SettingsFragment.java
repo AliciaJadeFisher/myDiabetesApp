@@ -220,10 +220,17 @@ public class SettingsFragment extends Fragment
         // Sets up the changeEmail alert dialog
         changeEmail = new AlertDialog.Builder(getActivity());
         changeEmail.setTitle("Change Email");
+        LinearLayout clayout = new LinearLayout(getActivity());
+        clayout.setOrientation(LinearLayout.VERTICAL);
+        final EditText pass = new EditText(getActivity());
+        pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        pass.setHint("Password");
         final EditText email = new EditText(getActivity());
         email.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         email.setHint("Email Address");
-        changeEmail.setView(email);
+        clayout.addView(email);
+        clayout.addView(pass);
+        changeEmail.setView(clayout);
 
         // setPositiveButton for changeEmail
         changeEmail.setPositiveButton("Change", new DialogInterface.OnClickListener()
@@ -234,12 +241,63 @@ public class SettingsFragment extends Fragment
              * @param which - button chosen
              */
             @Override
-            public void onClick(DialogInterface dialog, int which)
+            public void onClick(final DialogInterface dialog, int which)
             {
-                // Grabs the entered email and updates the login information
-                String em = email.getText().toString();
-                cUser.updateEmail(em);
-                Toast.makeText(getActivity(), "Email updated", Toast.LENGTH_SHORT).show();
+                // Gets the authentication credentials from the users email and entered password
+                cred = EmailAuthProvider.getCredential(Objects.requireNonNull(cUser.getEmail()), pass.getText().toString());
+
+                // Checks the authentication credentials
+                cUser.reauthenticate(cred).addOnCompleteListener(new OnCompleteListener<Void>()
+                {
+                    /**
+                     * onComplete() method
+                     * @param task - results of task
+                     */
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task)
+                    {
+                        // Checks if the task was successful
+                        if(!task.isSuccessful())
+                        {
+                            // Informs the user that their password was wrong
+                            Toast.makeText(getActivity(),"Incorrect Password", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            // Checks if the email is filled in
+                            if(email.getText().toString().equals(""))
+                            {
+                                // Informs the user that the field need to be filled in
+                                Toast.makeText(getActivity(),"Please enter a new email", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                // Updates the user's email
+                                cUser.updateEmail(email.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    /**
+                                     * onComplete() method
+                                     * @param task - results of task
+                                     */
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        // Checks if the task was successful
+                                        if(task.isSuccessful())
+                                        {
+                                            // Informs the user that the email was updated and dismisses the dialog
+                                            Toast.makeText(getActivity(),"Email Updated", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        }
+                                        else
+                                        {
+                                            // Informs the user that the email failed to update
+                                            Toast.makeText(getActivity(),"Failed to Update Email", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
             }
         });
 
