@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="56dp">
 
-        <!--Applications Settings section-->
+        <!--Account Settings section-->
         <!--TextView for the section title-->
         <TextView
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:background="@android:color/black"
             tools:ignore="SmallSp" />
 
-        <!--Button that links to the SettingsEditActivity-->
+        <!--Button that links to the AccountSetupActivity-->
         <Button
             android:id="@+id/btn_edit"
             android:layout_width="match_parent"
@@ -49,6 +49,8 @@
             android:layout_height="1sp"
             android:background="@android:color/black"
             tools:ignore="SmallSp" />
+
+        <!--Button to change email-->
         <Button
             android:id="@+id/btn_change_email"
             android:layout_width="match_parent"
@@ -69,6 +71,8 @@
             android:layout_height="1sp"
             android:background="@android:color/black"
             tools:ignore="SmallSp" />
+
+        <!--Button to change password-->
         <Button
             android:id="@+id/btn_change_password"
             android:layout_width="match_parent"
@@ -90,7 +94,7 @@
             android:background="@android:color/black"
             tools:ignore="SmallSp" />
 
-        <!--Button that links to the SettingsEditActivity-->
+        <!--Button to delete account-->
         <Button
             android:id="@+id/btn_delete"
             android:layout_width="match_parent"
@@ -134,7 +138,7 @@
             android:background="@android:color/black"
             tools:ignore="SmallSp" />
 
-        <!--Button that links to the AboutActivity-->
+        <!--Button that links to the SettingsAboutActivity-->
         <Button
             android:id="@+id/btn_about"
             android:layout_width="match_parent"
@@ -156,7 +160,7 @@
             android:background="@android:color/black"
             tools:ignore="SmallSp" />
 
-        <!--Button that links to the HelpActivity-->
+        <!--Button that links to the SettingsHelpActivity-->
         <Button
             android:id="@+id/btn_help"
             android:layout_width="match_parent"
@@ -178,7 +182,7 @@
             android:background="@android:color/black"
             tools:ignore="SmallSp" />
 
-        <!--Button that links to the SettingsEditActivity-->
+        <!--Button to log out of account-->
         <Button
             android:id="@+id/btn_log_out"
             android:layout_width="match_parent"
@@ -199,5 +203,4 @@
             android:layout_height="1sp"
             android:background="@android:color/black"
             tools:ignore="SmallSp" />
-
 </LinearLayout>
