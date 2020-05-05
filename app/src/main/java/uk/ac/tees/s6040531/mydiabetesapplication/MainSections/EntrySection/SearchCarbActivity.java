@@ -6,6 +6,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -24,6 +25,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Objects;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 import uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters.FoodListViewAdapter;
@@ -71,12 +74,11 @@ public class SearchCarbActivity extends AppCompatActivity
         btnSearch = findViewById(R.id.btn_search);
         lvResults = findViewById(R.id.lv_results);
         pbSearch = findViewById(R.id.pb_search);
-        pbSearch.setVisibility(View.VISIBLE);
 
         // Calls checkCon()
         checkCon();
 
-        // OnClickListner() for btnSearch
+        // OnClickListener() for btnSearch
         btnSearch.setOnClickListener(new View.OnClickListener()
         {
             /**
@@ -86,6 +88,14 @@ public class SearchCarbActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
+
+                // Shows the progress bar
+                pbSearch.setVisibility(View.VISIBLE);
+
+                // Hides the keyboard
+                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                Objects.requireNonNull(imm).hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),0);
+
                 // Grabs the user's search
                 String search = sv.getQuery().toString();
 
