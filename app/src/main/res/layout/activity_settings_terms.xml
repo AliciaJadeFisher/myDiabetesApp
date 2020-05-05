@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainSections.SettingsSection.SettingsTermsActivity">
 
+    <!--AppBarLayout-->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +19,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
             <!--ImageView to display the solo logo-->
             <ImageView
                 android:maxWidth="@dimen/logo_w_h"
@@ -29,20 +29,22 @@
                 android:layout_height="40dp"
                 android:contentDescription="@string/logo_icon"/>
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!--ScrollView for the screen-->
     <ScrollView
         android:id="@+id/sv_terms"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="56dp">
 
+        <!--LinearLayout for the widgets-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--TextViews for term 1-->
             <TextView
                 android:id="@+id/terms_1"
                 android:layout_width="match_parent"
@@ -73,11 +75,13 @@
                 android:text="@string/terms_1"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for term 2-->
             <TextView
                 android:id="@+id/terms_2"
                 android:layout_width="match_parent"
@@ -98,11 +102,13 @@
                 android:text="@string/terms_2"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for term 3-->
             <TextView
                 android:id="@+id/terms_3"
                 android:layout_width="match_parent"
@@ -123,11 +129,13 @@
                 android:text="@string/terms_3"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for term 4-->
             <TextView
                 android:id="@+id/terms_4"
                 android:layout_width="match_parent"
@@ -148,11 +156,13 @@
                 android:text="@string/terms_4"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for term 5-->
             <TextView
                 android:id="@+id/terms_5"
                 android:layout_width="match_parent"
@@ -173,11 +183,13 @@
                 android:text="@string/terms_5"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for term 6-->
             <TextView
                 android:id="@+id/terms_6"
                 android:layout_width="match_parent"
@@ -198,11 +210,13 @@
                 android:text="@string/terms_6"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for term 7-->
             <TextView
                 android:id="@+id/terms_7"
                 android:layout_width="match_parent"
@@ -223,11 +237,13 @@
                 android:text="@string/terms_7"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for term 8-->
             <TextView
                 android:id="@+id/terms_8"
                 android:layout_width="match_parent"
@@ -248,11 +264,13 @@
                 android:text="@string/terms_8"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for term 9-->
             <TextView
                 android:id="@+id/terms_9"
                 android:layout_width="match_parent"
@@ -273,11 +291,13 @@
                 android:text="@string/terms_9"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for term 10-->
             <TextView
                 android:id="@+id/terms_10"
                 android:layout_width="match_parent"
@@ -298,11 +318,13 @@
                 android:text="@string/terms_10"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for term 11-->
             <TextView
                 android:id="@+id/terms_11"
                 android:layout_width="match_parent"
@@ -323,11 +345,11 @@
                 android:text="@string/terms_11"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
-
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
