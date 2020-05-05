@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,8 @@ public class SearchCarbActivity extends AppCompatActivity
     static Button btnSearch;
     @SuppressLint("StaticFieldLeak")
     static ListView lvResults;
+    @SuppressLint("StaticFieldLeak")
+    static ProgressBar pbSearch;
 
     // Variable for adapter
     FoodListViewAdapter adapter;
@@ -67,6 +70,8 @@ public class SearchCarbActivity extends AppCompatActivity
         tvDisplay = findViewById(R.id.tv_noRes);
         btnSearch = findViewById(R.id.btn_search);
         lvResults = findViewById(R.id.lv_results);
+        pbSearch = findViewById(R.id.pb_search);
+        pbSearch.setVisibility(View.VISIBLE);
 
         // Calls checkCon()
         checkCon();
@@ -175,6 +180,7 @@ public class SearchCarbActivity extends AppCompatActivity
                             // Converts the string response to a JSON object
                             JSONObject object = new JSONObject(response);
 
+                            pbSearch.setVisibility(View.GONE);
                             // Sets the list view adapter and passes in the api response
                             adapter = new FoodListViewAdapter(SearchCarbActivity.this, object.getJSONArray("products"));
                             lvResults.setAdapter(adapter);
