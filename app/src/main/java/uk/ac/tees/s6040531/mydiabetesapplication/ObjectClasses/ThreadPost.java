@@ -8,9 +8,8 @@ import java.util.Date;
 public class ThreadPost
 {
     // Class attributes
-    String threadID, postID, senderID, senderName, message;
-    Date postDate;
-
+    private String threadID, postID, senderID, senderName, message;
+    private Date postDate;
 
     /**
      * Empty constructor
@@ -19,9 +18,12 @@ public class ThreadPost
 
     /**
      * Main constructor
-     * @param tID
-     * @param sID
-     * @param m
+     * @param tID - thread id
+     * @param pID - post id
+     * @param sID - sender id
+     * @param n - sender name
+     * @param m - post message
+     * @param pD - post date
      */
     public ThreadPost(String tID, String pID, String sID, String n, String m, Date pD)
     {
@@ -61,7 +63,7 @@ public class ThreadPost
 
     /**
      * Returns the sender name attribute
-     * @return
+     * @return senderName
      */
     public String getSenderName()
     {
@@ -88,7 +90,7 @@ public class ThreadPost
 
     /**
      * Sets the thread id attribute
-     * @param threadID
+     * @param threadID - thread ID
      */
     public void setThreadID(String threadID)
     {
@@ -97,7 +99,7 @@ public class ThreadPost
 
     /**
      * Sets the post id attribute
-     * @param postID
+     * @param postID - post ID
      */
     public void setPostID(String postID) {
         this.postID = postID;
@@ -105,7 +107,7 @@ public class ThreadPost
 
     /**
      * Sets the sender id attribute
-     * @param senderID
+     * @param senderID - sender ID
      */
     public void setSenderID(String senderID)
     {
@@ -114,7 +116,7 @@ public class ThreadPost
 
     /**
      * Sets the sender name attribute
-     * @param senderName
+     * @param senderName - sender name
      */
     public void setSenderName(String senderName)
     {
@@ -123,7 +125,7 @@ public class ThreadPost
 
     /**
      * Sets the message attribute
-     * @param message
+     * @param message - post message
      */
     public void setMessage(String message)
     {
@@ -132,7 +134,7 @@ public class ThreadPost
 
     /**
      * Sets the post date attribute
-     * @param postDate
+     * @param postDate - post date
      */
     public void setPostDate(Date postDate)
     {
