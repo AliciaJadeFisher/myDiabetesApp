@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--TextView to display product name-->
     <TextView
         android:id="@+id/tv_product_name"
         android:layout_width="match_parent"
@@ -11,6 +12,8 @@
         android:padding="5dp"
         android:text="@string/food_item_here"
         android:textColor="@color/colorPrimaryDark"/>
+
+    <!--TextView to display carbs per 100g-->
     <TextView
         android:id="@+id/tv_carbs_100"
         android:layout_width="match_parent"
@@ -19,6 +22,8 @@
         android:padding="5dp"
         android:text="@string/carbohydrates_per_100g"
         android:textColor="@color/colorPrimaryDark"/>
+
+    <!--TextView to display carbs per serving-->
     <TextView
         android:id="@+id/tv_carbs_serving"
         android:layout_width="match_parent"
