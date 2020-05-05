@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="top">
 
+        <!--TextView for welcome message-->
         <TextView
             android:id="@+id/tv_welcome"
             android:paddingTop="10dp"
@@ -29,6 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!--LinearLayout for button section-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,6 +39,7 @@
             android:background="@color/colorPrimaryDark"
             android:orientation="horizontal">
 
+            <!--Button to filter for today-->
             <Button
                 android:id="@+id/btn_today"
                 android:layout_width="70dp"
@@ -44,8 +48,10 @@
                 android:text="@string/today"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                tools:ignore="ButtonStyle" />
 
+            <!--Button to filter for week-->
             <Button
                 android:id="@+id/btn_week"
                 android:layout_width="70dp"
@@ -54,7 +60,10 @@
                 android:text="@string/week"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                tools:ignore="ButtonStyle" />
+
+            <!--Button to filter for month-->
             <Button
                 android:id="@+id/btn_month"
                 android:layout_width="70dp"
@@ -63,7 +72,10 @@
                 android:text="@string/month"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                tools:ignore="ButtonStyle" />
+
+            <!--Button to filter for all-->
             <Button
                 android:id="@+id/btn_all"
                 android:layout_width="70dp"
@@ -72,9 +84,11 @@
                 android:text="@string/all"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
 
+        <!--LinearLayout for averages section-->
         <LinearLayout
             android:paddingTop="10dp"
             android:layout_width="match_parent"
@@ -83,6 +97,7 @@
             android:gravity="center"
             android:background="@color/colorPrimaryDark">
 
+            <!--TextView to display average blood sugar-->
             <TextView
                 android:id="@+id/tv_average"
                 android:layout_margin="10dp"
@@ -93,6 +108,8 @@
                 android:textSize="13sp"
                 android:textColor="@color/colorAccent"
                 android:background="@drawable/textview_circle"/>
+
+            <!--TextView to display no. hypos-->
             <TextView
                 android:id="@+id/tv_hypos"
                 android:layout_margin="10dp"
@@ -103,6 +120,8 @@
                 android:textSize="13sp"
                 android:textColor="@color/colorAccent"
                 android:background="@drawable/textview_circle" />
+
+            <!--TextView to display no. hypers-->
             <TextView
                 android:id="@+id/tv_hypers"
                 android:layout_margin="10dp"
@@ -115,6 +134,7 @@
                 android:background="@drawable/textview_circle"/>
         </LinearLayout>
 
+        <!--LinearLayout for averages labels-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -122,6 +142,7 @@
             android:gravity="center"
             android:background="@color/colorPrimaryDark">
 
+            <!--TextView for average label-->
             <TextView
                 android:id="@+id/tv_a"
                 android:layout_width="80dp"
@@ -132,6 +153,7 @@
                 android:textSize="14sp"
                 android:textColor="@color/colorAccent"/>
 
+            <!--TextView for hypos label-->
             <TextView
                 android:id="@+id/tv_low"
                 android:layout_width="80dp"
@@ -143,6 +165,7 @@
                 android:textSize="14sp"
                 android:textColor="@color/colorAccent"/>
 
+            <!--TextView for hypers label-->
             <TextView
                 android:id="@+id/tv_high"
                 android:layout_width="80dp"
@@ -154,14 +177,13 @@
                 android:textColor="@color/colorAccent"/>
         </LinearLayout>
 
+        <!--RecyclerView for blood sugar entries-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_records"
             android:layout_marginTop="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </androidx.recyclerview.widget.RecyclerView>
-
-
     </LinearLayout>
 
     <!--FloatingActionButton that links to the AddEntryActivity-->
