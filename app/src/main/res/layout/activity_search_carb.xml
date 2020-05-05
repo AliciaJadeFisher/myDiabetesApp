@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainSections.EntrySection.SearchCarbActivity">
 
+    <!--AppBarLayout-->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +19,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
             <!--ImageView to display the solo logo-->
             <ImageView
                 android:maxWidth="@dimen/logo_w_h"
@@ -29,9 +29,9 @@
                 android:layout_height="40dp"
                 android:contentDescription="@string/logo_icon"/>
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!--LinearLayout for widgets-->
     <LinearLayout
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="56dp"
@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!--TextView to display network issue-->
         <TextView
             android:id="@+id/tv_net_con"
             android:layout_width="match_parent"
@@ -52,12 +53,14 @@
             android:textColor="@android:color/black"
             android:textSize="16sp"/>
 
+        <!--SearchView for user search input-->
         <SearchView
             android:id="@+id/sv_food"
             android:queryHint="Enter food..."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!--Button to activate search-->
         <Button
             android:id="@+id/btn_search"
             android:layout_width="fill_parent"
@@ -69,6 +72,7 @@
             android:textColor="@android:color/white"
             android:textSize="15sp" />
 
+        <!--TextView to display number of search results-->
         <TextView
             android:id="@+id/tv_noRes"
             android:layout_marginTop="16dp"
@@ -76,9 +80,9 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:layout_gravity="start"
-            android:text="@string/no_results"
-            />
+            android:text="@string/no_results" />
 
+        <!--ListView to display search results-->
         <ListView
             android:id="@+id/lv_results"
             android:layout_width="match_parent"
@@ -86,19 +90,22 @@
             android:divider="@color/colorPrimary"
             android:dividerHeight="1dp"
             android:listSelector="@color/colorAccent"/>
-
     </LinearLayout>
 
+    <!--LinearLayout for widgets-->
     <LinearLayout
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <!--View for section border-->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorPrimary"/>
 
+        <!--TextView for API credit-->
         <TextView
             android:id="@+id/tv_need"
             android:paddingTop="10dp"
