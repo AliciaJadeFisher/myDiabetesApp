@@ -6,6 +6,7 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".MainSections.AuthenticationSection.RegistrationActivity">
 
+    <!--LinearLayout for widgets-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,7 +41,8 @@
             android:textColorHint="@color/colorPrimaryDark"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:importantForAutofill="no" />
 
         <!--EditText for password input-->
         <EditText
@@ -57,7 +59,8 @@
             android:layout_marginTop="20dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:importantForAutofill="no" />
 
         <!--Button that links to the ResetPasswordActivity-->
         <Button
@@ -83,7 +86,7 @@
             android:textColor="@android:color/black"
             android:text="@string/register"/>
 
-        <!--Button that links to the RegistrationActivity-->
+        <!--Button that links to the LoginActivity-->
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
@@ -96,7 +99,5 @@
             android:textColor="@color/colorAccent"
             android:layout_marginEnd="5dp"
             android:text="@string/have_an_account_log_in"/>
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
