@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--this is for the main textboxes that are used throughout the app-->
+<!-- EditText background for main edit texts in application -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/colorAccent"/>
     <corners android:radius="2dp"/>

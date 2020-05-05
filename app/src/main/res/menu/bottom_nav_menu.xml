@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/navigation_settings"
-        android:icon="@drawable/ic_settings_24dp"
+        android:icon="@drawable/settings_nav_icon"
         android:title="@string/settings" />
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_24dp"
+        android:icon="@drawable/home_nav_icon"
         android:title="@string/title_home" />
     <item
         android:id="@+id/navigation_forum"
-        android:icon="@drawable/ic_chat_bubble_24dp"
+        android:icon="@drawable/forum_nav_icon"
         android:title="@string/forum" />
 
 
