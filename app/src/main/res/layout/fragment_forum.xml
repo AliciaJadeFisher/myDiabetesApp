@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
     <!--LinearLayout for the widgets-->
     <LinearLayout
         android:layout_marginTop="56dp"
@@ -15,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center">
 
-            <!--TextView for the page title-->
+        <!--TextView for the page title-->
         <TextView
             android:id="@+id/tv_Threads"
             android:layout_width="match_parent"
@@ -28,6 +29,7 @@
             android:textColor="@android:color/black"
             android:textSize="20sp"/>
 
+        <!--TextView for network issues-->
         <TextView
             android:id="@+id/tv_net_con"
             android:layout_width="match_parent"
@@ -40,6 +42,7 @@
             android:textColor="@android:color/black"
             android:textSize="16sp"/>
 
+        <!--RecyclerView for threads-->
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="10dp"
             android:paddingBottom="20dp"
@@ -48,10 +51,9 @@
             android:id="@+id/recyclerViewThreads"
             android:nestedScrollingEnabled="false">
         </androidx.recyclerview.widget.RecyclerView>
-
     </LinearLayout>
 
-    <!--FloatingActionButton that links to the AddEntryActivity-->
+    <!--FloatingActionButton that links to the CreateThreadActivity-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_thread"
         app:layout_constraintBottom_toBottomOf="parent"
