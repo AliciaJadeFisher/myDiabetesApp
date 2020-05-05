@@ -9,149 +9,151 @@
     android:background="@color/colorAccent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <!--LinearLayout for the widgets-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical">
 
+        <!--RecyclerView for the time blocks-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </androidx.recyclerview.widget.RecyclerView>
 
-        <LinearLayout
+        <!--TextView for start title-->
+        <TextView
+            android:id="@+id/tv_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
-            <!--TextView for the blood sugar type-->
-            <TextView
-                android:id="@+id/tv_start"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/time_start"
-                android:textColor="@color/colorPrimaryDark"
-                android:paddingTop="10dp"
-                android:textSize="13sp"/>
+            android:gravity="center"
+            android:text="@string/time_start"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingTop="10dp"
+            android:textSize="13sp"/>
 
-            <EditText
-                android:id="@+id/et_start"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/_00_00"
-                android:textSize="12sp"
-                android:paddingTop="10dp"
-                android:gravity="center"
-                android:textColorHighlight="@color/colorPrimaryDark"
-                android:textColorHint="@android:color/darker_gray"
-                android:textColor="@color/colorPrimaryDark"
-                android:background="@drawable/account_details_et_bg"
-                android:textCursorDrawable="@drawable/et_cursor"/>
+        <!--EditText for the start input-->
+        <EditText
+            android:id="@+id/et_start"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/_00_00"
+            android:textSize="12sp"
+            android:paddingTop="10dp"
+            android:gravity="center"
+            android:textColorHighlight="@color/colorPrimaryDark"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/account_details_et_bg"
+            android:textCursorDrawable="@drawable/et_cursor"
+            android:importantForAutofill="no"
+            android:inputType="time" />
 
-            <!--TextView for the blood sugar type-->
-            <TextView
-                android:id="@+id/tv_end"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/time_end"
-                android:textColor="@color/colorPrimaryDark"
-                android:paddingTop="10dp"
-                android:textSize="13sp"/>
+        <!--TextView for the end title-->
+        <TextView
+            android:id="@+id/tv_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/time_end"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingTop="10dp"
+            android:textSize="13sp"/>
 
-            <EditText
-                android:id="@+id/et_end"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/_08_00"
-                android:textSize="12sp"
-                android:paddingTop="10dp"
-                android:gravity="center"
-                android:textColorHighlight="@color/colorPrimaryDark"
-                android:textColorHint="@android:color/darker_gray"
-                android:textColor="@color/colorPrimaryDark"
-                android:background="@drawable/account_details_et_bg"
-                android:textCursorDrawable="@drawable/et_cursor"/>
+        <!--EditText for the end input-->
+        <EditText
+            android:id="@+id/et_end"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/_08_00"
+            android:textSize="12sp"
+            android:paddingTop="10dp"
+            android:gravity="center"
+            android:textColorHighlight="@color/colorPrimaryDark"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/account_details_et_bg"
+            android:textCursorDrawable="@drawable/et_cursor"
+            android:importantForAutofill="no"
+            android:inputType="time" />
 
-            <!--TextView for the blood sugar type-->
-            <TextView
-                android:id="@+id/tv_carb_ratio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/carbohydrate_ratio_insulin_for_1_cp"
-                android:textColor="@color/colorPrimaryDark"
-                android:paddingTop="10dp"
-                android:textSize="13sp"/>
+        <!--TextView for ratio titl-->
+        <TextView
+            android:id="@+id/tv_carb_ratio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/carbohydrate_ratio_insulin_for_1_cp"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingTop="10dp"
+            android:textSize="13sp"/>
 
-            <EditText
-                android:id="@+id/et_carb_ratio"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/_4"
-                android:textSize="12sp"
-                android:paddingTop="10dp"
-                android:gravity="center"
-                android:textColorHighlight="@color/colorPrimaryDark"
-                android:textColorHint="@android:color/darker_gray"
-                android:textColor="@color/colorPrimaryDark"
-                android:background="@drawable/account_details_et_bg"
-                android:textCursorDrawable="@drawable/et_cursor"/>
+        <!--EditText fo the ratio input-->
+        <EditText
+            android:id="@+id/et_carb_ratio"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/_4"
+            android:textSize="12sp"
+            android:paddingTop="10dp"
+            android:gravity="center"
+            android:textColorHighlight="@color/colorPrimaryDark"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/account_details_et_bg"
+            android:textCursorDrawable="@drawable/et_cursor"
+            android:importantForAutofill="no"
+            android:inputType="number" />
 
-            <!--Button that saves the user's details and links to the HomeActivity-->
-            <Button
-                android:id="@+id/btn_add"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/button_background"
-                android:text="@string/add_time_block"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="13sp"/>
-            <Button
-                android:id="@+id/btn_clear"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/button_background"
-                android:text="@string/clear_time_blocks"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="13sp"/>
+        <!--Button that saves the time block-->
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_background"
+            android:text="@string/add_time_block"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"/>
 
-            <LinearLayout
-                android:paddingTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <!--Button that saves the user's details and links to the HomeActivity-->
-                <Button
-                    android:id="@+id/btn_save"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/button_background"
-                    android:text="@string/save_details"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="13sp" />
-                <Button
-                    android:id="@+id/btn_back"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/button_background"
-                    android:text="@string/back"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="13sp"/>
-                <!--Button that saves the user's details and links to the HomeActivity-->
+        <!--Button that clears the time blocks-->
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_background"
+            android:text="@string/clear_time_blocks"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"/>
 
-            </LinearLayout>
-        </LinearLayout>
 
+        <!--Button that saves the user's details and links to the HomeActivity-->
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_background"
+            android:text="@string/save_details"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
+
+        <!--Button that goes back to the previous fragment-->
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_background"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"/>
     </LinearLayout>
 </ScrollView>
