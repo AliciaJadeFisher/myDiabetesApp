@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.TimeBlock;
@@ -22,8 +24,8 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 public class TimeBlockRecyclerViewAdapter extends RecyclerView.Adapter<TimeBlockRecyclerViewAdapter.ViewHolder>
 {
     // RecyclerViewAdapter attributes
-    Context context;
-    List<TimeBlock> timeBlocks;
+    private Context context;
+    private List<TimeBlock> timeBlocks;
 
     // Main constructor
     public TimeBlockRecyclerViewAdapter(Context context, List<TimeBlock> tb)
@@ -38,50 +40,48 @@ public class TimeBlockRecyclerViewAdapter extends RecyclerView.Adapter<TimeBlock
     class ViewHolder extends RecyclerView.ViewHolder
     {
         // View layout attributes
-        public TextView tvStart, tvEnd, tvRatio;
+        TextView tvStart, tvEnd, tvRatio;
         RelativeLayout parentLayout;
 
         /**
          * Main constructor
-         * @param itemView
+         * @param itemView - view for recycler view
          */
-        public ViewHolder(View itemView)
+        ViewHolder(View itemView)
         {
             super(itemView);
 
             // Initializes the layout and widgets
             parentLayout = itemView.findViewById(R.id.parent_layout);
-            tvStart = (TextView)itemView.findViewById(R.id.tv_viewStart);
-            tvEnd = (TextView)itemView.findViewById(R.id.tv_viewEnd);
-            tvRatio = (TextView)itemView.findViewById(R.id.tv_viewRatio);
+            tvStart = itemView.findViewById(R.id.tv_viewStart);
+            tvEnd = itemView.findViewById(R.id.tv_viewEnd);
+            tvRatio = itemView.findViewById(R.id.tv_viewRatio);
 
         }
     }
 
     /**
      * Creates a new RecyclerView.ViewHolder
-     * @param parent
-     * @param viewType
+     * @param parent - view group parent
+     * @param viewType - view type
      * @return viewHolder
      */
+    @NotNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         // Grabs the recycler view layout
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_time_blocks, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     /**
      * Updates the contents of the RecyclerView.ViewHolder
-     * @param holder
-     * @param position
+     * @param holder - view holder
+     * @param position - position in list
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
-        final Activity activity = (Activity)context;
-
         // Grabs the time block at the current position
         final TimeBlock block = timeBlocks.get(position);
 
@@ -99,7 +99,6 @@ public class TimeBlockRecyclerViewAdapter extends RecyclerView.Adapter<TimeBlock
     @Override
     public int getItemCount()
     {
-
         return timeBlocks.size();
     }
 }
