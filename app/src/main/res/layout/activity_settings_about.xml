@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainSections.SettingsSection.SettingsAboutActivity">
 
+    <!--AppBarLayout-->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +19,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
             <!--ImageView to display the solo logo-->
             <ImageView
                 android:maxWidth="@dimen/logo_w_h"
@@ -29,17 +29,16 @@
                 android:layout_height="40dp"
                 android:contentDescription="@string/logo_icon"/>
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--LinearLayout for the entire screen-->
+    <!--LinearLayout for the widgets-->
     <LinearLayout
         android:layout_marginTop="56dp"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
 
-        <!--Button that links to the TermsActivity-->
+        <!--Button that links to the SettingsTermsActivity-->
         <Button
             android:id="@+id/btn_terms"
             android:layout_width="match_parent"
@@ -61,7 +60,7 @@
             android:background="@android:color/black"
             tools:ignore="SmallSp" />
 
-        <!--Button that links to the PrivacyActivity-->
+        <!--Button that links to the SettingsPrivacyActivity-->
         <Button
             android:id="@+id/btn_privacy"
             android:layout_width="match_parent"
@@ -83,5 +82,4 @@
             android:background="@android:color/black"
             tools:ignore="SmallSp" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
