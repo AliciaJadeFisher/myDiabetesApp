@@ -1,16 +1,21 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
 import java.text.SimpleDateFormat;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
+import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.User;
 import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 /**
@@ -24,6 +29,9 @@ public class ViewRecordActivity extends AppCompatActivity
     // Variable for selected entry
     BloodSugarEntry entry;
 
+    // Variable for the current user
+    User user;
+
     /**
      * onCreate() method
      * @param savedInstanceState - instance bundle
@@ -34,6 +42,12 @@ public class ViewRecordActivity extends AppCompatActivity
         // Grabs the relevant layout file
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_record);
+
+        // Grabs the current user
+        SharedPreferences myPref = getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = myPref.getString(getResources().getString(R.string.user_key),"");
+        user = gson.fromJson(json,User.class);
 
         // Initialise the widgets
         tvDate = findViewById(R.id.tv_date);
@@ -73,14 +87,14 @@ public class ViewRecordActivity extends AppCompatActivity
     {
         // Saves the text displays
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        String date_display = "Date: " + format.format(entry.getDate());
-        String time_display = "Time: " + entry.getTime();
-        String bs_display = "Blood Sugar: " + entry.getBs();
-        String carbs_display = "Carbohydrates: " + entry.getCarbs();
-        String meal_display = "Meal Type: " + entry.getMeal();
-        String inF_display = "Insulin (Food): " + entry.getInsulin_f();
-        String inC_display = "Insulin (Correction): " + entry.getInsulin_c();
-        String inT_display = "Total Insulin: " + entry.getInsulin_t();
+        String date_display = format.format(entry.getDate());
+        String time_display = entry.getTime();
+        String bs_display = entry.getBs() + " " + user.getBs_m();
+        String carbs_display = entry.getCarbs() + " " + user.getCb_m();
+        String meal_display = entry.getMeal();
+        String inF_display = entry.getInsulin_f() + " U";
+        String inC_display = entry.getInsulin_c() + " U";
+        String inT_display = entry.getInsulin_t() + " U";
         String note_display = entry.getNotes();
 
         // Update the text view displays
