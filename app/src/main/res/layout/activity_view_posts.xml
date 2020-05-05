@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainSections.ForumSection.ViewPostsActivity">
 
+    <!--AppBarLayout-->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +19,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
             <!--ImageView to display the solo logo-->
             <ImageView
                 android:maxWidth="@dimen/logo_w_h"
@@ -29,7 +29,6 @@
                 android:layout_height="40dp"
                 android:contentDescription="@string/logo_icon"/>
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <!--ScrollView for the entire screen-->
@@ -58,7 +57,7 @@
                 android:textSize="20sp"
                 android:paddingTop="5dp"/>
 
-            <!--TextView to display thread title-->
+            <!--TextView to display thread description-->
             <TextView
                 android:id="@+id/tv_desc"
                 android:layout_width="match_parent"
@@ -90,5 +89,4 @@
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/fab_plus_in_circle" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
