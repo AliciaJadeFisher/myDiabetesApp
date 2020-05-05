@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainSections.HomeSection.ViewRecordActivity">
 
+    <!--AppBarLayout-->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +19,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
             <!--ImageView to display the solo logo-->
             <ImageView
                 android:maxWidth="@dimen/logo_w_h"
@@ -29,7 +29,6 @@
                 android:layout_height="40dp"
                 android:contentDescription="@string/logo_icon"/>
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <!--ScrollView for the entire screen-->
@@ -37,11 +36,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--RelativeLayout for the widgets-->
         <RelativeLayout
             android:paddingTop="56dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!--TextView for the title-->
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
@@ -53,6 +54,7 @@
                 android:textStyle="bold"
                 android:textSize="18sp"/>
 
+            <!--TextViews for the date section-->
             <TextView
                 android:id="@+id/tv_dateTitle"
                 android:layout_width="200dp"
@@ -65,7 +67,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
@@ -81,6 +82,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
 
+            <!--TextViews for the time section-->
             <TextView
                 android:id="@+id/tv_timeTitle"
                 android:layout_width="200dp"
@@ -93,7 +95,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
@@ -109,6 +110,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
 
+            <!--TextViews for the blood sugar section-->
             <TextView
                 android:id="@+id/tv_bsTitle"
                 android:layout_width="200dp"
@@ -121,7 +123,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_bs"
                 android:layout_width="wrap_content"
@@ -137,6 +138,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
 
+            <!--TextViews for the carbs section-->
             <TextView
                 android:id="@+id/tv_carbsTitle"
                 android:layout_width="200dp"
@@ -149,7 +151,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_carbs"
                 android:layout_width="wrap_content"
@@ -165,6 +166,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
 
+            <!--TextViews for the meal type section-->
             <TextView
                 android:id="@+id/tv_mealTitle"
                 android:layout_width="200dp"
@@ -177,7 +179,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_meal"
                 android:layout_width="wrap_content"
@@ -193,6 +194,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
 
+            <!--TextViews for the insulin food section-->
             <TextView
                 android:id="@+id/tv_inFTitle"
                 android:layout_width="200dp"
@@ -205,7 +207,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_inFood"
                 android:layout_width="wrap_content"
@@ -221,6 +222,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
 
+            <!--TextViews for the insulin correction section-->
             <TextView
                 android:id="@+id/tv_inCTitle"
                 android:layout_width="200dp"
@@ -233,7 +235,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_inCorr"
                 android:layout_width="wrap_content"
@@ -249,6 +250,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
 
+            <!--TextViews for the total insulin section-->
             <TextView
                 android:id="@+id/tv_inTTitle"
                 android:layout_width="200dp"
@@ -261,7 +263,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_inTotal"
                 android:layout_width="wrap_content"
@@ -277,6 +278,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
 
+            <!--TextViews for the notes section-->
             <TextView
                 android:id="@+id/tv_noteTitle"
                 android:layout_width="match_parent"
@@ -289,7 +291,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_note"
                 android:layout_width="match_parent"
