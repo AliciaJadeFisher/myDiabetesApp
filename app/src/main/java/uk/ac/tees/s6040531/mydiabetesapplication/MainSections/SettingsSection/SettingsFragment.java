@@ -109,93 +109,154 @@ public class SettingsFragment extends Fragment
         Button btnHelp = view.findViewById(R.id.btn_help);
         Button btnLogOut = view.findViewById(R.id.btn_log_out);
 
-        btnEdit.setOnClickListener(new View.OnClickListener() {
+        // onClickListener for btnEdit
+        btnEdit.setOnClickListener(new View.OnClickListener()
+        {
+            /**
+             * onClick() for btnEdit
+             * @param v - view for fragment
+             */
             @Override
             public void onClick(View v)
             {
+                // Loads up the AccountSetupActivity and passes the previous activity to it
                 Intent i = new Intent(getActivity(), AccountSetupActivity.class);
                 i.putExtra("previous", "settings");
-                getActivity().startActivity(i);
+                Objects.requireNonNull(getActivity()).startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 getActivity().finish();
             }
         });
 
+        // onClickListener for btnChEmail
         btnChEmail.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick() for btnChEmail
+             * @param v - view for fragment
+             */
             @Override
             public void onClick(View v) {
+                // Shows the changeEmail alert dialog
                 changeEmail.create().show();
             }
         });
 
+        // onClickListener for btnChPass
         btnChPass.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick() for btnChPass
+             * @param v - view for fragment
+             */
             @Override
             public void onClick(View v) {
+                // Shows the changePass alert dialog
                 changePass.create().show();
             }
         });
 
+        // onClickListener for btnDelete
         btnDelete.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onCick() for btnDelete
+             * @param v - view for fragment
+             */
             @Override
             public void onClick(View v) {
+                // Shows the deleteAccount alert dialog
                 deleteAccount.create().show();
             }
         });
 
+        // onClickListener for btnAbout
         btnAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(getActivity(), SettingsAboutActivity.class);
-                getActivity().startActivity(i);
-                getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-            }
-        });
-
-        btnHelp.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick for btnAbout
+             * @param v - view for fragment
+             */
             @Override
             public void onClick(View v) {
-
-                Intent i = new Intent(getActivity(), SettingsHelpActivity.class);
-                getActivity().startActivity(i);
+                // Loads up the SettingsAboutActivity
+                Intent i = new Intent(getActivity(), SettingsAboutActivity.class);
+                Objects.requireNonNull(getActivity()).startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
             }
         });
 
+        // onClickListener for btnHelp
+        btnHelp.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick() for btnHelp
+             * @param v - view for fragment
+             */
+            @Override
+            public void onClick(View v) {
+                // Loads up the SettingsHelpActivity
+                Intent i = new Intent(getActivity(), SettingsHelpActivity.class);
+                Objects.requireNonNull(getActivity()).startActivity(i);
+                getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            }
+        });
+
+        // onClickListener for btnLogOut
         btnLogOut.setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * onClick() for btnLogOut
+             * @param v - view for fragment
+             */
             @Override
             public void onClick(View v)
             {
+                // Signs the user out
                 auth.signOut();
-                getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+
+                // Loads up the LoginActivity
+                Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), LoginActivity.class));
                 getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 getActivity().finish();
             }
         });
 
+        // Sets up the changeEmail alert dialog
         changeEmail = new AlertDialog.Builder(getActivity());
         changeEmail.setTitle("Change Email");
         final EditText email = new EditText(getActivity());
         email.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         email.setHint("Email Address");
         changeEmail.setView(email);
+
+        // setPositiveButton for changeEmail
         changeEmail.setPositiveButton("Change", new DialogInterface.OnClickListener()
         {
+            /**
+             * onClick() for positive button for changeEmail
+             * @param dialog - dialog chosen
+             * @param which - button chosen
+             */
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
+                // Grabs the entered email and updates the login information
                 String em = email.getText().toString();
                 cUser.updateEmail(em);
             }
         });
+
+        // setNegativeButton for changeEmail
         changeEmail.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            /**
+             * onClick() for negative button for changeEmai
+             * @param dialog - dialog chosen
+             * @param which - button chosen
+             */
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // Dismisses the dialog
                 dialog.dismiss();
             }
         });
 
+        // Sets up the changePass alert dialog
         changePass = new AlertDialog.Builder(getActivity());
         changePass.setTitle("Change Password");
         LinearLayout layout = new LinearLayout(getActivity());
@@ -213,40 +274,66 @@ public class SettingsFragment extends Fragment
         layout.addView(newPass);
         layout.addView(conPass);
         changePass.setView(layout);
+
+        // setPositiveButton for changePass
         changePass.setPositiveButton("Change", new DialogInterface.OnClickListener()
         {
+            /**
+             * onClick() for positive button for changePass
+             * @param dialog - dialog chosen
+             * @param which - button chosen
+             */
             @Override
             public void onClick(final DialogInterface dialog, int which)
             {
-                cred = EmailAuthProvider.getCredential(cUser.getEmail(), oldPass.getText().toString());
+                // Gets the authentication credentials from the users email and entered password
+                cred = EmailAuthProvider.getCredential(Objects.requireNonNull(cUser.getEmail()), oldPass.getText().toString());
+
+                // Checks the authentication credentials
                 cUser.reauthenticate(cred).addOnCompleteListener(new OnCompleteListener<Void>()
                 {
+                    /**
+                     * onComplete() method
+                     * @param task - results of task
+                     */
                     @Override
                     public void onComplete(@NonNull Task<Void> task)
                     {
+                        // Checks if the task was successful
                         if(!task.isSuccessful())
                         {
+                            // Informs the user that their password was wrong
                             Toast.makeText(getActivity(),"Incorrect Password", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
+                            // Checks if the new password and confirmation passwords are filled in
                             if(newPass.getText().toString().equals("") || conPass.toString().equals(""))
                             {
+                                // Informs the user that the fields need to be filled in
                                 Toast.makeText(getActivity(),"All fields must be filled in", Toast.LENGTH_SHORT).show();
                             }
+                            // Checks if the new password and confirmation passwords match
                             else if(newPass.getText().toString().equals(conPass.getText().toString()))
                             {
+                                // Updates the user's password
                                 cUser.updatePassword(newPass.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    /**
+                                     * onComplete() method
+                                     * @param task - results of task
+                                     */
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-
+                                        // Checks if the task was successful
                                         if(task.isSuccessful())
                                         {
+                                            // Informs the user that the password was updated and dismisses the dialog
                                             Toast.makeText(getActivity(),"Password Updated", Toast.LENGTH_SHORT).show();
                                             dialog.dismiss();
                                         }
                                         else
                                         {
+                                            // Informs the user that the password failed to update
                                             Toast.makeText(getActivity(),"Failed to Update Password", Toast.LENGTH_SHORT).show();
                                         }
                                     }
@@ -254,6 +341,7 @@ public class SettingsFragment extends Fragment
                             }
                             else
                             {
+                                // Informs the user that the entered passwords do not match
                                 Toast.makeText(getActivity(),"Passwords do not match", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -261,73 +349,133 @@ public class SettingsFragment extends Fragment
                 });
             }
         });
+
+        // setNegativeButton for changePass
         changePass.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            /**
+             * onClick() for negative button for changePass
+             * @param dialog - dialog chosen
+             * @param which - button chosen
+             */
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // Dismisses the dialog
                 dialog.dismiss();
             }
         });
 
+        // Sets up the deleteAccount alert dialog
         deleteAccount = new AlertDialog.Builder(getActivity());
         deleteAccount.setTitle("Delete Account");
         final EditText dPassword = new EditText(getActivity());
         dPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         dPassword.setHint("Password");
         deleteAccount.setView(dPassword);
+
+        // setPositiveButton for deleteAccount
         deleteAccount.setPositiveButton("Delete", new DialogInterface.OnClickListener()
         {
+            /**
+             * onClick() for postivie button for deleteAccount
+             * @param dialog - dialog chosen
+             * @param which - button chosen
+             */
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                cred = EmailAuthProvider.getCredential(cUser.getEmail(), dPassword.getText().toString());
+                // Gets the authentication credentials from the users email and entered password
+                cred = EmailAuthProvider.getCredential(Objects.requireNonNull(cUser.getEmail()), dPassword.getText().toString());
+
+                // Checks the authentication credentials
                 cUser.reauthenticate(cred).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    /**
+                     * onComplete() method
+                     * @param task - results of task
+                     */
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void onComplete(@NonNull Task<Void> task)
+                    {
+                        // Checks if the task was successful
                         if(!task.isSuccessful())
                         {
+                            // Informs the user that the password was incorrect
                             Toast.makeText(getActivity(),"Incorrect Password", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
+                            // Shows the checkDelete alert dialog
                             checkDelete.create().show();
                         }
                     }
                 });
             }
         });
+
+        // setNegativeButton for deleteAccount
         deleteAccount.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            /**
+             * onClick() for negative button for deleteAccount
+             * @param dialog - dialog chosen
+             * @param which - button chosen
+             */
             @Override
             public void onClick(DialogInterface dialog, int which) {
-             dialog.dismiss();
+                // Dismisses the dialog
+                dialog.dismiss();
             }
         });
 
+        // Sets up the checkDelete alert dialog
         checkDelete = new AlertDialog.Builder(getActivity());
         checkDelete.setTitle("Confirm Delete Account");
         final TextView check = new TextView(getActivity());
-        check.setText("Are you sure you want to delete your account?");
+        String text = "Are you sure you want to delete your account?";
+        check.setText(text);
         checkDelete.setView(check);
+
+        // setPositiveButton for checkDelete
         checkDelete.setPositiveButton("Yes, Delete", new DialogInterface.OnClickListener()
         {
+            /**
+             * onClick() for positive button for checkDelete
+             * @param dialog - dialog chosen
+             * @param which - button chosen
+             */
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
+                // Removes the user from the database
                 uDbRef.collection("users").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    /**
+                     * onSuccess() method
+                     * @param aVoid - method parameter
+                     */
                     @Override
                     public void onSuccess(Void aVoid)
                     {
+                        // Removes the user's authentication details
                         cUser.delete().addOnCompleteListener(new OnCompleteListener<Void>()
                         {
+                            /**
+                             * onComplete() method
+                             * @param task - results of task
+                             */
                             @Override
                             public void onComplete(@NonNull Task<Void> task)
                             {
+                                // Removes the user's data from the local cache
                                 SharedPreferences.Editor prefEd = myPref.edit();
                                 prefEd.remove(getResources().getString(R.string.user_key));
+                                prefEd.apply();
 
+                                // Informs the user that the account was deleted
                                 Toast.makeText(getActivity(),"Account Deleted", Toast.LENGTH_SHORT).show();
 
+                                // Signs the user out
                                 auth.signOut();
-                                getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+
+                                // Loads up the LoginActivity
+                                Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), LoginActivity.class));
                                 getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                                 getActivity().finish();
                             }
@@ -335,16 +483,29 @@ public class SettingsFragment extends Fragment
                     }
                 }).addOnFailureListener(new OnFailureListener()
                 {
+                    /**
+                     * onFailure() method
+                     * @param e - error
+                     */
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(),"Error deleteing account, please try again", Toast.LENGTH_SHORT).show();
+                        // Informs the user that there was an error deleting the account
+                        Toast.makeText(getActivity(),"Error deleting account, please try again", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
+
+        // setNegativeButton for checkDelete
         checkDelete.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            /**
+             * onClick() for negative button for checkDelete
+             * @param dialog - dialog chosen
+             * @param which - button chosen
+             */
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // Dismisses the dialog
                 dialog.dismiss();
             }
         });
