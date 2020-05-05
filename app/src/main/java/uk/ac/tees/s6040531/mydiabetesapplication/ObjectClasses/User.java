@@ -10,9 +10,9 @@ import java.util.List;
 public class User implements Serializable
 {
     // Class attributes
-    String id, name, bs_m, cb_m,hypo, bottom, top, hyper, duration, precision, correction,portion;
-    List<TimeBlock> time_blocks;
-    List<BloodSugarEntry> blood_sugars = new ArrayList<>();
+    private String id, name, bs_m, cb_m,hypo, bottom, top, hyper, duration, precision, correction,portion;
+    private List<TimeBlock> time_blocks;
+    private List<BloodSugarEntry> blood_sugars = new ArrayList<>();
 
     /**
      * Empty constructor
@@ -134,7 +134,7 @@ public class User implements Serializable
 
     /**
      * Sets the id attribute
-     * @param id
+     * @param id - user id
      */
     public void setId(String id) {
         this.id = id;
@@ -142,7 +142,7 @@ public class User implements Serializable
 
     /**
      * Sets the name attribute
-     * @param name
+     * @param name - user name
      */
     public void setName(String name) {
         this.name = name;
@@ -150,7 +150,7 @@ public class User implements Serializable
 
     /**
      * Sets the blood sugar measurement attribute
-     * @param bs_m
+     * @param bs_m - user blood sugar measurement
      */
     public void setBs_m(String bs_m) {
         this.bs_m = bs_m;
@@ -158,7 +158,7 @@ public class User implements Serializable
 
     /**
      * Sets the carbohydrate measurement attribute
-     * @param cb_m
+     * @param cb_m - user carbohydrate measurement
      */
     public void setCb_m(String cb_m) {
         this.cb_m = cb_m;
@@ -166,7 +166,7 @@ public class User implements Serializable
 
     /**
      * Sets the hypo attribute
-     * @param hypo
+     * @param hypo - user hypo limit
      */
     public void setHypo(String hypo) {
         this.hypo = hypo;
@@ -174,7 +174,7 @@ public class User implements Serializable
 
     /**
      * Sets the bottom attribute
-     * @param bottom
+     * @param bottom - user target bottom
      */
     public void setBottom(String bottom) {
         this.bottom = bottom;
@@ -182,7 +182,7 @@ public class User implements Serializable
 
     /**
      * Sets the top attribute
-     * @param top
+     * @param top - user target top
      */
     public void setTop(String top) {
         this.top = top;
@@ -190,7 +190,7 @@ public class User implements Serializable
 
     /**
      * Sets the hyper attribute
-     * @param hyper
+     * @param hyper - user hyper limit
      */
     public void setHyper(String hyper) {
         this.hyper = hyper;
@@ -198,7 +198,7 @@ public class User implements Serializable
 
     /**
      * Sets the duration attribute
-     * @param duration
+     * @param duration - user insulin duration
      */
     public void setDuration(String duration) {
         this.duration = duration;
@@ -206,7 +206,7 @@ public class User implements Serializable
 
     /**
      * Sets the precision attribute
-     * @param precision
+     * @param precision - user insulin precision
      */
     public void setPrecision(String precision) {
         this.precision = precision;
@@ -214,7 +214,7 @@ public class User implements Serializable
 
     /**
      * Sets the correction attribute
-     * @param correction
+     * @param correction - user correction dosage
      */
     public void setCorrection(String correction) {
         this.correction = correction;
@@ -222,7 +222,7 @@ public class User implements Serializable
 
     /**
      * Sets the portion attribute
-     * @param portion
+     * @param portion - user carbohydrate portion
      */
     public void setPortion(String portion) {
         this.portion = portion;
@@ -230,7 +230,7 @@ public class User implements Serializable
 
     /**
      * Sets the time blocks attribute
-     * @param time_blocks
+     * @param time_blocks - user ratio time blocks
      */
     public void setTime_blocks(List<TimeBlock> time_blocks) {
         this.time_blocks = time_blocks;
@@ -238,7 +238,7 @@ public class User implements Serializable
 
     /**
      * Sets the blood sugars attribute
-     * @param blood_sugars
+     * @param blood_sugars - user blood sugars list
      */
     public void setBlood_sugars(List<BloodSugarEntry> blood_sugars) {
         this.blood_sugars = blood_sugars;
@@ -246,7 +246,7 @@ public class User implements Serializable
 
     /**
      * Adds a new blood sugar entry
-     * @param newEntry
+     * @param newEntry - new blood sugar entry
      */
     public void addBlood_sugar(BloodSugarEntry newEntry)
     {
