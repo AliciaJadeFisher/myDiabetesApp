@@ -129,9 +129,9 @@
     <string name="search">Search</string>
     <string name="calculate_insulin">Calculate Insulin</string>
     <string name="carbohydrates">Carbohydrates:</string>
-    <string name="insulin_food_8u">Insulin (food): 8U</string>
-    <string name="insulin_correction_2u">Insulin (correction): 2U</string>
-    <string name="total_insulin_10u">Total Insulin: 10U</string>
+    <string name="insulin_food_8u">Insulin (food): </string>
+    <string name="insulin_correction_2u">Insulin (correction): </string>
+    <string name="total_insulin_10u">Total Insulin: </string>
     <string name="meal_type">Meal Type:</string>
     <string name="notes">Notes:</string>
     <string name="save_entry">Save Entry</string>

@@ -185,6 +185,19 @@ public class AddEntryActivity extends AppCompatActivity
             }
         });
 
+        // onClickListener for btnBack
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick() for btnBack
+             * @param v - activity view
+             */
+            @Override
+            public void onClick(View v) {
+                // calls onBackPressed()
+                onBackPressed();
+            }
+        });
+
         // onClickListener for btnCalc
         btnCalc.setOnClickListener(new View.OnClickListener() {
             /**
@@ -205,7 +218,6 @@ public class AddEntryActivity extends AppCompatActivity
                 // Grabs the user's insulin settings
                 double targetTop = Double.parseDouble(user.getTop());
                 double targetBottom = Double.parseDouble(user.getBottom());
-                double hyper = Double.parseDouble(user.getHyper());
                 double hypo = Double.parseDouble(user.getHypo());
                 double correction = Double.parseDouble(user.getCorrection());
                 String prec = user.getPrecision();
