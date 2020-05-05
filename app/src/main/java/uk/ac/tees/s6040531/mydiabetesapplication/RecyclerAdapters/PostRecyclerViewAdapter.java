@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,16 +29,16 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 public class PostRecyclerViewAdapter  extends RecyclerView.Adapter<PostRecyclerViewAdapter.ViewHolder>
 {
     // RecyclerViewAdapter attributes
-    Context context;
-    List<ThreadPost> postList;
-    ForumThread thread;
-    FirebaseAuth auth;
+    private Context context;
+    private List<ThreadPost> postList;
+    private ForumThread thread;
+    private FirebaseAuth auth;
 
     /**
      * Main constructor
-     * @param context
-     * @param tempList
-     * @param th
+     * @param context - context called from
+     * @param tempList - list of posts
+     * @param th - thread for posts
      */
     public PostRecyclerViewAdapter(Context context, List<ThreadPost> tempList, ForumThread th)
     {
@@ -51,53 +54,51 @@ public class PostRecyclerViewAdapter  extends RecyclerView.Adapter<PostRecyclerV
     class ViewHolder extends RecyclerView.ViewHolder
     {
         // View layout attributes
-        public TextView posterName, postDate, postContent;
+        TextView posterName, postDate, postContent;
         LinearLayout parentLayout;
 
         /**
          * Main constructor
-         * @param itemView
+         * @param itemView - view for recyclerView
          */
-        public ViewHolder(View itemView)
+        ViewHolder(View itemView)
         {
             super(itemView);
 
             // Initializes the layout and widgets
             parentLayout = itemView.findViewById(R.id.parent_layout);
-            posterName = (TextView)itemView.findViewById(R.id.tv_poster);
-            postDate = (TextView)itemView.findViewById(R.id.tv_datePosted);
-            postContent = (TextView)itemView.findViewById(R.id.tv_postContent);
+            posterName = itemView.findViewById(R.id.tv_poster);
+            postDate = itemView.findViewById(R.id.tv_datePosted);
+            postContent = itemView.findViewById(R.id.tv_postContent);
         }
     }
 
     /**
      * Creates a new RecyclerView.ViewHolder
-     * @param parent
-     * @param viewType
+     * @param parent - parent view group
+     * @param viewType - stores type of view
      * @return viewHolder
      */
+    @NotNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         // Grabs the recycler view layout
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_posts, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     /**
      * Updates the contents of the RecyclerView.ViewHolder
-     * @param holder
-     * @param position
+     * @param holder - view holder
+     * @param position - position in list
      */
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position)
     {
-        final Activity activity = (Activity)context;
-
         //Grabs the post at the current position
         final ThreadPost post = postList.get(position);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
         //Sets the TextViews
         holder.posterName.setText(post.getSenderName());
