@@ -10,7 +10,10 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
+import java.util.Objects;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection.ViewPostsActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.ForumThread;
@@ -21,14 +24,14 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
  */
 public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecyclerViewAdapter.ViewHolder>
 {
-    // RecyclerViewAdapter attribtues
-    Fragment parent;
-    List<ForumThread> threadList;
+    // RecyclerViewAdapter attributes
+    private Fragment parent;
+    private List<ForumThread> threadList;
 
     /**
      * Main constructor
-     * @param parent
-     * @param tempList
+     * @param parent - parent fragment
+     * @param tempList - list of threads
      */
     public ThreadRecyclerViewAdapter(Fragment parent, List<ForumThread> tempList)
     {
@@ -42,43 +45,43 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
     class ViewHolder extends RecyclerView.ViewHolder
     {
         // View layout attributes
-        public TextView threadTitle, threadDesc, threadPosts;
+        TextView threadTitle, threadDesc, threadPosts;
         RelativeLayout parentLayout;
 
         /**
          * Main constructor
-         * @param itemView
+         * @param itemView - view for recycler view
          */
-        public ViewHolder(View itemView)
+        ViewHolder(View itemView)
         {
             super(itemView);
 
             // Initializes the layout and widgets
             parentLayout = itemView.findViewById(R.id.parent_layout);
-            threadTitle = (TextView)itemView.findViewById(R.id.tv_viewThreadTitle);
-            threadDesc = (TextView)itemView.findViewById(R.id.tv_viewThreadDesc);
-            threadPosts = (TextView)itemView.findViewById(R.id.tv_viewThreadPosts);
+            threadTitle = itemView.findViewById(R.id.tv_viewThreadTitle);
+            threadDesc = itemView.findViewById(R.id.tv_viewThreadDesc);
+            threadPosts = itemView.findViewById(R.id.tv_viewThreadPosts);
         }
     }
 
     /**
      * Creates a new RecyclerView.ViewHolder
-     * @param parent
-     * @param viewType
+     * @param parent - parent view group
+     * @param viewType - view type
      * @return viewHolder
      */
+    @NotNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         // Grabs the recycler view layout
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_threads, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     /**
      * Updates the contents of the RecyclerView.ViewHolder
-     * @param holder
-     * @param position
+     * @param holder - view holder
+     * @param position - position in list
      */
     @Override
     public void onBindViewHolder(ViewHolder holder,final int position)
@@ -96,7 +99,7 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
         {
             /**
              * onClick
-             * @param v
+             * @param v - recyclerView view
              */
             @Override
             public void onClick(View v)
@@ -104,7 +107,7 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
                 //Passes the user and thread to the CreatePostActivity and loads it up
                 Intent i = new Intent(parent.getActivity(), ViewPostsActivity.class);
                 i.putExtra("thread", thread);
-                parent.getActivity().startActivity(i);
+                Objects.requireNonNull(parent.getActivity()).startActivity(i);
                 parent.getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 parent.getActivity().finish();
             }
@@ -124,8 +127,8 @@ public class ThreadRecyclerViewAdapter extends RecyclerView.Adapter<ThreadRecycl
 
     /**
      * Returns the current position
-     * @param position
-     * @return
+     * @param position - position in list
+     * @return position
      */
     @Override
     public int getItemViewType(int position) {
