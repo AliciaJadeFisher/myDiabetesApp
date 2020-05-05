@@ -1,5 +1,6 @@
 package uk.ac.tees.s6040531.mydiabetesapplication.RecyclerAdapters;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,12 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Objects;
 
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection.ViewRecordActivity;
 import uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses.BloodSugarEntry;
@@ -20,16 +24,17 @@ import uk.ac.tees.s6040531.mydiabetesapplication.R;
 
 public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRecyclerViewAdapter.ViewHolder>
 {
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    @SuppressLint("SimpleDateFormat")
+    private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     // RecyclerViewAdapter attributes
-    Fragment parent;
-    List<BloodSugarEntry> entriesList;
+    private Fragment parent;
+    private List<BloodSugarEntry> entriesList;
 
     /**
-     * Main construcor
-     * @param parent
-     * @param tempList
+     * Main constructor
+     * @param parent - parent fragment
+     * @param tempList - list of records
      */
     public RecordsRecyclerViewAdapter(Fragment parent, List<BloodSugarEntry> tempList)
     {
@@ -43,44 +48,44 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
     class ViewHolder extends RecyclerView.ViewHolder
     {
         // View layout attributes
-        public TextView entryDate, entryTime,entryBS, entryIn;
+        TextView entryDate, entryTime,entryBS, entryIn;
         RelativeLayout parentLayout;
 
         /**
          * Main constructor
-         * @param itemView
+         * @param itemView - view for recycler view
          */
-        public ViewHolder(View itemView)
+        ViewHolder(View itemView)
         {
             super(itemView);
 
             // Initializes the layout and widgets
             parentLayout = itemView.findViewById(R.id.parent_layout);
-            entryDate = (TextView)itemView.findViewById(R.id.tv_viewDate);
-            entryTime = (TextView)itemView.findViewById(R.id.tv_viewTime);
-            entryBS = (TextView)itemView.findViewById(R.id.tv_viewBs);
-            entryIn = (TextView)itemView.findViewById(R.id.tv_viewInsulin);
+            entryDate = itemView.findViewById(R.id.tv_viewDate);
+            entryTime = itemView.findViewById(R.id.tv_viewTime);
+            entryBS = itemView.findViewById(R.id.tv_viewBs);
+            entryIn = itemView.findViewById(R.id.tv_viewInsulin);
         }
     }
 
     /**
      * Creates a new RecyclerView.ViewHolder
-     * @param parent
-     * @param viewType
+     * @param parent - parent view group
+     * @param viewType - view type
      * @return viewHolder
      */
+    @NotNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         // Grabs the recycler view layout
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_records, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     /**
      * Updates the contents of the RecyclerView.ViewHolder
-     * @param holder
-     * @param position
+     * @param holder - view holder
+     * @param position - position in list
      */
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position)
@@ -99,7 +104,7 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
         {
             /**
              * onClick
-             * @param v
+             * @param v - recyclerView view
              */
             @Override
             public void onClick(View v)
@@ -107,7 +112,7 @@ public class RecordsRecyclerViewAdapter  extends RecyclerView.Adapter<RecordsRec
                 //Passes the user and thread to the CreatePostActivity and loads it up
                 Intent i = new Intent(parent.getActivity(), ViewRecordActivity.class);
                 i.putExtra("bs_entry", entry);
-                parent.getActivity().startActivity(i);
+                Objects.requireNonNull(parent.getActivity()).startActivity(i);
                 parent.getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 parent.getActivity().finish();
             }
