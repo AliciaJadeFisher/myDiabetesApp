@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TimeBlock implements Serializable
 {
     // Class attributes
-    String start,end,ratio;
+    private String start,end,ratio;
 
     /**
      * Empty constructor
@@ -17,9 +17,9 @@ public class TimeBlock implements Serializable
 
     /**
      * Main constructor
-     * @param s
-     * @param e
-     * @param r
+     * @param s - block start
+     * @param e - block end
+     * @param r - block ratio
      */
     public TimeBlock(String s, String e, String r)
     {
@@ -54,7 +54,7 @@ public class TimeBlock implements Serializable
 
     /**
      * Sets the start attribute
-     * @param start
+     * @param start - block start
      */
     public void setStart(String start) {
         this.start = start;
@@ -62,7 +62,7 @@ public class TimeBlock implements Serializable
 
     /**
      * Sets the end attribute
-     * @param end
+     * @param end - block end
      */
     public void setEnd(String end) {
         this.end = end;
@@ -70,7 +70,7 @@ public class TimeBlock implements Serializable
 
     /**
      * Sets the ratio attribute
-     * @param ratio
+     * @param ratio - block ratio
      */
     public void setRatio(String ratio) {
         this.ratio = ratio;
