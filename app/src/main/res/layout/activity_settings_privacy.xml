@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainSections.SettingsSection.SettingsPrivacyActivity">
 
+    <!--AppBarLayout-->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +19,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
             <!--ImageView to display the solo logo-->
             <ImageView
                 android:maxWidth="@dimen/logo_w_h"
@@ -29,20 +29,22 @@
                 android:layout_height="40dp"
                 android:contentDescription="@string/logo_icon"/>
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!--ScrollView for screen-->
     <ScrollView
         android:id="@+id/sv_terms"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="56dp">
 
+        <!--LinearLayout for widgets-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--TextViews for policy 1-->
             <TextView
                 android:id="@+id/policy_1"
                 android:layout_width="match_parent"
@@ -73,11 +75,13 @@
                 android:text="@string/policy_1"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for policy 2-->
             <TextView
                 android:id="@+id/policy_2"
                 android:layout_width="match_parent"
@@ -98,21 +102,23 @@
                 android:text="@string/policy_2"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for policy 3-->
             <TextView
-            android:id="@+id/policy_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="10dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="@string/use_data"
-            android:textSize="16sp"/>
+                android:id="@+id/policy_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/use_data"
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/hwud"
                 android:layout_width="match_parent"
@@ -123,11 +129,13 @@
                 android:text="@string/policy_3"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for policy 4-->
             <TextView
                 android:id="@+id/policy_4"
                 android:layout_width="match_parent"
@@ -148,11 +156,13 @@
                 android:text="@string/policy_4"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for policy 5-->
             <TextView
                 android:id="@+id/policy_5"
                 android:layout_width="match_parent"
@@ -173,11 +183,13 @@
                 android:text="@string/policy_5"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorPrimary"/>
 
+            <!--TextViews for policy 6-->
             <TextView
                 android:id="@+id/policy_6"
                 android:layout_width="match_parent"
@@ -198,6 +210,7 @@
                 android:text="@string/policy_6"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
+            <!--View for section border-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
