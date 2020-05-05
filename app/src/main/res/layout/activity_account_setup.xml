@@ -7,6 +7,7 @@
     android:background="@color/colorAccent"
     tools:context=".MainSections.AuthenticationSection.AccountSetupActivity">
 
+    <!-- AppBarLayout -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,12 +31,15 @@
                 android:contentDescription="@string/logo_icon"/>
         </androidx.appcompat.widget.Toolbar>
 
+        <!--TabLayout for fragments-->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabTextColor="@color/colorAccent"
             android:background="?attr/colorPrimaryDark">
+
+            <!--Basic TabItem-->
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_basic"
                 android:layout_width="wrap_content"
@@ -43,6 +47,8 @@
                 android:text="@string/tab_basic"
                 android:clickable="false">
             </com.google.android.material.tabs.TabItem>
+
+            <!-- Medical TabItem-->
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_medical"
                 android:layout_width="wrap_content"
@@ -50,6 +56,8 @@
                 android:text="@string/tab_medical"
                 android:clickable="false">
             </com.google.android.material.tabs.TabItem>
+
+            <!-- Time Blocks TabItem-->
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_time"
                 android:layout_width="wrap_content"
@@ -60,6 +68,7 @@
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- ViewPager to display fragments-->
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
