@@ -11,7 +11,7 @@
     android:clickable="true"
     android:focusable="true">
 
-    <!--TextView for the field title-->
+    <!--TextViews for the start section-->
     <TextView
         android:id="@+id/startTitle"
         android:layout_width="150dp"
@@ -22,8 +22,6 @@
         android:textColor="@color/colorPrimary"
         android:textSize="13sp"
         android:textStyle="bold" />
-
-    <!--TextView to display the thread title-->
     <TextView
         android:id="@+id/tv_viewStart"
         android:layout_width="wrap_content"
@@ -37,7 +35,7 @@
         android:layout_toEndOf="@+id/startTitle"
         android:layout_marginStart="11dp" />
 
-    <!--TextView for the field title-->
+    <!--TextViews for the end section-->
     <TextView
         android:id="@+id/endTitle"
         android:layout_width="150dp"
@@ -49,8 +47,6 @@
         android:textColor="@color/colorPrimary"
         android:textSize="13sp"
         android:textStyle="bold" />
-
-    <!--TextView to display the thread description-->
     <TextView
         android:id="@+id/tv_viewEnd"
         android:layout_width="wrap_content"
@@ -63,7 +59,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="13sp" />
 
-    <!--TextView for the field title-->
+    <!--TextViews for the ratio section-->
     <TextView
         android:id="@+id/ratioTile"
         android:layout_width="150dp"
@@ -75,8 +71,6 @@
         android:textColor="@color/colorPrimary"
         android:textSize="13sp"
         android:textStyle="bold" />
-
-    <!--TextView to display the no. posts in the thread-->
     <TextView
         android:id="@+id/tv_viewRatio"
         android:layout_width="wrap_content"
