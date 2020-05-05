@@ -53,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/tv_viewThreadTitle"
         android:layout_below="@+id/tv_viewThreadTitle"
+        android:lines="1"
         android:gravity="start"
         android:text="@string/show_thread_description"
         android:fontFamily="sans-serif-condensed"

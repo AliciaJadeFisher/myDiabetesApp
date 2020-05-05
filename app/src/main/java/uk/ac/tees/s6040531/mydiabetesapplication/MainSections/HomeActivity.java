@@ -73,9 +73,6 @@ public class HomeActivity extends AppCompatActivity
         navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         navView.setSelectedItemId(R.id.navigation_home);
 
-        // Calls the method getIncomingIntent()
-        getIncomingIntent();
-
         // Call getUser()
         getUser();
     }
@@ -166,26 +163,5 @@ public class HomeActivity extends AppCompatActivity
 
         // Sets the home fragment to be shown
         fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"2").commit();
-    }
-
-
-    /**
-     * Retrieves data sent with the intent in the extra field
-     */
-    public void getIncomingIntent()
-    {
-        // Checks if the intent has field with the name prev
-        if(this.getIntent().hasExtra("prev"))
-        {
-            //Grabs the data in the extra
-            prev = this.getIntent().getStringExtra("prev");
-
-            // If the previous activity was the CreateThreadActivity, it returns the user to the forum activity
-            if(Objects.requireNonNull(prev).equals("CreateThread"))
-            {
-                pbHome.setVisibility(View.VISIBLE);
-                navView.setSelectedItemId(R.id.navigation_forum);
-            }
-        }
     }
 }

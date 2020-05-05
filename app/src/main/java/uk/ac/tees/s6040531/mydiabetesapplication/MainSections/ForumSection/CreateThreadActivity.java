@@ -101,7 +101,6 @@ public class CreateThreadActivity extends AppCompatActivity
     {
         // Loads the HomeActivity
         Intent i = new Intent(CreateThreadActivity.this, HomeActivity.class);
-        i.putExtra("prev","CreateThread");
         startActivity(i);
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
         finish();
