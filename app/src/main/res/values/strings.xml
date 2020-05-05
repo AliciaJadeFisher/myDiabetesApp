@@ -41,8 +41,8 @@
     <string name="hypo">Hypo:</string>
     <string name="_4_0_mmol_l">4.0 mmol/L</string>
     <string name="_5_0_mol_l">5.0 mmol/L</string>
-    <string name="bottom_target">Bottom Target :</string>
-    <string name="top_target">Top Target:</string>
+    <string name="bottom_target">Target Bottom :</string>
+    <string name="top_target">Target Top :</string>
     <string name="_8_5_mml_l">8.5 mmol/L</string>
     <string name="hyper">Hyper:</string>
     <string name="_13_mmol_l">13 mmol/L</string>
