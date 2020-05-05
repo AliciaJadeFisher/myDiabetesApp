@@ -126,7 +126,14 @@ public class BasicFragment extends Fragment
                 carb = spnCarb.getSelectedItem().toString();
 
                 // Creates a new user object and sets some of the attributes
-                user = new User();
+                if(cUser == null)
+                {
+                    user = new User();
+                }
+                else
+                {
+                    user = cUser;
+                }
                 user.setId(id);
                 user.setName(etName.getText().toString());
                 user.setBs_m(bs);
