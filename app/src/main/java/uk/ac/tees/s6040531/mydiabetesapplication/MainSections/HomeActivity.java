@@ -19,6 +19,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 
+import java.util.Objects;
+
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.ForumSection.ForumFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.HomeSection.HomeFragment;
 import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.SettingsSection.SettingsFragment;
@@ -36,9 +38,10 @@ public class HomeActivity extends AppCompatActivity
     final SettingsFragment settingFragment = new SettingsFragment();
     final FragmentManager fragMan = getSupportFragmentManager();
 
+    // Variable for progress bar
     ProgressBar pbHome;
 
-    //
+    // Variables for user and firebase access
     User user;
     FirebaseAuth auth;
     FirebaseFirestore udbRef;
@@ -52,7 +55,7 @@ public class HomeActivity extends AppCompatActivity
 
     /**
      * onCreate() method
-     * @param savedInstanceState
+     * @param savedInstanceState - instance bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -61,11 +64,12 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        pbHome = (ProgressBar)findViewById(R.id.pb_home);
+        // Initialises progress bar and shows it
+        pbHome = findViewById(R.id.pb_home);
         pbHome.setVisibility(View.VISIBLE);
 
         // Sets up the navigation view
-        navView = (BottomNavigationView) findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         navView.setSelectedItemId(R.id.navigation_home);
 
@@ -81,8 +85,14 @@ public class HomeActivity extends AppCompatActivity
      */
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener()
     {
+        /**
+         * onNavigationItemSelected() method
+         * @param item - menu item selected
+         * @return selected item fragment
+         */
         @Override public boolean onNavigationItemSelected(@NonNull MenuItem item)
         {
+            // Returns the relevant fragment
             switch (item.getItemId())
             {
                 // If the home icon is clicked, hides the current fragment and shows thte home fragment
@@ -106,35 +116,55 @@ public class HomeActivity extends AppCompatActivity
         }
     };
 
+    /**
+     * getUser() method
+     */
     public void getUser()
     {
+        // Initialises firebase variables
         auth = FirebaseAuth.getInstance();
         udbRef = FirebaseFirestore.getInstance();
 
-        udbRef.collection("users").document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+        // Grabs the user from the database
+        udbRef.collection("users").document(Objects.requireNonNull(auth.getUid())).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
         {
+            /**
+             * onSuccess() method
+             * @param documentSnapshot - database document
+             */
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot)
             {
+                // Saves the user
                 user = documentSnapshot.toObject(User.class);
 
+                // Cache's the user's data
                 SharedPreferences myPref = getSharedPreferences(getResources().getString(R.string.pref_key), Context.MODE_PRIVATE);
                 SharedPreferences.Editor prefEd = myPref.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(user);
                 prefEd.putString(getResources().getString(R.string.user_key),json);
-                prefEd.commit();
+                prefEd.apply();
+
+                // Calls setUpFrags()
                 setUpFrags();
             }
         });
     }
 
+    /**
+     * setUpFrags() method
+     */
     public void setUpFrags()
     {
-        // Adds all the fragments to the fragments manager and sets the home fragment to be shown
+        // Adds all the fragments to the fragments manager
         fragMan.beginTransaction().add(R.id.home_parent, forumFragment,"3").hide(forumFragment).commit();
         fragMan.beginTransaction().add(R.id.home_parent, settingFragment,"1").hide(settingFragment).commit();
+
+        // Hides the progress bar
         pbHome.setVisibility(View.GONE);
+
+        // Sets the home fragment to be shown
         fragMan.beginTransaction().add(R.id.home_parent, homeFragment,"2").commit();
     }
 
@@ -151,7 +181,7 @@ public class HomeActivity extends AppCompatActivity
             prev = this.getIntent().getStringExtra("prev");
 
             // If the previous activity was the CreateThreadActivity, it returns the user to the forum activity
-            if(prev.equals("CreateThread"))
+            if(Objects.requireNonNull(prev).equals("CreateThread"))
             {
                 pbHome.setVisibility(View.VISIBLE);
                 navView.setSelectedItemId(R.id.navigation_forum);
