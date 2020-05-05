@@ -13,16 +13,20 @@ import uk.ac.tees.s6040531.mydiabetesapplication.MainSections.AuthenticationSect
  */
 public class SplashActivity extends AppCompatActivity
 {
-    // Delay for screen
-    private static int SPLASH_TIME_OUT = 3000;
-
+    /**
+     * onCreate() method
+     * @param savedInstanceState - instance bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        // Grabs the relevant layout file
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
         // Create new handler to deal with the delay and transitions
+        // Delay for screen
+        int SPLASH_TIME_OUT = 3000;
         new Handler().postDelayed(new Runnable()
         {
             @Override
