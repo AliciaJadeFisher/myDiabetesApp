@@ -6,16 +6,16 @@ package uk.ac.tees.s6040531.mydiabetesapplication.ObjectClasses;
 public class FoodItem
 {
     // Class attributes
-    String name;
-    int serving;
-    double carbs_100, carbs_serv;
+    private String name;
+    private int serving;
+    private double carbs_100, carbs_serv;
 
     /**
      * Main constructor
-     * @param n
-     * @param s
-     * @param c
-     * @param cs
+     * @param n - food name
+     * @param s - serving size
+     * @param c - carbohyrdates per 100g
+     * @param cs - carbohydrates per serving
      */
     public FoodItem(String n, int s, double c, double cs)
     {
