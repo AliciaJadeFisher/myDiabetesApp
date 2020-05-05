@@ -49,7 +49,7 @@
             android:background="@drawable/account_details_et_bg"
             android:textCursorDrawable="@drawable/et_cursor"
             android:importantForAutofill="no"
-            android:inputType="time" />
+            android:inputType="text" />
 
         <!--TextView for the end title-->
         <TextView
@@ -77,9 +77,9 @@
             android:background="@drawable/account_details_et_bg"
             android:textCursorDrawable="@drawable/et_cursor"
             android:importantForAutofill="no"
-            android:inputType="time" />
+            android:inputType="text" />
 
-        <!--TextView for ratio titl-->
+        <!--TextView for ratio title-->
         <TextView
             android:id="@+id/tv_carb_ratio"
             android:layout_width="match_parent"
