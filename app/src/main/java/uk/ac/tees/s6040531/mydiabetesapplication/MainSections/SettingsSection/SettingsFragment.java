@@ -239,6 +239,7 @@ public class SettingsFragment extends Fragment
                 // Grabs the entered email and updates the login information
                 String em = email.getText().toString();
                 cUser.updateEmail(em);
+                Toast.makeText(getActivity(), "Email updated", Toast.LENGTH_SHORT).show();
             }
         });
 
