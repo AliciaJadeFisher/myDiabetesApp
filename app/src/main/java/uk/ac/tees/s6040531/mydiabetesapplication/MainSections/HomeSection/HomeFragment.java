@@ -295,7 +295,7 @@ public class HomeFragment extends Fragment
                 for (BloodSugarEntry e : unfilteredList)
                 {
                     // Checks if the entry date is this month
-                    if (e.getDate().after(month))
+                    if (e.getDate().after(month) || dateFormat.format(e.getDate()).equals(dateFormat.format(month)))
                     {
                         // Adds it to the list
                         filteredList.add(e);

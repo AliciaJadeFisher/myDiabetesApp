@@ -269,7 +269,7 @@ public class AddEntryActivity extends AppCompatActivity
                         newEntry.setInsulin_f(inF);
 
                         // Checks if the entered blood sugar is within target
-                        if(bs >= targetBottom && bs <= targetTop)
+                        if(bs >= targetBottom && bs <= targetTop || bs <= targetBottom && bs >= hypo)
                         {
                             // Calculates the total insulin and sets the insulin total and correction
                             newEntry.setInsulin_c(0);
@@ -280,13 +280,13 @@ public class AddEntryActivity extends AppCompatActivity
 
                         }
                         // Checks if the user has a low blood sugar
-                        else if(bs <= hypo)
+                        else if(bs < hypo)
                         {
                             // Informs the user to not do any insulin and consume carbohydrates
                             Toast.makeText(AddEntryActivity.this, "Low blood sugar, please do not take any insulin and make sure to eat 25g of carbohydrates. ", Toast.LENGTH_SHORT).show();
                         }
                         // Checks if the user has a high blood sugar
-                        else if(bs >= hyper)
+                        else if(bs > targetTop)
                         {
                             // Calculates and saves the correction dosgae
                             Double corr = (bs - targetTop) / correction;
