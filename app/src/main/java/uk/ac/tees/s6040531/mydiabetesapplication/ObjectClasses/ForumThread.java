@@ -9,7 +9,7 @@ public class ForumThread implements Serializable
 {
 
     // Class attributes
-    String threadID, title, desc, posts;
+    private String threadID, title, desc, posts;
 
     /**
      * Empty constructor
@@ -18,9 +18,10 @@ public class ForumThread implements Serializable
 
     /**
      * Main constructor
-     * @param t
-     * @param d
-     * @param p
+     * @param tID - thread ID
+     * @param t - thread title
+     * @param d - thread description
+     * @param p - no. posts
      */
     public ForumThread(String tID, String t, String d, String p)
     {
@@ -67,7 +68,7 @@ public class ForumThread implements Serializable
 
     /**
      * Sets the thread id attribute
-     * @param threadID
+     * @param threadID - thread id
      */
     public void setThreadID(String threadID)
     {
@@ -76,7 +77,7 @@ public class ForumThread implements Serializable
 
     /**
      * Sets the title attribute
-     * @param title
+     * @param title - thread title
      */
     public void setTitle(String title)
     {
@@ -85,7 +86,7 @@ public class ForumThread implements Serializable
 
     /**
      * Sets the description attribute
-     * @param desc
+     * @param desc - thread description
      */
     public void setDesc(String desc)
     {
@@ -94,7 +95,7 @@ public class ForumThread implements Serializable
 
     /**
      * Sets the posts attribute
-     * @param posts
+     * @param posts - no. posts
      */
     public void setPosts(String posts)
     {
