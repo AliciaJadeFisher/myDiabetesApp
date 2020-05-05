@@ -11,7 +11,7 @@
     android:clickable="true"
     android:focusable="true">
 
-        <!--TextView for the field title-->
+        <!--TextViews for the date section-->
         <TextView
             android:id="@+id/tv_recordDate"
             android:layout_width="150dp"
@@ -22,8 +22,6 @@
             android:textColor="@color/colorPrimary"
             android:textSize="13sp"
             android:textStyle="bold" />
-
-        <!--TextView to display the thread title-->
         <TextView
             android:id="@+id/tv_viewDate"
             android:layout_width="wrap_content"
@@ -37,6 +35,7 @@
             android:layout_toEndOf="@+id/tv_recordDate"
             android:layout_marginStart="11dp" />
 
+        <!--TextViews for the time section-->
         <TextView
             android:id="@+id/tv_recordTime"
             android:layout_width="150dp"
@@ -48,8 +47,6 @@
             android:layout_below="@+id/tv_recordDate"
             android:textSize="13sp"
             android:textStyle="bold" />
-
-        <!--TextView to display the thread title-->
         <TextView
             android:id="@+id/tv_viewTime"
             android:layout_width="wrap_content"
@@ -62,7 +59,7 @@
             android:layout_alignStart="@+id/tv_viewDate"
             android:layout_below="@+id/tv_viewDate" />
 
-        <!--TextView for the field title-->
+        <!--TextViews for the blood sugar section-->
         <TextView
             android:id="@+id/tv_bs"
             android:layout_width="150dp"
@@ -74,8 +71,6 @@
             android:textColor="@color/colorPrimary"
             android:textSize="13sp"
             android:textStyle="bold" />
-
-        <!--TextView to display the thread description-->
         <TextView
             android:id="@+id/tv_viewBs"
             android:layout_width="wrap_content"
@@ -88,7 +83,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="13sp" />
 
-        <!--TextView for the field title-->
+        <!--TextViews for the insulin section-->
         <TextView
             android:id="@+id/tv_insulin"
             android:layout_width="150dp"
@@ -100,8 +95,6 @@
             android:textColor="@color/colorPrimary"
             android:textSize="13sp"
             android:textStyle="bold" />
-
-        <!--TextView to display the no. posts in the thread-->
         <TextView
             android:id="@+id/tv_viewInsulin"
             android:layout_width="wrap_content"
@@ -113,4 +106,4 @@
             android:fontFamily="sans-serif-condensed"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="13sp" />
-    </RelativeLayout>
+</RelativeLayout>
