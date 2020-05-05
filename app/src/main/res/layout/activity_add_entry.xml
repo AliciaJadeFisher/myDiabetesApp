@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainSections.EntrySection.AddEntryActivity">
 
+    <!-- AppBarLayout -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--LinearLayout for the widgets-->
         <LinearLayout
             android:paddingTop="56dp"
             android:paddingEnd="16dp"
@@ -46,6 +48,7 @@
             android:orientation="vertical"
             android:gravity="center">
 
+            <!-- Date widgets-->
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
@@ -56,7 +59,6 @@
                 android:paddingTop="10dp"
                 android:textStyle="bold"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_date_display"
                 android:layout_width="match_parent"
@@ -68,6 +70,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
 
+            <!-- Time widgets-->
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="match_parent"
@@ -78,7 +81,6 @@
                 android:paddingTop="10dp"
                 android:textStyle="bold"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_time_display"
                 android:layout_width="100dp"
@@ -90,6 +92,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp"/>
 
+            <!-- Meal Type widgets-->
             <TextView
                 android:id="@+id/tv_meal"
                 android:layout_width="match_parent"
@@ -100,9 +103,6 @@
                 android:paddingTop="10dp"
                 android:textStyle="bold"
                 android:textSize="15sp"/>
-
-
-            <!--Spinner for the meal type-->
             <Spinner
                 android:id="@+id/spn_meal"
                 android:layout_width="match_parent"
@@ -110,6 +110,7 @@
                 android:paddingTop="10dp"
                 android:textColor="@color/colorPrimaryDark"/>
 
+            <!-- Blood Sugar widgets-->
             <TextView
                 android:id="@+id/tv_bs"
                 android:layout_width="match_parent"
@@ -120,15 +121,17 @@
                 android:paddingTop="10dp"
                 android:textStyle="bold"
                 android:textSize="15sp"/>
-
             <EditText
                 android:id="@+id/et_bs"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="15sp"
-                android:hint="@string/_5_0_mol_l"/>
+                android:hint="@string/_5_0_mol_l"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal" />
 
+            <!-- Carbohydrates widgets-->
             <TextView
                 android:id="@+id/tv_carbs"
                 android:layout_width="match_parent"
@@ -139,22 +142,21 @@
                 android:paddingTop="10dp"
                 android:textStyle="bold"
                 android:textSize="15sp"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:paddingTop="10dp">
-
                 <EditText
                     android:id="@+id/et_carbs"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="15sp"
-                    android:hint="@string/_10g"/>
-
+                    android:hint="@string/_10g"
+                    android:importantForAutofill="no"
+                    android:inputType="number" />
                 <Button
                     android:id="@+id/btn_search"
                     android:layout_width="100dp"
@@ -167,6 +169,7 @@
                     android:textSize="15sp"/>
             </LinearLayout>
 
+            <!-- Button to calculate insulin -->
             <Button
                 android:id="@+id/btn_calculate"
                 android:layout_width="200dp"
@@ -178,6 +181,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="15sp"/>
 
+            <!-- Insulin widgets-->
             <TextView
                 android:id="@+id/tv_if"
                 android:layout_width="match_parent"
@@ -187,7 +191,6 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:paddingTop="30dp"
                 android:textSize="15sp"/>
-
             <TextView
                 android:id="@+id/tv_ic"
                 android:layout_width="match_parent"
@@ -197,7 +200,6 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:paddingTop="10dp"
                 android:textSize="15sp" />
-
             <TextView
                 android:id="@+id/tv_it"
                 android:layout_width="match_parent"
@@ -209,6 +211,7 @@
                 android:textStyle="bold"
                 android:textSize="15sp"/>
 
+            <!-- Notes widgets-->
             <TextView
                 android:id="@+id/tv_notes"
                 android:layout_width="match_parent"
@@ -219,16 +222,17 @@
                 android:paddingTop="20dp"
                 android:textStyle="bold"
                 android:textSize="15sp"/>
-
             <EditText
                 android:id="@+id/et_notes"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="10dp"
                 android:inputType="textMultiLine"
-                android:background="@drawable/textbox_background">
-            </EditText>
+                android:background="@drawable/textbox_background"
+                android:importantForAutofill="no"
+                tools:ignore="LabelFor" />
 
+            <!-- Button to save entry-->
             <Button
                 android:id="@+id/btn_save_entry"
                 android:layout_width="fill_parent"
@@ -239,6 +243,8 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
+
+            <!-- Button to go back -->
             <Button
                 android:id="@+id/btn_back"
                 android:layout_width="fill_parent"
