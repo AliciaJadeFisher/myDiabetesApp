@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Array for blood sugar types-->
     <string-array name="bs_types">
         <item>mg/dL</item>
         <item>mmol/L</item>
     </string-array>
 
+    <!--Array for carbohyrdate types-->
     <string-array name="carb_types">
         <item>g</item>
         <item>CP</item>
-        <item>ex.</item>
     </string-array>
 
+    <!--Array for meal types-->
     <string-array name="meal_types">
         <item>Breakfast</item>
         <item>Lunch</item>
         <item>Dinner</item>
         <item>Supper</item>
         <item>Snack</item>
+        <item>No food</item>
     </string-array>
 </resources>
